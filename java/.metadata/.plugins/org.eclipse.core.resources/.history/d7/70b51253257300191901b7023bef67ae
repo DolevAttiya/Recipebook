@@ -1,0 +1,23 @@
+package rep;
+
+public class IngridiantType {
+
+	private int inridiantTypeId;
+	private String  inridiantTypeName;
+	public InridiantType(int inridiantTypeId, String inridiantTypeName) {
+		this.inridiantTypeId=inridiantTypeId;
+		this.inridiantTypeName=inridiantTypeName;
+	}
+	public int getInridiantTypeId() {
+		return this.inridiantTypeId; 
+	}
+	public String getInridiantTypeName() {
+		return this.inridiantTypeName; 
+	}
+	public void SetinrIdiantTypeName(String inridiantTypeName ) {
+		 this.inridiantTypeName=inridiantTypeName; 
+	}
+	public void SetinrdiantTypeId(int inridiantTypeId ) {
+		 this.inridiantTypeId=inridiantTypeId; 
+	}
+}

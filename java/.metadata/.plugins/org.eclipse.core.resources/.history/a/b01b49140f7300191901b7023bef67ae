@@ -1,0 +1,10 @@
+/**
+ * 
+ */
+/**
+ * @author dolev
+ *
+ */
+module DataBase {
+	requires java.sqli;
+}

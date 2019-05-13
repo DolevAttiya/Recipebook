@@ -1,0 +1,8 @@
+package rep;
+
+public class Allergies {
+
+	int allergieId;
+	String  allergieName;
+	getAll
+}

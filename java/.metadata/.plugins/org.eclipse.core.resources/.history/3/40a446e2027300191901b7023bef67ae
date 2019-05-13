@@ -1,0 +1,67 @@
+package rep;
+
+import javax.swing.ImageIcon;
+
+public class Ingridiant {
+ private int ingridiantId;
+ private String  ingridiantName;
+ private Allergies ingridiantalergie[];
+ private int ingridiantalergieCalories;
+ private int ingridiantCarbohydrate;
+ private int ingridiantProtein;
+ private int ingridiantFat;
+ private int ingridiantKosher;
+ private ImageIcon ingridiantImage;
+
+
+public int getIngridiantId() {
+	return ingridiantId;
+}
+public void setIngridiantId(int ingridiantId) {
+	this.ingridiantId = ingridiantId;
+}
+
+public String getIngridiantName() {
+	return ingridiantName;
+}
+public void setIngridiantName(String ingridiantName) {
+	this.ingridiantName = ingridiantName;
+}
+public int getIngridiantalergieCalories() {
+	return ingridiantalergieCalories;
+}
+public void setIngridiantalergieCalories(int ingridiantalergieCalories) {
+	this.ingridiantalergieCalories = ingridiantalergieCalories;
+}
+public int getIngridiantCarbohydrate() {
+	return ingridiantCarbohydrate;
+}
+public void setIngridiantCarbohydrate(int ingridiantCarbohydrate) {
+	this.ingridiantCarbohydrate = ingridiantCarbohydrate;
+}
+public int getIngridiantProtein() {
+	return ingridiantProtein;
+}
+public void setIngridiantProtein(int ingridiantProtein) {
+	this.ingridiantProtein = ingridiantProtein;
+}
+public int getIngridiantKosher() {
+	return ingridiantKosher;
+}
+public void setIngridiantKosher(int ingridiantKosher) {
+	this.ingridiantKosher = ingridiantKosher;
+}
+public int getIngridiantFat() {
+	return ingridiantFat;
+}
+public void setIngridiantFat(int ingridiantFat) {
+	this.ingridiantFat = ingridiantFat;
+}
+public ImageIcon getIngridiantImage() {
+	return ingridiantImage;
+}
+public void setIngridiantImage(ImageIcon ingridiantImage) {
+	this.ingridiantImage = ingridiantImage;
+}
+ 
+}

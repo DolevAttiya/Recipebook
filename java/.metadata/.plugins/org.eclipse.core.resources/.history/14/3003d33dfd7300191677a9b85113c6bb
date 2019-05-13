@@ -1,0 +1,19 @@
+package rep;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+int i ,j;/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
+				i=0; j=1;
+				if(j!=0)
+					 if(i!=3)
+						 if(i==0) {i=j;}
+						 else if (i!=j)
+							 i=3;
+				System.out.printf("father:%d,son: %d\n",i,j);
+			}
+			}
+	}
+
+}

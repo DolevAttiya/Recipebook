@@ -1,0 +1,25 @@
+import java.sql.*;
+public class Main {
+public static void  main(String args[]) {
+	Connection con =dbconnector();
+	if(con!=null)
+	System.out.println("Open Database");
+
+}
+	public static  Connection dbconnector() {
+	Connection con=null;
+	try {
+		Class.forName("orge.sqlite.JDBC.class");
+		con=DriverManager.getConnection("jdbc:sqlite:‪C:\\Users\\dolev\\Documents\\java\\database.db");
+		System.out.println("Open Database");
+		return con;
+	}
+	catch(Exception e)
+	{
+		System.out.println(e);
+		return null;
+	}
+	
+}
+
+}

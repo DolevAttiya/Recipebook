@@ -1,0 +1,23 @@
+package rep;
+
+public class InridiantType {
+
+	private int allergieId;
+	private String  allergieName;
+	public InridiantType(int allergieId, String allergieName) {
+		this.allergieId=allergieId;
+		this.allergieName=allergieName;
+	}
+	public int getAllergieId() {
+		return this.allergieId; 
+	}
+	public String getAllergieName() {
+		return this.allergieName; 
+	}
+	public void SetAllergieName(String allergieName ) {
+		 this.allergieName=allergieName; 
+	}
+	public void SetAllergieId(int allergieId ) {
+		 this.allergieId=allergieId; 
+	}
+}

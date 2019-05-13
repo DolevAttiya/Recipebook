@@ -1,0 +1,150 @@
+package rep;
+
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.ImageIcon;
+
+public class Recipe {
+ private int recipeId;
+ private String  recipeName;
+ private Allergies recipealergie[];
+ private Ingridiant recipeIngridiants[];
+ private int recipealergieCalories;
+ private int recipeCarbohydrate;
+ private int recipeProtein;
+ private int recipeFat;
+ private int recipeKosher;
+ private ImageIcon recipeImage;
+ private TimeUnit recipeTimeToMake;
+ private int recipeComplex;
+ private int recipeUserID;
+ private int recipeStars;
+ private String recipeDescription;
+ private String recipeProcses;
+ 
+
+public Recipe( int recipeId,String  recipeName,Allergies recipealergie[],int recipealergieCalories,int recipeCarbohydrate,int recipeProtein,int recipeFat, int recipeKosher, ImageIcon recipeImage, TimeUnit recipeTimeToMakeprivate ,int recipeComplex,int recipeUserID,int recipeStars, String recipeDescription, String recipeProcses ,Ingridiant recipeIngridiants[])
+{
+	this.recipeId=recipeId;
+	this.recipeName=recipeName;
+	this.recipealergie=new Allergies[recipealergie.length];
+	for (int i=0;i<recipealergie.length;i++)
+		this.recipealergie[i]=recipealergie[i];
+	for (int i=0;i<recipealergie.length;i++)
+		this.recipeIngridiants=new Ingridiant[recipeIngridiants.length];
+	for (int i=0;i<recipeIngridiants.length;i++)
+	  this.recipeIngridiants[i]=recipeIngridiants[i];
+	this.recipealergieCalories=recipealergieCalories;
+	this.recipeCarbohydrate=recipeCarbohydrate;
+	this.recipeProtein=recipeProtein;
+	this.recipeFat=recipeFat;
+	this.recipeKosher=recipeKosher;
+	this.setRecipeComplex(recipeComplex);
+	this.setRecipeUserID(recipeUserID);
+	this.setRecipeStars(recipeStars);
+	this.setRecipeDescription(recipeDescription);
+	this.setRecipeProcses(recipeProcses);	
+	this.recipeImage=recipeImage;
+}
+public int getRecipeId() {
+	return recipeId;
+}
+public void setRecipeId(int recipeId) {
+	this.recipeId = recipeId;
+}
+public String getRecipeName() {
+	return recipeName;
+}
+public void setRecipeName(String recipeName) {
+	this.recipeName = recipeName;
+}
+public int getRecipealergieCalories() {
+	return recipealergieCalories;
+}
+public void setRecipealergieCalories(int recipealergieCalories) {
+	this.recipealergieCalories = recipealergieCalories;
+}
+public int getRecipeCarbohydrate() {
+	return recipeCarbohydrate;
+}
+public void setRecipeCarbohydrate(int recipeCarbohydrate) {
+	this.recipeCarbohydrate = recipeCarbohydrate;
+}
+public int getRecipeProtein() {
+	return recipeProtein;
+}
+public void setRecipeProtein(int recipeProtein) {
+	this.recipeProtein = recipeProtein;
+}
+public int getRecipeKosher() {
+	return recipeKosher;
+}
+public void setRecipeKosher(int recipeKosher) {
+	this.recipeKosher = recipeKosher;
+}
+public int getRecipeFat() {
+	return recipeFat;
+}
+public void setRecipeFat(int recipeFat) {
+	this.recipeFat = recipeFat;
+}
+public ImageIcon getRecipeImage() {
+	return recipeImage;
+}
+public void setRecipeImage(ImageIcon recipeImage) {
+	this.recipeImage = recipeImage;
+}
+public Allergies[] getRecipealergies() {
+	return recipealergie;
+}
+public void setRecipealergies(Allergies recipealergie[]) {
+	this.recipealergie=new Allergies[recipealergie.length];
+	for (int i=0;i<recipealergie.length;i++)
+		this.recipealergie[i]=recipealergie[i];
+}
+public Ingridiant[] getRecipeIngridiants() {
+	return recipeIngridiants;
+}
+public void setRecipeIngridiants(Ingridiant recipeIngridiants[]) {
+	this.recipeIngridiants=new Ingridiant[recipeIngridiants.length];
+	for (int i=0;i<recipeIngridiants.length;i++)
+	  this.recipeIngridiants[i]=recipeIngridiants[i];
+}
+public TimeUnit getRecipeTimeToMake() {
+	return recipeTimeToMake;
+}
+public void setRecipeTimeToMake(TimeUnit recipeTimeToMake) {
+	this.recipeTimeToMake = recipeTimeToMake;
+}
+public int getRecipeComplex() {
+	return recipeComplex;
+}
+public void setRecipeComplex(int recipeComplex) {
+	this.recipeComplex = recipeComplex;
+}
+public int getRecipeUserID() {
+	return recipeUserID;
+}
+public void setRecipeUserID(int recipeUserID) {
+	this.recipeUserID = recipeUserID;
+}
+public int getRecipeStars() {
+	return recipeStars;
+}
+public void setRecipeStars(int recipeStars) {
+	this.recipeStars = recipeStars;
+}
+public String getRecipeDescription() {
+	return recipeDescription;
+}
+public void setRecipeDescription(String recipeDescription) {
+	this.recipeDescription = recipeDescription;
+}
+public String getRecipeProcses() {
+	return recipeProcses;
+}
+public void setRecipeProcses(String recipeProcses) {
+	this.recipeProcses = recipeProcses;
+}
+ 
+}
