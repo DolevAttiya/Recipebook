@@ -4,7 +4,6 @@ public static void  main(String args[]) {
 	Connection con =dbconnector();
 	if(con!=null)
 	System.out.println("Open Database");
-	int s;
 
 }
 	public static  Connection dbconnector() {
