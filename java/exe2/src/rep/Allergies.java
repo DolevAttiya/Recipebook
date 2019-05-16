@@ -1,7 +1,6 @@
 package rep;
 
 public class Allergies {
-	int x;
 	private static int maxAllergies=0;
 	private int allergieId;
 	private String  allergieName;
