@@ -1,10 +1,14 @@
 package rep;
 
-public class Allergies {
+public class Allergen {
+	
+	/*Attributes*/
 	private static int maxAllergies=0;
 	private int allergieId;
 	private String  allergieName;
-	public Allergies(int allergieId, String allergieName) {
+	
+	 /*Contractor*/
+	public Allergen(int allergieId, String allergieName) {
 		this.allergieId=allergieId;
 		this.allergieName=allergieName;
 		setMaxAllergies(getMaxAllergies() + 1);
@@ -25,6 +29,6 @@ public class Allergies {
 		return maxAllergies;
 	}
 	private static void setMaxAllergies(int maxAllergies) {
-		Allergies.maxAllergies = maxAllergies;
+		Allergen.maxAllergies = maxAllergies;
 	}
 }

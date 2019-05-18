@@ -3,28 +3,32 @@ package rep;
 import javax.swing.ImageIcon;
 
 public class Ingridiant {
+	
+	/*Attributes*/
  private int ingridiantId;
  private String  ingridiantName;
- private Allergies ingridiantalergie[];
+ private Allergen ingridiantalergie[];
  private int ingridiantalergieCalories;
  private int ingridiantCarbohydrate;
  private int ingridiantProtein;
  private int ingridiantFat;
- private int ingridiantKosher;
+ private int ingridiantKashruth;
  private ImageIcon ingridiantImage;
- public Ingridiant(int num) {}// do later
-public Ingridiant( int ingridiantId,String  ingridiantName,Allergies ingridiantalergie[],int ingridiantalergieCalories,int ingridiantCarbohydrate,int ingridiantProtein,int ingridiantFat, int ingridiantKosher, ImageIcon ingridiantImage)
+ 
+ /*Contractor*/
+ public Ingridiant(int num) {}// do later getting from DB all the artibutes 
+public Ingridiant( int ingridiantId,String  ingridiantName,Allergen ingridiantalergie[],int ingridiantalergieCalories,int ingridiantCarbohydrate,int ingridiantProtein,int ingridiantFat, int ingridiantKashruth, ImageIcon ingridiantImage)
 {
 	this.ingridiantId=ingridiantId;
 	this.ingridiantName=ingridiantName;
-	this.ingridiantalergie=new Allergies[ingridiantalergie.length];
+	this.ingridiantalergie=new Allergen[ingridiantalergie.length];
 	for (int i=0;i<ingridiantalergie.length;i++)
 		this.ingridiantalergie[i]=ingridiantalergie[i];
 	this.ingridiantalergieCalories=ingridiantalergieCalories;
 	this.ingridiantCarbohydrate=ingridiantCarbohydrate;
 	this.ingridiantProtein=ingridiantProtein;
 	this.ingridiantFat=ingridiantFat;
-	this.ingridiantKosher=ingridiantKosher;
+	this.ingridiantKashruth=ingridiantKashruth;
 	this.ingridiantImage=ingridiantImage;
 }
 public int getIngridiantId() {
@@ -57,11 +61,11 @@ public int getIngridiantProtein() {
 public void setIngridiantProtein(int ingridiantProtein) {
 	this.ingridiantProtein = ingridiantProtein;
 }
-public int getIngridiantKosher() {
-	return ingridiantKosher;
+public int getIngridiantKashruth() {
+	return ingridiantKashruth;
 }
-public void setIngridiantKosher(int ingridiantKosher) {
-	this.ingridiantKosher = ingridiantKosher;
+public void setIngridiantKashruth(int ingridiantKashruth) {
+	this.ingridiantKashruth = ingridiantKashruth;
 }
 public int getIngridiantFat() {
 	return ingridiantFat;
@@ -75,13 +79,13 @@ public ImageIcon getIngridiantImage() {
 public void setIngridiantImage(ImageIcon ingridiantImage) {
 	this.ingridiantImage = ingridiantImage;
 }
-public Allergies[] getIngridiantalergies() {
+public Allergen[] getIngridiantalergies() {
 	return ingridiantalergie;
 }
 public int getIngridiantalergies(int i) {
 	return ingridiantalergie[i].getAllergieId();
 }
-public void setIngridiantalergies(Allergies ingridiantalergie[]) {
+public void setIngridiantalergies(Allergen ingridiantalergie[]) {
 	this.ingridiantalergie = ingridiantalergie;
 }
  

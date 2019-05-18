@@ -1,11 +1,13 @@
 package rep;
 
 public class IngridiantType {
-
+	
+	/*Attributes*/
 	private int ingridiantTypeId;
 	private int ingridiantTypeValue;
 	private String  ingridiantTypeName;
 	
+	 /*Contractor*/
 	public IngridiantType(int ingridiantTypeId, String ingridiantTypeName) {
 		this.ingridiantTypeId=ingridiantTypeId;
 		this.ingridiantTypeName=ingridiantTypeName;
