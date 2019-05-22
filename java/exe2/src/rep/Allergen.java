@@ -1,34 +1,83 @@
 package rep;
 
-public class Allergen {
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Allergen extends  Entities{
 	
 	/*Attributes*/
-	private static int maxAllergies=0;
-	private int allergieId;
-	private String  allergieName;
+	private static int maxAllergen=0;
+	private Integer allergenId;
+	private String  allergenName;
 	
 	 /*Contractor*/
-	public Allergen(int allergieId, String allergieName) {
-		this.allergieId=allergieId;
-		this.allergieName=allergieName;
-		setMaxAllergies(getMaxAllergies() + 1);
+	public Allergen(ResultSet rs) {
+		try {
+			SetAllergenId(rs.getInt("allergenId"));
+			SetAllergenName(rs.getString("allergenName"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		setMaxAllergen(getMaxAllergen() + 1);
 	}
-	public int getAllergieId() {
-		return this.allergieId; 
+	public Allergen(int allergenId, String allergenName) {
+		this.allergenId=allergenId;
+		this.allergenName=allergenName;
+		setMaxAllergen(getMaxAllergen() + 1);
 	}
-	public String getAllergieName() {
-		return this.allergieName; 
+	public Integer getAllergenId() {
+		return this.allergenId; 
 	}
-	private void SetAllergieName(String allergieName ) {
-		 this.allergieName=allergieName; 
+	public String getAllergenName() {
+		return this.allergenName; 
 	}
-	private void SetAllergieId(int allergieId ) {
-		 this.allergieId=allergieId; 
+	private void SetAllergenName(String allergenName ) {
+		 this.allergenName=allergenName; 
 	}
-	public static int getMaxAllergies() {
-		return maxAllergies;
+	private void SetAllergenId(Integer allergieId ) {
+		 this.allergenId=allergieId; 
 	}
-	private static void setMaxAllergies(int maxAllergies) {
-		Allergen.maxAllergies = maxAllergies;
+	public static int getMaxAllergen() {
+		return maxAllergen;
 	}
+	private static void setMaxAllergen(int maxAllergen) {
+		Allergen.maxAllergen = maxAllergen;
+	}
+	@Override
+     public void getPsmtmt( PreparedStatement pstmt,int i) {
+            try {
+            	
+				pstmt.setInt(1, allergenId);
+				if(i==0) {
+				pstmt.setString(2, allergenName);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    }
+	@Override
+	String getEntitieKey() {
+		return "allergieId";
+	}
+	@Override
+	String getEntitieKeyValue() {
+		return this.getAllergenId().toString();
+	}
+	@Override
+	String getEntitieAttributesNames() {		
+		return "allergieId, allergieName";
+	}
+	@Override
+	String getEntitieAttributesValues() {
+		return " "+this.getAllergenId().toString()+", "+this.getAllergenName();
+	}
+	@Override
+	String getEntitieAttributesNamesValues() {
+		return "allergieId= "+this.getAllergenId().toString()+", allergieName"+this.getAllergenName();
+	}
+     
 }
+

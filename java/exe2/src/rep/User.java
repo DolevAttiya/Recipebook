@@ -25,8 +25,8 @@ public int[] getUserAllergen() {
 	return userAllergies;
 }
 public void setUserAllergen(int[] userAllergies) {
-	this.userAllergies= new int[Allergen.getMaxAllergies()];
-	for (int i=0;i<Allergen.getMaxAllergies();i++)
+	this.userAllergies= new int[Allergen.getMaxAllergen()];
+	for (int i=0;i<Allergen.getMaxAllergen();i++)
 		this.userAllergies[i]=userAllergies[i];
 }
 }

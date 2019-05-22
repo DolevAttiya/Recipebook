@@ -64,8 +64,8 @@ public int[] getRecipeAllergen() {
 	return recipeAllergen;
 }
 public void setRecipeAllergen(int[] recipeAllergen) {
-	this.recipeAllergen= new int[Allergen.getMaxAllergies()];
-	for (int i=0;i<Allergen.getMaxAllergies();i++)
+	this.recipeAllergen= new int[Allergen.getMaxAllergen()];
+	for (int i=0;i<Allergen.getMaxAllergen();i++)
 		this.recipeAllergen[i]=recipeAllergen[i];
 }
 public ArrayList<Ingridiant> getRecipeIngridiantId() {
@@ -164,7 +164,7 @@ public void addIngridiant(int IngridiantId,IngridiantType ingridiantType, int In
 	 this.recipeIngridiantId.add(newIngridiant); 
 	 this.recipeIngridiantsType.add(ingridiantType.getIngridiantTypeId());
 	 this.recipeIngridiantsAmount.add(IngridiantAmount);
-	 this.recipeTotalCalories+=(newIngridiant.getIngridiantalergieCalories()*IngridiantAmount*ingridiantType.getIngridiantTypeValue());
+	 this.recipeTotalCalories+=(newIngridiant.getIngridiantCalories()*IngridiantAmount*ingridiantType.getIngridiantTypeValue());
 	 this.recipeTotalCarbohydrate+=newIngridiant.getIngridiantCarbohydrate()*IngridiantAmount*ingridiantType.getIngridiantTypeValue();
 	 this.recipeTotalFat+=newIngridiant.getIngridiantFat()*IngridiantAmount*ingridiantType.getIngridiantTypeValue();
 	 //*protein*//
@@ -175,9 +175,9 @@ public void addIngridiant(int IngridiantId,IngridiantType ingridiantType, int In
 			 			else if (this.getRecipeKashruth()!=newIngridiant.getIngridiantKashruth())
 			 				this.setRecipeKashruth(3);
 	 }
-	 for( int i=0;i<Allergen.getMaxAllergies();i++)
+	 for( int i=0;i<Allergen.getMaxAllergen();i++)
 	 {
-		 if(newIngridiant.getIngridiantalergies(i)>0)
+		 if(newIngridiant.getIngridiantAllergen(i)>0)
 			 this.recipeAllergen[i]++;//***//
 	 }	 
 }

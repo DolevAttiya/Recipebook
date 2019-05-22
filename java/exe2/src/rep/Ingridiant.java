@@ -7,8 +7,8 @@ public class Ingridiant {
 	/*Attributes*/
  private int ingridiantId;
  private String  ingridiantName;
- private Allergen ingridiantalergie[];
- private int ingridiantalergieCalories;
+ private Allergen ingridiantAllergen[];
+ private int ingridiantCalories;
  private int ingridiantCarbohydrate;
  private int ingridiantProtein;
  private int ingridiantFat;
@@ -16,15 +16,15 @@ public class Ingridiant {
  private ImageIcon ingridiantImage;
  
  /*Contractor*/
- public Ingridiant(int num) {}// do later getting from DB all the artibutes 
-public Ingridiant( int ingridiantId,String  ingridiantName,Allergen ingridiantalergie[],int ingridiantalergieCalories,int ingridiantCarbohydrate,int ingridiantProtein,int ingridiantFat, int ingridiantKashruth, ImageIcon ingridiantImage)
+ public Ingridiant(int num) {}// do later getting from DB all the attributes 
+public Ingridiant( int ingridiantId,String  ingridiantName,Allergen ingridiantAllergen[],int ingridiantCalories,int ingridiantCarbohydrate,int ingridiantProtein,int ingridiantFat, int ingridiantKashruth, ImageIcon ingridiantImage)
 {
 	this.ingridiantId=ingridiantId;
 	this.ingridiantName=ingridiantName;
-	this.ingridiantalergie=new Allergen[ingridiantalergie.length];
-	for (int i=0;i<ingridiantalergie.length;i++)
-		this.ingridiantalergie[i]=ingridiantalergie[i];
-	this.ingridiantalergieCalories=ingridiantalergieCalories;
+	this.ingridiantAllergen=new Allergen[ingridiantAllergen.length];
+	for (int i=0;i<ingridiantAllergen.length;i++)
+		this.ingridiantAllergen[i]=ingridiantAllergen[i];
+	this.ingridiantCalories=ingridiantCalories;
 	this.ingridiantCarbohydrate=ingridiantCarbohydrate;
 	this.ingridiantProtein=ingridiantProtein;
 	this.ingridiantFat=ingridiantFat;
@@ -43,11 +43,11 @@ public String getIngridiantName() {
 public void setIngridiantName(String ingridiantName) {
 	this.ingridiantName = ingridiantName;
 }
-public int getIngridiantalergieCalories() {
-	return ingridiantalergieCalories;
+public int getIngridiantCalories() {
+	return ingridiantCalories;
 }
-public void setIngridiantalergieCalories(int ingridiantalergieCalories) {
-	this.ingridiantalergieCalories = ingridiantalergieCalories;
+public void setIngridiantCalories(int ingridiantCalories) {
+	this.ingridiantCalories = ingridiantCalories;
 }
 public int getIngridiantCarbohydrate() {
 	return ingridiantCarbohydrate;
@@ -79,14 +79,14 @@ public ImageIcon getIngridiantImage() {
 public void setIngridiantImage(ImageIcon ingridiantImage) {
 	this.ingridiantImage = ingridiantImage;
 }
-public Allergen[] getIngridiantalergies() {
-	return ingridiantalergie;
+public Allergen[] getIngridiAntallergen() {
+	return ingridiantAllergen;
 }
-public int getIngridiantalergies(int i) {
-	return ingridiantalergie[i].getAllergieId();
+public int getIngridiantAllergen(int i) {
+	return ingridiantAllergen[i].getAllergenId();
 }
-public void setIngridiantalergies(Allergen ingridiantalergie[]) {
-	this.ingridiantalergie = ingridiantalergie;
+public void setIngridiantAllergen(Allergen ingridiantAllergen[]) {
+	this.ingridiantAllergen = ingridiantAllergen;
 }
  
 }
