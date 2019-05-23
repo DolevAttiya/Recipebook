@@ -27,7 +27,7 @@ public  abstract class  Entities {
         }
         return conn;
     }
-	void Update() {String sql=" UPDATE"+this.getClass().getName()+"SET allergieId="+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue();
+	void Update() {String sql=" UPDATE"+this.getClass().getName()+"SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue();
 	 preformWithDB(sql);
 	 }
 	void Insert() {String sql="INSERT INTO" + this.getClass().getName()+"("+this.getEntitieAttributesNames()+") VALUES("+this.getEntitieAttributesValues()+")";

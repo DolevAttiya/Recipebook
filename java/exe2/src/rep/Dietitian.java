@@ -1,24 +1,25 @@
 package rep;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ImageIcon;
 
 public class Dietitian extends Person {
 
-private int dietitianId;
+private Integer dietitianId;
 private Date dieticianStatDate;
 public Dietitian(String personEmail, String personFirstName, String personLastName, Date personDateOfBirth,
-			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, ImageIcon personImage,int dietitianId, Date dieticianStatDate) {
+			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, ImageIcon personImage,Integer dietitianId, Date dieticianStatDate) {
 		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe,
 				personImage);
 		setDietitianId(dietitianId);
 		setDieticianStatDate(dieticianStatDate);
 	}
-public int getDietitianId() {
+public Integer getDietitianId() {
 	return dietitianId;
 }
-public void setDietitianId(int dietitianId) {
+public void setDietitianId(Integer dietitianId) {
 	this.dietitianId = dietitianId;
 }
 public Date getDieticianStatDate() {
@@ -29,9 +30,34 @@ public void setDieticianStatDate(Date dieticianStatDate) {
 
 }
 
-public int reputetionYears() {
+public Integer reputetionYears() {
 	Date Now= new Date();
 	
 return Now.compareTo(getDieticianStatDate());	
+}
+@Override
+String getEntitieKey() {
+	return "dietitianId";
+}
+@Override
+String getEntitieKeyValue() {
+	return this.getDietitianId().toString();
+}
+@Override
+String getEntitieAttributesNames() {
+	return " dietitianId , dieticianStatDate ";
+}
+@Override
+String getEntitieAttributesValues() {
+	return " "+this.getDietitianId().toString()+" , "+this.getDieticianStatDate().toString();
+}
+@Override
+String getEntitieAttributesNamesValues() { 
+	return " dietitianId = "+this.getDietitianId().toString()+" , dieticianStatDate = "+this.getDieticianStatDate().toString();
+}
+@Override
+public void getPsmtmt(PreparedStatement pstmt, int i) {
+	// TODO Auto-generated method stub
+	
 } 
 }

@@ -3,12 +3,14 @@ package rep;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
 
-public abstract class Person {
+public abstract class Person extends Entities{
 	private String personEmail;
 	private String personFirstName;
 	private String personLastName;
@@ -87,5 +89,42 @@ public abstract class Person {
 	        return sb.toString();
 
 	    }
+	@Override
+	String getEntitieKey() {
+		return "personEmail ";
+	}
+	@Override
+	String getEntitieKeyValue() {
+		return this.getPersonEmail();
+	}
+	@Override
+	String getEntitieAttributesNames() {
+		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personImage";
+	}
+	@Override
+	String getEntitieAttributesValues() {
+		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , "+this.getPersonDateOfBirth().toString()+" , "+this.getPersonHashPass()+" , "+this.getPersonImage();
+	}
+	@Override
+	String getEntitieAttributesNamesValues() {
+		// TODO Auto-generated method stub
+		return "personEmail = "+ this.getPersonEmail()+" , personFirstName = "+this.getPersonFirstName()+" , personLastName = "+this.getPersonLastName()+" , personDateOfBirth = "+this.getPersonDateOfBirth().toString()+" , personHashPass = "+ this.getPersonHashPass() + " , personImage = "+ this.getPersonImage();
+
+	}
+	@Override
+	public void getPsmtmt(PreparedStatement pstmt, int i) {
+		 try {
+         	
+				pstmt.setString(1, personEmail);
+				if(i==0) {
+				pstmt.setString(2, personFirstName);
+				pstmt.setString(3, personLastName);
+				pstmt.setDate(4, (java.sql.Date) personDateOfBirth);
+				pstmt.setBlob(5, personImage);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}		
+	}
 
 }

@@ -36,8 +36,8 @@ public class Allergen extends  Entities{
 	private void SetAllergenName(String allergenName ) {
 		 this.allergenName=allergenName; 
 	}
-	private void SetAllergenId(Integer allergieId ) {
-		 this.allergenId=allergieId; 
+	private void SetAllergenId(Integer AllergenId ) {
+		 this.allergenId=AllergenId; 
 	}
 	public static int getMaxAllergen() {
 		return maxAllergen;
@@ -54,13 +54,12 @@ public class Allergen extends  Entities{
 				pstmt.setString(2, allergenName);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     }
 	@Override
 	String getEntitieKey() {
-		return "allergieId";
+		return "allergenId";
 	}
 	@Override
 	String getEntitieKeyValue() {
@@ -68,7 +67,7 @@ public class Allergen extends  Entities{
 	}
 	@Override
 	String getEntitieAttributesNames() {		
-		return "allergieId, allergieName";
+		return "allergenId, allergenName";
 	}
 	@Override
 	String getEntitieAttributesValues() {
@@ -76,7 +75,7 @@ public class Allergen extends  Entities{
 	}
 	@Override
 	String getEntitieAttributesNamesValues() {
-		return "allergieId= "+this.getAllergenId().toString()+", allergieName"+this.getAllergenName();
+		return "allergenId= "+this.getAllergenId().toString()+", allergenName"+this.getAllergenName();
 	}
      
 }
