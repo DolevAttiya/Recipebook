@@ -3,12 +3,11 @@ package rep;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-
-import javax.swing.ImageIcon;
 
 public abstract class Person extends Entities{
 	private String personEmail;
@@ -17,8 +16,8 @@ public abstract class Person extends Entities{
 	private	Date personDateOfBirth;
 	private	String personHashPass;
 	private ArrayList<Integer> personsFavoriteRecipe;
-	private ImageIcon personImage;
-	public Person( String personEmail, String personFirstName, String personLastName, Date personDateOfBirth, String personHashPass, ArrayList<Integer> personsFavoriteRecipe,ImageIcon personImage) {
+	private Blob personImage;
+	public Person( String personEmail, String personFirstName, String personLastName, Date personDateOfBirth, String personHashPass, ArrayList<Integer> personsFavoriteRecipe,Blob personImage) {
 		setPersonEmail(personEmail);
 		setPersonFirstName(personFirstName);
 		setPersonLastName(personLastName);
@@ -64,10 +63,10 @@ public abstract class Person extends Entities{
 		personsFavoriteRecipe.forEach((n) -> this.personsFavoriteRecipe.add(n));
 
 	}
-	public ImageIcon getPersonImage() {
+	public Blob getPersonImage() {
 		return personImage;
 	}
-	public void setPersonImage(ImageIcon personImage) {
+	public void setPersonImage(Blob personImage) {
 		this.personImage = personImage;
 	}
 	public String ConvertPassTOHash(String password) throws NoSuchAlgorithmException {
@@ -120,6 +119,7 @@ public abstract class Person extends Entities{
 				pstmt.setString(2, personFirstName);
 				pstmt.setString(3, personLastName);
 				pstmt.setDate(4, (java.sql.Date) personDateOfBirth);
+				pstmt.setBlob(5, (Blob) personImage);
 				pstmt.setBlob(5, personImage);
 				}
 			} catch (SQLException e) {

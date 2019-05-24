@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 public  abstract class  Entities {
 	
 	abstract String getEntitieKey();
@@ -71,5 +70,5 @@ public  abstract class  Entities {
 	            System.out.println(e.getMessage());
 	        }
 		return null;
-}
+		}
 }

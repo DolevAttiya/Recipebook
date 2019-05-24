@@ -1,16 +1,17 @@
 package rep;
 
+import java.sql.Blob;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.ImageIcon;
 
 public class Dietitian extends Person {
 
 private Integer dietitianId;
 private Date dieticianStatDate;
 public Dietitian(String personEmail, String personFirstName, String personLastName, Date personDateOfBirth,
-			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, ImageIcon personImage,Integer dietitianId, Date dieticianStatDate) {
+			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, Blob personImage,Integer dietitianId, Date dieticianStatDate) {
 		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe,
 				personImage);
 		setDietitianId(dietitianId);
@@ -57,7 +58,15 @@ String getEntitieAttributesNamesValues() {
 }
 @Override
 public void getPsmtmt(PreparedStatement pstmt, int i) {
-	// TODO Auto-generated method stub
+	try {
+       	
+		pstmt.setInt(1, dietitianId);
+		if(i==0) {
+		pstmt.setDate(2, (java.sql.Date) dieticianStatDate);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
 	
 } 
 }

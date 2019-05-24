@@ -14,8 +14,8 @@ public class Allergen extends  Entities{
 	 /*Contractor*/
 	public Allergen(ResultSet rs) {
 		try {
-			SetAllergenId(rs.getInt("allergenId"));
-			SetAllergenName(rs.getString("allergenName"));
+			setAllergenId(rs.getInt("allergenId"));
+			setAllergenName(rs.getString("allergenName"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -23,8 +23,8 @@ public class Allergen extends  Entities{
 		setMaxAllergen(getMaxAllergen() + 1);
 	}
 	public Allergen(int allergenId, String allergenName) {
-		this.allergenId=allergenId;
-		this.allergenName=allergenName;
+		this.setAllergenId(allergenId);
+		this.setAllergenName(allergenName);
 		setMaxAllergen(getMaxAllergen() + 1);
 	}
 	public Integer getAllergenId() {
@@ -33,10 +33,10 @@ public class Allergen extends  Entities{
 	public String getAllergenName() {
 		return this.allergenName; 
 	}
-	private void SetAllergenName(String allergenName ) {
+	private void setAllergenName(String allergenName ) {
 		 this.allergenName=allergenName; 
 	}
-	private void SetAllergenId(Integer AllergenId ) {
+	private void setAllergenId(Integer AllergenId ) {
 		 this.allergenId=AllergenId; 
 	}
 	public static int getMaxAllergen() {
@@ -45,18 +45,7 @@ public class Allergen extends  Entities{
 	private static void setMaxAllergen(int maxAllergen) {
 		Allergen.maxAllergen = maxAllergen;
 	}
-	@Override
-     public void getPsmtmt( PreparedStatement pstmt,int i) {
-            try {
-            	
-				pstmt.setInt(1, allergenId);
-				if(i==0) {
-				pstmt.setString(2, allergenName);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-    }
+	
 	@Override
 	String getEntitieKey() {
 		return "allergenId";
@@ -77,6 +66,18 @@ public class Allergen extends  Entities{
 	String getEntitieAttributesNamesValues() {
 		return "allergenId= "+this.getAllergenId().toString()+", allergenName"+this.getAllergenName();
 	}
+	@Override
+    public void getPsmtmt( PreparedStatement pstmt,int i) {
+           try {
+           	
+				pstmt.setInt(1, allergenId);
+				if(i==0) {
+				pstmt.setString(2, allergenName);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+   }
      
 }
 

@@ -1,17 +1,17 @@
 package rep;
 
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.ImageIcon;
 
 public class User extends Person {
 
 private Integer userId;
 private Integer userAllergen[];
 public User(String personEmail, String personFirstName, String personLastName, Date personDateOfBirth,
-			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, ImageIcon personImage,Integer userId, Integer userAllergen[]) {
+			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, Blob personImage,Integer userId, Integer userAllergen[]) {
 		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe,
 				personImage);
 		setUserId(userId);
