@@ -1,53 +1,57 @@
 package rep;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-import javax.swing.ImageIcon;
-
-
-public class Recipe {
- private int recipeId;
+public class Recipe extends Entities{
+	
+	/*Attributes*/
+ private Integer recipeId;
  private String  recipeName;
- private int recipeallergies[];
- private ArrayList<Ingridiant> recipeIngridiants;
- private ArrayList<Integer> recipeIngridiantsType;
- private ArrayList<Integer> recipeIngridiantsAmount;
- private int recipeCalories;
- private int recipeCarbohydrate;
- private int recipeProtein;
- private int recipeFat;
- private int recipeKosher;
- private ImageIcon recipeImage;
- private TimeUnit recipeTimeToMake;
- private int recipeComplex;
- private int recipeUserID;
- private int recipeStars;
+ private Blob recipeImage;
+ private Integer recipeTotalCalories;
+ private Integer recipeTotalCarbohydrate;
+ private Integer recipeTotalProtein;
+ private Integer recipeTotalFat;
+ private Integer recipeKashruth;
+ private Time recipeTimeToMake;
+ private Integer recipeComplex;
+ private Integer recipeRate;
  private String recipeDescription;
  private String recipeProcses;
+ private String recipePersonEmail;
+ private ArrayList<Ingredient> recipeIngredientId;
+ private ArrayList<Integer> recipeIngredientsType;
+ private ArrayList<Integer> recipeIngredientsAmount;
+ private Integer recipeAllergen[];
+ 
+ 
  /*Contractor*/
-public Recipe( int recipeId,String  recipeName, int[] recipeallergies,int recipeCalories,int recipeCarbohydrate,int recipeProtein,int recipeFat, int recipeKosher, ImageIcon recipeImage, TimeUnit recipeTimeToMakeprivate ,int recipeComplex,int recipeUserID,int recipeStars, String recipeDescription, String recipeProcses ,ArrayList<Ingridiant> recipeIngridiants, ArrayList<Integer> recipeIngridiantsType, ArrayList<Integer> recipeIngridiantsAmount)
+public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Integer recipeTotalCalories,Integer recipeTotalCarbohydrate,Integer recipeTotalProtein,Integer recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMakeprivate ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcses ,ArrayList<Ingredient> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Integer> recipeIngredientsAmount)
 {
-	this.setRecipeallergies(recipeallergies);
+	this.setRecipeAllergen(recipeAllergen);
 	this.setRecipeId(recipeId);
 	this.setRecipeName(recipeName);
-	this.setRecipeIngridiants(recipeIngridiants);
-	this.setRecipeIngridiantsType(recipeIngridiantsType);
-	this.setRecipeIngridiantsAmount(recipeIngridiantsAmount);
-	this.setRecipeCalories(recipeCalories);
-	this.setRecipeCarbohydrate(recipeCarbohydrate);
-	this.setRecipeProtein(recipeProtein);
-	this.setRecipeFat(recipeFat);
-	this.setRecipeKosher(recipeKosher);
+	this.setRecipeIngredientId(recipeIngredientId);
+	this.setRecipeIngredientsType(recipeIngredientsType);
+	this.setRecipeIngredientsAmount(recipeIngredientsAmount);
+	this.setRecipeTotalCalories(recipeTotalCalories);
+	this.setRecipeTotalCarbohydrate(recipeTotalCarbohydrate);
+	this.setRecipeTotalProtein(recipeTotalProtein);
+	this.setRecipeTotalFat(recipeTotalFat);
+	this.setRecipeKashruth(recipeKashruth);
 	this.setRecipeComplex(recipeComplex);
-	this.setRecipeUserID(recipeUserID);
-	this.setRecipeStars(recipeStars);
+	this.setRecipePersonEmail(recipePersonEmail);
+	this.setRecipeRate(recipeRate);
 	this.setRecipeDescription(recipeDescription);
 	this.setRecipeProcses(recipeProcses);	
 	this.setRecipeImage(recipeImage);
 }
-public int getRecipeId() {
+public Integer getRecipeId() {
 	return recipeId;
 }
-public void setRecipeId(int recipeId) {
+public void setRecipeId(Integer recipeId) {
 	this.recipeId = recipeId;
 }
 public String getRecipeName() {
@@ -56,91 +60,91 @@ public String getRecipeName() {
 public void setRecipeName(String recipeName) {
 	this.recipeName = recipeName;
 }
-public int[] getRecipeallergies() {
-	return recipeallergies;
+public Integer[] getRecipeAllergen() {
+	return recipeAllergen;
 }
-public void setRecipeallergies(int[] recipeallergies) {
-	this.recipeallergies= new int[Allergies.getMaxAllergies()];
-	for (int i=0;i<Allergies.getMaxAllergies();i++)
-		this.recipeallergies[i]=recipeallergies[i];
+public void setRecipeAllergen(Integer[] recipeAllergen) {
+	this.recipeAllergen= new Integer[Allergen.getMaxAllergen()];
+	for (int i=0;i<Allergen.getMaxAllergen();i++)
+		this.recipeAllergen[i]=recipeAllergen[i];
 }
-public ArrayList<Ingridiant> getRecipeIngridiants() {
-	return recipeIngridiants;
+public ArrayList<Ingredient> getRecipeIngredientId() {
+	return recipeIngredientId;
 }
-public void setRecipeIngridiants(ArrayList<Ingridiant> recipeIngridiants) {
-	recipeIngridiants.forEach((n) -> this.recipeIngridiants.add(n));
+public void setRecipeIngredientId(ArrayList<Ingredient> recipeIngredientId) {
+	recipeIngredientId.forEach((n) -> this.recipeIngredientId.add(n));
 }
-public ArrayList<Integer> getRecipeIngridiantsType() {
-	return recipeIngridiantsType;
+public ArrayList<Integer> getRecipeIngredientsType() {
+	return recipeIngredientsType;
 }
-public void setRecipeIngridiantsType(ArrayList<Integer> recipeIngridiantsType) {
-	recipeIngridiantsType.forEach((n) -> this.recipeIngridiantsType.add(n));
+public void setRecipeIngredientsType(ArrayList<Integer> recipeIngredientsType) {
+	recipeIngredientsType.forEach((n) -> this.recipeIngredientsType.add(n));
 }
-public ArrayList<Integer> getRecipeIngridiantsAmount() {
-	return recipeIngridiantsAmount;
+public ArrayList<Integer> getRecipeIngredientsAmount() {
+	return recipeIngredientsAmount;
 }
-public void setRecipeIngridiantsAmount(ArrayList<Integer> recipeIngridiantsAmount) {
-	recipeIngridiantsAmount.forEach((n) -> this.recipeIngridiantsAmount.add(n));
+public void setRecipeIngredientsAmount(ArrayList<Integer> recipeIngredientsAmount) {
+	recipeIngredientsAmount.forEach((n) -> this.recipeIngredientsAmount.add(n));
 }
-public int getRecipeCalories() {
-	return recipeCalories;
+public Integer getRecipeTotalCalories() {
+	return recipeTotalCalories;
 }
-public void setRecipeCalories(int recipeCalories) {
-	this.recipeCalories = recipeCalories;
+public void setRecipeTotalCalories(Integer recipeTotalCalories) {
+	this.recipeTotalCalories = recipeTotalCalories;
 }
-public int getRecipeCarbohydrate() {
-	return recipeCarbohydrate;
+public Integer getRecipeTotalCarbohydrate() {
+	return recipeTotalCarbohydrate;
 }
-public void setRecipeCarbohydrate(int recipeCarbohydrate) {
-	this.recipeCarbohydrate = recipeCarbohydrate;
+public void setRecipeTotalCarbohydrate(Integer recipeTotalCarbohydrate) {
+	this.recipeTotalCarbohydrate = recipeTotalCarbohydrate;
 }
-public int getRecipeProtein() {
-	return recipeProtein;
+public Integer getRecipeTotalProtein() {
+	return recipeTotalProtein;
 }
-public void setRecipeProtein(int recipeProtein) {
-	this.recipeProtein = recipeProtein;
+public void setRecipeTotalProtein(Integer recipeTotalProtein) {
+	this.recipeTotalProtein = recipeTotalProtein;
 }
-public int getRecipeKosher() {
-	return recipeKosher;
+public Integer getRecipeKashruth() {
+	return recipeKashruth;
 }
-public void setRecipeKosher(int recipeKosher) {
-	this.recipeKosher = recipeKosher;
+public void setRecipeKashruth(Integer recipeKashruth) {
+	this.recipeKashruth = recipeKashruth;
 }
-public int getRecipeFat() {
-	return recipeFat;
+public Integer getRecipeTotalFat() {
+	return recipeTotalFat;
 }
-public void setRecipeFat(int recipeFat) {
-	this.recipeFat = recipeFat;
+public void setRecipeTotalFat(Integer recipeTotalFat) {
+	this.recipeTotalFat = recipeTotalFat;
 }
-public ImageIcon getRecipeImage() {
+public Blob getRecipeImage() {
 	return recipeImage;
 }
-public void setRecipeImage(ImageIcon recipeImage) {
+public void setRecipeImage(Blob recipeImage) {
 	this.recipeImage = recipeImage;
 }
-public TimeUnit getRecipeTimeToMake() {
+public Time getRecipeTimeToMake() {
 	return recipeTimeToMake;
 }
-public void setRecipeTimeToMake(TimeUnit recipeTimeToMake) {
+public void setRecipeTimeToMake(Time recipeTimeToMake) {
 	this.recipeTimeToMake = recipeTimeToMake;
 }
-public int getRecipeComplex() {
+public Integer getRecipeComplex() {
 	return recipeComplex;
 }
-public void setRecipeComplex(int recipeComplex) {
+public void setRecipeComplex(Integer recipeComplex) {
 	this.recipeComplex = recipeComplex;
 }
-public int getRecipeUserID() {
-	return recipeUserID;
+public String getRecipePersonEmail() {
+	return recipePersonEmail;
 }
-public void setRecipeUserID(int recipeUserID) {
-	this.recipeUserID = recipeUserID;
+public void setRecipePersonEmail(String recipePersonEmail) {
+	this.recipePersonEmail = recipePersonEmail;
 }
-public int getRecipeStars() {
-	return recipeStars;
+public Integer getRecipeRate() {
+	return recipeRate;
 }
-public void setRecipeStars(int recipeStars) {
-	this.recipeStars = recipeStars;
+public void setRecipeRate(Integer recipeRate) {
+	this.recipeRate = recipeRate;
 }
 public String getRecipeDescription() {
 	return recipeDescription;
@@ -154,27 +158,97 @@ public String getRecipeProcses() {
 public void setRecipeProcses(String recipeProcses) {
 	this.recipeProcses = recipeProcses;
 }
-public void addIngridiant(int IngridiantId,IngridiantType ingridiantType, int IngridiantAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
+public void addIngredient(Integer IngredientId,IngredientType ingredientType, Integer IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
 {
-	Ingridiant newIngridiant= new Ingridiant(IngridiantId);//***//
-	 this.recipeIngridiants.add(newIngridiant); 
-	 this.recipeIngridiantsType.add(ingridiantType.getIngridiantTypeId());
-	 this.recipeIngridiantsAmount.add(IngridiantAmount);
-	 this.recipeCalories+=(newIngridiant.getIngridiantalergieCalories()*IngridiantAmount*ingridiantType.getIngridiantTypeValue());
-	 this.recipeCarbohydrate+=newIngridiant.getIngridiantCarbohydrate()*IngridiantAmount*ingridiantType.getIngridiantTypeValue();
-	 this.recipeFat+=newIngridiant.getIngridiantFat()*IngridiantAmount*ingridiantType.getIngridiantTypeValue();
+	Ingredient newIngredient= new Ingredient(IngredientId);//***//
+	 this.recipeIngredientId.add(newIngredient); 
+	 this.recipeIngredientsType.add(ingredientType.getIngredientTypeId());
+	 this.recipeIngredientsAmount.add(IngredientAmount);
+	 this.recipeTotalCalories+=(newIngredient.getIngredientCalories()*IngredientAmount*ingredientType.getIngredientTypeValue());
+	 this.recipeTotalCarbohydrate+=newIngredient.getIngredientCarbohydrate()*IngredientAmount*ingredientType.getIngredientTypeValue();
+	 this.recipeTotalFat+=newIngredient.getIngredientFat()*IngredientAmount*ingredientType.getIngredientTypeValue();
 	 //*protein*//
 	 {
-		 if(newIngridiant.getIngridiantKosher()!=0) //*Kosher check*//
-			 	if(this.getRecipeKosher()!=3)
-			 			if(this.getRecipeKosher()==0) {this.setRecipeKosher(newIngridiant.getIngridiantKosher());}
-			 			else if (this.getRecipeKosher()!=newIngridiant.getIngridiantKosher())
-			 				this.setRecipeKosher(3);
+		 if(newIngredient.getIngredientKashruth()!=0) //*Kosher check*//
+			 	if(this.getRecipeKashruth()!=3)
+			 			if(this.getRecipeKashruth()==0) {this.setRecipeKashruth(newIngredient.getIngredientKashruth());}
+			 			else if (this.getRecipeKashruth()!=newIngredient.getIngredientKashruth())
+			 				this.setRecipeKashruth(3);
 	 }
-	 for( int i=0;i<Allergies.getMaxAllergies();i++)
+	 for( int i=0;i<Allergen.getMaxAllergen();i++)
 	 {
-		 if(newIngridiant.getIngridiantalergies(i)>0)
-			 this.recipeallergies[i]=1;//***//
+		 if(newIngredient.getIngredientAllergen(i)>0)
+			 this.recipeAllergen[i]++;//***//
 	 }	 
 }
+@Override
+String getEntitieKey() {
+	return "recipeId";
+}
+@Override
+String getEntitieKeyValue() {
+	return getRecipeId().toString();
+}
+@Override
+String getEntitieAttributesNames() {
+	return " recipeId , recipeName , recipeImage , recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein , recipeTotalFat , recipeKashruth , recipeTimeToMake, recipeComplex , recipeRate , recipeDescription  , recipeProcses, recipePersonEmail ";
+}
+@Override
+String getEntitieAttributesValues() {
+	return this.getRecipeId().toString() +" , " +
+	this.getRecipeName() +" , " +
+	this.getRecipeImage()+" , " +
+	this.getRecipeTotalCalories().toString() +" , " +
+	this.getRecipeTotalCarbohydrate().toString() +" , " +
+	this.getRecipeTotalProtein().toString() +" , " +
+	this.getRecipeTotalFat().toString() +" , " +
+	this.getRecipeKashruth().toString()+" , " +
+	this.getRecipeTimeToMake().toString()+" , " +
+	this.getRecipeComplex().toString()+" , " +
+	this.getRecipeRate().toString()+" , " +
+	this.getRecipeDescription()+" , " +
+	this.getRecipeProcses()+" , " +
+	this.getRecipePersonEmail();
+}
+@Override
+String getEntitieAttributesNamesValues() {
+	return  " recipeId = "+this.getRecipeId().toString() +" , " +
+			 ", recipeName = "+	this.getRecipeName() +" , " +
+			 ", recipeImage = "+	this.getRecipeImage().toString() +" , " +
+			 ", recipeTotalCalories = "+	this.getRecipeTotalCalories().toString() +" , " +
+			 ", recipeTotalCarbohydrate = "+	this.getRecipeTotalCarbohydrate().toString() +" , " +
+			 ", recipeTotalProtein = "+	this.getRecipeTotalProtein().toString() +" , " +
+			 ", recipeTotalFat = "+	this.getRecipeTotalFat().toString() +" , " +
+			 ", recipeKashruth = "+	this.getRecipeKashruth().toString() +" , " +
+			 ", recipeTimeToMake = "+	this.getRecipeTimeToMake().toString() +" , " +
+			 ", recipeComplex = "+	this.getRecipeComplex().toString() +" , " +
+			 ", recipeRate = "+	this.getRecipeRate().toString() +" , " +
+			 ", recipeDescription = "+	this.getRecipeDescription() +" , " +
+			 ", recipeProcses = "+	this.getRecipeProcses()+" , " +
+			 ", recipePersonEmail = "+	this.getRecipePersonEmail() +" ";
+}
+@Override
+public void getPsmtmt(PreparedStatement pstmt, int i) {
+	try {
+       	
+		pstmt.setInt(1, recipeId);
+		if(i==0) {
+		pstmt.setString(2, recipeName);
+		pstmt.setBlob(3, recipeImage);
+		pstmt.setInt(4, recipeTotalCalories);
+		pstmt.setInt(5, recipeTotalCarbohydrate);
+		pstmt.setInt(6, recipeTotalProtein);
+		pstmt.setInt(7, recipeTotalFat);
+		pstmt.setInt(8, recipeKashruth);
+		pstmt.setTime(9, recipeTimeToMake);
+		pstmt.setInt(10, recipeComplex);
+		pstmt.setString(11, recipeDescription);
+		pstmt.setString(12, recipeProcses);
+		pstmt.setString(13, recipePersonEmail);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+}
+ 
 }
