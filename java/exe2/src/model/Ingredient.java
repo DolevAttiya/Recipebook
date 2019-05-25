@@ -1,4 +1,4 @@
-package rep;
+package model;
 
 import java.sql.Blob;
 import java.sql.PreparedStatement;

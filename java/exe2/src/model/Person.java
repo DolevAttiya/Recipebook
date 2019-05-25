@@ -1,4 +1,4 @@
-package rep;
+package model;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

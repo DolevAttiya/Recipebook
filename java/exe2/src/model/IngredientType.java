@@ -1,4 +1,4 @@
-package rep;
+package model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
