@@ -37,9 +37,12 @@ public  abstract class  Entities {
 	}
 	ResultSet Select() {
 	 String sql="SELECT * FROM" + this.getClass().getName()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
-	 return (preformWithDB(sql,1)) ;
+	 return (getFromWithDB(sql)) ;
 	}
-	
+	ResultSet SelectSpecific(String Table, String Key,String Value) {
+		 String sql="SELECT * FROM" + Table+" WHERE "+Key+" = "+Value;
+		 return (getFromWithDB(sql)) ;
+	}
 	public void preformWithDB(String sql) {
 		 
 		 try (Connection conn = this.connect();
@@ -56,7 +59,7 @@ public  abstract class  Entities {
 		 }
 	}
 	
-	public ResultSet preformWithDB(String sql,int i) {
+	public ResultSet getFromWithDB(String sql) {
 		try (
 				Connection conn = this.connect();
 	            Statement stmt  = conn.createStatement();

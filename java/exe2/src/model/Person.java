@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +26,24 @@ public abstract class Person extends Entities{
 		setPersonHashPass(personHashPass);
 		setPersonsFavoriteRecipe(personsFavoriteRecipe);
 		setPersonImage(personImage);
+	}
+	public Person(ResultSet rs)
+	{
+		try {
+			this.setPersonEmail(rs.getString("personEmail"));
+			this.setPersonFirstName(rs.getString("personFirstName"));
+			this.setPersonLastName(rs.getString("personLastName"));
+			this.setPersonDateOfBirth(rs.getDate("personDateOfBirth"));
+			this.setPersonHashPass(rs.getString("personHashPass"));
+			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
+			ResultSet favorite = SelectSpecific("PersonFavoriteRecipe","personEmail",this.getPersonEmail());
+			while(favorite.next())
+				personsFavoriteRecipes.add(rs.getInt("recipeId"));
+			this.setPersonsFavoriteRecipe(personsFavoriteRecipes);
+			this.setPersonImage(rs.getBlob("personImage"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 	public String getPersonEmail() {
 		return personEmail;

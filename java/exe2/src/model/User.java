@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Blob;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,21 @@ public User(String personEmail, String personFirstName, String personLastName, D
 		setUserId(userId);
 		setUserAllergen(userAllergen);
 	}
+public User(ResultSet rs) {
+	super(rs);
+	try {
+		ResultSet userAllergens = SelectSpecific("UserAllergen","ingredientId",this.getUserId().toString());
+		Integer[] allergen= new Integer[userAllergens.getFetchSize()];
+		while(userAllergens.next())
+		{
+			allergen[userAllergens.getInt("allergenId")]=1;
+		}
+		this.setUserId(rs.getInt("dietitianId"));
+		this.setUserAllergen(allergen);
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+}
 public Integer getUserId() {
 	return userId;
 }
@@ -27,7 +43,6 @@ public Integer[] getUserAllergen() {
 	return userAllergen;
 }
 public void setUserAllergen(Integer[] userAllergen) {
-	this.userAllergen= new Integer[Allergen.getMaxAllergen()];
 	for (int i=0;i<Allergen.getMaxAllergen();i++)
 		this.userAllergen[i]=userAllergen[i];
 }
