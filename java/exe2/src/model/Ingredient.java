@@ -124,11 +124,10 @@ String getEntitieAttributesNamesValues() {
 			 ", ingredientImage = "+	this.getIngredientImage();
 }
 @Override
-public void getPsmtmt(PreparedStatement pstmt, int i) {
+public void getPsmtmt(PreparedStatement pstmt) {
 	try {
        	
 		pstmt.setInt(1, ingredientId);
-		if(i==0) {
 		pstmt.setString(2, ingredientName);
 		pstmt.setInt(3, ingredientCalories);
 		pstmt.setInt(4, ingredientCarbohydrate);
@@ -136,7 +135,6 @@ public void getPsmtmt(PreparedStatement pstmt, int i) {
 		pstmt.setInt(6, ingredientFat);
 		pstmt.setInt(7, ingredientKashruth);
 		pstmt.setBlob(8, ingredientImage);
-		}
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}

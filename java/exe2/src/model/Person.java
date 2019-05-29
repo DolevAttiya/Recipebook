@@ -111,17 +111,15 @@ public abstract class Person extends Entities{
 
 	}
 	@Override
-	public void getPsmtmt(PreparedStatement pstmt, int i) {
+	public void getPsmtmt(PreparedStatement pstmt) {
 		 try {
          	
 				pstmt.setString(1, personEmail);
-				if(i==0) {
 				pstmt.setString(2, personFirstName);
 				pstmt.setString(3, personLastName);
 				pstmt.setDate(4, (java.sql.Date) personDateOfBirth);
 				pstmt.setBlob(5, (Blob) personImage);
 				pstmt.setBlob(5, personImage);
-				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}		

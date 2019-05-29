@@ -64,15 +64,13 @@ public class IngredientType extends Entities {
 				 " ingredientTypeValue = "+this.getIngredientTypeValue()+" ";
 	}
 	@Override
-	public void getPsmtmt(PreparedStatement pstmt, int i) {
+	public void getPsmtmt(PreparedStatement pstmt) {
 		try {
 	       	
 			pstmt.setInt(1, ingredientTypeId);
-			if(i==0) {
 			pstmt.setString(2, ingredientTypeName);
 			pstmt.setInt(3, ingredientTypeValue);
-			}
-		} catch (SQLException e) {
+			} catch (SQLException e) {
 			e.printStackTrace();
 		}		
 	}

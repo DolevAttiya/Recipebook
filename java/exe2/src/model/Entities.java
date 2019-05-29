@@ -13,7 +13,7 @@ public  abstract class  Entities {
 	abstract String getEntitieAttributesNames();
 	abstract String getEntitieAttributesValues();
 	abstract String getEntitieAttributesNamesValues();
-	abstract public void getPsmtmt( PreparedStatement pstmt,int i) ;
+	abstract public void getPsmtmt( PreparedStatement pstmt) ;
 
 	private Connection connect() {
         // SQLite connection string
@@ -46,10 +46,7 @@ public  abstract class  Entities {
 	                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	         
        // set the corresponding param
-			 if (sql.charAt(0)=='S')
-				 this.getPsmtmt(pstmt,1);
-			 else
-			 this.getPsmtmt(pstmt,0);
+				 this.getPsmtmt(pstmt);
        // update 
        pstmt.executeUpdate();
 

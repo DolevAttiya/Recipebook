@@ -228,11 +228,10 @@ String getEntitieAttributesNamesValues() {
 			 ", recipePersonEmail = "+	this.getRecipePersonEmail() +" ";
 }
 @Override
-public void getPsmtmt(PreparedStatement pstmt, int i) {
+public void getPsmtmt(PreparedStatement pstmt) {
 	try {
        	
 		pstmt.setInt(1, recipeId);
-		if(i==0) {
 		pstmt.setString(2, recipeName);
 		pstmt.setBlob(3, recipeImage);
 		pstmt.setInt(4, recipeTotalCalories);
@@ -245,7 +244,6 @@ public void getPsmtmt(PreparedStatement pstmt, int i) {
 		pstmt.setString(11, recipeDescription);
 		pstmt.setString(12, recipeProcses);
 		pstmt.setString(13, recipePersonEmail);
-		}
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}

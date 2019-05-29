@@ -57,13 +57,11 @@ String getEntitieAttributesNamesValues() {
 	return " dietitianId = "+this.getDietitianId().toString()+" , dieticianStatDate = "+this.getDieticianStatDate().toString();
 }
 @Override
-public void getPsmtmt(PreparedStatement pstmt, int i) {
+public void getPsmtmt(PreparedStatement pstmt) {
 	try {
        	
 		pstmt.setInt(1, dietitianId);
-		if(i==0) {
 		pstmt.setDate(2, (java.sql.Date) dieticianStatDate);
-		}
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}

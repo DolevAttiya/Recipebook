@@ -52,7 +52,7 @@ String getEntitieAttributesNamesValues() {
 	return " "+getEntitieKey()+" = "+this.getUserId().toString()+" ";
 }
 @Override
-public void getPsmtmt(PreparedStatement pstmt, int i) {
+public void getPsmtmt(PreparedStatement pstmt) {
 	 try {
      	
 			pstmt.setInt(1, userId);
