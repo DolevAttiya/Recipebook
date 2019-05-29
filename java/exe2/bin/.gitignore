@@ -1,5 +1,3 @@
-/database/
-/driver/
-/controller/
 /view/
-/model/
+/controller/
+/driver/
