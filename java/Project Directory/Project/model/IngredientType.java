@@ -17,6 +17,9 @@ public class IngredientType extends Entities {
 		this.setIngredientTypeName(ingredientTypeName);
 		this.setIngredientTypeValue(ingredientTypeValue);
 	}
+	public IngredientType(Integer id) {
+		this(SelectSpecific("IngredientType","ingredientTypeId",id.toString()));
+	}
 	public IngredientType(ResultSet rs) {
 		try {
 			setIngredientTypeId(rs.getInt("ingredientTypeId"));
