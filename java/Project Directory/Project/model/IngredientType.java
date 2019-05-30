@@ -1,6 +1,7 @@
-package rep;
+package model;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class IngredientType extends Entities {
@@ -15,6 +16,15 @@ public class IngredientType extends Entities {
 		this.setIngredientTypeId(ingredientTypeId);
 		this.setIngredientTypeName(ingredientTypeName);
 		this.setIngredientTypeValue(ingredientTypeValue);
+	}
+	public IngredientType(ResultSet rs) {
+		try {
+			setIngredientTypeId(rs.getInt("ingredientTypeId"));
+			setIngredientTypeValue(rs.getInt("ingredientTypeValue"));
+			setIngredientTypeName(rs.getString("ingredientTypeName"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	public Integer getIngredientTypeId() {
 		return this.ingredientTypeId; 
@@ -64,15 +74,13 @@ public class IngredientType extends Entities {
 				 " ingredientTypeValue = "+this.getIngredientTypeValue()+" ";
 	}
 	@Override
-	public void getPsmtmt(PreparedStatement pstmt, int i) {
+	public void getPsmtmt(PreparedStatement pstmt) {
 		try {
 	       	
 			pstmt.setInt(1, ingredientTypeId);
-			if(i==0) {
 			pstmt.setString(2, ingredientTypeName);
 			pstmt.setInt(3, ingredientTypeValue);
-			}
-		} catch (SQLException e) {
+			} catch (SQLException e) {
 			e.printStackTrace();
 		}		
 	}
