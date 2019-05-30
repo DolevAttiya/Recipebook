@@ -1,10 +1,11 @@
-package rep;
+package model;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +26,24 @@ public abstract class Person extends Entities{
 		setPersonHashPass(personHashPass);
 		setPersonsFavoriteRecipe(personsFavoriteRecipe);
 		setPersonImage(personImage);
+	}
+	public Person(ResultSet rs)
+	{
+		try {
+			this.setPersonEmail(rs.getString("personEmail"));
+			this.setPersonFirstName(rs.getString("personFirstName"));
+			this.setPersonLastName(rs.getString("personLastName"));
+			this.setPersonDateOfBirth(rs.getDate("personDateOfBirth"));
+			this.setPersonHashPass(rs.getString("personHashPass"));
+			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
+			ResultSet favorite = SelectSpecific("PersonFavoriteRecipe","personEmail",this.getPersonEmail());
+			while(favorite.next())
+				personsFavoriteRecipes.add(rs.getInt("recipeId"));
+			this.setPersonsFavoriteRecipe(personsFavoriteRecipes);
+			this.setPersonImage(rs.getBlob("personImage"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 	public String getPersonEmail() {
 		return personEmail;
@@ -111,17 +130,15 @@ public abstract class Person extends Entities{
 
 	}
 	@Override
-	public void getPsmtmt(PreparedStatement pstmt, int i) {
+	public void getPsmtmt(PreparedStatement pstmt) {
 		 try {
          	
 				pstmt.setString(1, personEmail);
-				if(i==0) {
 				pstmt.setString(2, personFirstName);
 				pstmt.setString(3, personLastName);
 				pstmt.setDate(4, (java.sql.Date) personDateOfBirth);
 				pstmt.setBlob(5, (Blob) personImage);
 				pstmt.setBlob(5, personImage);
-				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}		

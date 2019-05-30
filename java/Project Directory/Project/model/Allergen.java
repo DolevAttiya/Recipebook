@@ -1,4 +1,4 @@
-package rep;
+package model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -67,13 +67,10 @@ public class Allergen extends  Entities{
 		return "allergenId= "+this.getAllergenId().toString()+", allergenName"+this.getAllergenName();
 	}
 	@Override
-    public void getPsmtmt( PreparedStatement pstmt,int i) {
+    public void getPsmtmt( PreparedStatement pstmt) {
            try {
-           	
 				pstmt.setInt(1, allergenId);
-				if(i==0) {
 				pstmt.setString(2, allergenName);
-				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

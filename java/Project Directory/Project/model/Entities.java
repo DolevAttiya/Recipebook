@@ -1,4 +1,4 @@
-package rep;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +13,7 @@ public  abstract class  Entities {
 	abstract String getEntitieAttributesNames();
 	abstract String getEntitieAttributesValues();
 	abstract String getEntitieAttributesNamesValues();
-	abstract public void getPsmtmt( PreparedStatement pstmt,int i) ;
+	abstract public void getPsmtmt( PreparedStatement pstmt) ;
 
 	private Connection connect() {
         // SQLite connection string
@@ -37,19 +37,19 @@ public  abstract class  Entities {
 	}
 	ResultSet Select() {
 	 String sql="SELECT * FROM" + this.getClass().getName()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
-	 return (preformWithDB(sql,1)) ;
+	 return (getFromWithDB(sql)) ;
 	}
-	
+	ResultSet SelectSpecific(String Table, String Key,String Value) {
+		 String sql="SELECT * FROM" + Table+" WHERE "+Key+" = "+Value;
+		 return (getFromWithDB(sql)) ;
+	}
 	public void preformWithDB(String sql) {
 		 
 		 try (Connection conn = this.connect();
 	                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	         
        // set the corresponding param
-			 if (sql.charAt(0)=='S')
-				 this.getPsmtmt(pstmt,1);
-			 else
-			 this.getPsmtmt(pstmt,0);
+				 this.getPsmtmt(pstmt);
        // update 
        pstmt.executeUpdate();
 
@@ -59,7 +59,7 @@ public  abstract class  Entities {
 		 }
 	}
 	
-	public ResultSet preformWithDB(String sql,int i) {
+	public ResultSet getFromWithDB(String sql) {
 		try (
 				Connection conn = this.connect();
 	            Statement stmt  = conn.createStatement();

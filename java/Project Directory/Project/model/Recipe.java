@@ -1,6 +1,7 @@
-package rep;
+package model;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -21,14 +22,14 @@ public class Recipe extends Entities{
  private String recipeDescription;
  private String recipeProcses;
  private String recipePersonEmail;
- private ArrayList<Ingredient> recipeIngredientId;
+ private ArrayList<Integer> recipeIngredientId;
  private ArrayList<Integer> recipeIngredientsType;
  private ArrayList<Integer> recipeIngredientsAmount;
  private Integer recipeAllergen[];
  
  
  /*Contractor*/
-public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Integer recipeTotalCalories,Integer recipeTotalCarbohydrate,Integer recipeTotalProtein,Integer recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMakeprivate ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcses ,ArrayList<Ingredient> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Integer> recipeIngredientsAmount)
+public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Integer recipeTotalCalories,Integer recipeTotalCarbohydrate,Integer recipeTotalProtein,Integer recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMakeprivate ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcses ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Integer> recipeIngredientsAmount)
 {
 	this.setRecipeAllergen(recipeAllergen);
 	this.setRecipeId(recipeId);
@@ -47,6 +48,49 @@ public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Int
 	this.setRecipeDescription(recipeDescription);
 	this.setRecipeProcses(recipeProcses);	
 	this.setRecipeImage(recipeImage);
+}
+public Recipe(ResultSet rs) {
+	try {
+	ResultSet RecipeAllergens = SelectSpecific("RecipeAllergen","ingredientId",this.getRecipeId().toString());
+	Integer[] allergen= new Integer[RecipeAllergens.getFetchSize()];
+	while(RecipeAllergens.next())
+	{
+		allergen[RecipeAllergens.getInt("allergenId")]=1;
+	}
+	this.setRecipeAllergen(allergen);
+	this.setRecipeId(rs.getInt("recipeId"));
+	this.setRecipeName(rs.getString("recipeName"));
+	ResultSet recipeIngredientVals = SelectSpecific("RecipeIngredient","recipeId",this.getRecipeId().toString());
+	ArrayList<Integer> IngredientsType= new ArrayList<Integer>();
+	ArrayList<Integer> IngredientsAmount= new ArrayList<Integer>();
+	ArrayList<Integer> ingredients= new ArrayList<Integer>();
+
+	while(recipeIngredientVals.next())
+		
+	{
+		IngredientsType.add(rs.getInt("ingredientsType"));
+		IngredientsAmount.add(rs.getInt("IngredientsAmount"));
+		ingredients.add(rs.getInt("IngredientsAmount"));
+
+	}
+	this.setRecipeIngredientId(ingredients);
+	this.setRecipeIngredientsType(IngredientsType);
+	this.setRecipeIngredientsAmount(IngredientsAmount);
+	this.setRecipeTotalCalories(rs.getInt("recipeTotalCalories"));
+	this.setRecipeTotalCarbohydrate(rs.getInt("recipeTotalCarbohydrate"));
+	this.setRecipeTotalProtein(rs.getInt("recipeTotalProtein"));
+	this.setRecipeTotalFat(rs.getInt("recipeTotalFat"));
+	this.setRecipeKashruth(rs.getInt("recipeKashruth"));
+	this.setRecipeComplex(rs.getInt("recipeComplex"));
+	this.setRecipePersonEmail(rs.getString("recipePersonEmail"));
+	this.setRecipeRate(rs.getInt("recipeRate"));
+	this.setRecipeDescription(rs.getString("recipeDescription"));
+	this.setRecipeProcses(rs.getString("recipeProcses"));	
+	this.setRecipeImage(rs.getBlob("recipeImage"));
+} catch (SQLException e) {
+	e.printStackTrace();
+}
+
 }
 public Integer getRecipeId() {
 	return recipeId;
@@ -68,10 +112,10 @@ public void setRecipeAllergen(Integer[] recipeAllergen) {
 	for (int i=0;i<Allergen.getMaxAllergen();i++)
 		this.recipeAllergen[i]=recipeAllergen[i];
 }
-public ArrayList<Ingredient> getRecipeIngredientId() {
+public ArrayList<Integer> getRecipeIngredientId() {
 	return recipeIngredientId;
 }
-public void setRecipeIngredientId(ArrayList<Ingredient> recipeIngredientId) {
+public void setRecipeIngredientId(ArrayList<Integer> recipeIngredientId) {
 	recipeIngredientId.forEach((n) -> this.recipeIngredientId.add(n));
 }
 public ArrayList<Integer> getRecipeIngredientsType() {
@@ -161,7 +205,7 @@ public void setRecipeProcses(String recipeProcses) {
 public void addIngredient(Integer IngredientId,IngredientType ingredientType, Integer IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
 {
 	Ingredient newIngredient= new Ingredient(IngredientId);//***//
-	 this.recipeIngredientId.add(newIngredient); 
+	 this.recipeIngredientId.add(newIngredient.getIngredientId()); 
 	 this.recipeIngredientsType.add(ingredientType.getIngredientTypeId());
 	 this.recipeIngredientsAmount.add(IngredientAmount);
 	 this.recipeTotalCalories+=(newIngredient.getIngredientCalories()*IngredientAmount*ingredientType.getIngredientTypeValue());
@@ -228,11 +272,10 @@ String getEntitieAttributesNamesValues() {
 			 ", recipePersonEmail = "+	this.getRecipePersonEmail() +" ";
 }
 @Override
-public void getPsmtmt(PreparedStatement pstmt, int i) {
+public void getPsmtmt(PreparedStatement pstmt) {
 	try {
        	
 		pstmt.setInt(1, recipeId);
-		if(i==0) {
 		pstmt.setString(2, recipeName);
 		pstmt.setBlob(3, recipeImage);
 		pstmt.setInt(4, recipeTotalCalories);
@@ -245,7 +288,6 @@ public void getPsmtmt(PreparedStatement pstmt, int i) {
 		pstmt.setString(11, recipeDescription);
 		pstmt.setString(12, recipeProcses);
 		pstmt.setString(13, recipePersonEmail);
-		}
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}

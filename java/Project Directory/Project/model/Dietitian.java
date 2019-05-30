@@ -1,7 +1,8 @@
-package rep;
+package model;
 
 import java.sql.Blob;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,15 @@ public Dietitian(String personEmail, String personFirstName, String personLastNa
 		setDietitianId(dietitianId);
 		setDieticianStatDate(dieticianStatDate);
 	}
+public Dietitian(ResultSet rs) {
+	super(rs);
+	try {
+		this.setDietitianId(rs.getInt("dietitianId"));
+		this.setDieticianStatDate(rs.getDate("dieticianStatDate"));
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+}
 public Integer getDietitianId() {
 	return dietitianId;
 }
@@ -30,7 +40,6 @@ public void setDieticianStatDate(Date dieticianStatDate) {
 	this.dieticianStatDate = dieticianStatDate;
 
 }
-
 public Integer reputetionYears() {
 	Date Now= new Date();
 	
@@ -57,13 +66,11 @@ String getEntitieAttributesNamesValues() {
 	return " dietitianId = "+this.getDietitianId().toString()+" , dieticianStatDate = "+this.getDieticianStatDate().toString();
 }
 @Override
-public void getPsmtmt(PreparedStatement pstmt, int i) {
+public void getPsmtmt(PreparedStatement pstmt) {
 	try {
        	
 		pstmt.setInt(1, dietitianId);
-		if(i==0) {
 		pstmt.setDate(2, (java.sql.Date) dieticianStatDate);
-		}
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}

@@ -1,7 +1,8 @@
-package rep;
+package model;
 
 import java.sql.Blob;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Ingredient extends Entities {
@@ -17,8 +18,30 @@ public class Ingredient extends Entities {
  private Integer ingredientKashruth;
  private Blob ingredientImage;
  
- /*Contractor*/
- public Ingredient(int num) {}// do later getting from DB all the attributes 
+ /*Contractors*/
+ public Ingredient(Integer num) {
+		ResultSet ingredient = SelectSpecific("Ingredient","ingredientId",num.toString());
+		try {
+			this.setIngredientId(ingredient.getInt("ingredientId"));
+			this.setIngredientName(ingredient.getString("ingredientName"));
+			ResultSet ingredientAllergens = SelectSpecific("IngredientAllergen","ingredientId",this.getIngredientId().toString());
+			Allergen[] allergen= new Allergen[ingredientAllergens.getFetchSize()];
+			for(int i=0;ingredientAllergens.next();i++)
+			{
+				allergen[i]=new Allergen(ingredientAllergens);
+			}
+			this.setIngredientAllergen(allergen);
+			this.setIngredientCalories(ingredient.getInt("ingredientCalories"));
+			this.setIngredientCarbohydrate(ingredient.getInt("ingredientCarbohydrate"));
+			this.setIngredientProtein(ingredient.getInt("ingredientProtein"));
+			this.setIngredientFat(ingredient.getInt("ingredientFat"));
+			this.setIngredientKashruth(ingredient.getInt("ingredientKashruth"));
+			this.setIngredientImage(ingredient.getBlob("ingredientImage"));
+			} catch (SQLException e) {
+					// 	TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+ }
 public Ingredient( Integer ingredientId,String  ingredientName,Allergen ingredientAllergen[],Integer ingredientCalories,Integer ingredientCarbohydrate,Integer ingredientProtein,Integer ingredientFat, Integer ingredientKashruth, Blob ingredientImage)
 {
 	this.setIngredientId(ingredientId);
@@ -30,6 +53,28 @@ public Ingredient( Integer ingredientId,String  ingredientName,Allergen ingredie
 	this.setIngredientFat(ingredientFat);
 	this.setIngredientKashruth(ingredientKashruth);
 	this.setIngredientImage(ingredientImage);
+}
+public Ingredient(ResultSet rs) {
+		try {
+			this.setIngredientId(rs.getInt("ingredientId"));
+			this.setIngredientName(rs.getString("ingredientName"));
+			ResultSet ingredientAllergens = SelectSpecific("IngredientAllergen","ingredientId",this.getIngredientId().toString());
+			Allergen[] allergen= new Allergen[ingredientAllergens.getFetchSize()];
+			for(int i=0;ingredientAllergens.next();i++)
+			{
+				allergen[i]=new Allergen(ingredientAllergens);
+			}
+			this.setIngredientAllergen(allergen);
+			this.setIngredientCalories(rs.getInt("ingredientCalories"));
+			this.setIngredientCarbohydrate(rs.getInt("ingredientCarbohydrate"));
+			this.setIngredientProtein(rs.getInt("ingredientProtein"));
+			this.setIngredientFat(rs.getInt("ingredientFat"));
+			this.setIngredientKashruth(rs.getInt("ingredientKashruth"));
+			this.setIngredientImage(rs.getBlob("ingredientImage"));
+			} catch (SQLException e) {
+					// 	TODO Auto-generated catch block
+					e.printStackTrace();
+			}
 }
 public Integer getIngredientId() {
 	return ingredientId;
@@ -124,11 +169,10 @@ String getEntitieAttributesNamesValues() {
 			 ", ingredientImage = "+	this.getIngredientImage();
 }
 @Override
-public void getPsmtmt(PreparedStatement pstmt, int i) {
+public void getPsmtmt(PreparedStatement pstmt) {
 	try {
        	
 		pstmt.setInt(1, ingredientId);
-		if(i==0) {
 		pstmt.setString(2, ingredientName);
 		pstmt.setInt(3, ingredientCalories);
 		pstmt.setInt(4, ingredientCarbohydrate);
@@ -136,7 +180,6 @@ public void getPsmtmt(PreparedStatement pstmt, int i) {
 		pstmt.setInt(6, ingredientFat);
 		pstmt.setInt(7, ingredientKashruth);
 		pstmt.setBlob(8, ingredientImage);
-		}
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}

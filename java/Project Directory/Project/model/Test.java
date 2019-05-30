@@ -1,4 +1,4 @@
-package rep;
+package model;
 
 public class Test {
 
