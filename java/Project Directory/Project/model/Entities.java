@@ -2,7 +2,6 @@ package model;
 
 import java.util.Observable;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +9,7 @@ import java.sql.Statement;
 @SuppressWarnings("deprecation")
 public class  Entities extends Observable implements model{
 	
+
 	String getEntitieKey() {return "Entitiy error";}
 	String getEntitieKeyValue(){return "Entitiy error";}
 	String getEntitieAttributesNames() {return "Entitiy error";}
@@ -47,7 +47,8 @@ public class  Entities extends Observable implements model{
 	}
 	public void preformWithDB(String sql) {
 		 
-		 try (Connection conn = connect();
+		 try (Connection conn = SingletonDBConnection.getConnection();
+
 	                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	         
        // set the corresponding param
@@ -63,7 +64,9 @@ public class  Entities extends Observable implements model{
 	
 	public static ResultSet getFromWithDB(String sql) {
 		try (
-				Connection conn = Entities.connect();
+
+				Connection conn = SingletonDBConnection.getConnection();
+
 	            Statement stmt  = conn.createStatement();
 	            ResultSet rs    = stmt.executeQuery(sql); 
 				)
