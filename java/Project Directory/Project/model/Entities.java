@@ -1,20 +1,33 @@
 package model;
 
+import java.util.Observable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-public  abstract class  Entities {
+@SuppressWarnings("deprecation")
+public class  Entities extends Observable implements model{
 	
-	abstract String getEntitieKey();
-	abstract String getEntitieKeyValue();
-	abstract String getEntitieAttributesNames();
-	abstract String getEntitieAttributesValues();
-	abstract String getEntitieAttributesNamesValues();
-	abstract public void getPsmtmt( PreparedStatement pstmt) ;
 
-	
+	String getEntitieKey() {return "Entitiy error";}
+	String getEntitieKeyValue(){return "Entitiy error";}
+	String getEntitieAttributesNames() {return "Entitiy error";}
+	String getEntitieAttributesValues() {return "Entitiy error";}
+	String getEntitieAttributesNamesValues(){return "Entitiy error";}
+  	public void getPsmtmt( PreparedStatement pstmt) {}
+ 
+	public static Connection connect() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:";
+        Connection conn = null;
+        try { 
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
 	void Update() {String sql=" UPDATE"+this.getClass().getName()+"SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue();
 	 preformWithDB(sql);
 	 }
@@ -24,17 +37,18 @@ public  abstract class  Entities {
 	void Delete() {String sql="DELETE FROM "+ this.getClass().getName()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
 	 preformWithDB(sql);
 	}
-	ResultSet Select() {
+	void Select() {
 	 String sql="SELECT * FROM" + this.getClass().getName()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
-	 return (getFromWithDB(sql)) ;
+	  notifyObservers((getFromWithDB(sql)));
 	}
-	ResultSet SelectSpecific(String Table, String Key,String Value) {
+	 static ResultSet SelectSpecific(String Table, String Key,String Value) {
 		 String sql="SELECT * FROM" + Table+" WHERE "+Key+" = "+Value;
 		 return (getFromWithDB(sql)) ;
 	}
 	public void preformWithDB(String sql) {
 		 
 		 try (Connection conn = SingletonDBConnection.getConnection();
+
 	                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	         
        // set the corresponding param
@@ -48,9 +62,11 @@ public  abstract class  Entities {
 		 }
 	}
 	
-	public ResultSet getFromWithDB(String sql) {
+	public static ResultSet getFromWithDB(String sql) {
 		try (
+
 				Connection conn = SingletonDBConnection.getConnection();
+
 	            Statement stmt  = conn.createStatement();
 	            ResultSet rs    = stmt.executeQuery(sql); 
 				)
