@@ -14,7 +14,7 @@ public class SingletonDBConnection {
         try {
         	if(conn==null) {
             // db parameters
-            String url = "jdbc:sqlite:C:/Users/yuval/Documents/GitHub/Recipebook/java/database.db";
+        		String url = "jdbc:sqlite:Project/database/database.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
             
