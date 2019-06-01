@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,17 +14,7 @@ public  abstract class  Entities {
 	abstract String getEntitieAttributesNamesValues();
 	abstract public void getPsmtmt( PreparedStatement pstmt) ;
 
-	private Connection connect() {
-        // SQLite connection string
-        String url = "jdbc:sqlite:";
-        Connection conn = null;
-        try { 
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
+	
 	void Update() {String sql=" UPDATE"+this.getClass().getName()+"SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue();
 	 preformWithDB(sql);
 	 }
@@ -45,7 +34,7 @@ public  abstract class  Entities {
 	}
 	public void preformWithDB(String sql) {
 		 
-		 try (Connection conn = this.connect();
+		 try (Connection conn = SingletonDBConnection.getConnection();
 	                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	         
        // set the corresponding param
@@ -61,7 +50,7 @@ public  abstract class  Entities {
 	
 	public ResultSet getFromWithDB(String sql) {
 		try (
-				Connection conn = this.connect();
+				Connection conn = SingletonDBConnection.getConnection();
 	            Statement stmt  = conn.createStatement();
 	            ResultSet rs    = stmt.executeQuery(sql); 
 				)
