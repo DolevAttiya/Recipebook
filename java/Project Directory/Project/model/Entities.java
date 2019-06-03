@@ -2,11 +2,11 @@ package model;
 
 import java.util.Observable;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-@SuppressWarnings("deprecation")
 public class  Entities extends Observable implements model{
 	
 
