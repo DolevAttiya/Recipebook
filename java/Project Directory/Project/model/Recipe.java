@@ -1,6 +1,6 @@
 package model;
 import java.sql.Blob;
-import java.sql.PreparedStatement;
+//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -11,10 +11,10 @@ public class Recipe extends Entities{
  private Integer recipeId;
  private String  recipeName;
  private Blob recipeImage;
- private Integer recipeTotalCalories;
- private Integer recipeTotalCarbohydrate;
- private Integer recipeTotalProtein;
- private Integer recipeTotalFat;
+ private Double recipeTotalCalories;
+ private Double recipeTotalCarbohydrate;
+ private Double recipeTotalProtein;
+ private Double recipeTotalFat;
  private Integer recipeKashruth;
  private Time recipeTimeToMake;
  private Integer recipeComplex;
@@ -34,7 +34,7 @@ public Recipe(Integer id)
 	this(SelectSpecific("Recipe","recipeId",id.toString()));
 
 }
-public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Integer recipeTotalCalories,Integer recipeTotalCarbohydrate,Integer recipeTotalProtein,Integer recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMakeprivate ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcses ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Integer> recipeIngredientsAmount)
+public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Double recipeTotalCalories,Double recipeTotalCarbohydrate,Double recipeTotalProtein,Double recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMakeprivate ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcses ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Integer> recipeIngredientsAmount)
 {
 	this.setRecipeAllergen(recipeAllergen);
 	this.setRecipeId(recipeId);
@@ -81,10 +81,10 @@ public Recipe(ResultSet rs) {
 	this.setRecipeIngredientId(ingredients);
 	this.setRecipeIngredientsType(IngredientsType);
 	this.setRecipeIngredientsAmount(IngredientsAmount);
-	this.setRecipeTotalCalories(rs.getInt("recipeTotalCalories"));
-	this.setRecipeTotalCarbohydrate(rs.getInt("recipeTotalCarbohydrate"));
-	this.setRecipeTotalProtein(rs.getInt("recipeTotalProtein"));
-	this.setRecipeTotalFat(rs.getInt("recipeTotalFat"));
+	this.setRecipeTotalCalories(rs.getDouble("recipeTotalCalories"));
+	this.setRecipeTotalCarbohydrate(rs.getDouble("recipeTotalCarbohydrate"));
+	this.setRecipeTotalProtein(rs.getDouble("recipeTotalProtein"));
+	this.setRecipeTotalFat(rs.getDouble("recipeTotalFat"));
 	this.setRecipeKashruth(rs.getInt("recipeKashruth"));
 	this.setRecipeComplex(rs.getInt("recipeComplex"));
 	this.setRecipePersonEmail(rs.getString("recipePersonEmail"));
@@ -139,22 +139,22 @@ public ArrayList<Integer> getRecipeIngredientsAmount() {
 public void setRecipeIngredientsAmount(ArrayList<Integer> recipeIngredientsAmount) {
 	recipeIngredientsAmount.forEach((n) -> this.recipeIngredientsAmount.add(n));
 }
-public Integer getRecipeTotalCalories() {
+public Double getRecipeTotalCalories() {
 	return recipeTotalCalories;
 }
-public void setRecipeTotalCalories(Integer recipeTotalCalories) {
+public void setRecipeTotalCalories(Double recipeTotalCalories) {
 	this.recipeTotalCalories = recipeTotalCalories;
 }
-public Integer getRecipeTotalCarbohydrate() {
+public Double getRecipeTotalCarbohydrate() {
 	return recipeTotalCarbohydrate;
 }
-public void setRecipeTotalCarbohydrate(Integer recipeTotalCarbohydrate) {
+public void setRecipeTotalCarbohydrate(Double recipeTotalCarbohydrate) {
 	this.recipeTotalCarbohydrate = recipeTotalCarbohydrate;
 }
-public Integer getRecipeTotalProtein() {
+public Double getRecipeTotalProtein() {
 	return recipeTotalProtein;
 }
-public void setRecipeTotalProtein(Integer recipeTotalProtein) {
+public void setRecipeTotalProtein(Double recipeTotalProtein) {
 	this.recipeTotalProtein = recipeTotalProtein;
 }
 public Integer getRecipeKashruth() {
@@ -163,10 +163,10 @@ public Integer getRecipeKashruth() {
 public void setRecipeKashruth(Integer recipeKashruth) {
 	this.recipeKashruth = recipeKashruth;
 }
-public Integer getRecipeTotalFat() {
+public Double getRecipeTotalFat() {
 	return recipeTotalFat;
 }
-public void setRecipeTotalFat(Integer recipeTotalFat) {
+public void setRecipeTotalFat(Double recipeTotalFat) {
 	this.recipeTotalFat = recipeTotalFat;
 }
 public Blob getRecipeImage() {
@@ -280,17 +280,17 @@ String getEntitieAttributesNamesValues() {
 			 ", recipeProcses = "+	this.getRecipeProcses()+" , " +
 			 ", recipePersonEmail = "+	this.getRecipePersonEmail() +" ";
 }
-@Override
+/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
 	try {
        	
 		pstmt.setInt(1, recipeId);
 		pstmt.setString(2, recipeName);
 		pstmt.setBlob(3, recipeImage);
-		pstmt.setInt(4, recipeTotalCalories);
-		pstmt.setInt(5, recipeTotalCarbohydrate);
-		pstmt.setInt(6, recipeTotalProtein);
-		pstmt.setInt(7, recipeTotalFat);
+		pstmt.setDouble(4, recipeTotalCalories);
+		pstmt.setDouble(5, recipeTotalCarbohydrate);
+		pstmt.setDouble(6, recipeTotalProtein);
+		pstmt.setDouble(7, recipeTotalFat);
 		pstmt.setInt(8, recipeKashruth);
 		pstmt.setTime(9, recipeTimeToMake);
 		pstmt.setInt(10, recipeComplex);
@@ -300,6 +300,6 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
-}
+}*/
  
 }

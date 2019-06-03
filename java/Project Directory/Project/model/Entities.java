@@ -2,7 +2,7 @@ package model;
 
 import java.util.Observable;
 import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,11 +41,11 @@ public class  Entities extends Observable implements model{
 		 try (Connection conn = SingletonDBConnection.getConnection();
 
 	                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-	         
+			 pstmt.executeUpdate();
        // set the corresponding param
-				 this.getPsmtmt(pstmt);
+				// this.getPsmtmt(pstmt);
        // update 
-       pstmt.executeUpdate();
+      
 
 		 }
 		 catch (SQLException e) {

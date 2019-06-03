@@ -1,7 +1,7 @@
 package model;
 
 import java.sql.Blob;
-import java.sql.PreparedStatement;
+//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -11,10 +11,10 @@ public class Ingredient extends Entities {
  private Integer ingredientId;
  private String  ingredientName;
  private Integer ingredientAllergen[];
- private Integer ingredientCalories;
- private Integer ingredientCarbohydrate;
- private Integer ingredientProtein;
- private Integer ingredientFat;
+ private Double ingredientCalories;
+ private Double ingredientCarbohydrate;
+ private Double ingredientProtein;
+ private Double ingredientFat;
  private Integer ingredientKashruth;
  private Blob ingredientImage;
  
@@ -23,7 +23,7 @@ public class Ingredient extends Entities {
 		this( SelectSpecific("Ingredient","ingredientId",num.toString()));
 		
  }
-public Ingredient( Integer ingredientId,String  ingredientName,Integer ingredientAllergen[],Integer ingredientCalories,Integer ingredientCarbohydrate,Integer ingredientProtein,Integer ingredientFat, Integer ingredientKashruth, Blob ingredientImage)
+public Ingredient( Integer ingredientId,String  ingredientName,Integer ingredientAllergen[],Double ingredientCalories,Double ingredientCarbohydrate,Double ingredientProtein,Double ingredientFat, Integer ingredientKashruth, Blob ingredientImage)
 {
 	this.setIngredientId(ingredientId);
 	this.setIngredientName(ingredientName);
@@ -46,10 +46,10 @@ public Ingredient(ResultSet rs) {
 				allergen[ingredientAllergens.getInt("allergenId")]=1;
 			}
 			this.setIngredientAllergen(allergen);
-			this.setIngredientCalories(rs.getInt("ingredientCalories"));
-			this.setIngredientCarbohydrate(rs.getInt("ingredientCarbohydrate"));
-			this.setIngredientProtein(rs.getInt("ingredientProtein"));
-			this.setIngredientFat(rs.getInt("ingredientFat"));
+			this.setIngredientCalories(rs.getDouble("ingredientCalories"));
+			this.setIngredientCarbohydrate(rs.getDouble("ingredientCarbohydrate"));
+			this.setIngredientProtein(rs.getDouble("ingredientProtein"));
+			this.setIngredientFat(rs.getDouble("ingredientFat"));
 			this.setIngredientKashruth(rs.getInt("ingredientKashruth"));
 			//this.setIngredientImage(rs.getBlob("ingredientImage"));
 			} catch (SQLException e) {
@@ -58,7 +58,7 @@ public Ingredient(ResultSet rs) {
 			}
 }
 public Integer getIngredientId() {
-	return ingredientId;
+	return ingredientId.intValue();
 }
 public void setIngredientId(Integer ingredientId) {
 	this.ingredientId = ingredientId;
@@ -69,22 +69,22 @@ public String getIngredientName() {
 public void setIngredientName(String ingredientName) {
 	this.ingredientName = ingredientName;
 }
-public Integer getIngredientCalories() {
+public Double getIngredientCalories() {
 	return ingredientCalories;
 }
-public void setIngredientCalories(Integer ingredientCalories) {
+public void setIngredientCalories(Double ingredientCalories) {
 	this.ingredientCalories = ingredientCalories;
 }
-public Integer getIngredientCarbohydrate() {
+public Double getIngredientCarbohydrate() {
 	return ingredientCarbohydrate;
 }
-public void setIngredientCarbohydrate(Integer ingredientCarbohydrate) {
+public void setIngredientCarbohydrate(Double ingredientCarbohydrate) {
 	this.ingredientCarbohydrate = ingredientCarbohydrate;
 }
-public Integer getIngredientProtein() {
+public Double getIngredientProtein() {
 	return ingredientProtein;
 }
-public void setIngredientProtein(Integer ingredientProtein) {
+public void setIngredientProtein(Double ingredientProtein) {
 	this.ingredientProtein = ingredientProtein;
 }
 public Integer getIngredientKashruth() {
@@ -93,10 +93,10 @@ public Integer getIngredientKashruth() {
 public void setIngredientKashruth(Integer ingredientKashruth) {
 	this.ingredientKashruth = ingredientKashruth;
 }
-public Integer getIngredientFat() {
+public Double getIngredientFat() {
 	return ingredientFat;
 }
-public void setIngredientFat(Integer ingredientFat) {
+public void setIngredientFat(Double ingredientFat) {
 	this.ingredientFat = ingredientFat;
 }
 public Blob getIngredientImage() {
@@ -151,21 +151,21 @@ String getEntitieAttributesNamesValues() {
 			 " ingredientKashruth = "+	this.getIngredientKashruth().toString() +" , " +
 			 " ingredientImage = "+	this.getIngredientImage()+" ";
 }
-@Override
+/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
 	try {
        	
-		pstmt.setInt(1, ingredientId);
-		pstmt.setString(2, ingredientName);
-		pstmt.setInt(3, ingredientCalories);
-		pstmt.setInt(4, ingredientCarbohydrate);
-		pstmt.setInt(5, ingredientProtein);
-		pstmt.setInt(6, ingredientFat);
-		pstmt.setInt(7, ingredientKashruth);
-		pstmt.setBlob(8, ingredientImage);
+		pstmt.setInt(1, (int)this.getIngredientId());
+		pstmt.setString(2, this.getIngredientName());
+		pstmt.setInt(3, this.getIngredientCalories());
+		pstmt.setInt(4, this.getIngredientCarbohydrate());
+		pstmt.setInt(5, this.getIngredientProtein());
+		pstmt.setInt(6, this.getIngredientFat());
+		pstmt.setInt(7, this.getIngredientKashruth());
+		pstmt.setBlob(8, this.getIngredientImage());
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
 }
- 
+	*/ 
 }
