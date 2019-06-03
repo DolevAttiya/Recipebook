@@ -27,6 +27,10 @@ public abstract class Person extends Entities{
 		setPersonsFavoriteRecipe(personsFavoriteRecipe);
 		setPersonImage(personImage);
 	}
+	public Person(String email)
+	{			
+		this(SelectSpecific("Person","personEmail",email));		
+	}
 	public Person(ResultSet rs)
 	{
 		try {
@@ -132,8 +136,7 @@ public abstract class Person extends Entities{
 	@Override
 	public void getPsmtmt(PreparedStatement pstmt) {
 		 try {
-         	
-				pstmt.setString(1, personEmail);
+			    pstmt.setString(1, personEmail);
 				pstmt.setString(2, personFirstName);
 				pstmt.setString(3, personLastName);
 				pstmt.setDate(4, (java.sql.Date) personDateOfBirth);

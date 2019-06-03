@@ -29,6 +29,11 @@ public class Recipe extends Entities{
  
  
  /*Contractor*/
+public Recipe(Integer id)
+{
+	this(SelectSpecific("Recipe","recipeId",id.toString()));
+
+}
 public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Integer recipeTotalCalories,Integer recipeTotalCarbohydrate,Integer recipeTotalProtein,Integer recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMakeprivate ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcses ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Integer> recipeIngredientsAmount)
 {
 	this.setRecipeAllergen(recipeAllergen);
