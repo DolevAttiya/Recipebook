@@ -10,11 +10,11 @@ public class SingletonDBConnection {
     
         static Connection conn = null;
         
-        public static Connection getConnection() {
+    public static Connection getConnection() {
         try {
         	if(conn==null) {
             // db parameters
-            String url = "jdbc:sqlite:Project/database/database.db";
+        		String url = "jdbc:sqlite:Project/database/database.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
             
@@ -27,17 +27,17 @@ public class SingletonDBConnection {
         return conn;
     }
         
-        public static void closeConnection() {
-            //closing the connection to the DB if its open
-        try {
-                if (conn != null) {
-                    conn.close();
-                    System.out.println("Connection to SQLite has been terminated");
-                }
-             } catch (SQLException ex) {
+    public static void closeConnection() {
+    //closing the connection to the DB if its open
+    	try {
+    		if (conn != null) {
+    			conn.close();
+    			System.out.println("Connection to SQLite has been terminated");
+    		}
+    	} catch (SQLException ex) {
                     System.out.println(ex.getMessage());
-             }
-        }
+    	}
+    }
     
     
     public static void main(String[] args) {
