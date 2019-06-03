@@ -10,7 +10,7 @@ public class Ingredient extends Entities {
 	/*Attributes*/
  private Integer ingredientId;
  private String  ingredientName;
- private Allergen ingredientAllergen[];
+ private Integer ingredientAllergen[];
  private Integer ingredientCalories;
  private Integer ingredientCarbohydrate;
  private Integer ingredientProtein;
@@ -20,29 +20,10 @@ public class Ingredient extends Entities {
  
  /*Contractors*/
  public Ingredient(Integer num) {
-		ResultSet ingredient = SelectSpecific("Ingredient","ingredientId",num.toString());
-		try {
-			this.setIngredientId(ingredient.getInt("ingredientId"));
-			this.setIngredientName(ingredient.getString("ingredientName"));
-			ResultSet ingredientAllergens = SelectSpecific("IngredientAllergen","ingredientId",this.getIngredientId().toString());
-			Allergen[] allergen= new Allergen[ingredientAllergens.getFetchSize()];
-			for(int i=0;ingredientAllergens.next();i++)
-			{
-				allergen[i]=new Allergen(ingredientAllergens);
-			}
-			this.setIngredientAllergen(allergen);
-			this.setIngredientCalories(ingredient.getInt("ingredientCalories"));
-			this.setIngredientCarbohydrate(ingredient.getInt("ingredientCarbohydrate"));
-			this.setIngredientProtein(ingredient.getInt("ingredientProtein"));
-			this.setIngredientFat(ingredient.getInt("ingredientFat"));
-			this.setIngredientKashruth(ingredient.getInt("ingredientKashruth"));
-			this.setIngredientImage(ingredient.getBlob("ingredientImage"));
-			} catch (SQLException e) {
-					// 	TODO Auto-generated catch block
-					e.printStackTrace();
-			}
+		this( SelectSpecific("Ingredient","ingredientId",num.toString()));
+		
  }
-public Ingredient( Integer ingredientId,String  ingredientName,Allergen ingredientAllergen[],Integer ingredientCalories,Integer ingredientCarbohydrate,Integer ingredientProtein,Integer ingredientFat, Integer ingredientKashruth, Blob ingredientImage)
+public Ingredient( Integer ingredientId,String  ingredientName,Integer ingredientAllergen[],Integer ingredientCalories,Integer ingredientCarbohydrate,Integer ingredientProtein,Integer ingredientFat, Integer ingredientKashruth, Blob ingredientImage)
 {
 	this.setIngredientId(ingredientId);
 	this.setIngredientName(ingredientName);
@@ -59,10 +40,10 @@ public Ingredient(ResultSet rs) {
 			this.setIngredientId(rs.getInt("ingredientId"));
 			this.setIngredientName(rs.getString("ingredientName"));
 			ResultSet ingredientAllergens = SelectSpecific("IngredientAllergen","ingredientId",this.getIngredientId().toString());
-			Allergen[] allergen= new Allergen[ingredientAllergens.getFetchSize()];
-			for(int i=0;ingredientAllergens.next();i++)
+			Integer[] allergen= new Integer[ingredientAllergens.getFetchSize()];
+			while(ingredientAllergens.next())
 			{
-				allergen[i]=new Allergen(ingredientAllergens);
+				allergen[ingredientAllergens.getInt("allergenId")]=1;
 			}
 			this.setIngredientAllergen(allergen);
 			this.setIngredientCalories(rs.getInt("ingredientCalories"));
@@ -124,13 +105,13 @@ public Blob getIngredientImage() {
 public void setIngredientImage(Blob ingredientImage) {
 	this.ingredientImage = ingredientImage;
 }
-public Allergen[] getIngridiAntallergen() {
+public Integer[] getIngridiAntallergen() {
 	return ingredientAllergen;
 }
 public Integer getIngredientAllergen(int i) {
-	return ingredientAllergen[i].getAllergenId();
+	return ingredientAllergen[i];
 }
-public void setIngredientAllergen(Allergen ingredientAllergen[]) {
+public void setIngredientAllergen(Integer ingredientAllergen[]) {
 	for (int i=0;i<ingredientAllergen.length;i++)
 		this.ingredientAllergen[i]=ingredientAllergen[i];
 }
