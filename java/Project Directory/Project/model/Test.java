@@ -1,12 +1,12 @@
-package rep;
+package model;
 
 public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int k=0;
+
 		for(int i=0;i<4;i++)
-			{k=i;
+			{
 			for(int j=0;j<4;j++)
 			{ 
 				i=0; j=1;
