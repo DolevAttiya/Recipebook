@@ -29,6 +29,10 @@ public class IngredientType extends Entities {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	String Class() {
+		return "IngredientType";
+	}
 	public Integer getIngredientTypeId() {
 		return this.ingredientTypeId; 
 	}

@@ -49,6 +49,10 @@ public abstract class Person extends Entities{
 			e.printStackTrace();
 		}	
 	}
+	@Override
+	String Class() {
+		return "Person";
+	}
 	public String getPersonEmail() {
 		return personEmail;
 	}

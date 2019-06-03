@@ -27,6 +27,10 @@ public class Allergen extends  Entities{
 		
 		setMaxAllergen(getMaxAllergen() + 1);
 	}
+	@Override
+	String Class() {
+		return "Allergen";
+	}
 	public Allergen(int allergenId, String allergenName) {
 		this.setAllergenId(allergenId);
 		this.setAllergenName(allergenName);

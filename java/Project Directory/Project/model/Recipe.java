@@ -97,6 +97,10 @@ public Recipe(ResultSet rs) {
 }
 
 }
+@Override
+String Class() {
+	return "Recipe";
+}
 public Integer getRecipeId() {
 	return recipeId;
 }

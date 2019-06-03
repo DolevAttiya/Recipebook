@@ -51,7 +51,7 @@ public Ingredient(ResultSet rs) {
 			this.setIngredientProtein(rs.getInt("ingredientProtein"));
 			this.setIngredientFat(rs.getInt("ingredientFat"));
 			this.setIngredientKashruth(rs.getInt("ingredientKashruth"));
-			this.setIngredientImage(rs.getBlob("ingredientImage"));
+			//this.setIngredientImage(rs.getBlob("ingredientImage"));
 			} catch (SQLException e) {
 					// 	TODO Auto-generated catch block
 					e.printStackTrace();
@@ -124,6 +124,8 @@ String getEntitieKeyValue() {
 	return getIngredientId().toString();
 }
 @Override
+String Class() {return " ingredient ";}
+@Override
 String getEntitieAttributesNames() {
 	return " ingredientId , ingredientName , ingredientCalories , ingredientCarbohydrate , ingredientProtein , ingredientFat , ingredientKashruth , ingredientImage ";
 }
@@ -136,18 +138,18 @@ String getEntitieAttributesValues() {
 	this.getIngredientProtein().toString() +" , " +
 	this.getIngredientFat().toString() +" , " +
 	this.getIngredientKashruth().toString() +" , " +
-	this.getIngredientImage();
+	this.getIngredientImage()+" ";
 }
 @Override
 String getEntitieAttributesNamesValues() {
 	return  " ingredientId = "+this.getIngredientId().toString() +" , " +
-			 ", ingredientName = "+	this.getIngredientName() +" , " +
-			 ", ingredientCalories = "+	this.getIngredientCalories().toString() +" , " +
-			 ", ingredientCarbohydrate = "+	this.getIngredientCarbohydrate().toString() +" , " +
-			 ", ingredientProtein = "+	this.getIngredientProtein().toString() +" , " +
-			 ", ingredientFat = "+	this.getIngredientKashruth().toString() +" , " +
-			 ", ingredientKashruth = "+	this.getIngredientKashruth().toString() +" , " +
-			 ", ingredientImage = "+	this.getIngredientImage();
+			 " ingredientName = \""+	this.getIngredientName() +"\" , " +
+			 " ingredientCalories = "+	this.getIngredientCalories().toString() +" , " +
+			 " ingredientCarbohydrate = "+	this.getIngredientCarbohydrate().toString() +" , " +
+			 " ingredientProtein = "+	this.getIngredientProtein().toString() +" , " +
+			 " ingredientFat = "+	this.getIngredientKashruth().toString() +" , " +
+			 " ingredientKashruth = "+	this.getIngredientKashruth().toString() +" , " +
+			 " ingredientImage = "+	this.getIngredientImage()+" ";
 }
 @Override
 public void getPsmtmt(PreparedStatement pstmt) {

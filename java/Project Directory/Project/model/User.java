@@ -33,6 +33,10 @@ public User(ResultSet rs) {
 		e.printStackTrace();
 	}
 }
+@Override
+String Class() {
+	return "User";
+}
 public Integer getUserId() {
 	return userId;
 }
