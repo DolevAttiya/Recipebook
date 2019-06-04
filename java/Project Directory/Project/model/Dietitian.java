@@ -1,7 +1,7 @@
 package model;
 
 import java.sql.Blob;
-import java.sql.PreparedStatement;
+//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,6 +27,10 @@ public Dietitian(ResultSet rs) {
 		e.printStackTrace();
 	}
 }
+@Override
+protected String Class() {
+	return "Dietitian";
+}
 public Integer getDietitianId() {
 	return dietitianId;
 }
@@ -46,26 +50,26 @@ public Integer reputetionYears() {
 return Now.compareTo(getDieticianStatDate());	
 }
 @Override
-String getEntitieKey() {
+protected String getEntitieKey() {
 	return "dietitianId";
 }
 @Override
-String getEntitieKeyValue() {
+protected String getEntitieKeyValue() {
 	return this.getDietitianId().toString();
 }
 @Override
-String getEntitieAttributesNames() {
+protected String getEntitieAttributesNames() {
 	return " dietitianId , dieticianStatDate ";
 }
 @Override
-String getEntitieAttributesValues() {
+protected String getEntitieAttributesValues() {
 	return " "+this.getDietitianId().toString()+" , "+this.getDieticianStatDate().toString();
 }
 @Override
-String getEntitieAttributesNamesValues() { 
+protected String getEntitieAttributesNamesValues() { 
 	return " dietitianId = "+this.getDietitianId().toString()+" , dieticianStatDate = "+this.getDieticianStatDate().toString();
 }
-@Override
+/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
 	try {
        	
@@ -75,5 +79,5 @@ public void getPsmtmt(PreparedStatement pstmt) {
 		e.printStackTrace();
 	}
 	
-} 
+} */
 }

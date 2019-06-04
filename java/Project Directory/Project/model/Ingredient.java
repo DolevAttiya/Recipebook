@@ -112,25 +112,26 @@ public Integer getIngredientAllergen(int i) {
 	return ingredientAllergen[i];
 }
 public void setIngredientAllergen(Integer ingredientAllergen[]) {
+	this.ingredientAllergen= new Integer[ingredientAllergen.length];
 	for (int i=0;i<ingredientAllergen.length;i++)
 		this.ingredientAllergen[i]=ingredientAllergen[i];
 }
 @Override
-String getEntitieKey() {
+protected String getEntitieKey() {
 	return "ingredientId";
 }
 @Override
-String getEntitieKeyValue() {
+protected String getEntitieKeyValue() {
 	return getIngredientId().toString();
 }
 @Override
-String Class() {return " ingredient ";}
+protected String Class() {return " ingredient";}
 @Override
-String getEntitieAttributesNames() {
+protected String getEntitieAttributesNames() {
 	return " ingredientId , ingredientName , ingredientCalories , ingredientCarbohydrate , ingredientProtein , ingredientFat , ingredientKashruth , ingredientImage ";
 }
 @Override
-String getEntitieAttributesValues() {
+protected String getEntitieAttributesValues() {
 	return this.getIngredientId().toString() +" , " +
 	this.getIngredientName() +" , " +
 	this.getIngredientCalories().toString() +" , " +
@@ -141,7 +142,7 @@ String getEntitieAttributesValues() {
 	this.getIngredientImage()+" ";
 }
 @Override
-String getEntitieAttributesNamesValues() {
+protected String getEntitieAttributesNamesValues() {
 	return  " ingredientId = "+this.getIngredientId().toString() +" , " +
 			 " ingredientName = \""+	this.getIngredientName() +"\" , " +
 			 " ingredientCalories = "+	this.getIngredientCalories().toString() +" , " +

@@ -98,8 +98,8 @@ public Recipe(ResultSet rs) {
 
 }
 @Override
-String Class() {
-	return "Recipe";
+protected String Class() {
+	return " Recipe";
 }
 public Integer getRecipeId() {
 	return recipeId;
@@ -235,19 +235,19 @@ public void addIngredient(Integer IngredientId,IngredientType ingredientType, In
 	 }	 
 }
 @Override
-String getEntitieKey() {
+protected String getEntitieKey() {
 	return "recipeId";
 }
 @Override
-String getEntitieKeyValue() {
+protected String getEntitieKeyValue() {
 	return getRecipeId().toString();
 }
 @Override
-String getEntitieAttributesNames() {
+protected String getEntitieAttributesNames() {
 	return " recipeId , recipeName , recipeImage , recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein , recipeTotalFat , recipeKashruth , recipeTimeToMake, recipeComplex , recipeRate , recipeDescription  , recipeProcses, recipePersonEmail ";
 }
 @Override
-String getEntitieAttributesValues() {
+protected String getEntitieAttributesValues() {
 	return this.getRecipeId().toString() +" , " +
 	this.getRecipeName() +" , " +
 	this.getRecipeImage()+" , " +
@@ -264,7 +264,7 @@ String getEntitieAttributesValues() {
 	this.getRecipePersonEmail();
 }
 @Override
-String getEntitieAttributesNamesValues() {
+protected String getEntitieAttributesNamesValues() {
 	return  " recipeId = "+this.getRecipeId().toString() +" , " +
 			 ", recipeName = "+	this.getRecipeName() +" , " +
 			 ", recipeImage = "+	this.getRecipeImage().toString() +" , " +

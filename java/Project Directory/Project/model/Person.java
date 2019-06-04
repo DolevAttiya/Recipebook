@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Blob;
-import java.sql.PreparedStatement;
+//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public abstract class Person extends Entities{
 		}	
 	}
 	@Override
-	String Class() {
+	protected String Class() {
 		return "Person";
 	}
 	public String getPersonEmail() {
@@ -116,28 +116,28 @@ public abstract class Person extends Entities{
 
 	    }
 	@Override
-	String getEntitieKey() {
+	protected String getEntitieKey() {
 		return "personEmail ";
 	}
 	@Override
-	String getEntitieKeyValue() {
+	protected String getEntitieKeyValue() {
 		return this.getPersonEmail();
 	}
 	@Override
-	String getEntitieAttributesNames() {
+	protected String getEntitieAttributesNames() {
 		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personImage";
 	}
 	@Override
-	String getEntitieAttributesValues() {
+	protected String getEntitieAttributesValues() {
 		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , "+this.getPersonDateOfBirth().toString()+" , "+this.getPersonHashPass()+" , "+this.getPersonImage();
 	}
 	@Override
-	String getEntitieAttributesNamesValues() {
+	protected String getEntitieAttributesNamesValues() {
 		// TODO Auto-generated method stub
 		return "personEmail = "+ this.getPersonEmail()+" , personFirstName = "+this.getPersonFirstName()+" , personLastName = "+this.getPersonLastName()+" , personDateOfBirth = "+this.getPersonDateOfBirth().toString()+" , personHashPass = "+ this.getPersonHashPass() + " , personImage = "+ this.getPersonImage();
 
 	}
-	@Override
+	/*@Override
 	public void getPsmtmt(PreparedStatement pstmt) {
 		 try {
 			    pstmt.setString(1, personEmail);
@@ -149,6 +149,6 @@ public abstract class Person extends Entities{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}		
-	}
+	}*/
 
 }

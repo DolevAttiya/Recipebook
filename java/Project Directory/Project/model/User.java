@@ -1,7 +1,7 @@
 package model;
 
 import java.sql.Blob;
-import java.sql.PreparedStatement;
+//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,8 +34,8 @@ public User(ResultSet rs) {
 	}
 }
 @Override
-String Class() {
-	return "User";
+protected String Class() {
+	return " User";
 }
 public Integer getUserId() {
 	return userId;
@@ -51,26 +51,26 @@ public void setUserAllergen(Integer[] userAllergen) {
 		this.userAllergen[i]=userAllergen[i];
 }
 @Override
-String getEntitieKey() {	
+protected String getEntitieKey() {	
 	return " userId ";
 }
 @Override
-String getEntitieKeyValue() {
+protected String getEntitieKeyValue() {
 	return this.getUserId().toString();
 }
 @Override
-String getEntitieAttributesNames() {
+protected String getEntitieAttributesNames() {
 	return getEntitieKey();
 }
 @Override
-String getEntitieAttributesValues() {
+protected String getEntitieAttributesValues() {
 	return this.getUserId().toString();
 }
 @Override
-String getEntitieAttributesNamesValues() {
+protected String getEntitieAttributesNamesValues() {
 	return " "+getEntitieKey()+" = "+this.getUserId().toString()+" ";
 }
-@Override
+/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
 	 try {
      	
@@ -78,5 +78,5 @@ public void getPsmtmt(PreparedStatement pstmt) {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-}
+}*/
 }

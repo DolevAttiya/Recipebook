@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.PreparedStatement;
+//import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -28,7 +28,7 @@ public class Allergen extends  Entities{
 		setMaxAllergen(getMaxAllergen() + 1);
 	}
 	@Override
-	String Class() {
+	protected String Class() {
 		return "Allergen";
 	}
 	public Allergen(int allergenId, String allergenName) {
@@ -56,26 +56,27 @@ public class Allergen extends  Entities{
 	}
 	
 	@Override
-	String getEntitieKey() {
+	protected String getEntitieKey() {
 		return "allergenId";
 	}
 	@Override
-	String getEntitieKeyValue() {
+	protected String getEntitieKeyValue() {
 		return this.getAllergenId().toString();
 	}
 	@Override
-	String getEntitieAttributesNames() {		
+	protected String getEntitieAttributesNames() {		
 		return "allergenId, allergenName";
 	}
 	@Override
-	String getEntitieAttributesValues() {
+	
+	protected String getEntitieAttributesValues() {
 		return " "+this.getAllergenId().toString()+", "+this.getAllergenName();
 	}
 	@Override
-	String getEntitieAttributesNamesValues() {
+	protected String getEntitieAttributesNamesValues() {
 		return "allergenId= "+this.getAllergenId().toString()+", allergenName"+this.getAllergenName();
 	}
-	@Override
+	/*@Override
     public void getPsmtmt( PreparedStatement pstmt) {
            try {
 				pstmt.setInt(1, allergenId);
@@ -83,7 +84,7 @@ public class Allergen extends  Entities{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-   }
+   }*/
      
 }
 
