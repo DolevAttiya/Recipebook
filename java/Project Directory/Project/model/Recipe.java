@@ -280,6 +280,20 @@ protected String getEntitieAttributesNamesValues() {
 			 ", recipeProcses = "+	this.getRecipeProcses()+" , " +
 			 ", recipePersonEmail = "+	this.getRecipePersonEmail() +" ";
 }
+
+@Override
+protected int getmaxIngredieantCount(){return this.recipeIngredientId.size();}
+@Override
+protected String getAllergenforTableForInsert(int place){return "( allergenId ) VALUE ( "+recipeAllergen[place].toString()+" ) ";}
+@Override
+protected String getIngredientforTableForInsert(int place){return " ( ingredientId ) VALUE "+recipeIngredientId.get(place).toString()+" ) ";}
+@Override
+protected String getAllergenforTableForUpdate(int place){return "Entitiy error";}//Override for Ingredient, User, Recipe. making the sql string for the connection Allergen table for Update
+@Override
+protected String getIngredientforTableForUpdate(int place){return "Entitiy error";}//Override for recipe. making the sql string for the connection Ingredients table for Update
+
+
+
 /*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
 	try {

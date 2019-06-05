@@ -1,8 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Observable;
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,28 +22,95 @@ public class  Entities extends Observable implements model{
 	protected String getIngredientforTableForInsert(int place){return "Entitiy error";}//Override for recipe. making the sql string for the connection Ingredients table for Insert
 	protected String getAllergenforTableForUpdate(int place){return "Entitiy error";}//Override for Ingredient, User, Recipe. making the sql string for the connection Allergen table for Update
 	protected String getIngredientforTableForUpdate(int place){return "Entitiy error";}//Override for recipe. making the sql string for the connection Ingredients table for Update
+	protected Integer[] getAllergenArray() {return null;}
+	protected ArrayList<Integer> getIngredientArray(){return null;}
 	protected int getmaxIngredieantCount(){return -1;}//Override for recipe. receive the count of the ingredients for each recipe
+	
   	 
 	public void Update() {
+		String sqlconnections;
 		String sql=" UPDATE "+this.Class()+" SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue();
-		if (this.Class()=="Ingrediant"||this.Class()=="Recipe"||this.Class()=="User") //case connection with allergen table need to be updated
+		if (this.Class()=="Ingrediant"||this.Class()=="User") //case connection with allergen table need to be updated
 		{
-			String sqlconnections;
-			for(int i=0;i<Allergen.getMaxAllergen();i++) {
-				sqlconnections=" UPDATE "+this.Class()+"Allergen "+" SET "+getAllergenforTableForUpdate(i)+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue();
-				preformWithDB(sqlconnections);
-			}
-			if (this.Class()=="Recipe") //case connection with Recipe and Ingredient table need to be updated
-			{
-				int nmax= this.getmaxIngredieantCount();
-				for(int i=0;i<nmax;i++) {	
-					sqlconnections=" UPDATE "+this.Class()+"Allergen "+" SET "+getIngredientforTableForUpdate(i)+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue();
-					preformWithDB(sqlconnections); ; 
+				ResultSet rs=Entities.SelectSpecific(this.Class()+"Allergen ", this.getEntitieKey(), this.getEntitieKeyValue());
+				Integer[] dbal = new Integer[Allergen.getMaxAllergen()];
+				try {
+				while(rs.next())
+					
+						dbal[rs.getInt("allergenId")]=1;
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				Integer[] allergentoupdate= getAllergenArray();
+				for (int j=0;j<Allergen.getMaxAllergen();j++)
+				{
+					if(dbal[j]!=allergentoupdate[j])
+					{
+						if(dbal[j]==1)
+							sqlconnections=" DELETE FROM "+ this.Class()+"Allergen	 "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"allergenId = "+j;
+						else
+							sqlconnections=" INSERT INTO " +this.Class()+"Allergen "+this.getAllergenforTableForInsert(j);/**/
+						preformWithDB(sqlconnections);
+					}
 				}
-	
-
-			}
+		
 		}
+		else if (this.Class()=="Recipe") //case connection with Recipe and Ingredient table need to be updated
+			{
+			ResultSet rs=Entities.SelectSpecific(this.Class()+"Allergen ", this.getEntitieKey(), this.getEntitieKeyValue());
+			Integer[] dbal = new Integer[Allergen.getMaxAllergen()];
+			try {
+			while(rs.next())
+				
+					dbal[rs.getInt("allergenId")]=rs.getInt("recipeAllergenAmount");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			Integer[] allergentoupdate= getAllergenArray();
+			for (int j=0;j<Allergen.getMaxAllergen();j++)
+			{
+				if(dbal[j]!=0&&allergentoupdate[j]!=0)
+				{
+				if(dbal[j]==0&&allergentoupdate[j]!=0)
+					sqlconnections=" INSERT INTO " +this.Class()+"Allergen "+this.getAllergenforTableForInsert(j);/**/
+				else if (dbal[j]==0&&allergentoupdate[j]!=0)
+					sqlconnections=" DELETE FROM "+ this.Class()+"Allergen	 "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"allergenId = "+dbal[j].toString();
+				else
+					sqlconnections=" UPDATE "+this.Class()+"Allergen "+" SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue()+" and "+"allergenId = "+j;/**/
+				preformWithDB(sqlconnections);
+				}
+			}
+			ArrayList<Integer> ingredientToUpDate= getIngredientArray();/**/
+			Collections.sort(ingredientToUpDate);
+			 rs=Entities.SelectSpecific(this.Class()+"Ingredient ", this.getEntitieKey(), this.getEntitieKeyValue());
+			 ArrayList<Integer> ingredientFromDB= new ArrayList<Integer>();  ;
+			try {
+			while(rs.next())
+				
+				ingredientFromDB.add(rs.getInt("ingredientId"));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			Collections.sort(ingredientFromDB);
+			int i=0,j=0;
+			while(ingredientFromDB.size()!=i&&ingredientToUpDate.size()!=j)
+				if(ingredientFromDB.get(i)!=ingredientToUpDate.get(j))
+				{
+					if(ingredientFromDB.get(i)<ingredientToUpDate.get(j)) {
+						sqlconnections=" DELETE FROM "+ this.Class()+"Ingredient "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"ingredientId = "+ingredientFromDB.get(i).toString();
+						i++;}
+					else 
+					{	
+						sqlconnections=" INSERT INTO " +this.Class()+"Ingredient "+this.getAllergenforTableForInsert(j);/**/
+						j++;
+					}
+					preformWithDB(sqlconnections);	
+				}
+				else {i++;j++;}
+			}
 		preformWithDB(sql);
 	 }
 	
@@ -58,7 +126,7 @@ public class  Entities extends Observable implements model{
 			if (this.Class()=="Recipe")//case connection with Recipe and Ingredient table need to be added
 			{
 				int nmax= this.getmaxIngredieantCount();
-				for(int i=0;i<nmax;i++) {	
+				for(int i=0;i<nmax;i++) {
 					sqlconnections=" INSERT INTO " +this.Class()+"Ingrediant " +this.getIngredientforTableForInsert(i);
 					preformWithDB(sqlconnections); 
 				}
