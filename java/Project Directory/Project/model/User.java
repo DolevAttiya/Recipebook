@@ -21,8 +21,9 @@ public User(String personEmail, String personFirstName, String personLastName, D
 public User(ResultSet rs) {
 	super(rs);
 	try {
-		ResultSet userAllergens = SelectSpecific("UserAllergen","ingredientId",this.getUserId().toString());
-		Integer[] allergen= new Integer[userAllergens.getFetchSize()];
+		ResultSet userAllergens = SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
+		Integer[] allergen= new Integer[userAllergens.getInt("counter")];
+		userAllergens = SelectSpecific("UserAllergen","ingredientId",this.getUserId().toString());
 		while(userAllergens.next())
 		{
 			allergen[userAllergens.getInt("allergenId")]=1;
@@ -79,4 +80,29 @@ public void getPsmtmt(PreparedStatement pstmt) {
 			e.printStackTrace();
 		}
 }*/
+@Override
+protected String getAllergenInsert(int place) {
+	// TODO Auto-generated method stub
+	return  this.userAllergen[place].toString();
+}
+@Override
+protected String getIngredientInsert(int place) {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+protected Integer[] getAllergenArray() {
+	// TODO Auto-generated method stub
+	return  this.getUserAllergen();
+}
+@Override
+protected ArrayList<Integer> getIngredientArray() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+protected int getmaxIngredieantCount() {
+	// TODO Auto-generated method stub
+	return 0;
+}
 }

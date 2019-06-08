@@ -3,6 +3,7 @@ package model;
 //import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class IngredientType extends Entities {
 	
@@ -91,4 +92,24 @@ public class IngredientType extends Entities {
 			e.printStackTrace();
 		}		
 	}*/
+	@Override
+	protected String getAllergenInsert(int place) {
+		return null;
+	}
+	@Override
+	protected String getIngredientInsert(int place) {
+		return null;
+	}
+	@Override
+	protected Integer[] getAllergenArray() {
+		return null;
+	}
+	@Override
+	protected ArrayList<Integer> getIngredientArray() {
+		return null;
+	}
+	@Override
+	protected int getmaxIngredieantCount() {
+		return 0;
+	}
 }

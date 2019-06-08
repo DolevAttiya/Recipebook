@@ -24,7 +24,7 @@ public class Recipe extends Entities{
  private String recipePersonEmail;
  private ArrayList<Integer> recipeIngredientId;
  private ArrayList<Integer> recipeIngredientsType;
- private ArrayList<Integer> recipeIngredientsAmount;
+ private ArrayList<Double> recipeIngredientsAmount;
  private Integer recipeAllergen[];
  
  
@@ -34,8 +34,8 @@ public Recipe(Integer id)
 	this(SelectSpecific("Recipe","recipeId",id.toString()));
 
 }
-public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Double recipeTotalCalories,Double recipeTotalCarbohydrate,Double recipeTotalProtein,Double recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMakeprivate ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcses ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Integer> recipeIngredientsAmount)
-{
+public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Double recipeTotalCalories,Double recipeTotalCarbohydrate,Double recipeTotalProtein,Double recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMake ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcses ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Double> recipeIngredientsAmount)
+{ 
 	this.setRecipeAllergen(recipeAllergen);
 	this.setRecipeId(recipeId);
 	this.setRecipeName(recipeName);
@@ -48,6 +48,7 @@ public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Dou
 	this.setRecipeTotalFat(recipeTotalFat);
 	this.setRecipeKashruth(recipeKashruth);
 	this.setRecipeComplex(recipeComplex);
+	this.setRecipeTimeToMake(recipeTimeToMake);
 	this.setRecipePersonEmail(recipePersonEmail);
 	this.setRecipeRate(recipeRate);
 	this.setRecipeDescription(recipeDescription);
@@ -56,25 +57,26 @@ public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Dou
 }
 public Recipe(ResultSet rs) {
 	try {
-	ResultSet RecipeAllergens = SelectSpecific("RecipeAllergen","ingredientId",this.getRecipeId().toString());
-	Integer[] allergen= new Integer[RecipeAllergens.getFetchSize()];
-	while(RecipeAllergens.next())
+	ResultSet recipeAllergens = SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
+	Integer[] allergen= new Integer[recipeAllergens.getInt("counter")];
+	recipeAllergens = SelectSpecific("RecipeAllergen","ingredientId",this.getRecipeId().toString());
+	while(recipeAllergens.next())
 	{
-		allergen[RecipeAllergens.getInt("allergenId")]=1;
+		allergen[recipeAllergens.getInt("allergenId")]=1;
 	}
 	this.setRecipeAllergen(allergen);
 	this.setRecipeId(rs.getInt("recipeId"));
 	this.setRecipeName(rs.getString("recipeName"));
 	ResultSet recipeIngredientVals = SelectSpecific("RecipeIngredient","recipeId",this.getRecipeId().toString());
 	ArrayList<Integer> IngredientsType= new ArrayList<Integer>();
-	ArrayList<Integer> IngredientsAmount= new ArrayList<Integer>();
+	ArrayList<Double> IngredientsAmount= new ArrayList<Double>();
 	ArrayList<Integer> ingredients= new ArrayList<Integer>();
 
 	while(recipeIngredientVals.next())
 		
 	{
 		IngredientsType.add(rs.getInt("ingredientsType"));
-		IngredientsAmount.add(rs.getInt("IngredientsAmount"));
+		IngredientsAmount.add(rs.getDouble("IngredientsAmount"));
 		ingredients.add(rs.getInt("IngredientsAmount"));
 
 	}
@@ -133,10 +135,10 @@ public ArrayList<Integer> getRecipeIngredientsType() {
 public void setRecipeIngredientsType(ArrayList<Integer> recipeIngredientsType) {
 	recipeIngredientsType.forEach((n) -> this.recipeIngredientsType.add(n));
 }
-public ArrayList<Integer> getRecipeIngredientsAmount() {
+public ArrayList<Double> getRecipeIngredientsAmount() {
 	return recipeIngredientsAmount;
 }
-public void setRecipeIngredientsAmount(ArrayList<Integer> recipeIngredientsAmount) {
+public void setRecipeIngredientsAmount(ArrayList<Double> recipeIngredientsAmount) {
 	recipeIngredientsAmount.forEach((n) -> this.recipeIngredientsAmount.add(n));
 }
 public Double getRecipeTotalCalories() {
@@ -211,7 +213,7 @@ public String getRecipeProcses() {
 public void setRecipeProcses(String recipeProcses) {
 	this.recipeProcses = recipeProcses;
 }
-public void addIngredient(Integer IngredientId,IngredientType ingredientType, Integer IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
+public void addIngredient(Integer IngredientId,IngredientType ingredientType, Double IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
 {
 	Ingredient newIngredient= new Ingredient(IngredientId);//***//
 	 this.recipeIngredientId.add(newIngredient.getIngredientId()); 
@@ -284,13 +286,19 @@ protected String getEntitieAttributesNamesValues() {
 @Override
 protected int getmaxIngredieantCount(){return this.recipeIngredientId.size();}
 @Override
-protected String getAllergenforTableForInsert(int place){return "( allergenId ) VALUE ( "+recipeAllergen[place].toString()+" ) ";}
+protected String getAllergenInsert(int place){return this.recipeAllergen[place].toString();}
 @Override
-protected String getIngredientforTableForInsert(int place){return " ( ingredientId ) VALUE "+recipeIngredientId.get(place).toString()+" ) ";}
+protected String getIngredientInsert(int place){return this.recipeIngredientId.get(place).toString();}
+
+//"INSERT INTO <CLASS NAME> (<ATTRIBUTES>) VALUES (<VALUES>)"
 @Override
-protected String getAllergenforTableForUpdate(int place){return "Entitiy error";}//Override for Ingredient, User, Recipe. making the sql string for the connection Allergen table for Update
+protected Integer[] getAllergenArray() {
+	return this.getRecipeAllergen();
+}
 @Override
-protected String getIngredientforTableForUpdate(int place){return "Entitiy error";}//Override for recipe. making the sql string for the connection Ingredients table for Update
+protected ArrayList<Integer> getIngredientArray() {
+	return this.getRecipeIngredientId();
+}
 
 
 

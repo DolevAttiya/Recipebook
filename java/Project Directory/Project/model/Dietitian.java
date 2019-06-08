@@ -80,4 +80,24 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	}
 	
 } */
+@Override
+protected String getAllergenInsert(int place) {
+	return null;
+}
+@Override
+protected String getIngredientInsert(int place) {
+	return null;
+}
+@Override
+protected Integer[] getAllergenArray() {
+	return null;
+}
+@Override
+protected ArrayList<Integer> getIngredientArray() {
+	return null;
+}
+@Override
+protected int getmaxIngredieantCount() {
+	return 0;
+}
 }
