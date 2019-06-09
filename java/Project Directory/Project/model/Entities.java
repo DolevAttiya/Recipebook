@@ -43,7 +43,8 @@ public abstract class  Entities  {
 	}
 	return size;
 	}
-	public void Update() {
+	public Boolean Update() {
+		Boolean x=true,y=true,z=true;
 		String sqlconnections;
 		Integer[] dbal;
 		String sql=" UPDATE "+this.Class()+" SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue();
@@ -65,11 +66,12 @@ public abstract class  Entities  {
 							sqlconnections=getStringAllergiesForDelete(j);
 						else
 							sqlconnections= getStringAllergiesForInsert(j);
-						preformWithDB(sqlconnections);
+						x=preformWithDB(sqlconnections);
 					}
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+				return false;
 			}
 		
 		}
@@ -79,10 +81,10 @@ public abstract class  Entities  {
 				try {
 					Integer[] allergentoupdate= getAllergenArray();
 					dbal = new Integer[allergentoupdate.length];	
-					while(rs.next())
+					while(rs.next()&&y)
 						dbal[rs.getInt("allergenId")]=rs.getInt("recipeAllergenAmount");
 					
-					for (int j=0;j<allergentoupdate.length;j++)
+					for (int j=0;j<allergentoupdate.length&&y;j++)
 					{
 						if(dbal[j]!=0&&allergentoupdate[j]!=0)
 						{
@@ -92,12 +94,13 @@ public abstract class  Entities  {
 								sqlconnections=getStringAllergiesForDelete(j);
 							else
 								sqlconnections=" UPDATE "+this.Class()+"Allergen "+" SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue()+" and "+"allergenId = "+j;
-							preformWithDB(sqlconnections);
+							y=preformWithDB(sqlconnections);
 						}
 					}
 				} 
 				catch (SQLException e) {
 				e.printStackTrace();
+				return false;
 			}
 			ArrayList<Integer> ingredientToUpDate= getIngredientArray();
 			Collections.sort(ingredientToUpDate);
@@ -109,6 +112,7 @@ public abstract class  Entities  {
 				ingredientFromDB.add(rs.getInt("ingredientId"));
 				} catch (SQLException e) {
 					e.printStackTrace();
+					return false;
 				}
 			Collections.sort(ingredientFromDB);
 			int i=0,j=0;
@@ -139,54 +143,63 @@ public abstract class  Entities  {
 				j++;
 			}
 			}
-		preformWithDB(sql);
+		z=preformWithDB(sql);
+		return x&&y&&z;
 	 }
 	
-	public void Insert() {//"INSERT INTO <CLASS NAME> (<ATTRIBUTES>) VALUES (<VALUES>)"
+	public Boolean Insert() {//"INSERT INTO <CLASS NAME> (<ATTRIBUTES>) VALUES (<VALUES>)"
+		Boolean x=true,y=true,z=true;
 		String sql=" INSERT INTO " +this.Class()+" ("+this.getEntitieAttributesNames()+" ) VALUES ( "+this.getEntitieAttributesValues()+" ) ";
-		preformWithDB(sql);
-		if (this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" Recipe")==0||this.Class().compareTo(" User")==0) {//case connection with allergen table need to be added
+		z= preformWithDB(sql);
+		if( (this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" Recipe")==0||this.Class().compareTo(" User")==0)&&z) {//case connection with allergen table need to be added
 			String sqlconnections;
-			for(int i=0;i<this.getAllergenArray().length;i++) {
+			for(int i=0;i<this.getAllergenArray().length&&y;i++) {
 				if(this.getAllergenArray()[i]>=1)
 				{
 				sqlconnections=getStringAllergiesForInsert(i);
-				preformWithDB(sqlconnections);
+				 y=preformWithDB(sqlconnections);
 				}
 			}
 
 			if (this.Class().compareTo("Recipe")==0)//case connection with Recipe and Ingredient table need to be added
 			{
 				int nmax= this.getmaxIngredieantCount();
-				for(int i=0;i<nmax;i++) {
+				for(int i=0;i<nmax&&x;i++) {
 					sqlconnections=getStringIngredientForInsert(i);
-					preformWithDB(sqlconnections); 
+					x= preformWithDB(sqlconnections); 
 				}
 			}
 		}
+		return x&&y&&z; 
 		
 	}
 	
-	public  void Delete() {
+	public  Boolean Delete() {
+		Boolean x=true,y=true,z=true;
 		String sql=" DELETE FROM "+ this.Class()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
-		preformWithDB(sql);
-		if (this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" Recipe")==0||this.Class().compareTo(" User")==0)//case connection with allergen table need to be deleted
+		z= preformWithDB(sql);
+		if ((this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" Recipe")==0||this.Class().compareTo(" User")==0)&&z)//case connection with allergen table need to be deleted
 		{
 			String sqlconnections;
-			for(int i=0;i<this.getAllergenArray().length;i++) {
-				if(this.getAllergenArray()[i]>=1) {
-				sqlconnections=getStringAllergiesForDelete(i);
-				preformWithDB(sqlconnections); }
+			for(int i=0;i<this.getAllergenArray().length&&x;i++) {
+				if(this.getAllergenArray()[i]>=1) 
+				{
+					sqlconnections=getStringAllergiesForDelete(i);
+					x=preformWithDB(sqlconnections); 
+				}
 			}
 			if (this.Class().compareTo("Recipe")==0)//case connection with Recipe and Ingredient table need to be deleted
 			{
 				int nmax= this.getmaxIngredieantCount();
-				for(int i=0;i<nmax;i++) {
+				for(int i=0;i<nmax&&y;i++)
+				{
 					sqlconnections=getStringIngredientForDelete(i);
-					preformWithDB(sqlconnections); 
+					y=preformWithDB(sqlconnections); 
 				}
 			}
 		}
+		return x&&y&&z; 
+	
 		
 	}
 	
@@ -211,18 +224,19 @@ public abstract class  Entities  {
 	}
 	
 	 
-	private void preformWithDB(String sql) {
+	private Boolean preformWithDB(String sql) {
 		 
 		 try (Connection conn = SingletonDBConnection.getConnection();
 				 PreparedStatement pstmt = conn.prepareStatement(sql)) 
 		 {
 			 pstmt.executeUpdate();
+			 return true;
 		 }
 		 catch (SQLException e) {
 			 System.out.println(e.getMessage());
+			 return false;
 		 }
 	}
-	
 	private static ResultSet getFromWithDB(String sql) {//the preform the connection t
 		try {
 			Connection conn = SingletonDBConnection.getConnection();

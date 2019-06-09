@@ -68,7 +68,7 @@ private	void reupdate() {
 		Integer recipeKashruth=0;
 		Time recipeTimeToMake= new Time(225);
 		Integer[] recipeAllergen= null;
-		User Daenerys= new User(Entities.SelectSpecific("UserPerson", "personEmail", "\"drakaris"+"Valyrian.com\""));
+		User Daenerys= new User(Entities.SelectSpecific("UserPerson", "personEmail", "\"drakarisValyrian.com\""));
 		Integer recipeComplex=3;
 		Integer recipeRate= 0;
 		String recipeDescription="The Italian cuisine is regional. Historical and cultural impacts, geography, the variety of climatic zones and cultural influences contributed to the diversity found in Italian cooking. This lasagna is made of pasta dough layers filled with bolognese sauce béchamel and Parmesan cheese, in the style of northern Italy.";

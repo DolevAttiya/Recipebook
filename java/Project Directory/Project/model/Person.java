@@ -34,7 +34,8 @@ public abstract class Person extends Entities{
 	public Person(ResultSet rs)
 	{
 		try {
-			this.setPersonEmail(rs.getString("personEmail"));
+			String email= rs.getString("personEmail");
+			this.setPersonEmail(email);
 			this.setPersonFirstName(rs.getString("personFirstName"));
 			this.setPersonLastName(rs.getString("personLastName"));
 			this.setPersonDateOfBirth(rs.getDate("personDateOfBirth"));
