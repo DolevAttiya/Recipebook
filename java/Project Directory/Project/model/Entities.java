@@ -2,11 +2,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 public abstract class  Entities  {
 	
 	protected abstract String Class();//Override for all. return the name of the class (the regular get this class return the package name too)
@@ -43,7 +40,8 @@ public abstract class  Entities  {
 	}
 	return size;
 	}
-	public Boolean Update() {
+	
+public Boolean Update() {
 		Boolean x=true,y=true,z=true;
 		String sqlconnections;
 		Integer[] dbal;
@@ -51,7 +49,7 @@ public abstract class  Entities  {
 		if (this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" User")==0) //case connection with allergen table need to be updated
 		{
 			try {
-				ResultSet rs=Entities.SelectSpecific(this.Class()+"Allergen ", this.getEntitieKey(), this.getEntitieKeyValue());
+				ResultSet rs=Models.SelectSpecific(this.Class()+"Allergen ", this.getEntitieKey(), this.getEntitieKeyValue());
 				Integer[] allergentoupdate= getAllergenArray();
 				dbal = new Integer[allergentoupdate.length];
 				for(int i=0;i<allergentoupdate.length;i++) {dbal[i]=0;}
@@ -66,7 +64,7 @@ public abstract class  Entities  {
 							sqlconnections=getStringAllergiesForDelete(j);
 						else
 							sqlconnections= getStringAllergiesForInsert(j);
-						x=preformWithDB(sqlconnections);
+						x=Models.preformWithDB(sqlconnections);
 					}
 				}
 			} catch (SQLException e) {
@@ -77,7 +75,7 @@ public abstract class  Entities  {
 		}
 		else if (this.Class().compareTo(" Recipe")==0) //case connection with Recipe and Ingredient, connection between Recipe and Allergen table need to be updated
 			{
-				ResultSet rs=Entities.SelectSpecific(this.Class()+"Allergen ", this.getEntitieKey(), this.getEntitieKeyValue());
+				ResultSet rs=Models.SelectSpecific(this.Class()+"Allergen ", this.getEntitieKey(), this.getEntitieKeyValue());
 				try {
 					Integer[] allergentoupdate= getAllergenArray();
 					dbal = new Integer[allergentoupdate.length];	
@@ -94,7 +92,7 @@ public abstract class  Entities  {
 								sqlconnections=getStringAllergiesForDelete(j);
 							else
 								sqlconnections=" UPDATE "+this.Class()+"Allergen "+" SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue()+" and "+"allergenId = "+j;
-							y=preformWithDB(sqlconnections);
+							y=Models.preformWithDB(sqlconnections);
 						}
 					}
 				} 
@@ -104,7 +102,7 @@ public abstract class  Entities  {
 			}
 			ArrayList<Integer> ingredientToUpDate= getIngredientArray();
 			Collections.sort(ingredientToUpDate);
-			 rs=Entities.SelectSpecific(this.Class()+" Ingredient ", this.getEntitieKey(), this.getEntitieKeyValue());
+			 rs=Models.SelectSpecific(this.Class()+" Ingredient ", this.getEntitieKey(), this.getEntitieKeyValue());
 			 ArrayList<Integer> ingredientFromDB= new ArrayList<Integer>();
 			try {
 			while(rs.next())
@@ -128,7 +126,7 @@ public abstract class  Entities  {
 						sqlconnections=getStringIngredientForInsert(i);
 						j++;
 					}
-					preformWithDB(sqlconnections);	
+					Models.preformWithDB(sqlconnections);	
 				}
 				else {i++;j++;}
 			}
@@ -143,21 +141,21 @@ public abstract class  Entities  {
 				j++;
 			}
 			}
-		z=preformWithDB(sql);
+		z=Models.preformWithDB(sql);
 		return x&&y&&z;
 	 }
 	
 	public Boolean Insert() {//"INSERT INTO <CLASS NAME> (<ATTRIBUTES>) VALUES (<VALUES>)"
 		Boolean x=true,y=true,z=true;
 		String sql=" INSERT INTO " +this.Class()+" ("+this.getEntitieAttributesNames()+" ) VALUES ( "+this.getEntitieAttributesValues()+" ) ";
-		z= preformWithDB(sql);
+		z= Models.preformWithDB(sql);
 		if( (this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" Recipe")==0||this.Class().compareTo(" User")==0)&&z) {//case connection with allergen table need to be added
 			String sqlconnections;
 			for(int i=0;i<this.getAllergenArray().length&&y;i++) {
 				if(this.getAllergenArray()[i]>=1)
 				{
 				sqlconnections=getStringAllergiesForInsert(i);
-				 y=preformWithDB(sqlconnections);
+				 y=Models.preformWithDB(sqlconnections);
 				}
 			}
 
@@ -166,7 +164,7 @@ public abstract class  Entities  {
 				int nmax= this.getmaxIngredieantCount();
 				for(int i=0;i<nmax&&x;i++) {
 					sqlconnections=getStringIngredientForInsert(i);
-					x= preformWithDB(sqlconnections); 
+					x= Models.preformWithDB(sqlconnections); 
 				}
 			}
 		}
@@ -177,7 +175,7 @@ public abstract class  Entities  {
 	public  Boolean Delete() {
 		Boolean x=true,y=true,z=true;
 		String sql=" DELETE FROM "+ this.Class()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
-		z= preformWithDB(sql);
+		z= Models.preformWithDB(sql);
 		if ((this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" Recipe")==0||this.Class().compareTo(" User")==0)&&z)//case connection with allergen table need to be deleted
 		{
 			String sqlconnections;
@@ -185,7 +183,7 @@ public abstract class  Entities  {
 				if(this.getAllergenArray()[i]>=1) 
 				{
 					sqlconnections=getStringAllergiesForDelete(i);
-					x=preformWithDB(sqlconnections); 
+					x=Models.preformWithDB(sqlconnections); 
 				}
 			}
 			if (this.Class().compareTo("Recipe")==0)//case connection with Recipe and Ingredient table need to be deleted
@@ -194,7 +192,7 @@ public abstract class  Entities  {
 				for(int i=0;i<nmax&&y;i++)
 				{
 					sqlconnections=getStringIngredientForDelete(i);
-					y=preformWithDB(sqlconnections); 
+					y=Models.preformWithDB(sqlconnections); 
 				}
 			}
 		}
@@ -203,52 +201,11 @@ public abstract class  Entities  {
 		
 	}
 	
-	public	ResultSet Select() {
+	public	 ResultSet Select() {
 		String sql=" SELECT * FROM " + this.Class()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
-		return getFromWithDB(sql);
-	}
-
-	public static ResultSet SelectSpecific(String Table, String Key,String Value) {
-		 String sql="SELECT * FROM " + Table+" WHERE "+Key+" = "+Value;
-		 ResultSet rs =getFromWithDB(sql) ; 
-		 return rs;
-	}
-	public static ResultSet SelectSpecificFrom(String Select, String Table, String Key,String Value) {
-		String sql;
-		if(Key!=null)
-			sql=" SELECT "+Select+" FROM " + Table+" WHERE "+Key+" = "+Value;
-		else
-			sql=" SELECT "+Select+" FROM " + Table;
-		 ResultSet rs =getFromWithDB(sql) ;         
-		 return rs;
+		return Models.getFromWithDB(sql);
 	}
 	
-	 
-	private Boolean preformWithDB(String sql) {
-		 
-		 try (Connection conn = SingletonDBConnection.getConnection();
-				 PreparedStatement pstmt = conn.prepareStatement(sql)) 
-		 {
-			 pstmt.executeUpdate();
-			 return true;
-		 }
-		 catch (SQLException e) {
-			 System.out.println(e.getMessage());
-			 return false;
-		 }
-	}
-	private static ResultSet getFromWithDB(String sql) {//the preform the connection t
-		try {
-			Connection conn = SingletonDBConnection.getConnection();
-			Statement stmt  = conn.createStatement();
-			ResultSet rs    = stmt.executeQuery(sql);
-			return rs;
-	           
-		}
-		catch (SQLException e) {
-			System.out.println(e.getMessage());
-			}
-		return null;
-		}
+	
 
 }

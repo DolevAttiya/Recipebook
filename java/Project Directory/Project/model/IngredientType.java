@@ -19,7 +19,7 @@ public class IngredientType extends Entities {
 		this.setIngredientTypeValue(ingredientTypeValue);
 	}
 	public IngredientType(Integer id) {
-		this(SelectSpecific("IngredientType","ingredientTypeId",id.toString()));
+		this(Models.SelectSpecific("IngredientType","ingredientTypeId",id.toString()));
 	}
 	public IngredientType(ResultSet rs) {
 		try {

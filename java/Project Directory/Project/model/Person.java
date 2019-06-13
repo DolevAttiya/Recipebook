@@ -29,7 +29,7 @@ public abstract class Person extends Entities{
 	}
 	public Person(String email)
 	{			
-		this(SelectSpecific("Person","personEmail",email));		
+		this(Models.SelectSpecific("Person","personEmail",email));		
 	}
 	public Person(ResultSet rs)
 	{
@@ -41,7 +41,7 @@ public abstract class Person extends Entities{
 			this.setPersonDateOfBirth(rs.getDate("personDateOfBirth"));
 			this.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
-			ResultSet favorite = SelectSpecific("PersonFavoriteRecipe","personEmail",this.getPersonEmail());
+			ResultSet favorite = Models.SelectSpecific("PersonFavoriteRecipe","personEmail",this.getPersonEmail());
 			while(favorite.next())
 				personsFavoriteRecipes.add(rs.getInt("recipeId"));
 			this.setPersonsFavoriteRecipe(personsFavoriteRecipes);

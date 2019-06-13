@@ -31,7 +31,7 @@ public class Recipe extends Entities{
  /*Contractor*/
 public Recipe(Integer id)
 {
-	this(SelectSpecific("Recipe","recipeId",id.toString()));
+	this(Models.SelectSpecific("Recipe","recipeId",id.toString()));
 
 }
 public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Double recipeTotalCalories,Double recipeTotalCarbohydrate,Double recipeTotalProtein,Double recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMake ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcses ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Double> recipeIngredientsAmount)
@@ -57,9 +57,9 @@ public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Dou
 }
 public Recipe(ResultSet rs) {
 	try {
-	ResultSet recipeAllergens = SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
+	ResultSet recipeAllergens = Models.SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
 	Integer[] allergen= new Integer[recipeAllergens.getInt("counter")];
-	recipeAllergens = SelectSpecific("RecipeAllergen","ingredientId",this.getRecipeId().toString());
+	recipeAllergens = Models.SelectSpecific("RecipeAllergen","ingredientId",this.getRecipeId().toString());
 	while(recipeAllergens.next())
 	{
 		allergen[recipeAllergens.getInt("allergenId")]=1;
@@ -67,7 +67,7 @@ public Recipe(ResultSet rs) {
 	this.setRecipeAllergen(allergen);
 	this.setRecipeId(rs.getInt("recipeId"));
 	this.setRecipeName(rs.getString("recipeName"));
-	ResultSet recipeIngredientVals = SelectSpecific("RecipeIngredient","recipeId",this.getRecipeId().toString());
+	ResultSet recipeIngredientVals = Models.SelectSpecific("RecipeIngredient","recipeId",this.getRecipeId().toString());
 	ArrayList<Integer> IngredientsType= new ArrayList<Integer>();
 	ArrayList<Double> IngredientsAmount= new ArrayList<Double>();
 	ArrayList<Integer> ingredients= new ArrayList<Integer>();

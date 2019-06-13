@@ -21,7 +21,7 @@ public class Ingredient extends Entities {
  
  /*Contractors*/
  public Ingredient(Integer num) {
-		this( SelectSpecific("Ingredient","ingredientId",num.toString()));
+		this( Models.SelectSpecific("Ingredient","ingredientId",num.toString()));
 		
  }
 public Ingredient( Integer ingredientId,String  ingredientName,Integer ingredientAllergen[],Double ingredientCalories,Double ingredientCarbohydrate,Double ingredientProtein,Double ingredientFat, Integer ingredientKashruth, Blob ingredientImage)
@@ -40,11 +40,11 @@ public Ingredient(ResultSet rs) {
 		try {
 			this.setIngredientId(rs.getInt("ingredientId"));
 			this.setIngredientName(rs.getString("ingredientName"));
-			ResultSet ingredientAllergens = SelectSpecificFrom("Count( \"allergenId\" ) as counter", "Allergen", null, null);
+			ResultSet ingredientAllergens = Models.SelectSpecificFrom("Count( \"allergenId\" ) as counter", "Allergen", null, null);
 			Integer[] allergen= new Integer[ingredientAllergens.getInt("counter")];
 			for(int i=0;i<allergen.length;i++)
 				allergen[i]=0;
-			ingredientAllergens = SelectSpecific("IngredientAllergen","ingredientId",this.getIngredientId().toString());
+			ingredientAllergens = Models.SelectSpecific("IngredientAllergen","ingredientId",this.getIngredientId().toString());
 			while(ingredientAllergens.next())
 			{
 				allergen[ingredientAllergens.getInt("allergenId")]++;

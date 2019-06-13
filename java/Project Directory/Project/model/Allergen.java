@@ -15,7 +15,7 @@ public class Allergen extends  Entities{
 	 /*Contractor*/
 	public Allergen(Integer id)
 	{
-		this(SelectSpecific("Allergen","allergenId",id.toString()));
+		this(Models.SelectSpecific("Allergen","allergenId",id.toString()));
 
 	}
 	public Allergen(ResultSet rs) {
