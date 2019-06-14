@@ -15,40 +15,37 @@ import view.MainPage;
 
 public class MyController implements Controller{
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		Event e = (Event)arg;
 		
-		//command 1=update 2=set 3=delete 4=response from model
-		if(o instanceof User)
-		{
-			switch(User.command) {
-			case 1:
-				//code block
-				break;
-				
-			case 2:
-				//code block
-				break;
-				
-			case 3:
-				//code block
-				break;
-				
-			case 4:
-				//code block
-				break;
-			}
+		switch (e.getName()) {
+		case "top_10":
+			//top10(); model function call
+			break;
+			
+		case "user_login":
+			Event<User> userEvent = e;
+			User user = userEvent.getEntity();
+			//user.login(); model function call
+			break;
+			
+		case "recipe_insert":
+			Event<Recipe> recipeIEvent = e;
+			Recipe recipeI = recipeIEvent.getEntity();
+			//recipe.insert(); model function call
+			break;
+			
+		case "recipe_update":
+			Event<Recipe> recipeUEvent = e;
+			Recipe recipeU = recipeUEvent.getEntity();
+			//recipe.update(); model function call
+			break;
+			
+		case "recipe_delete":
+			Event<Recipe> recipeDEvent = e;
+			Recipe recipeD = recipeDEvent.getEntity();
+			//recipe.delete(); model function call
+			break;
 		}
-		if(o instanceof Recipe)
-		{}
-		if(o instanceof Dietitian)
-		{}
-		if(o instanceof Ingredient)
-		{}
-		if(o instanceof Allergen)
-		{}
-		if(o instanceof Entities)
-		{}
-		if(o instanceof IngredientType)
-		{}
-	}
+		
+	}	
 }
