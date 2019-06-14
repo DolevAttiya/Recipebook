@@ -76,7 +76,6 @@ public class Login extends JFrame {
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 			}
 		});
 		btnLogin.setBounds(277, 332, 146, 63);

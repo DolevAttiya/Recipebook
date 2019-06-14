@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Observable;
 
 public class User extends Person {
 
@@ -18,6 +19,7 @@ public User(String personEmail, String personFirstName, String personLastName, D
 		setUserId(userId);
 		setUserAllergen(userAllergen);
 	}
+
 public User(ResultSet rs) {
 	super(rs);
 	try {
