@@ -201,7 +201,7 @@ public Boolean Update() {
 		
 	}
 	
-	public	 ResultSet Select() {
+	public	 Object Select() {
 		String sql=" SELECT * FROM " + this.Class()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
 		return Models.getFromWithDB(sql);
 	}

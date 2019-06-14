@@ -1,9 +1,6 @@
 package model;
 
 import java.sql.Blob;
-//import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Ingredient extends Entities {
@@ -20,10 +17,7 @@ public class Ingredient extends Entities {
  private Blob ingredientImage;
  
  /*Contractors*/
- public Ingredient(Integer num) {
-		this( Models.SelectSpecific("Ingredient","ingredientId",num.toString()));
-		
- }
+
 public Ingredient( Integer ingredientId,String  ingredientName,Integer ingredientAllergen[],Double ingredientCalories,Double ingredientCarbohydrate,Double ingredientProtein,Double ingredientFat, Integer ingredientKashruth, Blob ingredientImage)
 {
 	this.setIngredientId(ingredientId);
@@ -35,31 +29,6 @@ public Ingredient( Integer ingredientId,String  ingredientName,Integer ingredien
 	this.setIngredientFat(ingredientFat);
 	this.setIngredientKashruth(ingredientKashruth);
 	this.setIngredientImage(ingredientImage);
-}
-public Ingredient(ResultSet rs) {
-		try {
-			this.setIngredientId(rs.getInt("ingredientId"));
-			this.setIngredientName(rs.getString("ingredientName"));
-			ResultSet ingredientAllergens = Models.SelectSpecificFrom("Count( \"allergenId\" ) as counter", "Allergen", null, null);
-			Integer[] allergen= new Integer[ingredientAllergens.getInt("counter")];
-			for(int i=0;i<allergen.length;i++)
-				allergen[i]=0;
-			ingredientAllergens = Models.SelectSpecific("IngredientAllergen","ingredientId",this.getIngredientId().toString());
-			while(ingredientAllergens.next())
-			{
-				allergen[ingredientAllergens.getInt("allergenId")]++;
-			}
-			this.setIngredientAllergen(allergen);
-			this.setIngredientCalories(rs.getDouble("ingredientCalories"));
-			this.setIngredientCarbohydrate(rs.getDouble("ingredientCarbohydrate"));
-			this.setIngredientProtein(rs.getDouble("ingredientProtein"));
-			this.setIngredientFat(rs.getDouble("ingredientFat"));
-			this.setIngredientKashruth(rs.getInt("ingredientKashruth"));
-			//this.setIngredientImage(rs.getBlob("ingredientImage"));//TODO
-
-			} catch (SQLException e) {
-					e.printStackTrace();
-			}
 }
 public Integer getIngredientId() {
 	return ingredientId.intValue();

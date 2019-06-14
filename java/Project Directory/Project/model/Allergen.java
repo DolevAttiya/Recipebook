@@ -1,8 +1,5 @@
 package model;
 
-//import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Allergen extends  Entities{
@@ -13,20 +10,10 @@ public class Allergen extends  Entities{
 	private String  allergenName;
 	
 	 /*Contractor*/
-	public Allergen(Integer id)
+	public Allergen(Integer allergenId,String  allergenName)
 	{
-		this(Models.SelectSpecific("Allergen","allergenId",id.toString()));
-
-	}
-	public Allergen(ResultSet rs) {
-		try {
-			setAllergenId(rs.getInt("allergenId"));
-			setAllergenName(rs.getString("allergenName"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		setMaxAllergen(getMaxAllergen() + 1);
+		this.setAllergenId(allergenId);
+		this.setAllergenName(allergenName);
 	}
 	@Override
 	protected String Class() {
@@ -43,10 +30,10 @@ public class Allergen extends  Entities{
 	public String getAllergenName() {
 		return this.allergenName; 
 	}
-	private void setAllergenName(String allergenName ) {
+	 void setAllergenName(String allergenName ) {
 		 this.allergenName=allergenName; 
 	}
-	private void setAllergenId(Integer AllergenId ) {
+	 void setAllergenId(Integer AllergenId ) {
 		 this.allergenId=AllergenId; 
 	}
 	public static int getMaxAllergen() {
@@ -77,15 +64,6 @@ public class Allergen extends  Entities{
 	protected String getEntitieAttributesNamesValues() {
 		return "allergenId= "+this.getAllergenId().toString()+", allergenName"+this.getAllergenName();
 	}
-	/*@Override
-    public void getPsmtmt( PreparedStatement pstmt) {
-           try {
-				pstmt.setInt(1, allergenId);
-				pstmt.setString(2, allergenName);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-   }*/
 	@Override
 	protected String getAllergenInsert(int place) {
 		return null;

@@ -1,8 +1,5 @@
 package model;
 
-//import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class IngredientType extends Entities {
@@ -17,18 +14,6 @@ public class IngredientType extends Entities {
 		this.setIngredientTypeId(ingredientTypeId);
 		this.setIngredientTypeName(ingredientTypeName);
 		this.setIngredientTypeValue(ingredientTypeValue);
-	}
-	public IngredientType(Integer id) {
-		this(Models.SelectSpecific("IngredientType","ingredientTypeId",id.toString()));
-	}
-	public IngredientType(ResultSet rs) {
-		try {
-			setIngredientTypeId(rs.getInt("ingredientTypeId"));
-			setIngredientTypeValue(rs.getInt("ingredientTypeValue"));
-			setIngredientTypeName(rs.getString("ingredientTypeName"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 	@Override
 	protected String Class() {

@@ -1,6 +1,6 @@
 package tests;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Blob;
 import java.sql.ResultSet;
@@ -8,8 +8,13 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.*;
-import model.*;
+import org.junit.jupiter.api.Test;
+
+import model.Allergen;
+import model.Ingredient;
+import model.Models;
+import model.Recipe;
+import model.User;
 
 class Testentities {
 	Allergen al;
@@ -18,21 +23,21 @@ class Testentities {
 	Recipe re;
 	@Test
 	void test() {
-		al= new Allergen(5);
+		al= Models.GetAllergenFromDB(5);
 		assertEquals("accept", "Lactose intolerance", al.getAllergenName());
 	}
 	@Test
 	void update() {
-		pe= new Ingredient(5);
+		pe=Models.GetIngredientFromDB(5);
 		pe.getIngredientAllergen()[3]=1;
 		pe.setIngredientCarbohydrate(13.0);
 		pe.Update();
-		pe1= new Ingredient(5);
+		pe1=Models.GetIngredientFromDB(5);
 		assertEquals(13.0, (double)pe1.getIngredientCarbohydrate(),0);
 		reupdate();
 	}	
-private	void reupdate() {
-		pe= new Ingredient(5);
+	private	void reupdate() {
+		pe=Models.GetIngredientFromDB(5);
 		pe.getIngredientAllergen()[3]=0;
 		pe.setIngredientCarbohydrate(28.3);
 		pe.Update();
@@ -44,7 +49,7 @@ private	void reupdate() {
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
 		pe= new Ingredient(99,"\"test\"",al,99.9,99.9,99.9,99.9,0,null);
 		pe.Insert();
-		pe1= new Ingredient(99);
+		pe1=Models.GetIngredientFromDB(99);
 		assertTrue(pe1!=null);
 		pe1=null;
 		pe.Delete();
@@ -68,7 +73,7 @@ private	void reupdate() {
 		Integer recipeKashruth=0;
 		Time recipeTimeToMake= new Time(225);
 		Integer[] recipeAllergen= null;
-		User Daenerys= new User(Models.SelectSpecific("UserPerson", "personEmail", "\"drakarisValyrian.com\""));
+		User Daenerys= Models.GetUserFromDB( "\"drakarisValyrian.com\"");
 		Integer recipeComplex=3;
 		Integer recipeRate= 0;
 		String recipeDescription="The Italian cuisine is regional. Historical and cultural impacts, geography, the variety of climatic zones and cultural influences contributed to the diversity found in Italian cooking. This lasagna is made of pasta dough layers filled with bolognese sauce béchamel and Parmesan cheese, in the style of northern Italy.";
@@ -145,5 +150,5 @@ private	void reupdate() {
 	}
 
 }
-	
+
 

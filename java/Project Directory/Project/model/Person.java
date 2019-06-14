@@ -4,9 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Blob;
-//import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -26,29 +23,6 @@ public abstract class Person extends Entities{
 		setPersonHashPass(personHashPass);
 		setPersonsFavoriteRecipe(personsFavoriteRecipe);
 		setPersonImage(personImage);
-	}
-	public Person(String email)
-	{			
-		this(Models.SelectSpecific("Person","personEmail",email));		
-	}
-	public Person(ResultSet rs)
-	{
-		try {
-			String email= rs.getString("personEmail");
-			this.setPersonEmail(email);
-			this.setPersonFirstName(rs.getString("personFirstName"));
-			this.setPersonLastName(rs.getString("personLastName"));
-			this.setPersonDateOfBirth(rs.getDate("personDateOfBirth"));
-			this.setPersonHashPass(rs.getString("personHashPass"));
-			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
-			ResultSet favorite = Models.SelectSpecific("PersonFavoriteRecipe","personEmail",this.getPersonEmail());
-			while(favorite.next())
-				personsFavoriteRecipes.add(rs.getInt("recipeId"));
-			this.setPersonsFavoriteRecipe(personsFavoriteRecipes);
-			this.setPersonImage(rs.getBlob("personImage"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}	
 	}
 	@Override
 	protected String Class() {
@@ -98,24 +72,24 @@ public abstract class Person extends Entities{
 		this.personImage = personImage;
 	}
 	public String ConvertPassTOHash(String password) throws NoSuchAlgorithmException {
-		
+
 		final MessageDigest digest = MessageDigest.getInstance("SHA3_256");
 		final byte[] hashbytes = digest.digest(
 				password.getBytes(StandardCharsets.UTF_8));
 		String sha3_256hex = bytesToHex(hashbytes);
-		
-		
+
+
 		return sha3_256hex;
 	}
-	  private static String bytesToHex(byte[] hashInBytes) {
+	private static String bytesToHex(byte[] hashInBytes) {
 
-	        StringBuilder sb = new StringBuilder();
-	        for (byte b : hashInBytes) {
-	            sb.append(String.format("%02x", b));
-	        }
-	        return sb.toString();
+		StringBuilder sb = new StringBuilder();
+		for (byte b : hashInBytes) {
+			sb.append(String.format("%02x", b));
+		}
+		return sb.toString();
 
-	    }
+	}
 	@Override
 	protected String getEntitieKey() {
 		return "personEmail ";
