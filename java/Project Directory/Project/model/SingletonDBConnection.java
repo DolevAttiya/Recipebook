@@ -22,6 +22,7 @@ public class SingletonDBConnection {
         	else if(conn.isClosed())
 
         		conn = DriverManager.getConnection(url);
+
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
