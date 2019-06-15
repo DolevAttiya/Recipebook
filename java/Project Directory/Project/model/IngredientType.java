@@ -1,8 +1,6 @@
 package model;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class IngredientType extends Entities {
 	
@@ -17,17 +15,9 @@ public class IngredientType extends Entities {
 		this.setIngredientTypeName(ingredientTypeName);
 		this.setIngredientTypeValue(ingredientTypeValue);
 	}
-	public IngredientType(Integer id) {
-		this(SelectSpecific("IngredientType","ingredientTypeId",id.toString()));
-	}
-	public IngredientType(ResultSet rs) {
-		try {
-			setIngredientTypeId(rs.getInt("ingredientTypeId"));
-			setIngredientTypeValue(rs.getInt("ingredientTypeValue"));
-			setIngredientTypeName(rs.getString("ingredientTypeName"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	@Override
+	protected String Class() {
+		return "IngredientType";
 	}
 	public Integer getIngredientTypeId() {
 		return this.ingredientTypeId; 
@@ -48,35 +38,35 @@ public class IngredientType extends Entities {
 		this.ingredientTypeValue = ingredientTypeValue;
 	}
 	@Override
-	String getEntitieKey() {
+	protected String getEntitieKey() {
 		// TODO Auto-generated method stub
 		return "ingredientTypeId";
 	}
 	@Override
-	String getEntitieKeyValue() {
+	protected String getEntitieKeyValue() {
 		// TODO Auto-generated method stub
 		return this.getIngredientTypeId().toString();
 	}
 	@Override
-	String getEntitieAttributesNames() {
+	protected String getEntitieAttributesNames() {
 		// TODO Auto-generated method stub
 		return "ingredientTypeId , ingredientTypeName , ingredientTypeValue";
 	}
 	@Override
-	String getEntitieAttributesValues() {
+	protected String getEntitieAttributesValues() {
 		// TODO Auto-generated method stub
 		return " "+ this.getIngredientTypeId().toString()+ " , "+
 		this.getIngredientTypeName()+ " , "+
 		this.getIngredientTypeValue()+" ";
 	}
 	@Override
-	String getEntitieAttributesNamesValues() {
+	protected String getEntitieAttributesNamesValues() {
 		// TODO Auto-generated method stub
 		return  "ingredientTypeId = "+ this.getIngredientTypeId().toString()+ " , "+
 				 " ingredientTypeName = "+this.getIngredientTypeName()+ " , "+
 				 " ingredientTypeValue = "+this.getIngredientTypeValue()+" ";
 	}
-	@Override
+	/*@Override
 	public void getPsmtmt(PreparedStatement pstmt) {
 		try {
 	       	
@@ -86,5 +76,25 @@ public class IngredientType extends Entities {
 			} catch (SQLException e) {
 			e.printStackTrace();
 		}		
+	}*/
+	@Override
+	protected String getAllergenInsert(int place) {
+		return null;
+	}
+	@Override
+	protected String getIngredientInsert(int place) {
+		return null;
+	}
+	@Override
+	protected Integer[] getAllergenArray() {
+		return null;
+	}
+	@Override
+	protected ArrayList<Integer> getIngredientArray() {
+		return null;
+	}
+	@Override
+	protected int getmaxIngredieantCount() {
+		return 0;
 	}
 }
