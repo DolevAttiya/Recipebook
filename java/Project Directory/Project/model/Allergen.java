@@ -12,6 +12,11 @@ public class Allergen extends  Entities{
 	private String  allergenName;
 	
 	 /*Contractor*/
+	public Allergen(Integer id)
+	{
+		this(SelectSpecific("Allergen","allergenId",id.toString()));
+
+	}
 	public Allergen(ResultSet rs) {
 		try {
 			setAllergenId(rs.getInt("allergenId"));
