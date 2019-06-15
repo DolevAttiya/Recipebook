@@ -15,11 +15,16 @@ import view.MainPage;
 
 public class MVCDriver {
 	public static void main(String[] args) {
-		User user = new User();
 		Controller controller = new MyController();
+		User user = new User();
+		Dietitian dietitian = new Dietitian();
+		//create an object from every class
 		
-		model.addObserver(controller);
-		Dietitian.addObserver(controller);
+		
+		user.addObserver(controller);
+		dietitian.addObserver(controller);
+		//add all the rest of the observers
+		
 		//view.start();
 	}
 }

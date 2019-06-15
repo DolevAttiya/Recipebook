@@ -45,6 +45,24 @@ public class MyController implements Controller{
 			Recipe recipeD = recipeDEvent.getEntity();
 			//recipe.delete(); model function call
 			break;
+			
+		case "ingredient_insert":
+			Event<Ingredient> ingredientIEvent = e;
+			Ingredient ingredientI = ingredientIEvent.getEntity();
+			//ingredient.insert(); model function call
+			break;
+			
+		case "ingredient_update":
+			Event<Ingredient> ingredientUEvent = e;
+			Ingredient ingredientU = ingredientUEvent.getEntity();
+			//ingredient.update(); model function call
+			break;
+			
+		case "ingredient_delete":
+			Event<Ingredient> ingredientDEvent = e;
+			Ingredient ingredientD = ingredientDEvent.getEntity();
+			//ingredient.delete(); model function call
+			break;
 		}
 		
 	}	
