@@ -1,3 +1,4 @@
+
 package model;
 
 import java.util.ArrayList;
@@ -205,7 +206,5 @@ public Boolean Update() {
 		String sql=" SELECT * FROM " + this.Class()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
 		return Models.getFromWithDB(sql);
 	}
-	
-	
 
 }

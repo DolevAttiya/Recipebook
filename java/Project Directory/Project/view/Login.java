@@ -44,31 +44,36 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 738, 546);
+		setBounds(100, 100, 764, 593);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(230, 230, 250));
+		contentPane.setBackground(new Color(65, 105, 225));
 		contentPane.setForeground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JTextPane txtpnWelcomeToRecipebook = new JTextPane();
-		txtpnWelcomeToRecipebook.setBackground(new Color(230, 230, 250));
-		txtpnWelcomeToRecipebook.setFont(new Font("Tempus Sans ITC", Font.BOLD, 48));
-		txtpnWelcomeToRecipebook.setText("Welcome To RecipeBook !");
-		txtpnWelcomeToRecipebook.setBounds(51, 73, 609, 83);
+		txtpnWelcomeToRecipebook.setForeground(new Color(255, 255, 255));
+		txtpnWelcomeToRecipebook.setBackground(new Color(65, 105, 225));
+		txtpnWelcomeToRecipebook.setFont(new Font("Tempus Sans ITC", Font.BOLD, 60));
+		txtpnWelcomeToRecipebook.setText("Welcome To Taimli !");
+		txtpnWelcomeToRecipebook.setBounds(76, 85, 609, 83);
 		contentPane.add(txtpnWelcomeToRecipebook);
 		
-		JLabel lblUserName = new JLabel("User Name:");
-		lblUserName.setBounds(213, 195, 104, 41);
+		JLabel lblUserName = new JLabel("Email:");
+		lblUserName.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 27));
+		lblUserName.setForeground(new Color(255, 255, 255));
+		lblUserName.setBounds(189, 207, 153, 41);
 		contentPane.add(lblUserName);
 		
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(213, 252, 104, 42);
+		lblPassword.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 27));
+		lblPassword.setForeground(new Color(255, 255, 255));
+		lblPassword.setBounds(189, 264, 153, 42);
 		contentPane.add(lblPassword);
 		
 		textField = new JTextField();
-		textField.setBounds(317, 202, 146, 26);
+		textField.setBounds(342, 214, 146, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -78,19 +83,19 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnLogin.setBounds(277, 332, 146, 63);
+		btnLogin.setBounds(277, 313, 146, 41);
 		contentPane.add(btnLogin);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(317, 260, 146, 26);
+		passwordField.setBounds(342, 272, 146, 26);
 		contentPane.add(passwordField);
 		
-		JButton btnRegister = new JButton("Register");
+		JButton btnRegister = new JButton("Sign up!");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnRegister.setBounds(276, 411, 147, 41);
+		btnRegister.setBounds(277, 361, 147, 41);
 		contentPane.add(btnRegister);
 	}
 }
