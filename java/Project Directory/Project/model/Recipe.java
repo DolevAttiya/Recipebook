@@ -248,3 +248,4 @@ public class Recipe extends Entities{
 		return this.getRecipeIngredientId();
 	}
 }
+
