@@ -1,8 +1,6 @@
 package model;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Allergen extends  Entities{
 	
@@ -12,20 +10,14 @@ public class Allergen extends  Entities{
 	private String  allergenName;
 	
 	 /*Contractor*/
-	public Allergen(Integer id)
+	public Allergen(Integer allergenId,String  allergenName)
 	{
-		this(SelectSpecific("Allergen","allergenId",id.toString()));
-
+		this.setAllergenId(allergenId);
+		this.setAllergenName(allergenName);
 	}
-	public Allergen(ResultSet rs) {
-		try {
-			setAllergenId(rs.getInt("allergenId"));
-			setAllergenName(rs.getString("allergenName"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		setMaxAllergen(getMaxAllergen() + 1);
+	@Override
+	protected String Class() {
+		return "Allergen";
 	}
 	public Allergen(int allergenId, String allergenName) {
 		this.setAllergenId(allergenId);
@@ -38,10 +30,10 @@ public class Allergen extends  Entities{
 	public String getAllergenName() {
 		return this.allergenName; 
 	}
-	private void setAllergenName(String allergenName ) {
+	 void setAllergenName(String allergenName ) {
 		 this.allergenName=allergenName; 
 	}
-	private void setAllergenId(Integer AllergenId ) {
+	 void setAllergenId(Integer AllergenId ) {
 		 this.allergenId=AllergenId; 
 	}
 	public static int getMaxAllergen() {
@@ -52,34 +44,47 @@ public class Allergen extends  Entities{
 	}
 	
 	@Override
-	String getEntitieKey() {
+	protected String getEntitieKey() {
 		return "allergenId";
 	}
 	@Override
-	String getEntitieKeyValue() {
+	protected String getEntitieKeyValue() {
 		return this.getAllergenId().toString();
 	}
 	@Override
-	String getEntitieAttributesNames() {		
+	protected String getEntitieAttributesNames() {		
 		return "allergenId, allergenName";
 	}
 	@Override
-	String getEntitieAttributesValues() {
+	
+	protected String getEntitieAttributesValues() {
 		return " "+this.getAllergenId().toString()+", "+this.getAllergenName();
 	}
 	@Override
-	String getEntitieAttributesNamesValues() {
+	protected String getEntitieAttributesNamesValues() {
 		return "allergenId= "+this.getAllergenId().toString()+", allergenName"+this.getAllergenName();
 	}
 	@Override
-    public void getPsmtmt( PreparedStatement pstmt) {
-           try {
-				pstmt.setInt(1, allergenId);
-				pstmt.setString(2, allergenName);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-   }
+	protected String getAllergenInsert(int place) {
+		return null;
+	}
+	@Override
+	protected String getIngredientInsert(int place) {
+		return null;
+	}
+	@Override
+	protected Integer[] getAllergenArray() {		
+		return null;
+	}
+	@Override
+	protected ArrayList<Integer> getIngredientArray() {
+		return null;
+	}
+	@Override
+	protected int getmaxIngredieantCount() {
+		return 0;
+	}
      
 }
 
+=
