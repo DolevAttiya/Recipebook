@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class MyRecipes extends JFrame {
-	void setSize ((int)(Toolkit.getDefaultToolkit().getScreenSize().width*0.5),
+	setSize ((int)(Toolkit.getDefaultToolkit().getScreenSize().width*0.5),
 			(int)(Toolkit.getDefaultToolkit().getScreenSize().hight*0.5));
 	setVisible (true);
 

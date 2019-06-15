@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
+import javax.swing.JList;
 
 public class NewRecipe extends JFrame {
 
@@ -31,6 +32,10 @@ public class NewRecipe extends JFrame {
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_3;
+	/**
+	 * @wbp.nonvisual location=119,23
+	 */
+	private final JList list = new JList();
 
 	/**
 	 * Launch the application.
