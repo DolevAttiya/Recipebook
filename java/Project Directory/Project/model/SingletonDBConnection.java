@@ -9,17 +9,18 @@ public class SingletonDBConnection {
     private SingletonDBConnection() {}
     
         static Connection conn = null;
-        // db parameters
+
         static String url = "jdbc:sqlite:Project/database/database.db";
     public static Connection getConnection() {
         try {
         	if(conn==null) {
+
             // create a connection to the database
             conn = DriverManager.getConnection(url);
-            
             System.out.println("Connection to SQLite has been established.");   
         	}
-        	else if (conn.isClosed())
+        	else if(conn.isClosed())
+
         		conn = DriverManager.getConnection(url);
         }
         catch (SQLException e) {
