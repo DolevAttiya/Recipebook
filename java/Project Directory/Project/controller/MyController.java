@@ -1,66 +1,67 @@
 package controller;
 
 import java.util.Observable;
+import java.util.ArrayList;
+import model.Models;
 
-import model.model;
-import model.User;
-import model.Allergen;
-import model.Dietitian;
-import model.Entities;
-import model.Ingredient;
-import model.IngredientType;
-import model.Recipe;
-import view.Login;
-import view.MainPage;
 
 public class MyController implements Controller{
 	public void update(Observable o, Object arg) {
-		Event e = (Event)arg;
 		
-		switch (e.getName()) {
+		switch ((String)((Event)arg).getArr().get(0)) {
+		
 		case "top_10":
-			//top10(); model function call
+			Models.top10();
+			break;
+			
+		case "top_10_response":
+			//rotem's function
 			break;
 			
 		case "user_login":
-			Event<User> userEvent = e;
-			User user = userEvent.getEntity();
-			//user.login(); model function call
+			/*
+			 * 0 - Event name
+			 * 1 - User name
+			 * 2 - Password
+			 */
+			Models.CheckPasswordAndEmail((String)((Event)arg).getArr().get(1),(String)((Event)arg).getArr().get(2));
+			break;
+			
+		case "user_login_response":
+			/*
+			 * 0 - Event name
+			 * 1 - Array list
+			 */
+			//rotem's function
 			break;
 			
 		case "recipe_insert":
-			Event<Recipe> recipeIEvent = e;
-			Recipe recipeI = recipeIEvent.getEntity();
+		
 			//recipe.insert(); model function call
 			break;
 			
 		case "recipe_update":
-			Event<Recipe> recipeUEvent = e;
-			Recipe recipeU = recipeUEvent.getEntity();
+			
 			//recipe.update(); model function call
 			break;
 			
 		case "recipe_delete":
-			Event<Recipe> recipeDEvent = e;
-			Recipe recipeD = recipeDEvent.getEntity();
+		
 			//recipe.delete(); model function call
 			break;
 			
 		case "ingredient_insert":
-			Event<Ingredient> ingredientIEvent = e;
-			Ingredient ingredientI = ingredientIEvent.getEntity();
+		
 			//ingredient.insert(); model function call
 			break;
 			
 		case "ingredient_update":
-			Event<Ingredient> ingredientUEvent = e;
-			Ingredient ingredientU = ingredientUEvent.getEntity();
+		
 			//ingredient.update(); model function call
 			break;
 			
 		case "ingredient_delete":
-			Event<Ingredient> ingredientDEvent = e;
-			Ingredient ingredientD = ingredientDEvent.getEntity();
+			
 			//ingredient.delete(); model function call
 			break;
 		}

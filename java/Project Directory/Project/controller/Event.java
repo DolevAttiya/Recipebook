@@ -1,25 +1,20 @@
 package controller;
 
-public class Event<T> {
+import java.util.ArrayList;
 
-	private String eventName;
-	private T entity;
+public class Event {
+	
+	private ArrayList<Object> arr;
 	
 	public Event() {
-		this.eventName = "nullEvent";
-		this.entity = null;
+		setArr(new ArrayList<Object>());
 	}
-	
-	public Event(String name, T entity) {
-		this.eventName = name;
-		this.entity = entity;
+
+	public ArrayList<Object> getArr() {
+		return arr;
 	}
-	
-	public T getEntity() {
-		return this.entity;
-	}
-	
-	public String getName() {
-		return this.eventName;
+
+	public void setArr(ArrayList<Object> arr) {
+		this.arr = arr;
 	}
 }
