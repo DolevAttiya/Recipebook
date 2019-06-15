@@ -87,3 +87,4 @@ public class Allergen extends  Entities{
      
 }
 
+=
