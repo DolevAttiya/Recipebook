@@ -6,12 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Models implements model {
+import controller.Event;
+public class Models extends Observable implements model  {
+	Event ev;
 
 	public Models() {
+		 ev=new Event();
 	}
-	ArrayList<Recipe> top10(){
+	void top10(){
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=search("Top10Recipe",null);
@@ -25,29 +29,34 @@ public class Models implements model {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return recipe;
+		ev.getArr().add("top_10_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
 
 	}
 
-	ArrayList<User> CheckPasswordAndEmail(User us){
+	public void CheckPasswordAndEmail(String Email, String Password){
 		// select column_name from table_name order by column_name desc limit size.
-		String[] args=new String[2];
-		args[0]=us.getPersonEmail();
-		args[1]=us.getPersonHashPass();
+		ArrayList<Object> args=new ArrayList<Object>();
+		args.add(Email);
+		args.add(Password);
 		ArrayList<User> user= new ArrayList<User>();
 		ResultSet rs=search("CheckPasswordAndEmail",args);
 		int i;
 		try {
 			for(i=0;i<10&&rs.next();i++)
 			{
-				user.add(GetUserFromDB(us.getPersonEmail()));
+				user.add(GetUserFromDB(Email));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return user;
-
+		ev.getArr().add("user_login_response");
+		ev.getArr().add(user);
+		setChanged();
+		notifyObservers(ev);
 	}
 
 	ArrayList<User> InsertUser(User us){
@@ -55,8 +64,8 @@ public class Models implements model {
 		ArrayList<User> user= new ArrayList<User>();
 		if(us.Update())
 		{
-			String[] args=new String[1];
-			args[0]=us.getPersonEmail();
+			ArrayList<Object>args=new ArrayList<Object>();
+			args.add(us.getPersonEmail());
 			ResultSet rs=search("InsertUser",args);
 			int i;
 			try {
@@ -73,15 +82,15 @@ public class Models implements model {
 
 	}
 
-	private ResultSet search(String typeSearch, Object args[]) {
+	private ResultSet search(String typeSearch,ArrayList<Object> args) {
 		String sql="";
 		if(typeSearch.compareTo("Top10Recipe")==0) 
 			sql="  select * from Recipe order by recipeRate desc ";
 		if(typeSearch.compareTo("CheckPasswordAndEmail")==0)
-			sql="  select * from UserPerson where personEmail = "+(String)args[0]+" And PersonHash = "+(String)args[1];
-		ResultSet rs =getFromWithDB(sql) ;    
+			sql="  select * from UserPerson where personEmail = "+(String)args.get(0)+" And PersonHash = "+(String)args.get(1);
 		if(typeSearch.compareTo("InsertUser")==0)
-			sql="  select * from UserPerson where personEmail = "+(String)args[0];
+			sql="  select * from UserPerson where personEmail = "+(String)args.get(0);
+		ResultSet rs =getFromWithDB(sql) ;
 		return rs;
 
 
