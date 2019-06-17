@@ -36,16 +36,41 @@ public class Models extends Observable implements model  {
 	}
 
 	public void CheckPasswordAndEmail(String Email, String Password){
-		// select column_name from table_name order by column_name desc limit size.
 		ev=new Event();
 		ArrayList<Object> args=new ArrayList<Object>();
+
+		args.add("User");
 		args.add(Email);
 		args.add(Password);
-		ArrayList<User> user= new ArrayList<User>();
 		ResultSet rs=search("CheckPasswordAndEmail",args);
-		user.add(GetUserParser(rs));
-		ev.getArr().add("user_login_response");
-		ev.getArr().add(user);
+		try {
+			if(rs.next()){
+				ArrayList<User> user= new ArrayList<User>();
+				user.add(GetUserParser(rs));
+				ev.getArr().add("user_login_response");
+				ev.getArr().add(user);
+			}
+			else
+			{
+				args.add(0, "Dietitian");
+				rs=search("CheckPasswordAndEmail",args);
+				if(rs.next()){
+					ArrayList<Dietitian> diet= new ArrayList<Dietitian>();
+					diet.add(GetDietitianParser(rs));
+					ev.getArr().add("dietitian_login_response");
+					ev.getArr().add(diet);
+				}else
+				{
+					ev.getArr().add("user_login_response");
+					ev.getArr().add(null);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
 		setChanged();
 		notifyObservers(ev);
 	}
@@ -55,7 +80,10 @@ public class Models extends Observable implements model  {
 		if(typeSearch.compareTo("Top10Recipe")==0) 
 			sql="  select * from Recipe order by recipeRate desc ";
 		if(typeSearch.compareTo("CheckPasswordAndEmail")==0)
-			sql="  select * from UserPerson where personEmail = "+(String)args.get(0)+" And PersonHash = "+(String)args.get(1);
+			if (((String)args.get(0)).compareTo("User")==0)
+				sql="  select * from UserPerson where personEmail = "+(String)args.get(1)+" And PersonHash = "+(String)args.get(2)+"And userId is not null";
+			else
+				sql="  select * from DietitianPerson where personEmail = "+(String)args.get(1)+" And PersonHash = "+(String)args.get(2)+"And dietitianId is not null";
 		ResultSet rs =getFromWithDB(sql) ;
 		return rs;
 
@@ -607,6 +635,46 @@ public class Models extends Observable implements model  {
 			e.printStackTrace();
 		}
 		ev.getArr().add("search_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void myRecipes(String Email) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join PersonRecipe using (RecipeId) Where recipeID = "+Email;
+
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("my_recipes_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void myFavoriteRecipes(String Email) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join PersonFavoriteRecipe using (RecipeId) Where recipeID = "+Email;
+
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("favorite_recipes_response");
 		ev.getArr().add(recipe);
 		setChanged();
 		notifyObservers(ev);

@@ -67,8 +67,8 @@ public class Recipe extends Entities{
 		return recipeAllergen;
 	}
 	public void setRecipeAllergen(Integer[] recipeAllergen) {
-		this.recipeAllergen= new Integer[Allergen.getMaxAllergen()];
-		for (int i=0;i<Allergen.getMaxAllergen();i++)
+		this.recipeAllergen= new Integer[recipeAllergen.length];
+		for (int i=0;i<recipeAllergen.length;i++)
 			this.recipeAllergen[i]=recipeAllergen[i];
 	}
 	public ArrayList<Integer> getRecipeIngredientId() {
@@ -178,7 +178,7 @@ public class Recipe extends Entities{
 					else if (this.getRecipeKashruth()!=newIngredient.getIngredientKashruth())
 						this.setRecipeKashruth(3);
 		}
-		for( int i=0;i<Allergen.getMaxAllergen();i++)
+		for( int i=0;i<newIngredient.getAllergenArray().length;i++)
 		{
 			if(newIngredient.getIngredientAllergen(i)>0)
 				this.recipeAllergen[i]++;//***//

@@ -31,7 +31,8 @@ public class User extends Person {
 		return userAllergen;
 	}
 	public void setUserAllergen(Integer[] userAllergen) {
-		for (int i=0;i<Allergen.getMaxAllergen();i++)
+		this.userAllergen= new Integer[userAllergen.length];
+		for (int i=0;i<userAllergen.length;i++)
 			this.userAllergen[i]=userAllergen[i];
 	}
 	@Override

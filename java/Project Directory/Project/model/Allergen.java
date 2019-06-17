@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Allergen extends  Entities{
 
 	/*Attributes*/
-	private static int maxAllergen=0;
 	private Integer allergenId;
 	private String  allergenName;
 
@@ -31,13 +30,6 @@ public class Allergen extends  Entities{
 	void setAllergenId(Integer AllergenId ) {
 		this.allergenId=AllergenId; 
 	}
-	public static int getMaxAllergen() {
-		return maxAllergen;
-	}
-	private static void setMaxAllergen(int maxAllergen) {
-		Allergen.maxAllergen = maxAllergen;
-	}
-
 	@Override
 	protected String getEntitieKey() {
 		return "allergenId";
