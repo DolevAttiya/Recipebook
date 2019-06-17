@@ -36,7 +36,6 @@ public class NewRecipe extends JFrame {
 	 * @wbp.nonvisual location=119,23
 	 */
 	private final JList list = new JList();
-
 	/**
 	 * Launch the application.
 	 */

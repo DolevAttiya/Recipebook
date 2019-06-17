@@ -6,12 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Models implements model {
+import controller.Event;
+public class Models extends Observable implements model  {
+	Event ev;
 
 	public Models() {
 	}
-	ArrayList<Recipe> top10(){
+	void top10(){
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=search("Top10Recipe",null);
@@ -25,68 +28,40 @@ public class Models implements model {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return recipe;
+		ev.getArr().add("top_10_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
 
 	}
 
-	ArrayList<User> CheckPasswordAndEmail(User us){
+	public void CheckPasswordAndEmail(String Email, String Password){
 		// select column_name from table_name order by column_name desc limit size.
-		String[] args=new String[2];
-		args[0]=us.getPersonEmail();
-		args[1]=us.getPersonHashPass();
+		ev=new Event();
+		ArrayList<Object> args=new ArrayList<Object>();
+		args.add(Email);
+		args.add(Password);
 		ArrayList<User> user= new ArrayList<User>();
 		ResultSet rs=search("CheckPasswordAndEmail",args);
-		int i;
-		try {
-			for(i=0;i<10&&rs.next();i++)
-			{
-				user.add(GetUserFromDB(us.getPersonEmail()));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return user;
-
+		user.add(GetUserParser(rs));
+		ev.getArr().add("user_login_response");
+		ev.getArr().add(user);
+		setChanged();
+		notifyObservers(ev);
 	}
 
-	ArrayList<User> InsertUser(User us){
-		// select column_name from table_name order by column_name desc limit size.
-		ArrayList<User> user= new ArrayList<User>();
-		if(us.Update())
-		{
-			String[] args=new String[1];
-			args[0]=us.getPersonEmail();
-			ResultSet rs=search("InsertUser",args);
-			int i;
-			try {
-				for(i=0;i<10&&rs.next();i++)
-				{
-					user.add(GetUserFromDB(us.getPersonEmail()));
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return user;
-
-	}
-
-	private ResultSet search(String typeSearch, Object args[]) {
+	private ResultSet search(String typeSearch,ArrayList<Object> args) {
 		String sql="";
 		if(typeSearch.compareTo("Top10Recipe")==0) 
 			sql="  select * from Recipe order by recipeRate desc ";
 		if(typeSearch.compareTo("CheckPasswordAndEmail")==0)
-			sql="  select * from UserPerson where personEmail = "+(String)args[0]+" And PersonHash = "+(String)args[1];
-		ResultSet rs =getFromWithDB(sql) ;    
-		if(typeSearch.compareTo("InsertUser")==0)
-			sql="  select * from UserPerson where personEmail = "+(String)args[0];
+			sql="  select * from UserPerson where personEmail = "+(String)args.get(0)+" And PersonHash = "+(String)args.get(1);
+		ResultSet rs =getFromWithDB(sql) ;
 		return rs;
 
 
 	}
-	
+
 	public static User GetUserFromDB(String email)
 	{ResultSet rs=SelectSpecific("UserPerson","personEmail",email);
 	User user =GetUserParser(rs);
@@ -120,6 +95,54 @@ public class Models implements model {
 		}	
 		return per;
 	}
+	public void insertUser(User us){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<User> user= new ArrayList<User>();
+		if(us.Insert())
+		{
+			user.add(GetUserFromDB(us.getPersonEmail()));
+		}
+		ev.getArr().add("user_register_response");
+		ev.getArr().add(user);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void updateUser(User us){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<User> user= new ArrayList<User>();
+		if(us.Update())
+		{
+			user.add(GetUserFromDB(us.getPersonEmail()));
+		}
+		ev.getArr().add("user_update_response");
+		ev.getArr().add(user);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void deleteUser(User us){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<User> user= new ArrayList<User>();
+		if(!us.Delete())
+		{
+			user.add(GetUserFromDB(us.getPersonEmail()));
+		}
+		ev.getArr().add("user_delete_response");
+		ev.getArr().add(user);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void selectUser(String Email) {
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<User> user= new ArrayList<User>();
+		user.add(GetUserFromDB(Email));
+		ev.getArr().add("user_select_response");
+		ev.getArr().add(user);
+		setChanged();
+		notifyObservers(ev);}	
 
 	public static Dietitian GetDietitianFromDB(String email)
 	{ResultSet rs=SelectSpecific("DietitianPerson","personEmail",email);
@@ -147,6 +170,55 @@ public class Models implements model {
 		}	
 		return per;
 	}
+	public void insertDietitian(Dietitian dt){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
+		if(dt.Insert())
+		{
+			dietitian.add(GetDietitianFromDB(dt.getPersonEmail()));
+		}
+		ev.getArr().add("dietitian_register_response");
+		ev.getArr().add(dietitian);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void updateDietitian(Dietitian dt){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
+		if(dt.Update())
+		{
+			dietitian.add(GetDietitianFromDB(dt.getPersonEmail()));
+		}
+		ev.getArr().add("dietitian_update_response");
+		ev.getArr().add(dietitian);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void deleteDietitian(Dietitian dt){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
+		if(!dt.Delete())
+		{
+			dietitian.add(GetDietitianFromDB(dt.getPersonEmail()));
+		}
+		ev.getArr().add("dietitian_delete_response");
+		ev.getArr().add(dietitian);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void selectDietitian(String Email) {
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
+		dietitian.add(GetDietitianFromDB(Email));
+		ev.getArr().add("dietitian_select_response");
+		ev.getArr().add(dietitian);
+		setChanged();
+		notifyObservers(ev);
+	}	
 
 	public static Allergen GetAllergenFromDB(Integer id) {
 		ResultSet rs=SelectSpecific("Allergen","allergenId",id.toString());
@@ -163,6 +235,55 @@ public class Models implements model {
 		}
 		return allergen;
 	}
+	public void insertAllergen(Allergen al){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Allergen> allergen= new ArrayList<Allergen>();
+		if(al.Insert())
+		{
+			allergen.add(GetAllergenFromDB(al.getAllergenId()));
+		}
+		ev.getArr().add("allergen_insert_response");
+		ev.getArr().add(allergen);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void updateAllergen(Allergen al){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Allergen> allergen= new ArrayList<Allergen>();
+		if(al.Update())
+		{
+			allergen.add(GetAllergenFromDB(al.getAllergenId()));
+		}
+		ev.getArr().add("allergen_update_response");
+		ev.getArr().add(allergen);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void deleteAllergen(Allergen al){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Allergen> allergen= new ArrayList<Allergen>();
+		if(!al.Delete())
+		{
+			allergen.add(GetAllergenFromDB(al.getAllergenId()));
+		}
+		ev.getArr().add("allergen_delete_response");
+		ev.getArr().add(allergen);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void selectAllergen(Integer id) {
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Allergen> allergen= new ArrayList<Allergen>();
+		allergen.add(GetAllergenFromDB(id));
+		ev.getArr().add("allergen_select_response");
+		ev.getArr().add(allergen);
+		setChanged();
+		notifyObservers(ev);
+	}	
 
 	public static Ingredient GetIngredientFromDB(Integer id) {
 		ResultSet rs=SelectSpecific("Ingredient","ingredientId",id.toString());
@@ -196,6 +317,55 @@ public class Models implements model {
 		}
 		return ingredient;
 	}
+	public void insertIngredient(Ingredient ing){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
+		if(ing.Insert())
+		{
+			ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+		}
+		ev.getArr().add("ingredient_insert_response");
+		ev.getArr().add(ingredient);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void updateIngredient(Ingredient ing){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
+		if(ing.Update())
+		{
+			ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+		}
+		ev.getArr().add("ingredient_update_response");
+		ev.getArr().add(ingredient);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void deleteIngredient(Ingredient ing){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
+		if(!ing.Delete())
+		{
+			ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+		}
+		ev.getArr().add("ingredient_delete_response");
+		ev.getArr().add(ingredient);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void selectIngredient(Integer id) {
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
+		ingredient.add(GetIngredientFromDB(id));
+		ev.getArr().add("ingredient_select_response");
+		ev.getArr().add(ingredient);
+		setChanged();
+		notifyObservers(ev);
+	}	
 
 	public static IngredientType GetIngredientTypeFromDB(Integer id) {
 		ResultSet rs=SelectSpecific("IngredientType","ingredientTypeId",id.toString());
@@ -214,6 +384,55 @@ public class Models implements model {
 		}
 		return ingredientType;
 	}
+	public void insertIngredientType(IngredientType ingty){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
+		if(ingty.Insert())
+		{
+			ingredientType.add(GetIngredientTypeFromDB(ingty.getIngredientTypeId()));
+		}
+		ev.getArr().add("ingredientType_insert_response");
+		ev.getArr().add(ingredientType);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void updateIngredientType(IngredientType ingty){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
+		if(ingty.Update())
+		{
+			ingredientType.add(GetIngredientTypeFromDB(ingty.getIngredientTypeId()));
+		}
+		ev.getArr().add("ingredientType_update_response");
+		ev.getArr().add(ingredientType);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void deleteIngredientType(IngredientType ingty){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
+		if(!ingty.Delete())
+		{
+			ingredientType.add(GetIngredientTypeFromDB(ingty.getIngredientTypeId()));
+		}
+		ev.getArr().add("ingredientType_delete_response");
+		ev.getArr().add(ingredientType);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void selectIngredientTypeType(Integer id) {
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
+		ingredientType.add(GetIngredientTypeFromDB(id));
+		ev.getArr().add("ingredientType_select_response");
+		ev.getArr().add(ingredientType);
+		setChanged();
+		notifyObservers(ev);
+	}	
 
 	public static Recipe GetRecipeFromDB(Integer id) {
 		ResultSet rs=SelectSpecific("Recipe","recipeId",id.toString());
@@ -266,6 +485,55 @@ public class Models implements model {
 
 		return recipe;
 	}
+	public void insertRecipe(Recipe res){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		if(res.Insert())
+		{
+			recipe.add(GetRecipeFromDB(res.getRecipeId()));
+		}
+		ev.getArr().add("recipe_insert_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void updateRecipe(Recipe res){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		if(res.Update())
+		{
+			recipe.add(GetRecipeFromDB(res.getRecipeId()));
+		}
+		ev.getArr().add("recipe_update_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void deleteRecipe(Recipe res){
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		if(!res.Delete())
+		{
+			recipe.add(GetRecipeFromDB(res.getRecipeId()));
+		}
+		ev.getArr().add("recipe_delete_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void selectRecipe(Integer id) {
+		ev=new Event();
+		// select column_name from table_name order by column_name desc limit size.
+		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
+		ingredientType.add(GetIngredientTypeFromDB(id));
+		ev.getArr().add("ingredientType_select_response");
+		ev.getArr().add(ingredientType);
+		setChanged();
+		notifyObservers(ev);
+	}	
 
 	public static ResultSet SelectSpecificFrom(String Select, String Table, String Key,String Value) {
 		String sql;
@@ -308,9 +576,40 @@ public class Models implements model {
 		return null;
 	}
 
-
-
-
-
-
+	@SuppressWarnings("unchecked")
+	public void Search(ArrayList<Object> search) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
+		if(search.get(2)!=null)
+			sql+=" AND recipeKashruth = "+search.get(2);
+		if(search.get(3)!=null)
+			sql+=" AND recipeComplex = "+search.get(3);
+		if(search.get(4)!=null)
+			sql+=" AND recipeTimeToMake = "+search.get(4);
+		if(search.get(5)!=null)
+			sql+=" AND recipeRate  "+search.get(5);
+		if(search.get(6)!=null)
+			for(int i=0;i<((ArrayList<Integer>)search.get(6)).size();i++)
+				
+			sql+=" AND AllergenId  "+((ArrayList<Integer>)search.get(6)).get(i);
+		
+			sql+=" Orderby recipeRate ";
+			
+			
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("ingredientType_select_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
 }
