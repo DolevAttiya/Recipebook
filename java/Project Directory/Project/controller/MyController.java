@@ -23,7 +23,7 @@ public class MyController implements Controller{
 			/* 0 - Event name
 			   1 - User name
 			   2 - Password */
-			Models.CheckPasswordAndEmail((String)((Event)arg).getArr().get(1),(String)((Event)arg).getArr().get(2));
+			model.CheckPasswordAndEmail((String)((Event)arg).getArr().get(1),(String)((Event)arg).getArr().get(2));
 			break;
 		
 		case "user_login_response":
@@ -33,7 +33,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "user_register":
-			Models.insertUser((User)((Event)arg).getArr().get(1));
+			model.insertUser((User)((Event)arg).getArr().get(1));
 			break;
 			
 		case "user_register_response":
@@ -41,7 +41,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "dietitian_register":
-			Models.insertDietitian((Dietitian)((Event)arg).getArr().get(1));
+			model.insertDietitian((Dietitian)((Event)arg).getArr().get(1));
 			break;
 			
 		case "dietitian_register_response":
@@ -50,7 +50,7 @@ public class MyController implements Controller{
 		//-------------------------------
 		//---------User Settings---------
 		case "user_update":
-			Models.updateUser((User)((Event)arg).getArr().get(1));
+			model.updateUser((User)((Event)arg).getArr().get(1));
 			break;
 			
 		case "user_update_response":
@@ -58,7 +58,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "user_delete":
-			Models.deleteUser((User)((Event)arg).getArr().get(1));
+			model.deleteUser((User)((Event)arg).getArr().get(1));
 			break;
 			
 		case "user_delete_response":
@@ -66,7 +66,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "dietitian_update":
-			Models.updateDietitian((Dietitian)((Event)arg).getArr().get(1));
+			model.updateDietitian((Dietitian)((Event)arg).getArr().get(1));
 			break;
 			
 		case "dietitian_update_response":
@@ -74,7 +74,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "dietitian_delete":
-			Models.deleteDietitian((Dietitian)((Event)arg).getArr().get(1));
+			model.deleteDietitian((Dietitian)((Event)arg).getArr().get(1));
 			break;
 			
 		case "dietitian_delete_response":
