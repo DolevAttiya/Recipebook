@@ -1,15 +1,16 @@
 package model;
 
+import java.awt.image.BufferedImage;
 import java.sql.Blob;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Dietitian extends Person {
 
 	private Integer dietitianId;
-	private Date dieticianStatDate;
-	public Dietitian(String personEmail, String personFirstName, String personLastName, Date personDateOfBirth,
-			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, Blob personImage,Integer dietitianId, Date dieticianStatDate) {
+	private LocalDate dieticianStatDate;
+	public Dietitian(String personEmail, String personFirstName, String personLastName, LocalDate personDateOfBirth,
+			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, BufferedImage personImage,Integer dietitianId, LocalDate dieticianStatDate) {
 		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe,
 				personImage);
 		setDietitianId(dietitianId);
@@ -25,15 +26,15 @@ public class Dietitian extends Person {
 	public void setDietitianId(Integer dietitianId) {
 		this.dietitianId = dietitianId;
 	}
-	public Date getDieticianStatDate() {
+	public LocalDate getDieticianStatDate() {
 		return dieticianStatDate;
 	}
-	public void setDieticianStatDate(Date dieticianStatDate) {
+	public void setDieticianStatDate(LocalDate dieticianStatDate) {
 		this.dieticianStatDate = dieticianStatDate;
 
 	}
 	public Integer reputetionYears() {
-		Date Now= new Date();
+		LocalDate Now= LocalDate.now();
 
 		return Now.compareTo(getDieticianStatDate());	
 	}

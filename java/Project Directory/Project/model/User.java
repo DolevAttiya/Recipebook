@@ -1,16 +1,17 @@
 package model;
 
+import java.awt.image.BufferedImage;
 import java.sql.Blob;
+import java.time.LocalDate;
 //import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class User extends Person {
 
 	private Integer userId;
 	private Integer userAllergen[];
-	public User(String personEmail, String personFirstName, String personLastName, Date personDateOfBirth,
-			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, Blob personImage,Integer userId, Integer userAllergen[]) {
+	public User(String personEmail, String personFirstName, String personLastName, LocalDate personDateOfBirth,
+			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, BufferedImage personImage,Integer userId, Integer userAllergen[]) {
 		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe,
 				personImage);
 		this.setUserId(userId);

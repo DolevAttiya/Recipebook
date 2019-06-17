@@ -72,8 +72,8 @@ class Testentities {
 		Double recipeTotalFat=0.0;
 		Integer recipeKashruth=0;
 		Time recipeTimeToMake= new Time(225);
-		Integer[] recipeAllergen= null;
-		User Daenerys= Models.GetUserFromDB( "\"drakarisValyrian.com\"");
+		Integer[] recipeAllergen= {0,0,0,0,1,0,0,1,0,0,1,0};
+		User Daenerys= Models.GetUserFromDB("\"drakarisValyrian.com\"");
 		Integer recipeComplex=3;
 		Integer recipeRate= 0;
 		String recipeDescription="The Italian cuisine is regional. Historical and cultural impacts, geography, the variety of climatic zones and cultural influences contributed to the diversity found in Italian cooking. This lasagna is made of pasta dough layers filled with bolognese sauce béchamel and Parmesan cheese, in the style of northern Italy.";
@@ -146,7 +146,8 @@ class Testentities {
 		recipeIngredientsAmount.add(1.0);
 		recipeIngredientsAmount.add(50.0);
 		re= new Recipe(recipeId, recipeName, recipeAllergen, recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein, recipeTotalFat, recipeKashruth, recipeImage, recipeTimeToMake, recipeComplex,Daenerys.getPersonEmail() , recipeRate, recipeDescription, recipeProcses, recipeIngredientId,recipeIngredientsType ,recipeIngredientsAmount );
-
+		re.Insert();
+		re.Delete();
 	}
 
 }

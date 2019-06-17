@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Blob;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Ingredient extends Entities {
@@ -14,11 +14,11 @@ public class Ingredient extends Entities {
 	private Double ingredientProtein;
 	private Double ingredientFat;
 	private Integer ingredientKashruth;
-	private Blob ingredientImage;
+	private BufferedImage ingredientImage;
 
 	/*Contractors*/
 
-	public Ingredient( Integer ingredientId,String  ingredientName,Integer ingredientAllergen[],Double ingredientCalories,Double ingredientCarbohydrate,Double ingredientProtein,Double ingredientFat, Integer ingredientKashruth, Blob ingredientImage)
+	public Ingredient( Integer ingredientId,String  ingredientName,Integer ingredientAllergen[],Double ingredientCalories,Double ingredientCarbohydrate,Double ingredientProtein,Double ingredientFat, Integer ingredientKashruth, BufferedImage ingredientImage)
 	{
 		this.setIngredientId(ingredientId);
 		this.setIngredientName(ingredientName);
@@ -72,10 +72,10 @@ public class Ingredient extends Entities {
 	public void setIngredientFat(Double ingredientFat) {
 		this.ingredientFat = ingredientFat;
 	}
-	public Blob getIngredientImage() {
+	public BufferedImage getIngredientImage() {
 		return ingredientImage;
 	}
-	public void setIngredientImage(Blob ingredientImage) {
+	public void setIngredientImage(BufferedImage ingredientImage) {
 		this.ingredientImage = ingredientImage;
 	}
 	public Integer[] getIngredientAllergen() {

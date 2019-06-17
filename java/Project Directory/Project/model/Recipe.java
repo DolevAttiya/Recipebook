@@ -17,7 +17,7 @@ public class Recipe extends Entities{
 	private Integer recipeComplex;
 	private Integer recipeRate;
 	private String recipeDescription;
-	private String recipeProcses;
+	private String recipeProcess;
 	private String recipePersonEmail;
 	private ArrayList<Integer> recipeIngredientId;
 	private ArrayList<Integer> recipeIngredientsType;
@@ -26,7 +26,7 @@ public class Recipe extends Entities{
 
 
 	/*Contractor*/
-	public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Double recipeTotalCalories,Double recipeTotalCarbohydrate,Double recipeTotalProtein,Double recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMake ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcses ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Double> recipeIngredientsAmount)
+	public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Double recipeTotalCalories,Double recipeTotalCarbohydrate,Double recipeTotalProtein,Double recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMake ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcess ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Double> recipeIngredientsAmount)
 	{ 
 		this.setRecipeAllergen(recipeAllergen);
 		this.setRecipeId(recipeId);
@@ -44,7 +44,7 @@ public class Recipe extends Entities{
 		this.setRecipePersonEmail(recipePersonEmail);
 		this.setRecipeRate(recipeRate);
 		this.setRecipeDescription(recipeDescription);
-		this.setRecipeProcses(recipeProcses);	
+		this.setRecipeProcess(recipeProcess);	
 		this.setRecipeImage(recipeImage);
 	}
 	@Override
@@ -75,18 +75,21 @@ public class Recipe extends Entities{
 		return recipeIngredientId;
 	}
 	public void setRecipeIngredientId(ArrayList<Integer> recipeIngredientId) {
-		recipeIngredientId.forEach((n) -> this.recipeIngredientId.add(n));
+		this.recipeIngredientId = new ArrayList<Integer>();
+		recipeIngredientId.forEach(n -> this.recipeIngredientId.add(n));
 	}
 	public ArrayList<Integer> getRecipeIngredientsType() {
 		return recipeIngredientsType;
 	}
 	public void setRecipeIngredientsType(ArrayList<Integer> recipeIngredientsType) {
+		this.recipeIngredientsType = new ArrayList<Integer>();
 		recipeIngredientsType.forEach((n) -> this.recipeIngredientsType.add(n));
 	}
 	public ArrayList<Double> getRecipeIngredientsAmount() {
 		return recipeIngredientsAmount;
 	}
 	public void setRecipeIngredientsAmount(ArrayList<Double> recipeIngredientsAmount) {
+		this.recipeIngredientsAmount = new ArrayList<Double>();
 		recipeIngredientsAmount.forEach((n) -> this.recipeIngredientsAmount.add(n));
 	}
 	public Double getRecipeTotalCalories() {
@@ -155,11 +158,11 @@ public class Recipe extends Entities{
 	public void setRecipeDescription(String recipeDescription) {
 		this.recipeDescription = recipeDescription;
 	}
-	public String getRecipeProcses() {
-		return recipeProcses;
+	public String getRecipeProcess() {
+		return recipeProcess;
 	}
-	public void setRecipeProcses(String recipeProcses) {
-		this.recipeProcses = recipeProcses;
+	public void setRecipeProcess(String recipeProcess) {
+		this.recipeProcess = recipeProcess;
 	}
 	public void addIngredient(Integer IngredientId,IngredientType ingredientType, Double IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
 	{
@@ -194,41 +197,41 @@ public class Recipe extends Entities{
 	}
 	@Override
 	protected String getEntitieAttributesNames() {
-		return " recipeId , recipeName , recipeImage , recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein , recipeTotalFat , recipeKashruth , recipeTimeToMake, recipeComplex , recipeRate , recipeDescription  , recipeProcses, recipePersonEmail ";
+		return " recipeId , recipeName , recipeImage , recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein , recipeTotalFat , recipeKashruth , recipeTimeToMake, recipeComplex , recipeRate , recipeDescription  , recipeProcess, PersonEmail ";
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return this.getRecipeId().toString() +" , " +
-				this.getRecipeName() +" , " +
+		return this.getRecipeId().toString() +" , \"" +
+				this.getRecipeName() +"\" , " +
 				this.getRecipeImage()+" , " +
 				this.getRecipeTotalCalories().toString() +" , " +
 				this.getRecipeTotalCarbohydrate().toString() +" , " +
 				this.getRecipeTotalProtein().toString() +" , " +
 				this.getRecipeTotalFat().toString() +" , " +
-				this.getRecipeKashruth().toString()+" , " +
-				this.getRecipeTimeToMake().toString()+" , " +
+				this.getRecipeKashruth().toString()+" , time( '"+
+				this.getRecipeTimeToMake() +"' ) , " +
 				this.getRecipeComplex().toString()+" , " +
-				this.getRecipeRate().toString()+" , " +
-				this.getRecipeDescription()+" , " +
-				this.getRecipeProcses()+" , " +
-				this.getRecipePersonEmail();
+				this.getRecipeRate().toString()+" , \"" +
+				this.getRecipeDescription()+"\" , \"" +
+				this.getRecipeProcess()+"\" , \"" +
+				this.getRecipePersonEmail()+"\" ";
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() {
 		return  " recipeId = "+this.getRecipeId().toString() +" , " +
-				", recipeName = "+	this.getRecipeName() +" , " +
+				", recipeName = \""+	this.getRecipeName() +"\" , " +
 				", recipeImage = "+	this.getRecipeImage().toString() +" , " +
 				", recipeTotalCalories = "+	this.getRecipeTotalCalories().toString() +" , " +
 				", recipeTotalCarbohydrate = "+	this.getRecipeTotalCarbohydrate().toString() +" , " +
 				", recipeTotalProtein = "+	this.getRecipeTotalProtein().toString() +" , " +
 				", recipeTotalFat = "+	this.getRecipeTotalFat().toString() +" , " +
 				", recipeKashruth = "+	this.getRecipeKashruth().toString() +" , " +
-				", recipeTimeToMake = "+	this.getRecipeTimeToMake().toString() +" , " +
+				", recipeTimeToMake =  time( '"+	this.getRecipeTimeToMake() +"' ) , " +
 				", recipeComplex = "+	this.getRecipeComplex().toString() +" , " +
 				", recipeRate = "+	this.getRecipeRate().toString() +" , " +
-				", recipeDescription = "+	this.getRecipeDescription() +" , " +
-				", recipeProcses = "+	this.getRecipeProcses()+" , " +
-				", recipePersonEmail = "+	this.getRecipePersonEmail() +" ";
+				", recipeDescription = \""+	this.getRecipeDescription() +"\" , " +
+				", recipeProcess = \""+	this.getRecipeProcess()+"\" , " +
+				", PersonEmail = \""+	this.getRecipePersonEmail() +"\" ";
 	}
 
 	@Override
