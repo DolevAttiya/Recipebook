@@ -11,10 +11,14 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.awt.im.InputContext;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
 
 public class Login extends JFrame {
 
@@ -73,6 +77,11 @@ public class Login extends JFrame {
 		contentPane.add(lblPassword);
 		
 		textField = new JTextField();
+		textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Email = textField.getText();
+			}
+		});
 		textField.setBounds(342, 214, 146, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
@@ -81,12 +90,20 @@ public class Login extends JFrame {
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (myView.login(Email, Pass)==1)
+					JOptionPane.showMessageDialog(null,"success");
+				else JOptionPane.showMessageDialog(null,"oh no!");	
 			}
 		});
 		btnLogin.setBounds(277, 313, 146, 41);
 		contentPane.add(btnLogin);
 		
 		passwordField = new JPasswordField();
+		passwordField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Pass = textField.getText();
+			}
+		});
 		passwordField.setBounds(342, 272, 146, 26);
 		contentPane.add(passwordField);
 		
@@ -98,4 +115,6 @@ public class Login extends JFrame {
 		btnRegister.setBounds(277, 361, 147, 41);
 		contentPane.add(btnRegister);
 	}
+	private String Email;
+	private String Pass;
 }
