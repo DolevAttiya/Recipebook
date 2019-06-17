@@ -14,17 +14,17 @@ public class myView extends Observable implements View {
 	public void login (String email, String pass)
 	{
 		Event ev=new Event();
-		ev.getArr.add("userLogin");
-		ev.getArr.add(email);
-		ev.getArr.add(pass);
+		ev.getArr().add("userLogin");
+		ev.getArr().add(email);
+		ev.getArr().add(pass);
 		setChanged();
 		notifyObservers(ev);
 	}
 	
-	public void loginResponse (ArrayList<Object> us) {
-			if((ArrayList<User>)(us.get(1)).size()>0) // if the user exists in the DB
+	public void loginResponse (ArrayList<User> us) {
+			if(us.get(0)!=null) // if the user exists in the DB
 			{
-				myUser=(ArrayList<User>)(us.get(1)).get(0));
+				myUser=us.get(0);
 				MainPage frame = new MainPage();
 			}
 			else JOptionPane.showMessageDialog(null,"One of the parameters is wrong, Please try again");
