@@ -3,19 +3,21 @@ package controller;
 import java.util.Observable;
 import java.util.ArrayList;
 import model.*;
-import view.View;
+import model.User;
+import view.*;
 
 
 public class MyController implements Controller{
+	
+	private model model;
+	private View view;
+	
+	public MyController(model model, View view){
+		this.view = view;
+		this.model = model;
+	}
+
 	public void update(Observable o, Object arg) {
-		
-		private model model;
-		private View view;
-		
-		public MyController(model model, View view){
-			this.view = view;
-			this.model = model;
-		}
 		
 		switch ((String)((Event)arg).getArr().get(0)) {
 		//---------Login Page------------
@@ -29,7 +31,13 @@ public class MyController implements Controller{
 		case "user_login_response":
 			/* 0 - Event name
 			   1 - Array list */
-			//rotem's function
+			view.loginResponse((ArrayList<User>)((Event)arg).getArr().get(1));
+			break;
+			
+		case "dietitian_login_response":
+			/* 0 - Event name
+			   1 - Array list */
+			view.loginResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 			
 		case "user_register":
@@ -83,7 +91,7 @@ public class MyController implements Controller{
 		//-------------------------------
 		//---------Menu Page-------------	
 		case "top_10":
-			Models.top10();
+			model.top10();
 			break;
 			
 		case "top_10_response":
@@ -91,19 +99,27 @@ public class MyController implements Controller{
 			break;	
 			
 		case "my_recipes":
-			//dolev's function
+			/* 0 - Event name
+			   1 - user email */
+			model.myRecipes((String)((Event)arg).getArr().get(1));
 			break;
 			
 		case "my_recipes_response":
 			//rotem's function
 			break;
 			
-		case "menu_search":
-			//dolev's function
+		case "favorite_recipes":
+			/* 0 - Event name
+			   1 - user email */
+			model.myFavoriteRecipes((String)((Event)arg).getArr().get(1));
 			break;
 			
-		case "menu_search_response":
+		case "favorite_recipes_response":
 			//rotem's function
+			break;
+			
+		case "menu_search":
+			model.Search((String)((Event)arg).getArr().get(1));
 			break;
 			
 		case "advenced_search":
@@ -114,16 +130,16 @@ public class MyController implements Controller{
 			   4 - cooking time
 			   5 - rate above
 			   5 - allergen array */
-			//dolev's function
+			model.Search((String)((Event)arg).getArr().get(1));
 			break;
 			
-		case "advenced_search_response":
+		case "search_response":
 			//rotem's function
 			break;
 		//-------------------------------
 		//---------Recipe Page-----------
 		case "recipe_insert":
-			//dolev's function
+			model.insertRecipe((Recipe)((Event)arg).getArr().get(1));
 			break;
 			
 		case "recipe_insert_response":
@@ -131,7 +147,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "recipe_update":
-			//dolev's function
+			model.updateRecipe((Recipe)((Event)arg).getArr().get(1));
 			break;
 			
 		case "recipe_update_response":
@@ -139,7 +155,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "recipe_delete":
-			//dolev's function
+			model.deleteRecipe((Recipe)((Event)arg).getArr().get(1));
 			break;
 			
 		case "recipe_delete_response":
@@ -147,7 +163,9 @@ public class MyController implements Controller{
 			break;
 			
 		case "select_user":
-			//dolev's function
+			/* 0 - Event name
+			   1 - user email */
+			model.selectUser((String)((Event)arg).getArr().get(1));
 			break;
 			
 		case "select_user_response":
@@ -155,7 +173,9 @@ public class MyController implements Controller{
 			break;
 			
 		case "select_dietitian":
-			//dolev's function
+			/* 0 - Event name
+			   1 - dietitian email */
+			model.selectDietitian((String)((Event)arg).getArr().get(1));
 			break;
 			
 		case "select_dietitian_response":
@@ -164,7 +184,7 @@ public class MyController implements Controller{
 		//-------------------------------
 		//---------Ingredient Page-------
 		case "ingredient_insert":
-			//dolev's function
+			model.insertIngredient((Recipe)((Event)arg).getArr().get(1));
 			break;
 			
 		case "ingredient_insert_response":
@@ -172,7 +192,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "ingredient_update":
-			//dolev's function
+			model.updateIngredient((Recipe)((Event)arg).getArr().get(1));
 			break;
 			
 		case "ingredient_update_response":
@@ -180,7 +200,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "ingredient_delete":
-			//dolev's function
+			model.deleteIngredient((Recipe)((Event)arg).getArr().get(1));
 			break;
 			
 		case "ingredient_delete_response":
