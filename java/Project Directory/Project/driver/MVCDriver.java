@@ -9,9 +9,9 @@ import view.myView;
 
 public class MVCDriver {
 	public static void main(String[] args) {
-		Controller controller = new MyController();
 		model model = new Models();
 		View view = new myView();
+		Controller controller = new MyController(model, view);
 		
 		model.addObserver(controller);
 		view.addObserver(controller);

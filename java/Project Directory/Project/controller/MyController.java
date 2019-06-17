@@ -2,11 +2,20 @@ package controller;
 
 import java.util.Observable;
 import java.util.ArrayList;
-import model.Models;
+import model.*;
+import view.View;
 
 
 public class MyController implements Controller{
 	public void update(Observable o, Object arg) {
+		
+		private model model;
+		private View view;
+		
+		public MyController(model model, View view){
+			this.view = view;
+			this.model = model;
+		}
 		
 		switch ((String)((Event)arg).getArr().get(0)) {
 		//---------Login Page------------
@@ -24,24 +33,24 @@ public class MyController implements Controller{
 			break;
 			
 		case "user_register":
-			//dolev's function
+			Models.insertUser((User)((Event)arg).getArr().get(1));
 			break;
 			
 		case "user_register_response":
 			//rotem's function
 			break;
-		//-------------------------------
-		//---------User Settings---------
-		case "user_change_settings":
-			//dolev's function
+			
+		case "dietitian_register":
+			Models.insertDietitian((Dietitian)((Event)arg).getArr().get(1));
 			break;
 			
-		case "user_change_settings_response":
+		case "dietitian_register_response":
 			//rotem's function
 			break;
-			
+		//-------------------------------
+		//---------User Settings---------
 		case "user_update":
-			//dolev's function
+			Models.updateUser((User)((Event)arg).getArr().get(1));
 			break;
 			
 		case "user_update_response":
@@ -49,10 +58,26 @@ public class MyController implements Controller{
 			break;
 			
 		case "user_delete":
-			//dolev's function
+			Models.deleteUser((User)((Event)arg).getArr().get(1));
 			break;
 			
 		case "user_delete_response":
+			//rotem's function
+			break;
+			
+		case "dietitian_update":
+			Models.updateDietitian((Dietitian)((Event)arg).getArr().get(1));
+			break;
+			
+		case "dietitian_update_response":
+			//rotem's function
+			break;
+			
+		case "dietitian_delete":
+			Models.deleteDietitian((Dietitian)((Event)arg).getArr().get(1));
+			break;
+			
+		case "dietitian_delete_response":
 			//rotem's function
 			break;
 		//-------------------------------
@@ -65,6 +90,14 @@ public class MyController implements Controller{
 			//rotem's function
 			break;	
 			
+		case "my_recipes":
+			//dolev's function
+			break;
+			
+		case "my_recipes_response":
+			//rotem's function
+			break;
+			
 		case "menu_search":
 			//dolev's function
 			break;
@@ -74,6 +107,13 @@ public class MyController implements Controller{
 			break;
 			
 		case "advenced_search":
+			/* 0 - Event name
+			   1 - search string
+			   2 - kashrot
+			   3 - complexity
+			   4 - cooking time
+			   5 - rate above
+			   5 - allergen array */
 			//dolev's function
 			break;
 			
@@ -103,6 +143,22 @@ public class MyController implements Controller{
 			break;
 			
 		case "recipe_delete_response":
+			//rotem's function
+			break;
+			
+		case "select_user":
+			//dolev's function
+			break;
+			
+		case "select_user_response":
+			//rotem's function
+			break;
+			
+		case "select_dietitian":
+			//dolev's function
+			break;
+			
+		case "select_dietitian_response":
 			//rotem's function
 			break;
 		//-------------------------------
