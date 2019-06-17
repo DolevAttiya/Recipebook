@@ -19,6 +19,7 @@ import java.awt.im.InputContext;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
+import view.View;
 
 public class Login extends JFrame {
 
@@ -90,9 +91,7 @@ public class Login extends JFrame {
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (myView.login(Email, Pass)==1)
-					JOptionPane.showMessageDialog(null,"success");
-				else JOptionPane.showMessageDialog(null,"oh no!");	
+				login(Email, Pass);	
 			}
 		});
 		btnLogin.setBounds(277, 313, 146, 41);
