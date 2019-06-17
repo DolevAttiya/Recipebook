@@ -3,13 +3,13 @@ package model;
 import java.util.ArrayList;
 
 public class Allergen extends  Entities{
-	
+
 	/*Attributes*/
 	private static int maxAllergen=0;
 	private Integer allergenId;
 	private String  allergenName;
-	
-	 /*Contractor*/
+
+	/*Contractor*/
 	public Allergen(Integer allergenId,String  allergenName)
 	{
 		this.setAllergenId(allergenId);
@@ -25,11 +25,11 @@ public class Allergen extends  Entities{
 	public String getAllergenName() {
 		return this.allergenName; 
 	}
-	 void setAllergenName(String allergenName ) {
-		 this.allergenName=allergenName; 
+	void setAllergenName(String allergenName ) {
+		this.allergenName=allergenName; 
 	}
-	 void setAllergenId(Integer AllergenId ) {
-		 this.allergenId=AllergenId; 
+	void setAllergenId(Integer AllergenId ) {
+		this.allergenId=AllergenId; 
 	}
 	public static int getMaxAllergen() {
 		return maxAllergen;
@@ -37,7 +37,7 @@ public class Allergen extends  Entities{
 	private static void setMaxAllergen(int maxAllergen) {
 		Allergen.maxAllergen = maxAllergen;
 	}
-	
+
 	@Override
 	protected String getEntitieKey() {
 		return "allergenId";
@@ -51,7 +51,7 @@ public class Allergen extends  Entities{
 		return "allergenId, allergenName";
 	}
 	@Override
-	
+
 	protected String getEntitieAttributesValues() {
 		return " "+this.getAllergenId().toString()+", "+this.getAllergenName();
 	}
@@ -79,5 +79,5 @@ public class Allergen extends  Entities{
 	protected int getmaxIngredieantCount() {
 		return 0;
 	}
-     
+
 }

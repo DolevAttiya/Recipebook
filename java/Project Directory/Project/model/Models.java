@@ -14,7 +14,7 @@ public class Models extends Observable implements model  {
 
 	public Models() {
 	}
-	void top10(){
+	public void top10(){
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=search("Top10Recipe",null);
@@ -591,12 +591,11 @@ public class Models extends Observable implements model  {
 			sql+=" AND recipeRate  "+search.get(5);
 		if(search.get(6)!=null)
 			for(int i=0;i<((ArrayList<Integer>)search.get(6)).size();i++)
-				
-			sql+=" AND AllergenId  "+((ArrayList<Integer>)search.get(6)).get(i);
-		
-			sql+=" Orderby recipeRate ";
-			
-			
+			{
+				sql+=" AND AllergenId is not"+((ArrayList<Integer>)search.get(6)).get(i);
+			}
+		sql+=" Orderby recipeRate ";
+
 		ResultSet rs =getFromWithDB(sql);
 		try {
 			while(rs.next())
@@ -607,7 +606,7 @@ public class Models extends Observable implements model  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ev.getArr().add("ingredientType_select_response");
+		ev.getArr().add("search_response");
 		ev.getArr().add(recipe);
 		setChanged();
 		notifyObservers(ev);
