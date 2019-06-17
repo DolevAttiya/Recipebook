@@ -3,28 +3,17 @@ package driver;
 import controller.Controller;
 import controller.MyController;
 import model.model;
-import model.User;
-import model.Allergen;
-import model.Dietitian;
-import model.Entities;
-import model.Ingredient;
-import model.IngredientType;
-import model.Person;
-import view.Login;
-import view.MainPage;
+import model.Models;
+import view.View;
+import view.myView;
 
 public class MVCDriver {
 	public static void main(String[] args) {
-		Controller controller = new MyController();
 		model model = new Models();
-		
-		//create an object from every class
-		
+		View view = new myView();
+		Controller controller = new MyController(model, view);
 		
 		model.addObserver(controller);
-		
-		//add all the rest of the view observers
-		
-		//view.start();
+		view.addObserver(controller);
 	}
 }
