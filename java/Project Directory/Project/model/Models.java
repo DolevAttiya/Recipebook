@@ -105,7 +105,7 @@ public class Models extends Observable implements model  {
 	private static User GetUserParser(ResultSet rs) {
 		Integer[] ar=new Integer[1];
 		ar[0]=0;
-		User per=new User(null,null,null,null,null,null,null, null, ar); 
+		User per=new User(null,null,null,null,null,null,null, null, ar,null,null); 
 		try {
 			per.setUserId(rs.getInt("userId"));
 			ResultSet userAllergens = Models.SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
@@ -119,8 +119,7 @@ public class Models extends Observable implements model  {
 			per.setPersonEmail(rs.getString("personEmail"));
 			per.setPersonFirstName(rs.getString("personFirstName"));
 			per.setPersonLastName(rs.getString("personLastName"));
-			//LocalDate ld=rs.getDate("personDateOfBirth").toLocalDate();
-			//per.setPersonDateOfBirth(ld);
+			per.setPersonDateOfBirth(LocalDate.parse(rs.getString("personDateOfBirth")));
 			per.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
 			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail","\""+per.getPersonEmail()+"\"");
@@ -199,11 +198,11 @@ public class Models extends Observable implements model  {
 		Dietitian per=new Dietitian(null,null,null,null,null,null,null, null, null); 
 		try {
 			per.setDietitianId(rs.getInt("dietitianId"));
-			per.setDieticianStatDate(rs.getDate("dieticianStatDate").toLocalDate());
+			per.setDieticianStatDate(LocalDate.parse(rs.getString("dieticianStatDate")));
 			per.setPersonEmail(rs.getString("personEmail"));
 			per.setPersonFirstName(rs.getString("personFirstName"));
 			per.setPersonLastName(rs.getString("personLastName"));
-			per.setPersonDateOfBirth(rs.getDate("personDateOfBirth").toLocalDate());
+			per.setPersonDateOfBirth(LocalDate.parse(rs.getString("personDateOfBirth")));
 			per.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
 			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail",per.getPersonEmail());

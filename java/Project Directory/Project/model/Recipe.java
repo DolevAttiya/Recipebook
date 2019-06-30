@@ -239,7 +239,7 @@ public class Recipe extends Entities{
 	@Override
 	protected String getAllergenInsert(int place){return this.recipeAllergen[place].toString();}
 	@Override
-	protected String getIngredientInsert(int place){return this.recipeIngredientId.get(place).toString();}
+	protected String getIngredientInsert(int place){return " "+this.recipeIngredientId.get(place).toString()+" , "+this.recipeIngredientsAmount.get(place).toString()+" , "+this.recipeIngredientsType.get(place)+" ";}
 
 	//"INSERT INTO <CLASS NAME> (<ATTRIBUTES>) VALUES (<VALUES>)"
 	@Override
@@ -249,6 +249,11 @@ public class Recipe extends Entities{
 	@Override
 	protected ArrayList<Integer> getIngredientArray() {
 		return this.getRecipeIngredientId();
+	}
+	@Override
+	protected String getIngredientDelete(int place) {
+		// TODO Auto-generated method stub
+		return this.recipeIngredientId.get(place).toString();
 	}
 }
 

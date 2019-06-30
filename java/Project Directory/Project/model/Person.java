@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -65,7 +64,6 @@ public abstract class Person extends Entities{
 	public void setPersonsFavoriteRecipe(ArrayList<Integer> personsFavoriteRecipe) {
 		if( personsFavoriteRecipe!=null)
 		personsFavoriteRecipe.forEach((n) -> this.personsFavoriteRecipe.add(n));
-
 	}
 	public BufferedImage getPersonImage() {
 		return personImage;
@@ -90,7 +88,6 @@ public abstract class Person extends Entities{
 			sb.append(String.format("%02x", b));
 		}
 		return sb.toString();
-
 	}
 	@Override
 	protected String getEntitieKey() {

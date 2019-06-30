@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.image.BufferedImage;
-import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -88,5 +87,10 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	@Override
 	protected int getmaxIngredieantCount() {
 		return 0;
+	}
+	@Override
+	protected String getIngredientDelete(int place) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

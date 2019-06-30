@@ -125,8 +125,6 @@ class Testentities {
 		recipeIngredientsType.add(2);//0.5TS
 		recipeIngredientsType.add(4);//0.125TS
 		recipeIngredientsType.add(15);//item
-		recipeIngredientsType.add(15);//item
-		recipeIngredientsType.add(15);//item
 		recipeIngredientsType.add(11);//item
 		ArrayList<Double> recipeIngredientsAmount=new ArrayList<Double>();
 		recipeIngredientsAmount.add(270.0);
@@ -144,6 +142,7 @@ class Testentities {
 		recipeIngredientsAmount.add(1.0);
 		recipeIngredientsAmount.add(1.0);
 		recipeIngredientsAmount.add(1.0);
+		recipeIngredientsAmount.add(50.0);
 		recipeIngredientsAmount.add(50.0);
 		re= new Recipe(recipeId, recipeName, recipeAllergen, recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein, recipeTotalFat, recipeKashruth, recipeImage, recipeTimeToMake, recipeComplex,Daenerys.getPersonEmail() , recipeRate, recipeDescription, recipeProcses, recipeIngredientId,recipeIngredientsType ,recipeIngredientsAmount );
 		re.Insert();

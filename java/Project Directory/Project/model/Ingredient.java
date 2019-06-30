@@ -161,5 +161,10 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	@Override
 	protected int getmaxIngredieantCount() {
 		return 0;
+	}
+	@Override
+	protected String getIngredientDelete(int place) {
+		// TODO Auto-generated method stub
+		return null;
 	} 
 }

@@ -15,18 +15,18 @@ public abstract class  Entities  {
 	protected abstract String getEntitieAttributesNamesValues();//Override for all. return the attributes names + values for the table
 	protected abstract String getAllergenInsert(int place);//Override for Ingredient, User, Recipe. making the sql string for the connection Allergen table
 	protected abstract String getIngredientInsert(int place);//Override for recipe. making the sql string for the connection Ingredients table for Insert
+	protected abstract String getIngredientDelete(int place);//Override for recipe. making the sql string for the connection Ingredients table for Delete
 	protected abstract Integer[] getAllergenArray(); //Override for Ingredient, User, Recipe. retrieve the array list of the allergens from the class 
 	protected abstract ArrayList<Integer> getIngredientArray();//Override for Recipe. retrieve the array list of the ingredient from the class 
 	protected abstract int getmaxIngredieantCount();//Override for recipe. receive the count of the ingredients for each recipe
 	private String getStringAllergiesForInsert(int i) {
 		return " INSERT INTO " +this.Class()+"Allergen "+" ( "+this.getEntitieKey()+" , allergenId ) VALUES ( "+this.getEntitieKeyValue()+" , "+i+" ) ";}
 	private String getStringIngredientForInsert(int i) {
-		return " INSERT INTO " +this.Class()+"Ingrediant " + " ( " +this.getEntitieKey()+ " , ingredientId ) VALUES ( "+this.getEntitieKeyValue()+" , "+this.getIngredientInsert(i)+" ) ";}
+		return " INSERT INTO " +this.Class()+"Ingredient " + " ( " +this.getEntitieKey()+ " , ingredientId , ingredientAmount ,  ingredientTypeId ) VALUES ( "+this.getEntitieKeyValue()+" , "+this.getIngredientInsert(i)+" ) ";}
 	private String getStringAllergiesForDelete(int i) {
-		return " DELETE FROM "+ this.Class()+"Allergen	 "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"allergenId = "+i;
-	}
+		return " DELETE FROM "+ this.Class()+"Allergen	 "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"allergenId = "+i;}
 	private String getStringIngredientForDelete(int i) {
-		return " DELETE FROM "+ this.Class()+"Ingredient "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"ingredientId = "+i;}
+		return " DELETE FROM "+ this.Class()+"Ingredient "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"ingredientId = "+getIngredientDelete(i);}
 	protected int getResultSetSize(ResultSet rs) {
 		int size =0;
 		if (rs != null) 
@@ -160,7 +160,7 @@ public abstract class  Entities  {
 				}
 			}
 
-			if (this.Class().compareTo("Recipe")==0)//case connection with Recipe and Ingredient table need to be added
+			if (this.Class()==" Recipe")//case connection with Recipe and Ingredient table need to be added
 			{
 				int nmax= this.getmaxIngredieantCount();
 				for(int i=0;i<nmax&&x;i++) {
@@ -187,7 +187,7 @@ public abstract class  Entities  {
 					x=Models.preformWithDB(sqlconnections); 
 				}
 			}
-			if (this.Class().compareTo("Recipe")==0)//case connection with Recipe and Ingredient table need to be deleted
+			if (this.Class().compareTo(" Recipe")==0)//case connection with Recipe and Ingredient table need to be deleted
 			{
 				int nmax= this.getmaxIngredieantCount();
 				for(int i=0;i<nmax&&y;i++)

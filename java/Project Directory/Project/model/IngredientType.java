@@ -97,4 +97,9 @@ public class IngredientType extends Entities {
 	protected int getmaxIngredieantCount() {
 		return 0;
 	}
+	@Override
+	protected String getIngredientDelete(int place) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
