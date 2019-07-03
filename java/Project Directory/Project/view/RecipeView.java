@@ -14,7 +14,6 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
@@ -26,23 +25,20 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
 import javax.swing.JList;
+import javax.swing.ImageIcon;
 
-public class NewRecipe extends JFrame {
+public class RecipeView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_5;
-	private JTextField textField_3;
-	/**
-	 * @wbp.nonvisual location=119,23
-	 */
-	private final JList list = new JList();
 	private JTextField txtRecipebook;
 	private JTextField textField_2;
 	private JTextField textField_4;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	private JTextField textField_3;
 
 	/**
 	 * Launch the application.
@@ -51,7 +47,7 @@ public class NewRecipe extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NewRecipe frame = new NewRecipe();
+					RecipeView frame = new RecipeView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,14 +55,11 @@ public class NewRecipe extends JFrame {
 			}
 		});
 	}
-	public void close() {
-		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
 
 	/**
 	 * Create the frame.
 	 */
-	public NewRecipe() {
+	public RecipeView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1664, 1493);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -148,17 +141,6 @@ public class NewRecipe extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_1.setBounds(824, 282, 229, 49);
-		panel_1.add(comboBox_1);
-		
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(713, 282, 105, 49);
-		panel_1.add(textField_3);
-		
 		JTextPane txtpnPerGrams = new JTextPane();
 		txtpnPerGrams.setText("per 100 grams");
 		txtpnPerGrams.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -211,20 +193,8 @@ public class NewRecipe extends JFrame {
 		txtpnSearchFor.setBounds(22, 182, 350, 61);
 		panel_1.add(txtpnSearchFor);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox.setBounds(365, 282, 339, 49);
-		panel_1.add(comboBox);
-		
-		JTextPane txtpnCategory = new JTextPane();
-		txtpnCategory.setText("Name:");
-		txtpnCategory.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		txtpnCategory.setBackground(new Color(240, 248, 255));
-		txtpnCategory.setBounds(485, 248, 97, 31);
-		panel_1.add(txtpnCategory);
-		
 		JTextPane txtpnAdvancedSearch = new JTextPane();
-		txtpnAdvancedSearch.setText("Add New Recipe");
+		txtpnAdvancedSearch.setText("Recipe");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
 		txtpnAdvancedSearch.setBounds(507, 55, 886, 99);
@@ -243,7 +213,7 @@ public class NewRecipe extends JFrame {
 		panel_1.add(txtpnNutritionValues);
 		
 		JTextPane txtpnIngredients = new JTextPane();
-		txtpnIngredients.setText("Add Ingredients:");
+		txtpnIngredients.setText("Ingredients:");
 		txtpnIngredients.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnIngredients.setBackground(new Color(240, 248, 255));
 		txtpnIngredients.setBounds(22, 252, 453, 61);
@@ -256,20 +226,6 @@ public class NewRecipe extends JFrame {
 		txtpnInstructions.setBounds(22, 630, 326, 49);
 		panel_1.add(txtpnInstructions);
 		
-		JTextPane txtpnAmount = new JTextPane();
-		txtpnAmount.setText("Amount:");
-		txtpnAmount.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		txtpnAmount.setBackground(new Color(240, 248, 255));
-		txtpnAmount.setBounds(713, 248, 105, 31);
-		panel_1.add(txtpnAmount);
-		
-		JTextPane txtpnMeauring = new JTextPane();
-		txtpnMeauring.setText("Measuring:");
-		txtpnMeauring.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		txtpnMeauring.setBackground(new Color(240, 248, 255));
-		txtpnMeauring.setBounds(849, 248, 138, 38);
-		panel_1.add(txtpnMeauring);
-		
 		JTextArea textArea = new JTextArea();
 		textArea.setDropMode(DropMode.ON);
 		textArea.setBounds(32, 687, 1021, 423);
@@ -278,7 +234,7 @@ public class NewRecipe extends JFrame {
 		JTextArea textArea_1 = new JTextArea();
 		textArea_1.setColumns(30);
 		textArea_1.setRows(15);
-		textArea_1.setBounds(32, 345, 1021, 271);
+		textArea_1.setBounds(32, 318, 1021, 298);
 		panel_1.add(textArea_1);
 		
 		textField_2 = new JTextField();
@@ -305,9 +261,17 @@ public class NewRecipe extends JFrame {
 		textField_7.setBounds(1287, 876, 237, 49);
 		panel_1.add(textField_7);
 		
-		JButton button = new JButton("Edit Photo");
-		button.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		button.setBounds(1238, 557, 161, 31);
-		panel_1.add(button);
+		JButton btnILikeIt = new JButton("I Like It!");
+		btnILikeIt.setIcon(new ImageIcon("C:\\Users\\Adi G\\Desktop\\like.png"));
+		btnILikeIt.setBackground(new Color(65, 105, 225));
+		btnILikeIt.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 20));
+		btnILikeIt.setBounds(1220, 954, 173, 156);
+		panel_1.add(btnILikeIt);
+		
+		textField_3 = new JTextField();
+		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		textField_3.setColumns(10);
+		textField_3.setBounds(1220, 1113, 173, 49);
+		panel_1.add(textField_3);
 	}
 }
