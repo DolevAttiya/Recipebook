@@ -26,7 +26,7 @@ public abstract class Person extends Entities{
 	}
 	@Override
 	protected String Class() {
-		return "Person";
+		return " Person";
 	}
 	public String getPersonEmail() {
 		return personEmail;
@@ -103,12 +103,12 @@ public abstract class Person extends Entities{
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , "+this.getPersonDateOfBirth().toString()+" , "+this.getPersonHashPass()+" , "+this.getPersonImage();
+		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , "+this.getPersonDateOfBirth()+" , "+this.getPersonHashPass()+" , "+this.getPersonImage();
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() {
 		// TODO Auto-generated method stub
-		return "personEmail = "+ this.getPersonEmail()+" , personFirstName = "+this.getPersonFirstName()+" , personLastName = "+this.getPersonLastName()+" , personDateOfBirth = "+this.getPersonDateOfBirth().toString()+" , personHashPass = "+ this.getPersonHashPass() + " , personImage = "+ this.getPersonImage();
+		return "personEmail = "+ this.getPersonEmail()+" , personFirstName = "+this.getPersonFirstName()+" , personLastName = "+this.getPersonLastName()+" , personDateOfBirth = "+this.getPersonDateOfBirth()+" , personHashPass = "+ this.getPersonHashPass() + " , personImage = "+ this.getPersonImage();
 
 	}
 	/*@Override

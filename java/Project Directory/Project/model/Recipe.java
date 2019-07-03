@@ -222,19 +222,19 @@ public class Recipe extends Entities{
 	@Override
 	protected String getEntitieAttributesNamesValues() {
 		return  " recipeId = "+this.getRecipeId().toString() +" , " +
-				", recipeName = \""+	this.getRecipeName() +"\" , " +
-				", recipeImage = "+	this.getRecipeImage().toString() +" , " +
-				", recipeTotalCalories = "+	this.getRecipeTotalCalories().toString() +" , " +
-				", recipeTotalCarbohydrate = "+	this.getRecipeTotalCarbohydrate().toString() +" , " +
-				", recipeTotalProtein = "+	this.getRecipeTotalProtein().toString() +" , " +
-				", recipeTotalFat = "+	this.getRecipeTotalFat().toString() +" , " +
-				", recipeKashruth = "+	this.getRecipeKashruth().toString() +" , " +
-				", recipeTimeToMake =  time( '"+	this.getRecipeTimeToMake() +"' ) , " +
-				", recipeComplex = "+	this.getRecipeComplex().toString() +" , " +
-				", recipeRate = "+	this.getRecipeRate().toString() +" , " +
-				", recipeDescription = \""+	this.getRecipeDescription() +"\" , " +
-				", recipeProcess = \""+	this.getRecipeProcess()+"\" , " +
-				", PersonEmail = \""+	this.getRecipePersonEmail() +"\" ";
+				" recipeName = \""+	this.getRecipeName() +"\" , " +
+				//" recipeImage = "+	this.getRecipeImage().toString() +" , " +
+				" recipeTotalCalories = "+	this.getRecipeTotalCalories().toString() +" , " +
+				" recipeTotalCarbohydrate = "+	this.getRecipeTotalCarbohydrate().toString() +" , " +
+				" recipeTotalProtein = "+	this.getRecipeTotalProtein().toString() +" , " +
+				" recipeTotalFat = "+	this.getRecipeTotalFat().toString() +" , " +
+				" recipeKashruth = "+	this.getRecipeKashruth().toString() +" , " +
+				" recipeTimeToMake =  time( '"+	this.getRecipeTimeToMake() +"' ) , " +
+				" recipeComplex = "+	this.getRecipeComplex().toString() +" , " +
+				" recipeRate = "+	this.getRecipeRate().toString() +" , " +
+				" recipeDescription = \""+	this.getRecipeDescription() +"\" , " +
+				" recipeProcess = \""+	this.getRecipeProcess()+"\" , " +
+				" PersonEmail = \""+	this.getRecipePersonEmail() +"\" ";
 	}
 
 	@Override
@@ -257,6 +257,26 @@ public class Recipe extends Entities{
 	protected String getIngredientDelete(int place) {
 		// TODO Auto-generated method stub
 		return this.recipeIngredientId.get(place).toString();
+	}
+	@Override
+	protected String getPersonAttributesNamesValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesNames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonKeyValue() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

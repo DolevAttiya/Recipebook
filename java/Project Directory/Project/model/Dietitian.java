@@ -47,15 +47,15 @@ public class Dietitian extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesNames() {
-		return " dietitianId , dietitianStatDate ";
+		return " dietitianId , dietitianStatDate ,personEmail ";
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return " "+this.getDietitianId().toString()+" , "+this.getDietitianStatDate().toString();
+		return " "+this.getDietitianId().toString()+" , \""+this.getDietitianStatDate()+"\" , \""+this.getPersonEmail()+"\" ";
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() { 
-		return " dietitianId = "+this.getDietitianId().toString()+" , dietitianStatDate = "+this.getDietitianStatDate().toString();
+		return " dietitianId = "+this.getDietitianId().toString()+" , dietitianStatDate = \""+this.getDietitianStatDate().toString()+"\" + personEmail = \""+this.getDietitianStatDate()+"\" ";
 	}
 	/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
@@ -92,5 +92,23 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	protected String getIngredientDelete(int place) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	protected String getPersonAttributesNames() {
+		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personImage";
+	}
+	@Override
+	protected String getPersonAttributesValues() {
+		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , "+this.getPersonDateOfBirth().toString()+" , "+this.getPersonHashPass()+" , "+this.getPersonImage()+ " ";
+	}
+	@Override
+	protected String getPersonAttributesNamesValues() {
+		// TODO Auto-generated method stub
+		return " personFirstName = \""+this.getPersonFirstName()+"\" , personLastName = \""+this.getPersonLastName()+"\" , personDateOfBirth = \""+this.getPersonDateOfBirth().toString()+"\" , personHashPass = \""+ this.getPersonHashPass() + "\" , personImage = "+ this.getPersonImage();
+
+	}
+	@Override
+	protected String getPersonKeyValue() {
+		return this.getPersonEmail();
 	}
 }

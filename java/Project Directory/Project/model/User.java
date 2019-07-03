@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 //import java.sql.PreparedStatement;
 import java.util.ArrayList;
-
 public class User extends Person {
 
 	private Integer userId;
@@ -69,15 +68,15 @@ public class User extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesNames() {
-		return getEntitieKey()+" , userAllergen , userKashruth  ";
+		return getEntitieKey()+" , userAllergen , userKashruth,  personEmail ";
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return " "+this.getUserId().toString()+" , "+this.getUserAllergens().toString()+" , "+this.getUserKashruth().toString()+" ";
+		return " "+this.getUserId().toString()+" , "+this.getUserAllergens().toString()+" , "+this.getUserKashruth().toString()+" , "+this.getPersonEmail()+" ";
 	}
-	@Override
+	
 	protected String getEntitieAttributesNamesValues() {
-		return " "+getEntitieKey()+" = "+this.getUserId().toString()+" , userAllergen = "+this.getUserAllergens().toString()+" , userKashruth = "+this.getUserKashruth().toString()+ " ";
+		return " "+getEntitieKey()+" = "+this.getUserId().toString()+" , userAllergen = "+this.getUserAllergens().toString()+" , userKashruth = "+this.getUserKashruth().toString()+" , personEmail = \""+this.getPersonEmail()+ "\" ";
 	}
 	/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
@@ -118,6 +117,25 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	protected String getIngredientDelete(int place) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected String getPersonAttributesNames() {
+		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personImage";
+	}
+	@Override
+	protected String getPersonAttributesValues() {
+		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , \""+this.getPersonDateOfBirth().toString()+"\" , "+this.getPersonHashPass()+" , "+this.getPersonImage();
+	}
+	@Override
+	protected String getPersonAttributesNamesValues() {
+		// TODO Auto-generated method stub
+		return " personFirstName = \""+this.getPersonFirstName()+"\" , personLastName = \""+this.getPersonLastName()+"\" , personDateOfBirth = \""+this.getPersonDateOfBirth().toString()+"\" , personHashPass = \""+ this.getPersonHashPass() + "\" , personImage = "+ this.getPersonImage();
+
+	}
+	@Override
+	protected String getPersonKeyValue() {
+		return this.getPersonEmail();
 	}
 
 

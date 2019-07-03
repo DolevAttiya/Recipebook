@@ -76,5 +76,25 @@ public class Allergen extends  Entities{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	protected String getPersonAttributesNamesValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesNames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonKeyValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

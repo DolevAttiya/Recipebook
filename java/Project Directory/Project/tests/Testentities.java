@@ -1,6 +1,6 @@
 package tests;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 import java.awt.image.BufferedImage;
 import java.sql.Blob;
@@ -51,12 +51,12 @@ class Testentities {
 		pe= new Ingredient(99,"\"test\"",al,99.9,99.9,99.9,99.9,0,null);
 		pe.Insert();
 		pe1=Models.GetIngredientFromDB(99);
-		assertTrue(pe1!=null);
+		assertNotNull(pe1);
 		pe1=null;
 		pe.Delete();
 		ResultSet rs =Models.SelectSpecificFrom("Count( \"allergenId\" ) as counter","Ingredient", "ingredientId", "99");
 		try {
-			assertTrue(rs.getInt("counter")==0);
+			assertEquals(0,rs.getInt("counter"),0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,12 +148,13 @@ class Testentities {
 		re= new Recipe(recipeId, recipeName, recipeAllergen, recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein, recipeTotalFat, recipeKashruth, recipeImage, recipeTimeToMake, recipeComplex,Daenerys.getPersonEmail() , recipeRate, recipeDescription, recipeProcses, recipeIngredientId,recipeIngredientsType ,recipeIngredientsAmount );
 		re.Insert();
 		re1=Models.GetRecipeFromDB(99);
-		assertTrue(re1!=null);
+		assertNotNull(re1);
 		re1=null;
 		re.Delete();
+		re=null;
 		ResultSet rs =Models.SelectSpecificFrom("Count( \"recipeId\" ) as counter","Recipe", "recipeId", "99");
 		try {
-			assertTrue(rs.getInt("counter")==0);
+			assertEquals(0,rs.getInt("counter"),0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -249,14 +250,14 @@ class Testentities {
 		re.setRecipeRate(9);
 		re.Update();
 		re1=Models.GetRecipeFromDB(99);
-		assertEquals(9, (double)re1.getRecipeRate(),0);
+		assertEquals(9, re1.getRecipeRate(),0);
 		reupdateRecipe();
 	}
 	private	void reupdateRecipe() {
 		re=Models.GetRecipeFromDB(99);
-		re.Update();
 		re.Delete();
 		re=null;
+		re1=null;
 	}
 
 	@Test
@@ -277,15 +278,15 @@ class Testentities {
 	@Test
 	void insertAndDeleteUser() {
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		us= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, null, 99, al, true, false);
+		us= new User("\"idontknowhatemailis\"", "\"elad\"", "\"valad\"",LocalDate.parse("2019-06-17"), "\"eladvald\"", null, null, 99, al, true, false);
 		us.Insert();
-		us1=Models.GetUserFromDB("idontknowhatemailis");
-		assertTrue(us1!=null);
+		us1=Models.GetUserFromDB("\"idontknowhatemailis\"");
+		assertNotNull(us1);
 		us1=null;
 		us.Delete();
 		ResultSet rs =Models.SelectSpecificFrom("Count( \"userId\" ) as counter","User", "userId", "99");
 		try {
-			assertTrue(rs.getInt("counter")==0);
+			assertEquals(0, rs.getInt("counter"),0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -293,8 +294,23 @@ class Testentities {
 	}
 
 	/*void updateDietitian() {}
-	private	void reupdateDietitian() {}
-	void insertAndDeleteDietitian() {}*/
+	private	void reupdateDietitian() {}*/
+	@Test
+	void insertAndDeleteDietitian() {
+		dt= new Dietitian("\"idontknowhatemailis\"", "\"elad\"", "\"valad\"",LocalDate.parse("2019-06-17"), "\"eladvald\"", null, null, 99, LocalDate.parse("2010-06-17"));
+		dt.Insert();
+		dt1=Models.GetDietitianFromDB("\"idontknowhatemailis\"");
+		assertNotNull(dt1);
+		dt1=null;
+		dt.Delete();
+		ResultSet rs =Models.SelectSpecificFrom("Count( \"dietitianId\" ) as counter","Dietitian", "dietitianId", "99");
+		try {
+			assertEquals(0, rs.getInt("counter"),0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 }

@@ -19,11 +19,16 @@ public abstract class  Entities  {
 	protected abstract Integer[] getAllergenArray(); //Override for Ingredient, User, Recipe. retrieve the array list of the allergens from the class 
 	protected abstract ArrayList<Integer> getIngredientArray();//Override for Recipe. retrieve the array list of the ingredient from the class 
 	protected abstract int getmaxIngredieantCount();//Override for recipe. receive the count of the ingredients for each recipe
+	protected abstract String getPersonAttributesNamesValues();//Override for all. return the attributes names + values for the table
+	protected abstract String getPersonAttributesValues();
+	protected abstract String getPersonAttributesNames();
+	protected abstract String getPersonKeyValue() ;
+
 	private String getStringAllergiesForInsert(int i) {
 		String sql = " INSERT INTO " +this.Class()+"Allergen "+" ( "+this.getEntitieKey()+" , allergenId ";
 		if (this.Class().compareTo(" Recipe")==0) 
 			sql+=", recipeAllergenAmount ";
-			sql+=" ) VALUES ( "+this.getEntitieKeyValue()+" , "+i;
+		sql+=" ) VALUES ( "+this.getEntitieKeyValue()+" , "+i;
 		if (this.Class().compareTo(" Recipe")==0)
 			sql+=" , "+this.getAllergenInsert(i);
 		sql+=" ) ";
@@ -50,10 +55,15 @@ public abstract class  Entities  {
 	}
 
 	public Boolean Update() {
-		Boolean x=true,y=true,z=true;
+		Boolean x=true,y=true,z=true,q=true;
 		String sqlconnections;
 		Integer[] dbal;
-		String sql=" UPDATE "+this.Class()+" SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue();
+		String sql;
+		if(this.Class().compareTo(" User")==0||this.Class().compareTo(" Dietitian")==0) {
+			sql=" UPDATE  Person SET"+this.getPersonAttributesNamesValues()+" WHERE personEmail = \""+this.getPersonKeyValue()+"\" ";
+			q= Models.preformWithDB(sql);
+		}
+		sql=" UPDATE "+this.Class()+" SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " = \"" +this.getEntitieKeyValue()+"\" ";
 		if (this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" User")==0) //case connection with allergen table need to be updated
 		{
 			try {
@@ -92,14 +102,14 @@ public abstract class  Entities  {
 
 				for (int j=0;j<allergentoupdate.length&&y;j++)
 				{
-					if(dbal[j]!=0&&allergentoupdate[j]!=0)
+					if(dbal[j]!=null&&allergentoupdate[j]!=null)
 					{
-						if(dbal[j]==0&&allergentoupdate[j]!=0)
+						if(dbal[j]==null&&allergentoupdate[j]!=null)
 							sqlconnections=getStringAllergiesForInsert(j);
-						else if (dbal[j]==0&&allergentoupdate[j]!=0)
+						else if (dbal[j]==0&&allergentoupdate[j]!=null)
 							sqlconnections=getStringAllergiesForDelete(j);
 						else
-							sqlconnections=" UPDATE "+this.Class()+"Allergen "+" SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " =" +this.getEntitieKeyValue()+" and "+"allergenId = "+j;
+							sqlconnections=" UPDATE "+this.Class()+"Allergen "+" SET recipeAllergenAmount = "+getAllergenInsert(j)+" WHERE "+ this.getEntitieKey()+ " = " +this.getEntitieKeyValue()+" and "+"allergenId = "+j;
 						y=Models.preformWithDB(sqlconnections);
 					}
 				}
@@ -110,7 +120,7 @@ public abstract class  Entities  {
 			}
 			ArrayList<Integer> ingredientToUpDate= getIngredientArray();
 			Collections.sort(ingredientToUpDate);
-			rs=Models.SelectSpecific(this.Class()+" Ingredient ", this.getEntitieKey(), this.getEntitieKeyValue());
+			rs=Models.SelectSpecific(this.Class()+"Ingredient ", this.getEntitieKey(), this.getEntitieKeyValue());
 			ArrayList<Integer> ingredientFromDB= new ArrayList<Integer>();
 			try {
 				while(rs.next())
@@ -150,12 +160,18 @@ public abstract class  Entities  {
 			}
 		}
 		z=Models.preformWithDB(sql);
-		return x&&y&&z;
+
+		return x&&y&&z&&q;
 	}
 
 	public Boolean Insert() {//"INSERT INTO <CLASS NAME> (<ATTRIBUTES>) VALUES (<VALUES>)"
-		Boolean x=true,y=true,z=true;
-		String sql=" INSERT INTO " +this.Class()+" ("+this.getEntitieAttributesNames()+" ) VALUES ( "+this.getEntitieAttributesValues()+" ) ";
+		Boolean x=true,y=true,z=true,q=true;
+		String sql;
+		if(this.Class().compareTo(" User")==0||this.Class().compareTo(" Dietitian")==0) {
+			sql=" INSERT INTO Person ("+this.getPersonAttributesNames()+" ) VALUES ( "+this.getPersonAttributesValues()+" ) ";
+			q= Models.preformWithDB(sql);
+		}
+		sql=" INSERT INTO " +this.Class()+" ("+this.getEntitieAttributesNames()+" ) VALUES ( "+this.getEntitieAttributesValues()+" ) ";
 		z= Models.preformWithDB(sql);
 		if( (this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" Recipe")==0||this.Class().compareTo(" User")==0)&&z) {//case connection with allergen table need to be added
 			String sqlconnections;
@@ -176,19 +192,19 @@ public abstract class  Entities  {
 				}
 			}
 		}
-		return x&&y&&z; 
+		return x&&y&&z&&q; 
 
 	}
 
 	public  Boolean Delete() {
 		Boolean x=true,y=true,z=true;
 		String sql=" DELETE FROM "+ this.Class()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
-		z= Models.preformWithDB(sql);
+
 		if ((this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" Recipe")==0||this.Class().compareTo(" User")==0)&&z)//case connection with allergen table need to be deleted
 		{
 			String sqlconnections;
 			for(int i=0;i<this.getAllergenArray().length&&x;i++) {
-				if(this.getAllergenArray()[i]>=1) 
+				if(this.getAllergenArray()[i]!=null) 
 				{
 					sqlconnections=getStringAllergiesForDelete(i);
 					x=Models.preformWithDB(sqlconnections); 
@@ -204,6 +220,7 @@ public abstract class  Entities  {
 				}
 			}
 		}
+		z= Models.preformWithDB(sql);
 		return x&&y&&z; 
 
 
