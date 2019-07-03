@@ -105,11 +105,13 @@ public class Models extends Observable implements model  {
 	private static User GetUserParser(ResultSet rs) {
 		Integer[] ar=new Integer[1];
 		ar[0]=0;
-		User per=new User(null,null,null,null,null,null,null, null, ar,null,null); 
+		User per=new User(null,null,null,null,null,null,null, null, ar,false,false); 
 		try {
 			per.setUserId(rs.getInt("userId"));
 			ResultSet userAllergens = Models.SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
 			Integer[] allergen= new Integer[userAllergens.getInt("counter")];
+			per.setUserKashruth(rs.getBoolean("userKashruth"));
+			per.setUserAllergens(rs.getBoolean("userAllergen"));
 			userAllergens = SelectSpecific("UserAllergen","allergenId",per.getUserId().toString());
 			while(userAllergens.next())
 			{
@@ -198,7 +200,7 @@ public class Models extends Observable implements model  {
 		Dietitian per=new Dietitian(null,null,null,null,null,null,null, null, null); 
 		try {
 			per.setDietitianId(rs.getInt("dietitianId"));
-			per.setDieticianStatDate(LocalDate.parse(rs.getString("dieticianStatDate")));
+			per.setDietitianStatDate(LocalDate.parse(rs.getString("dietitianStatDate")));
 			per.setPersonEmail(rs.getString("personEmail"));
 			per.setPersonFirstName(rs.getString("personFirstName"));
 			per.setPersonLastName(rs.getString("personLastName"));
@@ -503,24 +505,21 @@ public class Models extends Observable implements model  {
 			recipe.setRecipeName(rs.getString("recipeName"));
 			ResultSet recipeAllergens = Models.SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
 			Integer[] allergen= new Integer[recipeAllergens.getInt("counter")];
-			recipeAllergens = Models.SelectSpecific("RecipeAllergen","ingredientId",recipe.getRecipeId().toString());
+			recipeAllergens = Models.SelectSpecific("RecipeAllergen","recipeId",recipe.getRecipeId().toString());
 			while(recipeAllergens.next())
 			{
-				allergen[recipeAllergens.getInt("allergenId")]=1;
+				allergen[recipeAllergens.getInt("allergenId")]=recipeAllergens.getInt("recipeAllergenAmount");
 			}
 			recipe.setRecipeAllergen(allergen);
-
 			ResultSet recipeIngredientVals = Models.SelectSpecific("RecipeIngredient","recipeId",recipe.getRecipeId().toString());
 			ArrayList<Integer> IngredientsType= new ArrayList<Integer>();
 			ArrayList<Double> IngredientsAmount= new ArrayList<Double>();
 			ArrayList<Integer> ingredients= new ArrayList<Integer>();
-
 			while(recipeIngredientVals.next())
 			{
-				IngredientsType.add(rs.getInt("ingredientsType"));
-				IngredientsAmount.add(rs.getDouble("IngredientsAmount"));
-				ingredients.add(rs.getInt("IngredientsAmount"));
-
+				ingredients.add(recipeIngredientVals.getInt("ingredientId"));
+				IngredientsAmount.add(recipeIngredientVals.getDouble("ingredientAmount"));
+				IngredientsType.add(recipeIngredientVals.getInt("ingredientTypeId"));
 			}
 			recipe.setRecipeIngredientId(ingredients);
 			recipe.setRecipeIngredientsType(IngredientsType);
@@ -531,11 +530,11 @@ public class Models extends Observable implements model  {
 			recipe.setRecipeTotalFat(rs.getDouble("recipeTotalFat"));
 			recipe.setRecipeKashruth(rs.getInt("recipeKashruth"));
 			recipe.setRecipeComplex(rs.getInt("recipeComplex"));
-			recipe.setRecipePersonEmail(rs.getString("recipePersonEmail"));
+			recipe.setRecipePersonEmail(rs.getString("PersonEmail"));
 			recipe.setRecipeRate(rs.getInt("recipeRate"));
 			recipe.setRecipeDescription(rs.getString("recipeDescription"));
 			recipe.setRecipeProcess(rs.getString("recipeProcess"));	
-			recipe.setRecipeImage(rs.getBlob("recipeImage"));
+		//	recipe.setRecipeImage(rs.getBlob("recipeImage"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

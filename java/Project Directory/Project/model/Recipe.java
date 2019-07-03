@@ -76,6 +76,7 @@ public class Recipe extends Entities{
 	}
 	public void setRecipeIngredientId(ArrayList<Integer> recipeIngredientId) {
 		this.recipeIngredientId = new ArrayList<Integer>();
+		if(recipeIngredientId!=null)
 		recipeIngredientId.forEach(n -> this.recipeIngredientId.add(n));
 	}
 	public ArrayList<Integer> getRecipeIngredientsType() {
@@ -83,6 +84,7 @@ public class Recipe extends Entities{
 	}
 	public void setRecipeIngredientsType(ArrayList<Integer> recipeIngredientsType) {
 		this.recipeIngredientsType = new ArrayList<Integer>();
+		if(recipeIngredientsType!=null)
 		recipeIngredientsType.forEach((n) -> this.recipeIngredientsType.add(n));
 	}
 	public ArrayList<Double> getRecipeIngredientsAmount() {
@@ -90,6 +92,7 @@ public class Recipe extends Entities{
 	}
 	public void setRecipeIngredientsAmount(ArrayList<Double> recipeIngredientsAmount) {
 		this.recipeIngredientsAmount = new ArrayList<Double>();
+		if(recipeIngredientsAmount!=null)
 		recipeIngredientsAmount.forEach((n) -> this.recipeIngredientsAmount.add(n));
 	}
 	public Double getRecipeTotalCalories() {

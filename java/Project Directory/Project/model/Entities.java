@@ -20,7 +20,14 @@ public abstract class  Entities  {
 	protected abstract ArrayList<Integer> getIngredientArray();//Override for Recipe. retrieve the array list of the ingredient from the class 
 	protected abstract int getmaxIngredieantCount();//Override for recipe. receive the count of the ingredients for each recipe
 	private String getStringAllergiesForInsert(int i) {
-		return " INSERT INTO " +this.Class()+"Allergen "+" ( "+this.getEntitieKey()+" , allergenId ) VALUES ( "+this.getEntitieKeyValue()+" , "+i+" ) ";}
+		String sql = " INSERT INTO " +this.Class()+"Allergen "+" ( "+this.getEntitieKey()+" , allergenId ";
+		if (this.Class().compareTo(" Recipe")==0) 
+			sql+=", recipeAllergenAmount ";
+			sql+=" ) VALUES ( "+this.getEntitieKeyValue()+" , "+i;
+		if (this.Class().compareTo(" Recipe")==0)
+			sql+=" , "+this.getAllergenInsert(i);
+		sql+=" ) ";
+		return sql;}
 	private String getStringIngredientForInsert(int i) {
 		return " INSERT INTO " +this.Class()+"Ingredient " + " ( " +this.getEntitieKey()+ " , ingredientId , ingredientAmount ,  ingredientTypeId ) VALUES ( "+this.getEntitieKeyValue()+" , "+this.getIngredientInsert(i)+" ) ";}
 	private String getStringAllergiesForDelete(int i) {

@@ -44,7 +44,10 @@ public class User extends Person {
 	}
 
 	public void setUserKashruth(Boolean userKashruth) {
-		this.userKashruth = userKashruth;
+		if(userKashruth)
+		this.userKashruth = true;
+		else
+			this.userKashruth =false;
 	}
 
 	public Boolean getUserAllergens() {
@@ -52,8 +55,10 @@ public class User extends Person {
 	}
 
 	public void setUserAllergens(Boolean userAllergens) {
-		this.userAllergens = userAllergens;
-	}
+		if(userAllergens)
+			this.userAllergens = true;
+			else
+				this.userAllergens =false;	}
 	@Override
 	protected String getEntitieKey() {	
 		return " userId ";
@@ -64,7 +69,7 @@ public class User extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesNames() {
-		return getEntitieKey()+" , userKashruth , userAllergen ";
+		return getEntitieKey()+" , userAllergen , userKashruth  ";
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
@@ -72,7 +77,7 @@ public class User extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() {
-		return " "+getEntitieKey()+" = "+this.getUserId().toString()+" , userKashruth = "+this.getUserAllergens().toString()+" , userAllergen = "+this.getUserKashruth().toString()+ " ";
+		return " "+getEntitieKey()+" = "+this.getUserId().toString()+" , userAllergen = "+this.getUserAllergens().toString()+" , userKashruth = "+this.getUserKashruth().toString()+ " ";
 	}
 	/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {

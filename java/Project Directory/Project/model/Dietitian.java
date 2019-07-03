@@ -7,13 +7,13 @@ import java.util.ArrayList;
 public class Dietitian extends Person {
 
 	private Integer dietitianId;
-	private LocalDate dieticianStatDate;
+	private LocalDate dietitianStatDate;
 	public Dietitian(String personEmail, String personFirstName, String personLastName, LocalDate personDateOfBirth,
-			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, BufferedImage personImage,Integer dietitianId, LocalDate dieticianStatDate) {
+			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, BufferedImage personImage,Integer dietitianId, LocalDate dietitianStatDate) {
 		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe,
 				personImage);
 		setDietitianId(dietitianId);
-		setDieticianStatDate(dieticianStatDate);
+		setDietitianStatDate(dietitianStatDate);
 	}
 	@Override
 	protected String Class() {
@@ -25,17 +25,17 @@ public class Dietitian extends Person {
 	public void setDietitianId(Integer dietitianId) {
 		this.dietitianId = dietitianId;
 	}
-	public LocalDate getDieticianStatDate() {
-		return dieticianStatDate;
+	public LocalDate getDietitianStatDate() {
+		return dietitianStatDate;
 	}
-	public void setDieticianStatDate(LocalDate dieticianStatDate) {
-		this.dieticianStatDate = dieticianStatDate;
+	public void setDietitianStatDate(LocalDate dietitianStatDate) {
+		this.dietitianStatDate = dietitianStatDate;
 
 	}
 	public Integer reputetionYears() {
 		LocalDate Now= LocalDate.now();
 
-		return Now.compareTo(getDieticianStatDate());	
+		return Now.compareTo(getDietitianStatDate());	
 	}
 	@Override
 	protected String getEntitieKey() {
@@ -47,22 +47,22 @@ public class Dietitian extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesNames() {
-		return " dietitianId , dieticianStatDate ";
+		return " dietitianId , dietitianStatDate ";
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return " "+this.getDietitianId().toString()+" , "+this.getDieticianStatDate().toString();
+		return " "+this.getDietitianId().toString()+" , "+this.getDietitianStatDate().toString();
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() { 
-		return " dietitianId = "+this.getDietitianId().toString()+" , dieticianStatDate = "+this.getDieticianStatDate().toString();
+		return " dietitianId = "+this.getDietitianId().toString()+" , dietitianStatDate = "+this.getDietitianStatDate().toString();
 	}
 	/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
 	try {
 
 		pstmt.setInt(1, dietitianId);
-		pstmt.setDate(2, (java.sql.Date) dieticianStatDate);
+		pstmt.setDate(2, (java.sql.Date) dietitianStatDate);
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
