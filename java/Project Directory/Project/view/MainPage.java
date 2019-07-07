@@ -61,6 +61,11 @@ public class MainPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Advanced Search");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// open a new advanced page
+			}
+		});
 		btnNewButton.setBounds(484, 175, 171, 41);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.add(btnNewButton);

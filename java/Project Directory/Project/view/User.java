@@ -18,6 +18,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JEditorPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class User extends JFrame {
 
@@ -246,6 +248,12 @@ public class User extends JFrame {
 		panel_1.add(checkBox);
 		
 		JButton btnSearch = new JButton("Register");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// if pass!=pass again > print an error
+				// else send him to my func which I don't know it's name yet :)
+			}
+		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 27));
 		btnSearch.setBounds(247, 382, 228, 41);
 		panel_1.add(btnSearch);
@@ -263,6 +271,11 @@ public class User extends JFrame {
 		panel_1.add(txtpnEmail);
 		
 		passwordField = new JPasswordField();
+		passwordField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// if the count(pass)<6 -> print an error
+			}
+		});
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		passwordField.setBounds(216, 187, 141, 21);
 		panel_1.add(passwordField);
