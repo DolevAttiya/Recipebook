@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
@@ -22,26 +23,18 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JEditorPane;
-
 import javax.swing.JLabel;
 import java.awt.Component;
 import javax.swing.JScrollBar;
 import javax.swing.JProgressBar;
 import java.awt.Choice;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
 
-public class User extends JFrame {
+public class Register extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel contentPane_1;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField txtRecipebook;
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_3;
@@ -57,7 +50,7 @@ public class User extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					User frame = new User();
+					Register frame = new Register();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -73,21 +66,21 @@ public class User extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public User() {
+	public Register() {
 		setSize(1664, 1493);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
 		contentPane = new JPanel();
-		contentPane_1 = new JPanel();
-		contentPane_1.setBackground(new Color(65, 105, 225));
-		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane_1);
-		contentPane_1.setLayout(null);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(65, 105, 225));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(26, 15, 1603, 87);
 		panel.setBackground(new Color(65, 105, 225));
-		contentPane_1.add(panel);
+		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JPanel panel_3 = new JPanel();
@@ -95,14 +88,6 @@ public class User extends JFrame {
 		panel.add(panel_3);
 		
 		JTextPane txtpnUserDetails = new JTextPane();
-		txtpnUserDetails.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				User c=new User();
-				c.setVisible(true);
-				close();
-			}
-		});
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
 		panel.add(txtpnUserDetails);
 		txtpnUserDetails.setForeground(new Color(255, 255, 255));
@@ -111,14 +96,6 @@ public class User extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
-		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				AdvancedSearch c=new AdvancedSearch();
-				c.setVisible(true);
-				close();
-			}
-		});
 		txtpnAdvancedSearch_1.setText("Advanced Search");
 		txtpnAdvancedSearch_1.setForeground(Color.WHITE);
 		txtpnAdvancedSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -133,14 +110,6 @@ public class User extends JFrame {
 		panel.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
-		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				MyFavourites c=new MyFavourites();
-				c.setVisible(true);
-				close();
-			}
-		});
 		txtpnFavouriteRecipes.setBounds(524, 7, 210, 87);
 		panel.add(txtpnFavouriteRecipes);
 		txtpnFavouriteRecipes.setText("Favourite Recipes");
@@ -157,14 +126,6 @@ public class User extends JFrame {
 		panel.add(txtpnSearch_1);
 		
 		JTextPane txtpnMyRecipes = new JTextPane();
-		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				MyRecipes c=new MyRecipes();
-				c.setVisible(true);
-				close();
-			}
-		});
 		txtpnMyRecipes.setText("My Recipes");
 		txtpnMyRecipes.setForeground(Color.WHITE);
 		txtpnMyRecipes.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -172,26 +133,19 @@ public class User extends JFrame {
 		txtpnMyRecipes.setBounds(347, 7, 175, 80);
 		panel.add(txtpnMyRecipes);
 		
-		JTextPane txtpnTaimli = new JTextPane();
-		txtpnTaimli.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				MainPage a=new MainPage();
-				a.setVisible(true);
-				close();
-			}
-		});
-		txtpnTaimli.setText("Taimli");
-		txtpnTaimli.setForeground(Color.WHITE);
-		txtpnTaimli.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
-		txtpnTaimli.setBackground(new Color(65, 105, 225));
-		txtpnTaimli.setBounds(0, -7, 343, 96);
-		panel.add(txtpnTaimli);
+		txtRecipebook = new JTextField();
+		txtRecipebook.setForeground(new Color(255, 255, 255));
+		txtRecipebook.setBounds(11, 0, 386, 87);
+		panel.add(txtRecipebook);
+		txtRecipebook.setFont(new Font("Gill Sans Ultra Bold", Font.BOLD, 70));
+		txtRecipebook.setBackground(new Color(65, 105, 225));
+		txtRecipebook.setText("Taimli");
+		txtRecipebook.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(240, 248, 255));
 		panel_1.setBounds(11, 106, 1610, 1299);
-		contentPane_1.add(panel_1);
+		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		textField_4 = new JTextField();
@@ -304,7 +258,7 @@ public class User extends JFrame {
 		panel_1.add(chckbxNewCheckBox);
 		
 		JTextPane txtpnAdvancedSearch = new JTextPane();
-		txtpnAdvancedSearch.setText("User Details");
+		txtpnAdvancedSearch.setText("Register");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
 		txtpnAdvancedSearch.setBounds(507, 55, 644, 99);
@@ -347,15 +301,6 @@ public class User extends JFrame {
 		txtpnEmail.setBounds(69, 337, 255, 69);
 		panel_1.add(txtpnEmail);
 		
-		passwordField = new JPasswordField();
-		passwordField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// if the count(pass)<6 -> print an error
-			}
-		});
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		passwordField.setBounds(216, 187, 141, 21);
-		panel_1.add(passwordField);
 		JTextPane txtpnEnterPassword = new JTextPane();
 		txtpnEnterPassword.setText("Enter Password: (6 digits)");
 		txtpnEnterPassword.setFont(new Font("Tahoma", Font.PLAIN, 40));
