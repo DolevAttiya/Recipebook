@@ -22,6 +22,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JEditorPane;
+
 import javax.swing.JLabel;
 import java.awt.Component;
 import javax.swing.JScrollBar;
@@ -346,6 +347,15 @@ public class User extends JFrame {
 		txtpnEmail.setBounds(69, 337, 255, 69);
 		panel_1.add(txtpnEmail);
 		
+		passwordField = new JPasswordField();
+		passwordField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// if the count(pass)<6 -> print an error
+			}
+		});
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		passwordField.setBounds(216, 187, 141, 21);
+		panel_1.add(passwordField);
 		JTextPane txtpnEnterPassword = new JTextPane();
 		txtpnEnterPassword.setText("Enter Password: (6 digits)");
 		txtpnEnterPassword.setFont(new Font("Tahoma", Font.PLAIN, 40));

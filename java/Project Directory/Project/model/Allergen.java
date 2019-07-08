@@ -19,11 +19,6 @@ public class Allergen extends  Entities{
 	protected String Class() {
 		return "Allergen";
 	}
-	public Allergen(int allergenId, String allergenName) {
-		this.setAllergenId(allergenId);
-		this.setAllergenName(allergenName);
-		setMaxAllergen(getMaxAllergen() + 1);
-	}
 	public Integer getAllergenId() {
 		return this.allergenId; 
 	}
@@ -86,5 +81,3 @@ public class Allergen extends  Entities{
 	}
      
 }
-
-=

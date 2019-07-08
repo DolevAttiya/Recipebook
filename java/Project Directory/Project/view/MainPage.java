@@ -70,6 +70,7 @@ public void close() {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(11, 106, 1610, 1299);
 		panel.setBackground(new Color(240, 248, 255));

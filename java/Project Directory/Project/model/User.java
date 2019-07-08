@@ -4,7 +4,6 @@ import java.sql.Blob;
 //import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Observable;
 
 public class User extends Person {
 
