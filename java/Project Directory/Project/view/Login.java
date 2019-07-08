@@ -1,5 +1,5 @@
 package view;
-
+import view.myView;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.im.InputContext;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
@@ -24,7 +25,6 @@ import view.View;
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtKljaeld;
 	private JTextField textField;
 	private JPasswordField passwordField;
 
@@ -91,7 +91,7 @@ public class Login extends JFrame {
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				login(Email, Pass);	
+				myView.statview.login(Email, Pass);
 			}
 		});
 		btnLogin.setBounds(277, 313, 146, 41);
@@ -100,7 +100,7 @@ public class Login extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Pass = textField.getText();
+				Pass = passwordField.getPassword();
 			}
 		});
 		passwordField.setBounds(342, 272, 146, 26);
@@ -109,11 +109,12 @@ public class Login extends JFrame {
 		JButton btnRegister = new JButton("Sign up!");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// no func from myView, we need to move to the next page by clicking this button (move to User page)
 			}
 		});
 		btnRegister.setBounds(277, 361, 147, 41);
 		contentPane.add(btnRegister);
 	}
 	private String Email;
-	private String Pass;
+	private char[] Pass;
 }
