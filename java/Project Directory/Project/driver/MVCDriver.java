@@ -6,14 +6,18 @@ import model.model;
 import model.Models;
 import view.View;
 import view.myView;
+import tests.ControlerModelIntegration;
 
 public class MVCDriver {
 	public static void main(String[] args) {
 		model model = new Models();
 		View view = new myView();
-		Controller controller = new MyController(model, view);
+		View test = new ControlerModelIntegration();
+		Controller controller = new MyController(model, view, test);
 		
 		((Models)model).addObserver(controller);
 		((myView)view).addObserver(controller);
+		
+		((ControlerModelIntegration)test).addObserver(controller);
 	}
 }

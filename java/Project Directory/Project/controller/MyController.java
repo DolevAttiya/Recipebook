@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.Observable;
+import java.util.function.BooleanSupplier;
 import java.util.ArrayList;
 import model.*;
 import model.User;
@@ -9,22 +10,29 @@ import view.*;
 
 public class MyController implements Controller{
 
+	public static boolean visit=false;
 	private model model;
 	private View view;
+	private View test;
 
-	public MyController(model model, View view){
+	public MyController(model model, View view, View test){
 		this.view = view;
 		this.model = model;
+		this.test = test;
+	}
+
+	public MyController() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public void update(Observable o, Object arg) {
-
 		switch ((String)((Event)arg).getArr().get(0)) {
 		//---------Login Page------------
 		case "user_login":
 			/* 0 - Event name
 			   1 - User name
 			   2 - Password */
+			visit=true;
 			((Models)model).CheckPasswordAndEmail((String)((Event)arg).getArr().get(1),(String)((Event)arg).getArr().get(2));
 			break;
 
