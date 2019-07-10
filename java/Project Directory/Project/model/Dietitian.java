@@ -1,23 +1,23 @@
 package model;
 
-import java.sql.Blob;
+import java.awt.image.BufferedImage;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Dietitian extends Person {
 
 	private Integer dietitianId;
-	private Date dieticianStatDate;
-	public Dietitian(String personEmail, String personFirstName, String personLastName, Date personDateOfBirth,
-			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, Blob personImage,Integer dietitianId, Date dieticianStatDate) {
+	private LocalDate dietitianStatDate;
+	public Dietitian(String personEmail, String personFirstName, String personLastName, LocalDate personDateOfBirth,
+			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, BufferedImage personImage,Integer dietitianId, LocalDate dietitianStatDate) {
 		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe,
 				personImage);
 		setDietitianId(dietitianId);
-		setDieticianStatDate(dieticianStatDate);
+		setDietitianStatDate(dietitianStatDate);
 	}
 	@Override
 	protected String Class() {
-		return "Dietitian";
+		return " Dietitian";
 	}
 	public Integer getDietitianId() {
 		return dietitianId;
@@ -25,17 +25,17 @@ public class Dietitian extends Person {
 	public void setDietitianId(Integer dietitianId) {
 		this.dietitianId = dietitianId;
 	}
-	public Date getDieticianStatDate() {
-		return dieticianStatDate;
+	public LocalDate getDietitianStatDate() {
+		return dietitianStatDate;
 	}
-	public void setDieticianStatDate(Date dieticianStatDate) {
-		this.dieticianStatDate = dieticianStatDate;
+	public void setDietitianStatDate(LocalDate dietitianStatDate) {
+		this.dietitianStatDate = dietitianStatDate;
 
 	}
 	public Integer reputetionYears() {
-		Date Now= new Date();
+		LocalDate Now= LocalDate.now();
 
-		return Now.compareTo(getDieticianStatDate());	
+		return Now.compareTo(getDietitianStatDate());	
 	}
 	@Override
 	protected String getEntitieKey() {
@@ -47,22 +47,22 @@ public class Dietitian extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesNames() {
-		return " dietitianId , dieticianStatDate ";
+		return " dietitianId , dietitianStatDate ,personEmail ";
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return " "+this.getDietitianId().toString()+" , "+this.getDieticianStatDate().toString();
+		return " "+this.getDietitianId().toString()+" , \""+this.getDietitianStatDate().toString()+"\" , \""+this.getPersonEmail()+"\" ";
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() { 
-		return " dietitianId = "+this.getDietitianId().toString()+" , dieticianStatDate = "+this.getDieticianStatDate().toString();
+		return " dietitianId = "+this.getDietitianId().toString()+" , dietitianStatDate = \""+this.getDietitianStatDate().toString()+"\", personEmail = \""+this.getPersonEmail()+"\" ";
 	}
 	/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
 	try {
 
 		pstmt.setInt(1, dietitianId);
-		pstmt.setDate(2, (java.sql.Date) dieticianStatDate);
+		pstmt.setDate(2, (java.sql.Date) dietitianStatDate);
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
@@ -87,5 +87,28 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	@Override
 	protected int getmaxIngredieantCount() {
 		return 0;
+	}
+	@Override
+	protected String getIngredientDelete(int place) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesNames() {
+		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personImage";
+	}
+	@Override
+	protected String getPersonAttributesValues() {
+		return " \""+this.getPersonEmail()+"\" , \""+this.getPersonFirstName()+"\" , \""+this.getPersonLastName()+"\" , \""+this.getPersonDateOfBirth().toString()+"\" , \""+this.getPersonHashPass()+"\" , "+this.getPersonImage()+ " ";
+	}
+	@Override
+	protected String getPersonAttributesNamesValues() {
+		// TODO Auto-generated method stub
+		return " personFirstName = \""+this.getPersonFirstName()+"\" , personLastName = \""+this.getPersonLastName()+"\" , personDateOfBirth = \""+this.getPersonDateOfBirth().toString()+"\" , personHashPass = \""+ this.getPersonHashPass() + "\" , personImage = "+ this.getPersonImage();
+
+	}
+	@Override
+	protected String getPersonKeyValue() {
+		return " \""+this.getPersonEmail()+"\" ";
 	}
 }
