@@ -55,7 +55,7 @@ public class Dietitian extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() { 
-		return " dietitianId = "+this.getDietitianId().toString()+" , dietitianStatDate = \""+this.getDietitianStatDate().toString()+"\" + personEmail = \""+this.getDietitianStatDate()+"\" ";
+		return " dietitianId = "+this.getDietitianId().toString()+" , dietitianStatDate = \""+this.getDietitianStatDate().toString()+"\", personEmail = \""+this.getPersonEmail()+"\" ";
 	}
 	/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {

@@ -72,7 +72,7 @@ public class User extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return " "+this.getUserId().toString()+" , "+this.getUserAllergens().toString()+" , "+this.getUserKashruth().toString()+" , "+this.getPersonEmail()+" ";
+		return " "+this.getUserId().toString()+" , "+this.getUserAllergens().toString()+" , "+this.getUserKashruth().toString()+" , \""+this.getPersonEmail()+"\" ";
 	}
 	
 	protected String getEntitieAttributesNamesValues() {

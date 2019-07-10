@@ -98,7 +98,7 @@ public class Models extends Observable implements model  {
 	}
 
 	public static User GetUserFromDB(String email)
-	{ResultSet rs=SelectSpecific("UserPerson","personEmail",email);
+	{ResultSet rs=SelectSpecific("UserPerson","personEmail","\""+email+"\"");
 	User user =GetUserParser(rs);
 	return user;
 	}
@@ -121,7 +121,6 @@ public class Models extends Observable implements model  {
 			per.setPersonEmail(rs.getString("personEmail"));
 			per.setPersonFirstName(rs.getString("personFirstName"));
 			per.setPersonLastName(rs.getString("personLastName"));
-			String s= rs.getString("personDateOfBirth");
 			per.setPersonDateOfBirth(LocalDate.parse(rs.getString("personDateOfBirth")));
 			per.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
@@ -201,6 +200,7 @@ public class Models extends Observable implements model  {
 		Dietitian per=new Dietitian(null,null,null,null,null,null,null, null, null); 
 		try {
 			per.setDietitianId(rs.getInt("dietitianId"));
+			LocalDate d = LocalDate.parse(rs.getString("dietitianStatDate"));
 			per.setDietitianStatDate(LocalDate.parse(rs.getString("dietitianStatDate")));
 			per.setPersonEmail(rs.getString("personEmail"));
 			per.setPersonFirstName(rs.getString("personFirstName"));
@@ -208,7 +208,7 @@ public class Models extends Observable implements model  {
 			per.setPersonDateOfBirth(LocalDate.parse(rs.getString("personDateOfBirth")));
 			per.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
-			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail",per.getPersonEmail());
+			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail","\""+per.getPersonEmail()+"\"");
 			while(favorite.next())
 				personsFavoriteRecipes.add(rs.getInt("recipeId"));
 			per.setPersonsFavoriteRecipe(personsFavoriteRecipes);
@@ -594,7 +594,27 @@ public class Models extends Observable implements model  {
 		setChanged();
 		notifyObservers(ev);
 	}	
+	public void myFavoriteRecipes(String Email) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join PersonFavoriteRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
 
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("favorite_recipes_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	
 	public static ResultSet SelectSpecificFrom(String Select, String Table, String Key,String Value) {
 		String sql;
 		if(Key!=null)
@@ -674,7 +694,7 @@ public class Models extends Observable implements model  {
 	public void myRecipes(String Email) {
 		ev=new Event();
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		String sql= " Select * From Recipe Join PersonRecipe using (RecipeId) Where recipeID = "+Email;
+		String sql= " Select * From Recipe Join PersonRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
 
 		ResultSet rs =getFromWithDB(sql);
 		try {
@@ -691,24 +711,6 @@ public class Models extends Observable implements model  {
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void myFavoriteRecipes(String Email) {
-		ev=new Event();
-		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		String sql= " Select * From Recipe Join PersonFavoriteRecipe using (RecipeId) Where recipeID = "+Email;
 
-		ResultSet rs =getFromWithDB(sql);
-		try {
-			while(rs.next())
-			{
-				recipe.add(GetRecipeParser(rs));	
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ev.getArr().add("favorite_recipes_response");
-		ev.getArr().add(recipe);
-		setChanged();
-		notifyObservers(ev);
-	}
+	
 }

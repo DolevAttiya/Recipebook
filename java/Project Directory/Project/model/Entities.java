@@ -197,9 +197,9 @@ public abstract class  Entities  {
 	}
 
 	public  Boolean Delete() {
-		Boolean x=true,y=true,z=true;
+		Boolean x=true,y=true,z=true,q=true;
 		String sql=" DELETE FROM "+ this.Class()+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue();
-
+		
 		if ((this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" Recipe")==0||this.Class().compareTo(" User")==0)&&z)//case connection with allergen table need to be deleted
 		{
 			String sqlconnections;
@@ -221,7 +221,11 @@ public abstract class  Entities  {
 			}
 		}
 		z= Models.preformWithDB(sql);
-		return x&&y&&z; 
+		if(this.Class().compareTo(" User")==0||this.Class().compareTo(" Dietitian")==0) {
+			sql=" Delete From Person WHERE personEmail = "+this.getPersonKeyValue();
+			q= Models.preformWithDB(sql);
+		}
+		return x&&y&&z&&q; 
 
 
 	}

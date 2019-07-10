@@ -74,7 +74,7 @@ class Testentities {
 		Integer recipeKashruth=0;
 		Time recipeTimeToMake= new Time(225);
 		Integer[] recipeAllergen= {0,0,0,0,1,0,0,1,0,0,1,0};
-		User Daenerys= Models.GetUserFromDB("\"drakarisValyrian.com\"");
+		User Daenerys= Models.GetUserFromDB("drakarisValyrian.com");
 		Integer recipeComplex=3;
 		Integer recipeRate= 0;
 		String recipeDescription="The Italian cuisine is regional. Historical and cultural impacts, geography, the variety of climatic zones and cultural influences contributed to the diversity found in Italian cooking. This lasagna is made of pasta dough layers filled with bolognese sauce béchamel and Parmesan cheese, in the style of northern Italy.";
@@ -173,7 +173,7 @@ class Testentities {
 		Integer recipeKashruth=0;
 		Time recipeTimeToMake= new Time(225);
 		Integer[] recipeAllergen= {0,0,0,0,1,0,0,1,0,0,1,0};
-		User Daenerys= Models.GetUserFromDB("\"drakarisValyrian.com\"");
+		User Daenerys= Models.GetUserFromDB("drakarisValyrian.com");
 		Integer recipeComplex=3;
 		Integer recipeRate= 0;
 		String recipeDescription="The Italian cuisine is regional. Historical and cultural impacts, geography, the variety of climatic zones and cultural influences contributed to the diversity found in Italian cooking. This lasagna is made of pasta dough layers filled with bolognese sauce béchamel and Parmesan cheese, in the style of northern Italy.";
@@ -262,25 +262,25 @@ class Testentities {
 
 	@Test
 	void updateUser() {
-		us= Models.GetUserFromDB("\"drakarisValyrian.com\"");
+		us= Models.GetUserFromDB("drakarisValyrian.com");
 		us.setUserKashruth(true);
 		us.Update();
-		us1=Models.GetUserFromDB("\"drakarisValyrian.com\"");
+		us1=Models.GetUserFromDB("drakarisValyrian.com");
 		assertEquals((Boolean)true, us1.getUserKashruth());
 		reupdateUser();
 	}
 
 	private	void reupdateUser() {
-		us1=Models.GetUserFromDB("\"drakarisValyrian.com\"");
+		us1=Models.GetUserFromDB("drakarisValyrian.com");
 		us.setUserKashruth(true);
 		us.Update();}
 
 	@Test
 	void insertAndDeleteUser() {
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		us= new User("\"idontknowhatemailis\"", "\"elad\"", "\"valad\"",LocalDate.parse("2019-06-17"), "\"eladvald\"", null, null, 99, al, true, false);
+		us= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, null, 99, al, true, false);
 		us.Insert();
-		us1=Models.GetUserFromDB("\"idontknowhatemailis\"");
+		us1=Models.GetUserFromDB("idontknowhatemailis");
 		assertNotNull(us1);
 		us1=null;
 		us.Delete();
@@ -296,26 +296,27 @@ class Testentities {
 	void updateDietitian() {
 		dt= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, null, 99, LocalDate.parse("2010-06-17"));
 		dt.Insert();
-		dt.setDietitianStatDate(LocalDate.parse("2066-06-17"));
+		dt.setDietitianStatDate(LocalDate.parse("1996-06-17"));
 		dt.Update();
 		dt1=Models.GetDietitianFromDB("idontknowhatemailis");
-		assertEquals("2066-06-17", dt.getDietitianStatDate().toString());
+		assertEquals("1996-06-17", dt.getDietitianStatDate().toString());
 		reupdateDietitian();
 	}
-	private	void reupdateDietitian() {		dt1=Models.GetDietitianFromDB("\"idontknowhatemailis\"");
+	private	void reupdateDietitian() {		dt1=Models.GetDietitianFromDB("idontknowhatemailis");
 	dt1.Delete();
 }
 	@Test
 	void insertAndDeleteDietitian() {
 		dt= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, null, 99, LocalDate.parse("2010-06-17"));
 		dt.Insert();
-		dt1=Models.GetDietitianFromDB("\"idontknowhatemailis\"");
+		dt1=Models.GetDietitianFromDB("idontknowhatemailis");
 		assertNotNull(dt1);
 		dt1=null;
 		dt.Delete();
 		ResultSet rs =Models.SelectSpecificFrom("Count( \"dietitianId\" ) as counter","Dietitian", "dietitianId", "99");
 		try {
-			assertEquals(0, rs.getInt("counter"),0);
+			int counter =rs.getInt("counter");
+			assertEquals(0, counter,0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
