@@ -60,7 +60,7 @@ public abstract class  Entities  {
 		Integer[] dbal;
 		String sql;
 		if(this.Class().compareTo(" User")==0||this.Class().compareTo(" Dietitian")==0) {
-			sql=" UPDATE  Person SET"+this.getPersonAttributesNamesValues()+" WHERE personEmail = \""+this.getPersonKeyValue()+"\" ";
+			sql=" UPDATE  Person SET"+this.getPersonAttributesNamesValues()+" WHERE personEmail = "+this.getPersonKeyValue()+" ";
 			q= Models.preformWithDB(sql);
 		}
 		sql=" UPDATE "+this.Class()+" SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " = \"" +this.getEntitieKeyValue()+"\" ";

@@ -125,7 +125,7 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	}
 	@Override
 	protected String getPersonAttributesValues() {
-		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , \""+this.getPersonDateOfBirth().toString()+"\" , "+this.getPersonHashPass()+" , "+this.getPersonImage();
+		return " \""+this.getPersonEmail()+"\" , \""+this.getPersonFirstName()+"\" , \""+this.getPersonLastName()+"\" , \""+this.getPersonDateOfBirth().toString()+"\" , \""+this.getPersonHashPass()+"\" , "+this.getPersonImage()+ " ";
 	}
 	@Override
 	protected String getPersonAttributesNamesValues() {
@@ -135,7 +135,7 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	}
 	@Override
 	protected String getPersonKeyValue() {
-		return this.getPersonEmail();
+		return " \""+this.getPersonEmail()+"\" ";
 	}
 
 

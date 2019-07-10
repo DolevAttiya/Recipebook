@@ -193,7 +193,7 @@ public class Models extends Observable implements model  {
 		notifyObservers(ev);}	
 
 	public static Dietitian GetDietitianFromDB(String email)
-	{ResultSet rs=SelectSpecific("DietitianPerson","personEmail",email);
+	{ResultSet rs=SelectSpecific("DietitianPerson","personEmail","\""+email+"\"");
 	Dietitian dietitian =GetDietitianParser(rs);
 	return dietitian;
 	}
@@ -212,7 +212,7 @@ public class Models extends Observable implements model  {
 			while(favorite.next())
 				personsFavoriteRecipes.add(rs.getInt("recipeId"));
 			per.setPersonsFavoriteRecipe(personsFavoriteRecipes);
-			Blob blob = rs.getBlob("personImage");               
+			/*Blob blob = rs.getBlob("personImage");               
 			byte [] data = blob.getBytes( 1, ( int ) blob.length() );
 			BufferedImage img = null;
 			try {
@@ -220,7 +220,7 @@ public class Models extends Observable implements model  {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			per.setPersonImage(img);
+			per.setPersonImage(img);*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	

@@ -17,7 +17,7 @@ public class Dietitian extends Person {
 	}
 	@Override
 	protected String Class() {
-		return "Dietitian";
+		return " Dietitian";
 	}
 	public Integer getDietitianId() {
 		return dietitianId;
@@ -51,7 +51,7 @@ public class Dietitian extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return " "+this.getDietitianId().toString()+" , \""+this.getDietitianStatDate()+"\" , \""+this.getPersonEmail()+"\" ";
+		return " "+this.getDietitianId().toString()+" , \""+this.getDietitianStatDate().toString()+"\" , \""+this.getPersonEmail()+"\" ";
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() { 
@@ -99,7 +99,7 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	}
 	@Override
 	protected String getPersonAttributesValues() {
-		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , "+this.getPersonDateOfBirth().toString()+" , "+this.getPersonHashPass()+" , "+this.getPersonImage()+ " ";
+		return " \""+this.getPersonEmail()+"\" , \""+this.getPersonFirstName()+"\" , \""+this.getPersonLastName()+"\" , \""+this.getPersonDateOfBirth().toString()+"\" , \""+this.getPersonHashPass()+"\" , "+this.getPersonImage()+ " ";
 	}
 	@Override
 	protected String getPersonAttributesNamesValues() {
@@ -109,6 +109,6 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	}
 	@Override
 	protected String getPersonKeyValue() {
-		return this.getPersonEmail();
+		return " \""+this.getPersonEmail()+"\" ";
 	}
 }

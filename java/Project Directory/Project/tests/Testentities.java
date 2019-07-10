@@ -2,7 +2,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.awt.image.BufferedImage;
+//import java.awt.image.BufferedImage;
 import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -292,12 +292,22 @@ class Testentities {
 			e.printStackTrace();
 		}
 	}
-
-	/*void updateDietitian() {}
-	private	void reupdateDietitian() {}*/
+	@Test
+	void updateDietitian() {
+		dt= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, null, 99, LocalDate.parse("2010-06-17"));
+		dt.Insert();
+		dt.setDietitianStatDate(LocalDate.parse("2066-06-17"));
+		dt.Update();
+		dt1=Models.GetDietitianFromDB("idontknowhatemailis");
+		assertEquals("2066-06-17", dt.getDietitianStatDate().toString());
+		reupdateDietitian();
+	}
+	private	void reupdateDietitian() {		dt1=Models.GetDietitianFromDB("\"idontknowhatemailis\"");
+	dt1.Delete();
+}
 	@Test
 	void insertAndDeleteDietitian() {
-		dt= new Dietitian("\"idontknowhatemailis\"", "\"elad\"", "\"valad\"",LocalDate.parse("2019-06-17"), "\"eladvald\"", null, null, 99, LocalDate.parse("2010-06-17"));
+		dt= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, null, 99, LocalDate.parse("2010-06-17"));
 		dt.Insert();
 		dt1=Models.GetDietitianFromDB("\"idontknowhatemailis\"");
 		assertNotNull(dt1);
