@@ -30,7 +30,7 @@ public class Login extends JFrame {
 	private JTextField textField;
 	private JPanel contentPane;
 	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+
 
 	/**
 	 * Launch the application.
@@ -59,6 +59,7 @@ public class Login extends JFrame {
 	public Login() {
 		setSize(1664, 1493);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		
 		this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(65, 105, 225));
@@ -88,10 +89,6 @@ public class Login extends JFrame {
 		lblPassword.setForeground(new Color(255, 255, 255));
 		lblPassword.setBounds(302, 604, 536, 72);
 		contentPane.add(lblPassword);
-		textField = new JTextField(50);
-		textField.setBounds(342, 214, 146, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnLogin.addActionListener(new ActionListener() {
@@ -122,9 +119,10 @@ public class Login extends JFrame {
 		btnRegister.setBounds(589, 976, 421, 93);
 		contentPane.add(btnRegister);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setFont(new Font("Dialog", Font.PLAIN, 50));
-		passwordField_1.setBounds(662, 515, 641, 65);
-		contentPane.add(passwordField_1);
+		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		textField.setColumns(10);
+		textField.setBounds(662, 522, 641, 65);
+		contentPane.add(textField);
 	}
 }

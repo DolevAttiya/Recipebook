@@ -14,6 +14,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JComboBox;
@@ -24,6 +26,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Component extends JFrame {
 
@@ -70,6 +74,7 @@ public class Component extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//panelkavuaa
 		JPanel panel = new JPanel();
 		panel.setBounds(26, 15, 1603, 87);
 		panel.setBackground(new Color(65, 105, 225));
@@ -81,6 +86,15 @@ public class Component extends JFrame {
 		panel.add(panel_3);
 		
 		JTextPane txtpnUserDetails = new JTextPane();
+		txtpnUserDetails.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				User f=new User();
+				f.setVisible(true);
+				Component.this.dispose();
+				Component.this.setVisible(false);
+			}
+		});
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
 		panel.add(txtpnUserDetails);
 		txtpnUserDetails.setForeground(new Color(255, 255, 255));
@@ -89,6 +103,15 @@ public class Component extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
+		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AdvancedSearch f=new AdvancedSearch();
+				f.setVisible(true);
+				Component.this.dispose();
+				Component.this.setVisible(false);
+			}
+		});
 		txtpnAdvancedSearch_1.setText("Advanced Search");
 		txtpnAdvancedSearch_1.setForeground(Color.WHITE);
 		txtpnAdvancedSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -103,6 +126,15 @@ public class Component extends JFrame {
 		panel.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
+		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MyFavourites f=new MyFavourites();
+				f.setVisible(true);
+				Component.this.dispose();
+				Component.this.setVisible(false);
+			}
+		});
 		txtpnFavouriteRecipes.setBounds(524, 7, 210, 87);
 		panel.add(txtpnFavouriteRecipes);
 		txtpnFavouriteRecipes.setText("Favourite Recipes");
@@ -119,6 +151,15 @@ public class Component extends JFrame {
 		panel.add(txtpnSearch_1);
 		
 		JTextPane txtpnMyRecipes = new JTextPane();
+		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MyRecipes f=new MyRecipes();
+				f.setVisible(true);
+				Component.this.dispose();
+				Component.this.setVisible(false);
+			}
+		});
 		txtpnMyRecipes.setText("My Recipes");
 		txtpnMyRecipes.setForeground(Color.WHITE);
 		txtpnMyRecipes.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -126,14 +167,24 @@ public class Component extends JFrame {
 		txtpnMyRecipes.setBounds(347, 7, 175, 80);
 		panel.add(txtpnMyRecipes);
 		
-		txtRecipebook = new JTextField();
-		txtRecipebook.setForeground(new Color(255, 255, 255));
-		txtRecipebook.setBounds(11, 0, 386, 87);
-		panel.add(txtRecipebook);
-		txtRecipebook.setFont(new Font("Gill Sans Ultra Bold", Font.BOLD, 70));
-		txtRecipebook.setBackground(new Color(65, 105, 225));
-		txtRecipebook.setText("Taimli");
-		txtRecipebook.setColumns(10);
+		JTextPane txtpnTaimli = new JTextPane();
+		txtpnTaimli.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainPage f=new MainPage();
+				f.setVisible(true);
+				Component.this.dispose();
+				Component.this.setVisible(false);
+			}
+		});
+		txtpnTaimli.setText("Taimli");
+		txtpnTaimli.setForeground(Color.WHITE);
+		txtpnTaimli.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
+		txtpnTaimli.setBackground(new Color(65, 105, 225));
+		txtpnTaimli.setBounds(0, -7, 343, 96);
+		panel.add(txtpnTaimli);
+		
+		//panelkavuaa
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(240, 248, 255));
@@ -238,30 +289,65 @@ public class Component extends JFrame {
 		panel_1.add(txtpnMes);
 		
 		JCheckBox chckbxKosher = new JCheckBox("Kosher");
+		chckbxKosher.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent j) {
+				 System.out.println(j.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : j.getID()); //add what happens
+			}
+		});
 		chckbxKosher.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		chckbxKosher.setBackground(new Color(240, 248, 255));
 		chckbxKosher.setBounds(60, 799, 697, 64);
 		panel_1.add(chckbxKosher);
 		
 		JCheckBox chckbxCup = new JCheckBox("Cup");
+		chckbxCup.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent e) {
+				 System.out.println(e.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : e.getID()); //add what happens
+			}
+		});
 		chckbxCup.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		chckbxCup.setBackground(new Color(240, 248, 255));
 		chckbxCup.setBounds(58, 487, 697, 64);
 		panel_1.add(chckbxCup);
 		
 		JCheckBox chckbxSpoon_1 = new JCheckBox("Spoon");
+		chckbxSpoon_1.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent g) {
+				 System.out.println(g.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : g.getID()); //add what happens
+			}
+		});
 		chckbxSpoon_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		chckbxSpoon_1.setBackground(new Color(240, 248, 255));
 		chckbxSpoon_1.setBounds(58, 547, 697, 64);
 		panel_1.add(chckbxSpoon_1);
 		
 		JCheckBox chckbxGrams_1 = new JCheckBox("Grams");
+		chckbxGrams_1.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent h) {
+				 System.out.println(h.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : h.getID()); //add what happens
+			}
+		});
 		chckbxGrams_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		chckbxGrams_1.setBackground(new Color(240, 248, 255));
 		chckbxGrams_1.setBounds(58, 607, 697, 64);
 		panel_1.add(chckbxGrams_1);
 		
 		JCheckBox chckbxMililiter = new JCheckBox("Mililiter");
+		chckbxMililiter.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent i) {
+				 System.out.println(i.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : i.getID()); //add what happens
+			}
+		});
 		chckbxMililiter.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		chckbxMililiter.setBackground(new Color(240, 248, 255));
 		chckbxMililiter.setBounds(58, 667, 697, 64);
