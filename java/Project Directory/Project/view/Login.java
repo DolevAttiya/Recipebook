@@ -25,7 +25,7 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtKljaeld;
 	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -35,12 +35,6 @@ public class Login extends JFrame {
 			public void run() {
 				try {
 					Login frame = new Login();
-					//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-					 //int height = screenSize.height;
-					// int width = screenSize.width;
-					 //frame.setSize(width/2, height/2);
-					 //frame.setLocationRelativeTo(null);
-					 
 					  frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -119,9 +113,10 @@ public class Login extends JFrame {
 		btnRegister.setBounds(589, 976, 421, 93);
 		contentPane.add(btnRegister);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setFont(new Font("Dialog", Font.PLAIN, 50));
-		passwordField_1.setBounds(662, 515, 641, 65);
-		contentPane.add(passwordField_1);
+		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		textField.setColumns(10);
+		textField.setBounds(662, 522, 641, 65);
+		contentPane.add(textField);
 	}
 }
