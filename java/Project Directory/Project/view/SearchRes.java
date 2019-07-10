@@ -116,9 +116,6 @@ public class SearchRes extends JFrame {
 		txtpnAdvancedSearch_1.setBackground(new Color(65, 105, 225));
 		txtpnAdvancedSearch_1.setBounds(1146, 7, 215, 80);
 		panel.add(txtpnAdvancedSearch_1);
-
-
-
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override

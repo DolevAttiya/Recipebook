@@ -23,14 +23,12 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
-import view.View;
 import java.awt.event.WindowEvent;
 	
 public class Login extends JFrame {
 
 	private JTextField textField;
 	private JPanel contentPane;
-	private JTextField txtKljaeld;
 	private JPasswordField passwordField;
 
 
@@ -95,7 +93,7 @@ public class Login extends JFrame {
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.login(Email, Pass);
+				myView.statview.login(passwordField_1.getText(), String.copyValueOf(passwordField.getPassword()));
 				MainPage a=new MainPage();
 				a.setVisible(true);
 				close();
@@ -104,12 +102,7 @@ public class Login extends JFrame {
 		btnLogin.setBounds(589, 867, 421, 93);
 		contentPane.add(btnLogin);
 		
-		passwordField = new JPasswordField();
-		passwordField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Pass = passwordField.getPassword();
-			}
-		});
+		passwordField = new JPasswordField(50);
 		passwordField.setFont(new Font("Dialog", Font.PLAIN, 50));
 		passwordField.setBounds(662, 615, 641, 65);
 		contentPane.add(passwordField);
@@ -118,7 +111,6 @@ public class Login extends JFrame {
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// no func from myView, we need to move to the next page by clicking this button (move to User page)
 				Register a=new Register();
 				a.setVisible(true);
 				close();
@@ -133,6 +125,4 @@ public class Login extends JFrame {
 		textField.setBounds(662, 522, 641, 65);
 		contentPane.add(textField);
 	}
-	private String Email;
-	private char[] Pass;
 }
