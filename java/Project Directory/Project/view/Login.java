@@ -1,5 +1,5 @@
 package view;
-
+import view.myView;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -9,23 +9,30 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.im.InputContext;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
-
+import view.View;
+import java.awt.event.WindowEvent;
+	
 public class Login extends JFrame {
 
+	private JTextField textField;
 	private JPanel contentPane;
 	private JTextField txtKljaeld;
-	private JTextField textField;
 	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
 
 	/**
 	 * Launch the application.
@@ -35,20 +42,32 @@ public class Login extends JFrame {
 			public void run() {
 				try {
 					Login frame = new Login();
-					frame.setVisible(true);
+					//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+					 //int height = screenSize.height;
+					// int width = screenSize.width;
+					 //frame.setSize(width/2, height/2);
+					 //frame.setLocationRelativeTo(null);
+					 
+					  frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+	
+	public void close() {
+		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Login() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 764, 593);
+		setSize(1664, 1493);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(65, 105, 225));
 		contentPane.setForeground(new Color(255, 255, 255));
@@ -56,26 +75,27 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
+		//components:
 		JTextPane txtpnWelcomeToRecipebook = new JTextPane();
 		txtpnWelcomeToRecipebook.setForeground(new Color(255, 255, 255));
 		txtpnWelcomeToRecipebook.setBackground(new Color(65, 105, 225));
-		txtpnWelcomeToRecipebook.setFont(new Font("Tempus Sans ITC", Font.BOLD, 60));
+		txtpnWelcomeToRecipebook.setFont(new Font("Tempus Sans ITC", Font.BOLD, 99));
 		txtpnWelcomeToRecipebook.setText("Welcome To Taimli !");
-		txtpnWelcomeToRecipebook.setBounds(76, 85, 609, 83);
+		txtpnWelcomeToRecipebook.setBounds(302, 234, 1028, 160);
 		contentPane.add(txtpnWelcomeToRecipebook);
 		
 		JLabel lblUserName = new JLabel("Email:");
-		lblUserName.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 27));
+		lblUserName.setFont(new Font("Dialog", Font.PLAIN, 70));
 		lblUserName.setForeground(new Color(255, 255, 255));
-		lblUserName.setBounds(189, 207, 153, 41);
+		lblUserName.setBounds(302, 504, 536, 72);
 		contentPane.add(lblUserName);
 		
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 27));
+		lblPassword.setFont(new Font("Dialog", Font.PLAIN, 70));
 		lblPassword.setForeground(new Color(255, 255, 255));
-		lblPassword.setBounds(189, 264, 153, 42);
+		lblPassword.setBounds(302, 604, 536, 72);
 		contentPane.add(lblPassword);
-		
 		textField = new JTextField();
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,36 +105,47 @@ public class Login extends JFrame {
 		textField.setBounds(342, 214, 146, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (myView.login(Email, Pass)==1)
-					JOptionPane.showMessageDialog(null,"success");
-				else JOptionPane.showMessageDialog(null,"oh no!");	
+				myView.statview.login(Email, Pass);
+				MainPage a=new MainPage();
+				a.setVisible(true);
+				close();
 			}
 		});
-		btnLogin.setBounds(277, 313, 146, 41);
+		btnLogin.setBounds(589, 867, 421, 93);
 		contentPane.add(btnLogin);
 		
 		passwordField = new JPasswordField();
 		passwordField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Pass = textField.getText();
+				Pass = passwordField.getPassword();
 			}
 		});
-		passwordField.setBounds(342, 272, 146, 26);
+		passwordField.setFont(new Font("Dialog", Font.PLAIN, 50));
+		passwordField.setBounds(662, 615, 641, 65);
 		contentPane.add(passwordField);
 		
 		JButton btnRegister = new JButton("Sign up!");
+		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// no func from myView, we need to move to the next page by clicking this button (move to User page)
+				Register a=new Register();
+				a.setVisible(true);
+				close();
 			}
 		});
-		btnRegister.setBounds(277, 361, 147, 41);
+		btnRegister.setBounds(589, 976, 421, 93);
 		contentPane.add(btnRegister);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setFont(new Font("Dialog", Font.PLAIN, 50));
+		passwordField_1.setBounds(662, 515, 641, 65);
+		contentPane.add(passwordField_1);
 	}
 	private String Email;
-	private String Pass;
+	private char[] Pass;
 }
