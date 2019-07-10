@@ -95,7 +95,7 @@ public class SearchRes extends JFrame {
 		txtpnAdvancedSearch_1.setBounds(1146, 7, 215, 80);
 		panel.add(txtpnAdvancedSearch_1);
 		
-		textField_5 = new JTextField();
+		JTextField textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_5.setColumns(10);
 		textField_5.setBounds(747, 37, 340, 43);

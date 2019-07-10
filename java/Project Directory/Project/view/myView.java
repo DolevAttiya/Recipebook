@@ -20,15 +20,18 @@ public class myView extends Observable implements View {
 	public static myView statview = new myView();
 	User myUser;
 	Dietitian myDietitian;
-	public String ConvertPassTOHash(String password) throws NoSuchAlgorithmException {
-
-		final MessageDigest digest = MessageDigest.getInstance("SHA3_256");
-		final byte[] hashbytes = digest.digest(
-				password.getBytes(StandardCharsets.UTF_8));
+	public String ConvertPassToHash(String password)  {
+		MessageDigest digest;
+		try {
+			digest = MessageDigest.getInstance("SHA3_256");
+		
+		final byte[] hashbytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 		String sha3_256hex = bytesToHex(hashbytes);
-
-
 		return sha3_256hex;
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} return null;
 	}
 	private static String bytesToHex(byte[] hashInBytes) {
 
@@ -39,27 +42,22 @@ public class myView extends Observable implements View {
 		return sb.toString();
 
 	}
-	public void login (String email, char[] cPass)
+	public void login (String email, String Pass)
 	{
-		String sPass=new String(cPass);
-		try {
-			sPass=ConvertPassTOHash(sPass);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Pass=ConvertPassToHash(Pass);
 		Event ev=new Event();
 		ev.getArr().add("userLogin");
 		ev.getArr().add(email);
-		ev.getArr().add(sPass);
+		ev.getArr().add(Pass);
 		setChanged();
 		notifyObservers(ev);
 	}	
+
 	public void loginResponse (ArrayList<User> us) {
 		if(us.get(0)!=null) // if the user exists in the DB
 		{
 			myUser=us.get(0);
-			MainPage frame = new MainPage(); // create new page of the mainPage and close the last one
+			//open mainPage
 		}
 		else JOptionPane.showMessageDialog(null,"One of the parameters is wrong, Please try again");
 	}
@@ -70,7 +68,7 @@ public class myView extends Observable implements View {
 		String hashPass;
 		Event ev=new Event();
 		try {
-			hashPass = ConvertPassTOHash(pass);
+			hashPass = ConvertPassToHash(pass);
 			if (isDietitian==true)
 			{
 				newDietitian = new Dietitian(email, firstName, lastName, dateOfBirth, hashPass, null, null, dietitianNum, dietitianStatDate);
@@ -86,7 +84,6 @@ public class myView extends Observable implements View {
 			setChanged();
 			notifyObservers(ev);		
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -94,7 +91,7 @@ public class myView extends Observable implements View {
 		if(usD.get(0)!=null) // if the user exists in the DB
 		{
 			myDietitian=usD.get(0);
-			MainPage frame = new MainPage(); // create new page of the mainPage and close the last one
+			//open mainPage
 		}
 		else JOptionPane.showMessageDialog(null,"Something went wrong, Please try again");
 	}
@@ -102,13 +99,15 @@ public class myView extends Observable implements View {
 		if(usU.get(0)!=null) // if the user exists in the DB
 		{
 			myUser=usU.get(0);
-			MainPage frame = new MainPage(); // create new page of the mainPage and close the last one
+			//open mainPage
 		}
 		else JOptionPane.showMessageDialog(null,"Something went wrong, Please try again");
 	}
-	
-	public void getTop10() {
-	//Ovali needs to tell me how he sends me the information
+	public void getTop10(ArrayList<Recipe> r) {
+		Event ev=new Event();
+		ev.getArr().add("top10");
+		setChanged();
+		notifyObservers(ev);
 	}
 	public void mainSearch(String s) {
 		Event ev=new Event();
@@ -120,15 +119,5 @@ public class myView extends Observable implements View {
 	public void searchResponse (ArrayList<Recipe> r) {
 		
 	}
-
-
-
-
-
-
-
-
-
-
 
 }

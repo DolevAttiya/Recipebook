@@ -23,14 +23,12 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
-import view.View;
 import java.awt.event.WindowEvent;
 	
 public class Login extends JFrame {
 
 	private JTextField textField;
 	private JPanel contentPane;
-	private JTextField txtKljaeld;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
 
@@ -42,12 +40,6 @@ public class Login extends JFrame {
 			public void run() {
 				try {
 					Login frame = new Login();
-					//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-					 //int height = screenSize.height;
-					// int width = screenSize.width;
-					 //frame.setSize(width/2, height/2);
-					 //frame.setLocationRelativeTo(null);
-					 
 					  frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -96,12 +88,7 @@ public class Login extends JFrame {
 		lblPassword.setForeground(new Color(255, 255, 255));
 		lblPassword.setBounds(302, 604, 536, 72);
 		contentPane.add(lblPassword);
-		textField = new JTextField();
-		textField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Email = textField.getText();
-			}
-		});
+		textField = new JTextField(50);
 		textField.setBounds(342, 214, 146, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
@@ -109,7 +96,7 @@ public class Login extends JFrame {
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.login(Email, Pass);
+				myView.statview.login(passwordField_1.getText(), String.copyValueOf(passwordField.getPassword()));
 				MainPage a=new MainPage();
 				a.setVisible(true);
 				close();
@@ -118,12 +105,7 @@ public class Login extends JFrame {
 		btnLogin.setBounds(589, 867, 421, 93);
 		contentPane.add(btnLogin);
 		
-		passwordField = new JPasswordField();
-		passwordField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Pass = passwordField.getPassword();
-			}
-		});
+		passwordField = new JPasswordField(50);
 		passwordField.setFont(new Font("Dialog", Font.PLAIN, 50));
 		passwordField.setBounds(662, 615, 641, 65);
 		contentPane.add(passwordField);
@@ -132,7 +114,6 @@ public class Login extends JFrame {
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// no func from myView, we need to move to the next page by clicking this button (move to User page)
 				Register a=new Register();
 				a.setVisible(true);
 				close();
@@ -146,6 +127,4 @@ public class Login extends JFrame {
 		passwordField_1.setBounds(662, 515, 641, 65);
 		contentPane.add(passwordField_1);
 	}
-	private String Email;
-	private char[] Pass;
 }

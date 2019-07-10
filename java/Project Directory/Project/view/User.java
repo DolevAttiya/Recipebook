@@ -347,7 +347,7 @@ public class User extends JFrame {
 		txtpnEmail.setBounds(69, 337, 255, 69);
 		panel_1.add(txtpnEmail);
 		
-		passwordField = new JPasswordField();
+		JPasswordField passwordField = new JPasswordField();
 		passwordField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// if the count(pass)<6 -> print an error
