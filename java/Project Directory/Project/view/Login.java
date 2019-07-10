@@ -32,7 +32,7 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtKljaeld;
 	private JPasswordField passwordField;
-	private JTextField textField;
+
 
 	/**
 	 * Launch the application.
@@ -90,15 +90,6 @@ public class Login extends JFrame {
 		lblPassword.setForeground(new Color(255, 255, 255));
 		lblPassword.setBounds(302, 604, 536, 72);
 		contentPane.add(lblPassword);
-		textField = new JTextField();
-		textField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Email = textField.getText();
-			}
-		});
-		textField.setBounds(342, 214, 146, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnLogin.addActionListener(new ActionListener() {

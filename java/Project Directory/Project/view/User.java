@@ -373,22 +373,6 @@ public class User extends JFrame {
 		txtpnEmail.setBounds(69, 337, 255, 69);
 		panel_1.add(txtpnEmail);
 		
-		passwordField = new JPasswordField();
-		passwordField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// if the count(pass)<6 -> print an error
-			}
-		});
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		passwordField.setBounds(216, 187, 141, 21);
-		panel_1.add(passwordField);
-		JTextPane txtpnEnterPassword = new JTextPane();
-		txtpnEnterPassword.setText("Enter Password: (6 digits)");
-		txtpnEnterPassword.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		txtpnEnterPassword.setBackground(new Color(240, 248, 255));
-		txtpnEnterPassword.setBounds(69, 461, 526, 68);
-		panel_1.add(txtpnEnterPassword);
-		
 		JTextPane txtpnEnterPasswordAgain = new JTextPane();
 		txtpnEnterPasswordAgain.setText("Enter Password Again:");
 		txtpnEnterPasswordAgain.setFont(new Font("Tahoma", Font.PLAIN, 40));
