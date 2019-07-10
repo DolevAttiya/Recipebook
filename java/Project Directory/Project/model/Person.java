@@ -1,21 +1,21 @@
 package model;
 
+import java.awt.image.BufferedImage;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Blob;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public abstract class Person extends Entities{
 	private String personEmail;
 	private String personFirstName;
 	private String personLastName;
-	private	Date personDateOfBirth;
+	private	LocalDate personDateOfBirth;
 	private	String personHashPass;
 	private ArrayList<Integer> personsFavoriteRecipe;
-	private Blob personImage;
-	public Person( String personEmail, String personFirstName, String personLastName, Date personDateOfBirth, String personHashPass, ArrayList<Integer> personsFavoriteRecipe,Blob personImage) {
+	private BufferedImage personImage;
+	public Person( String personEmail, String personFirstName, String personLastName, LocalDate personDateOfBirth, String personHashPass, ArrayList<Integer> personsFavoriteRecipe,BufferedImage personImage) {
 		setPersonEmail(personEmail);
 		setPersonFirstName(personFirstName);
 		setPersonLastName(personLastName);
@@ -26,7 +26,7 @@ public abstract class Person extends Entities{
 	}
 	@Override
 	protected String Class() {
-		return "Person";
+		return " Person";
 	}
 	public String getPersonEmail() {
 		return personEmail;
@@ -46,10 +46,10 @@ public abstract class Person extends Entities{
 	public void setPersonLastName(String personLastName) {
 		this.personLastName = personLastName;
 	}
-	public Date getPersonDateOfBirth() {
+	public LocalDate getPersonDateOfBirth() {
 		return personDateOfBirth;
 	}
-	public void setPersonDateOfBirth(Date personDateOfBirth) {
+	public void setPersonDateOfBirth(LocalDate personDateOfBirth) {
 		this.personDateOfBirth = personDateOfBirth;
 	}
 	public String getPersonHashPass() {
@@ -62,14 +62,14 @@ public abstract class Person extends Entities{
 		return personsFavoriteRecipe;
 	}
 	public void setPersonsFavoriteRecipe(ArrayList<Integer> personsFavoriteRecipe) {
+		if( personsFavoriteRecipe!=null)
 		personsFavoriteRecipe.forEach((n) -> this.personsFavoriteRecipe.add(n));
-
 	}
-	public Blob getPersonImage() {
+	public BufferedImage getPersonImage() {
 		return personImage;
 	}
-	public void setPersonImage(Blob personImage) {
-		this.personImage = personImage;
+	public void setPersonImage(BufferedImage img) {
+		this.personImage = img;
 	}
 	public String ConvertPassTOHash(String password) throws NoSuchAlgorithmException {
 
@@ -88,7 +88,6 @@ public abstract class Person extends Entities{
 			sb.append(String.format("%02x", b));
 		}
 		return sb.toString();
-
 	}
 	@Override
 	protected String getEntitieKey() {
@@ -104,12 +103,12 @@ public abstract class Person extends Entities{
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , "+this.getPersonDateOfBirth().toString()+" , "+this.getPersonHashPass()+" , "+this.getPersonImage();
+		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , "+this.getPersonDateOfBirth()+" , "+this.getPersonHashPass()+" , "+this.getPersonImage();
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() {
 		// TODO Auto-generated method stub
-		return "personEmail = "+ this.getPersonEmail()+" , personFirstName = "+this.getPersonFirstName()+" , personLastName = "+this.getPersonLastName()+" , personDateOfBirth = "+this.getPersonDateOfBirth().toString()+" , personHashPass = "+ this.getPersonHashPass() + " , personImage = "+ this.getPersonImage();
+		return "personEmail = "+ this.getPersonEmail()+" , personFirstName = "+this.getPersonFirstName()+" , personLastName = "+this.getPersonLastName()+" , personDateOfBirth = "+this.getPersonDateOfBirth()+" , personHashPass = "+ this.getPersonHashPass() + " , personImage = "+ this.getPersonImage();
 
 	}
 	/*@Override

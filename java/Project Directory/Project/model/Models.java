@@ -1,12 +1,19 @@
 package model;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Observable;
+
+import javax.imageio.ImageIO;
 
 import controller.Event;
 public class Models extends Observable implements model  {
@@ -14,7 +21,7 @@ public class Models extends Observable implements model  {
 
 	public Models() {
 	}
-	void top10(){
+	public void top10(){
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=search("Top10Recipe",null);
@@ -36,16 +43,41 @@ public class Models extends Observable implements model  {
 	}
 
 	public void CheckPasswordAndEmail(String Email, String Password){
-		// select column_name from table_name order by column_name desc limit size.
 		ev=new Event();
 		ArrayList<Object> args=new ArrayList<Object>();
+
+		args.add("User");
 		args.add(Email);
 		args.add(Password);
-		ArrayList<User> user= new ArrayList<User>();
 		ResultSet rs=search("CheckPasswordAndEmail",args);
-		user.add(GetUserParser(rs));
-		ev.getArr().add("user_login_response");
-		ev.getArr().add(user);
+		try {
+			if(rs.next()){
+				ArrayList<User> user= new ArrayList<User>();
+				user.add(GetUserParser(rs));
+				ev.getArr().add("user_login_response");
+				ev.getArr().add(user);
+			}
+			else
+			{
+				args.add(0, "Dietitian");
+				rs=search("CheckPasswordAndEmail",args);
+				if(rs.next()){
+					ArrayList<Dietitian> diet= new ArrayList<Dietitian>();
+					diet.add(GetDietitianParser(rs));
+					ev.getArr().add("dietitian_login_response");
+					ev.getArr().add(diet);
+				}else
+				{
+					ev.getArr().add("user_login_response");
+					ev.getArr().add(null);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
 		setChanged();
 		notifyObservers(ev);
 	}
@@ -55,7 +87,10 @@ public class Models extends Observable implements model  {
 		if(typeSearch.compareTo("Top10Recipe")==0) 
 			sql="  select * from Recipe order by recipeRate desc ";
 		if(typeSearch.compareTo("CheckPasswordAndEmail")==0)
-			sql="  select * from UserPerson where personEmail = "+(String)args.get(0)+" And PersonHash = "+(String)args.get(1);
+			if (((String)args.get(0)).compareTo("User")==0)
+				sql="  select * from UserPerson where personEmail = "+(String)args.get(1)+" And PersonHash = "+(String)args.get(2)+"And userId is not null";
+			else
+				sql="  select * from DietitianPerson where personEmail = "+(String)args.get(1)+" And PersonHash = "+(String)args.get(2)+"And dietitianId is not null";
 		ResultSet rs =getFromWithDB(sql) ;
 		return rs;
 
@@ -63,33 +98,45 @@ public class Models extends Observable implements model  {
 	}
 
 	public static User GetUserFromDB(String email)
-	{ResultSet rs=SelectSpecific("UserPerson","personEmail",email);
+	{ResultSet rs=SelectSpecific("UserPerson","personEmail","\""+email+"\"");
 	User user =GetUserParser(rs);
 	return user;
 	}
 	private static User GetUserParser(ResultSet rs) {
-		User per=new User(null,null,null,null,null,null,null, null, null); 
+		Integer[] ar=new Integer[1];
+		ar[0]=0;
+		User per=new User(null,null,null,null,null,null,null, null, ar,false,false); 
 		try {
 			per.setUserId(rs.getInt("userId"));
 			ResultSet userAllergens = Models.SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
 			Integer[] allergen= new Integer[userAllergens.getInt("counter")];
-			userAllergens = SelectSpecific("UserAllergen","ingredientId",per.getUserId().toString());
+			userAllergens = SelectSpecific("UserAllergen","allergenId",per.getUserId().toString());
 			while(userAllergens.next())
 			{
 				allergen[userAllergens.getInt("allergenId")]=1;
 			}
 			per.setUserAllergen(allergen);
+			per.setUserAllergens(rs.getBoolean("userAllergen"));
+			per.setUserKashruth(rs.getBoolean("userKashruth"));
 			per.setPersonEmail(rs.getString("personEmail"));
 			per.setPersonFirstName(rs.getString("personFirstName"));
 			per.setPersonLastName(rs.getString("personLastName"));
-			per.setPersonDateOfBirth(rs.getDate("personDateOfBirth"));
+			per.setPersonDateOfBirth(LocalDate.parse(rs.getString("personDateOfBirth")));
 			per.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
-			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail",per.getPersonEmail());
+			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail","\""+per.getPersonEmail()+"\"");
 			while(favorite.next())
 				personsFavoriteRecipes.add(rs.getInt("recipeId"));
 			per.setPersonsFavoriteRecipe(personsFavoriteRecipes);
-			per.setPersonImage(rs.getBlob("personImage"));
+			/*Blob blob = rs.getBlob("personImage");               
+			byte [] data = blob.getBytes( 1, ( int ) blob.length() );
+			BufferedImage img = null;
+			try {
+			img = ImageIO.read(new ByteArrayInputStream(data));
+			} catch (IOException e) {
+			    e.printStackTrace();
+			}
+			per.setPersonImage(img);*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
@@ -145,7 +192,7 @@ public class Models extends Observable implements model  {
 		notifyObservers(ev);}	
 
 	public static Dietitian GetDietitianFromDB(String email)
-	{ResultSet rs=SelectSpecific("DietitianPerson","personEmail",email);
+	{ResultSet rs=SelectSpecific("DietitianPerson","personEmail","\""+email+"\"");
 	Dietitian dietitian =GetDietitianParser(rs);
 	return dietitian;
 	}
@@ -153,18 +200,27 @@ public class Models extends Observable implements model  {
 		Dietitian per=new Dietitian(null,null,null,null,null,null,null, null, null); 
 		try {
 			per.setDietitianId(rs.getInt("dietitianId"));
-			per.setPersonDateOfBirth(rs.getDate("dieticianStatDate"));
+			LocalDate d = LocalDate.parse(rs.getString("dietitianStatDate"));
+			per.setDietitianStatDate(LocalDate.parse(rs.getString("dietitianStatDate")));
 			per.setPersonEmail(rs.getString("personEmail"));
 			per.setPersonFirstName(rs.getString("personFirstName"));
 			per.setPersonLastName(rs.getString("personLastName"));
-			per.setPersonDateOfBirth(rs.getDate("personDateOfBirth"));
+			per.setPersonDateOfBirth(LocalDate.parse(rs.getString("personDateOfBirth")));
 			per.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
-			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail",per.getPersonEmail());
+			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail","\""+per.getPersonEmail()+"\"");
 			while(favorite.next())
 				personsFavoriteRecipes.add(rs.getInt("recipeId"));
 			per.setPersonsFavoriteRecipe(personsFavoriteRecipes);
-			per.setPersonImage(rs.getBlob("personImage"));
+			/*Blob blob = rs.getBlob("personImage");               
+			byte [] data = blob.getBytes( 1, ( int ) blob.length() );
+			BufferedImage img = null;
+			try {
+				img = ImageIO.read(new ByteArrayInputStream(data));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			per.setPersonImage(img);*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
@@ -291,7 +347,9 @@ public class Models extends Observable implements model  {
 		return ingredient;
 	}
 	private static Ingredient GetIngredientParser(ResultSet rs) {
-		Ingredient ingredient = new Ingredient(null,null,null,null,null,null,null,null,null);
+		Integer[] ar=new Integer[1];
+		ar[0]=0;
+		Ingredient ingredient = new Ingredient(null,null,ar,null,null,null,null,null,null);
 		try {
 			ingredient.setIngredientId(rs.getInt("ingredientId"));
 			ingredient.setIngredientName(rs.getString("ingredientName"));
@@ -440,13 +498,15 @@ public class Models extends Observable implements model  {
 		return recipe;
 	}
 	private static Recipe GetRecipeParser(ResultSet rs) {
-		Recipe recipe = new Recipe(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+		Integer[] ar=new Integer[1];
+		ar[0]=0;
+		Recipe recipe = new Recipe(null,null,ar,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 		try {
 			recipe.setRecipeId(rs.getInt("recipeId"));
 			recipe.setRecipeName(rs.getString("recipeName"));
 			ResultSet recipeAllergens = Models.SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
 			Integer[] allergen= new Integer[recipeAllergens.getInt("counter")];
-			recipeAllergens = Models.SelectSpecific("RecipeAllergen","ingredientId",recipe.getRecipeId().toString());
+			recipeAllergens = Models.SelectSpecific("RecipeAllergen","recipeId",recipe.getRecipeId().toString());
 			while(recipeAllergens.next())
 			{
 				allergen[recipeAllergens.getInt("allergenId")]=1;
@@ -460,9 +520,9 @@ public class Models extends Observable implements model  {
 
 			while(recipeIngredientVals.next())
 			{
-				IngredientsType.add(rs.getInt("ingredientsType"));
-				IngredientsAmount.add(rs.getDouble("IngredientsAmount"));
-				ingredients.add(rs.getInt("IngredientsAmount"));
+				IngredientsType.add(recipeIngredientVals.getInt("ingredientTypeId"));
+				IngredientsAmount.add(recipeIngredientVals.getDouble("IngredientAmount"));
+				ingredients.add(recipeIngredientVals.getInt("IngredientId"));
 
 			}
 			recipe.setRecipeIngredientId(ingredients);
@@ -474,11 +534,11 @@ public class Models extends Observable implements model  {
 			recipe.setRecipeTotalFat(rs.getDouble("recipeTotalFat"));
 			recipe.setRecipeKashruth(rs.getInt("recipeKashruth"));
 			recipe.setRecipeComplex(rs.getInt("recipeComplex"));
-			recipe.setRecipePersonEmail(rs.getString("recipePersonEmail"));
+			recipe.setRecipePersonEmail(rs.getString("PersonEmail"));
 			recipe.setRecipeRate(rs.getInt("recipeRate"));
 			recipe.setRecipeDescription(rs.getString("recipeDescription"));
-			recipe.setRecipeProcses(rs.getString("recipeProcses"));	
-			recipe.setRecipeImage(rs.getBlob("recipeImage"));
+			recipe.setRecipeProcess(rs.getString("recipeProcess"));	
+			//recipe.setRecipeImage(rs.getBlob("recipeImage"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -534,7 +594,27 @@ public class Models extends Observable implements model  {
 		setChanged();
 		notifyObservers(ev);
 	}	
+	public void myFavoriteRecipes(String Email) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join PersonFavoriteRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
 
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("favorite_recipes_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	
 	public static ResultSet SelectSpecificFrom(String Select, String Table, String Key,String Value) {
 		String sql;
 		if(Key!=null)
@@ -591,12 +671,11 @@ public class Models extends Observable implements model  {
 			sql+=" AND recipeRate  "+search.get(5);
 		if(search.get(6)!=null)
 			for(int i=0;i<((ArrayList<Integer>)search.get(6)).size();i++)
-				
-			sql+=" AND AllergenId  "+((ArrayList<Integer>)search.get(6)).get(i);
-		
-			sql+=" Orderby recipeRate ";
-			
-			
+			{
+				sql+=" AND AllergenId is not"+((ArrayList<Integer>)search.get(6)).get(i);
+			}
+		sql+=" Orderby recipeRate ";
+
 		ResultSet rs =getFromWithDB(sql);
 		try {
 			while(rs.next())
@@ -607,9 +686,31 @@ public class Models extends Observable implements model  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ev.getArr().add("ingredientType_select_response");
+		ev.getArr().add("search_response");
 		ev.getArr().add(recipe);
 		setChanged();
 		notifyObservers(ev);
 	}
+	public void myRecipes(String Email) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join PersonRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
+
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("my_recipes_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+
+	
 }

@@ -1,20 +1,23 @@
 package model;
 
-import java.sql.Blob;
+import java.awt.image.BufferedImage;
+import java.time.LocalDate;
 //import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.Date;
-
 public class User extends Person {
 
 	private Integer userId;
 	private Integer userAllergen[];
-	public User(String personEmail, String personFirstName, String personLastName, Date personDateOfBirth,
-			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, Blob personImage,Integer userId, Integer userAllergen[]) {
+	private Boolean userAllergens;
+	private Boolean userKashruth;
+	public User(String personEmail, String personFirstName, String personLastName, LocalDate personDateOfBirth,
+			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, BufferedImage personImage,Integer userId, Integer userAllergen[],Boolean userAllergens, Boolean userKashruth) {
 		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe,
 				personImage);
 		this.setUserId(userId);
 		this.setUserAllergen(userAllergen);
+		this.setUserAllergens(userAllergens);
+		this.setUserKashruth(userKashruth);
 	}
 
 	@Override
@@ -31,9 +34,30 @@ public class User extends Person {
 		return userAllergen;
 	}
 	public void setUserAllergen(Integer[] userAllergen) {
-		for (int i=0;i<Allergen.getMaxAllergen();i++)
+		this.userAllergen= new Integer[userAllergen.length];
+		for (int i=0;i<userAllergen.length;i++)
 			this.userAllergen[i]=userAllergen[i];
 	}
+	public Boolean getUserKashruth() {
+		return userKashruth;
+	}
+
+	public void setUserKashruth(Boolean userKashruth) {
+		if(userKashruth)
+		this.userKashruth = true;
+		else
+			this.userKashruth =false;
+	}
+
+	public Boolean getUserAllergens() {
+		return userAllergens;
+	}
+
+	public void setUserAllergens(Boolean userAllergens) {
+		if(userAllergens)
+			this.userAllergens = true;
+			else
+				this.userAllergens =false;	}
 	@Override
 	protected String getEntitieKey() {	
 		return " userId ";
@@ -44,15 +68,15 @@ public class User extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesNames() {
-		return getEntitieKey();
+		return getEntitieKey()+" , userAllergen , userKashruth,  personEmail ";
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return this.getUserId().toString();
+		return " "+this.getUserId().toString()+" , "+this.getUserAllergens().toString()+" , "+this.getUserKashruth().toString()+" , \""+this.getPersonEmail()+"\" ";
 	}
-	@Override
+	
 	protected String getEntitieAttributesNamesValues() {
-		return " "+getEntitieKey()+" = "+this.getUserId().toString()+" ";
+		return " "+getEntitieKey()+" = "+this.getUserId().toString()+" , userAllergen = "+this.getUserAllergens().toString()+" , userKashruth = "+this.getUserKashruth().toString()+" , personEmail = \""+this.getPersonEmail()+ "\" ";
 	}
 	/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
@@ -88,4 +112,31 @@ public void getPsmtmt(PreparedStatement pstmt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	protected String getIngredientDelete(int place) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String getPersonAttributesNames() {
+		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personImage";
+	}
+	@Override
+	protected String getPersonAttributesValues() {
+		return " \""+this.getPersonEmail()+"\" , \""+this.getPersonFirstName()+"\" , \""+this.getPersonLastName()+"\" , \""+this.getPersonDateOfBirth().toString()+"\" , \""+this.getPersonHashPass()+"\" , "+this.getPersonImage()+ " ";
+	}
+	@Override
+	protected String getPersonAttributesNamesValues() {
+		// TODO Auto-generated method stub
+		return " personFirstName = \""+this.getPersonFirstName()+"\" , personLastName = \""+this.getPersonLastName()+"\" , personDateOfBirth = \""+this.getPersonDateOfBirth().toString()+"\" , personHashPass = \""+ this.getPersonHashPass() + "\" , personImage = "+ this.getPersonImage();
+
+	}
+	@Override
+	protected String getPersonKeyValue() {
+		return " \""+this.getPersonEmail()+"\" ";
+	}
+
+
 }

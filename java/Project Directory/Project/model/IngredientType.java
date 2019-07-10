@@ -3,13 +3,13 @@ package model;
 import java.util.ArrayList;
 
 public class IngredientType extends Entities {
-	
+
 	/*Attributes*/
 	private Integer ingredientTypeId;
 	private Integer ingredientTypeValue;
 	private String  ingredientTypeName;
-	
-	 /*Contractor*/
+
+	/*Contractor*/
 	public IngredientType(int ingredientTypeId, String ingredientTypeName, Integer ingredientTypeValue) {
 		this.setIngredientTypeId(ingredientTypeId);
 		this.setIngredientTypeName(ingredientTypeName);
@@ -26,10 +26,10 @@ public class IngredientType extends Entities {
 		return this.ingredientTypeName; 
 	}
 	public void setIngredientTypeName(String ingredientTypeName ) {
-		 this.ingredientTypeName=ingredientTypeName; 
+		this.ingredientTypeName=ingredientTypeName; 
 	}
 	public void setIngredientTypeId(Integer ingredientTypeId ) {
-		 this.ingredientTypeId=ingredientTypeId; 
+		this.ingredientTypeId=ingredientTypeId; 
 	}
 	public Integer getIngredientTypeValue() {
 		return ingredientTypeValue;
@@ -63,13 +63,13 @@ public class IngredientType extends Entities {
 	protected String getEntitieAttributesNamesValues() {
 		// TODO Auto-generated method stub
 		return  "ingredientTypeId = "+ this.getIngredientTypeId().toString()+ " , "+
-				 " ingredientTypeName = "+this.getIngredientTypeName()+ " , "+
-				 " ingredientTypeValue = "+this.getIngredientTypeValue()+" ";
+		" ingredientTypeName = "+this.getIngredientTypeName()+ " , "+
+		" ingredientTypeValue = "+this.getIngredientTypeValue()+" ";
 	}
 	/*@Override
 	public void getPsmtmt(PreparedStatement pstmt) {
 		try {
-	       	
+
 			pstmt.setInt(1, ingredientTypeId);
 			pstmt.setString(2, ingredientTypeName);
 			pstmt.setInt(3, ingredientTypeValue);
@@ -96,5 +96,30 @@ public class IngredientType extends Entities {
 	@Override
 	protected int getmaxIngredieantCount() {
 		return 0;
+	}
+	@Override
+	protected String getIngredientDelete(int place) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesNamesValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesNames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonKeyValue() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
