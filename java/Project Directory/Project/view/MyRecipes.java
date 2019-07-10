@@ -4,6 +4,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
@@ -64,6 +66,8 @@ public class MyRecipes extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		//panelkavuaa
 		JPanel panel = new JPanel();
 		panel.setBounds(26, 15, 1603, 87);
 		panel.setBackground(new Color(65, 105, 225));
@@ -75,6 +79,15 @@ public class MyRecipes extends JFrame {
 		panel.add(panel_3);
 		
 		JTextPane txtpnUserDetails = new JTextPane();
+		txtpnUserDetails.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				User f=new User();
+				f.setVisible(true);
+				MyRecipes.this.dispose();
+				MyRecipes.this.setVisible(false);
+			}
+		});
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
 		panel.add(txtpnUserDetails);
 		txtpnUserDetails.setForeground(new Color(255, 255, 255));
@@ -83,6 +96,15 @@ public class MyRecipes extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
+		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AdvancedSearch f=new AdvancedSearch();
+				f.setVisible(true);
+				MyRecipes.this.dispose();
+				MyRecipes.this.setVisible(false);
+			}
+		});
 		txtpnAdvancedSearch_1.setText("Advanced Search");
 		txtpnAdvancedSearch_1.setForeground(Color.WHITE);
 		txtpnAdvancedSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -97,6 +119,15 @@ public class MyRecipes extends JFrame {
 		panel.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
+		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MyFavourites f=new MyFavourites();
+				f.setVisible(true);
+				MyRecipes.this.dispose();
+				MyRecipes.this.setVisible(false);
+			}
+		});
 		txtpnFavouriteRecipes.setBounds(524, 7, 210, 87);
 		panel.add(txtpnFavouriteRecipes);
 		txtpnFavouriteRecipes.setText("Favourite Recipes");
@@ -113,6 +144,15 @@ public class MyRecipes extends JFrame {
 		panel.add(txtpnSearch_1);
 		
 		JTextPane txtpnMyRecipes = new JTextPane();
+		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MyRecipes f=new MyRecipes();
+				f.setVisible(true);
+				MyRecipes.this.dispose();
+				MyRecipes.this.setVisible(false);
+			}
+		});
 		txtpnMyRecipes.setText("My Recipes");
 		txtpnMyRecipes.setForeground(Color.WHITE);
 		txtpnMyRecipes.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -120,14 +160,24 @@ public class MyRecipes extends JFrame {
 		txtpnMyRecipes.setBounds(347, 7, 175, 80);
 		panel.add(txtpnMyRecipes);
 		
-		txtRecipebook = new JTextField();
-		txtRecipebook.setForeground(new Color(255, 255, 255));
-		txtRecipebook.setBounds(11, 0, 386, 87);
-		panel.add(txtRecipebook);
-		txtRecipebook.setFont(new Font("Gill Sans Ultra Bold", Font.BOLD, 70));
-		txtRecipebook.setBackground(new Color(65, 105, 225));
-		txtRecipebook.setText("Taimli");
-		txtRecipebook.setColumns(10);
+		JTextPane txtpnTaimli = new JTextPane();
+		txtpnTaimli.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainPage f=new MainPage();
+				f.setVisible(true);
+				MyRecipes.this.dispose();
+				MyRecipes.this.setVisible(false);
+			}
+		});
+		txtpnTaimli.setText("Taimli");
+		txtpnTaimli.setForeground(Color.WHITE);
+		txtpnTaimli.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
+		txtpnTaimli.setBackground(new Color(65, 105, 225));
+		txtpnTaimli.setBounds(0, -7, 343, 96);
+		panel.add(txtpnTaimli);
+		
+		//panelkavuaa
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(240, 248, 255));

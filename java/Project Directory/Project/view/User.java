@@ -98,9 +98,10 @@ public class User extends JFrame {
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User c=new User();
-				c.setVisible(true);
-				close();
+				User f=new User();
+				f.setVisible(true);
+				User.this.dispose();
+				User.this.setVisible(false);
 			}
 		});
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
@@ -114,9 +115,10 @@ public class User extends JFrame {
 		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AdvancedSearch c=new AdvancedSearch();
-				c.setVisible(true);
-				close();
+				AdvancedSearch f=new AdvancedSearch();
+				f.setVisible(true);
+				User.this.dispose();
+				User.this.setVisible(false);
 			}
 		});
 		txtpnAdvancedSearch_1.setText("Advanced Search");
@@ -136,9 +138,10 @@ public class User extends JFrame {
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MyFavourites c=new MyFavourites();
-				c.setVisible(true);
-				close();
+				MyFavourites f=new MyFavourites();
+				f.setVisible(true);
+				User.this.dispose();
+				User.this.setVisible(false);
 			}
 		});
 		txtpnFavouriteRecipes.setBounds(524, 7, 210, 87);
@@ -160,9 +163,10 @@ public class User extends JFrame {
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MyRecipes c=new MyRecipes();
-				c.setVisible(true);
-				close();
+				MyRecipes f=new MyRecipes();
+				f.setVisible(true);
+				User.this.dispose();
+				User.this.setVisible(false);
 			}
 		});
 		txtpnMyRecipes.setText("My Recipes");
@@ -176,9 +180,10 @@ public class User extends JFrame {
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MainPage a=new MainPage();
-				a.setVisible(true);
-				close();
+				MainPage f=new MainPage();
+				f.setVisible(true);
+				User.this.dispose();
+				User.this.setVisible(false);
 			}
 		});
 		txtpnTaimli.setText("Taimli");
@@ -311,6 +316,13 @@ public class User extends JFrame {
 		panel_1.add(txtpnAdvancedSearch);
 		
 		JCheckBox chckbxDairy = new JCheckBox("Fish");
+		chckbxDairy.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent h) {
+				 System.out.println(h.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : h.getID()); //add what happens
+			}
+		});
 		chckbxDairy.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		chckbxDairy.setBackground(new Color(240, 248, 255));
 		chckbxDairy.setBounds(1027, 715, 345, 41);
@@ -324,18 +336,32 @@ public class User extends JFrame {
 		panel_1.add(txtpnAllergies);
 		
 		JCheckBox chckbxG = new JCheckBox("Coffie");
+		chckbxG.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent g) {
+				 System.out.println(g.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : g.getID()); //add what happens
+			}
+		});
 		chckbxG.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		chckbxG.setBackground(new Color(240, 248, 255));
 		chckbxG.setBounds(1027, 850, 345, 41);
 		panel_1.add(chckbxG);
 		
 		JCheckBox chckbxNon = new JCheckBox("Gluten");
+		chckbxNon.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent f) {
+				 System.out.println(f.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : f.getID()); //add what happens
+			}
+		});
 		chckbxNon.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		chckbxNon.setBackground(new Color(240, 248, 255));
 		chckbxNon.setBounds(1027, 923, 345, 41);
 		panel_1.add(chckbxNon);
 		
-		JButton btnSearch = new JButton("Register");
+		JButton btnSearch = new JButton("Update!");
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
 		btnSearch.setBounds(607, 1068, 326, 69);
 		panel_1.add(btnSearch);
@@ -347,22 +373,6 @@ public class User extends JFrame {
 		txtpnEmail.setBounds(69, 337, 255, 69);
 		panel_1.add(txtpnEmail);
 		
-		passwordField = new JPasswordField();
-		passwordField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// if the count(pass)<6 -> print an error
-			}
-		});
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		passwordField.setBounds(216, 187, 141, 21);
-		panel_1.add(passwordField);
-		JTextPane txtpnEnterPassword = new JTextPane();
-		txtpnEnterPassword.setText("Enter Password: (6 digits)");
-		txtpnEnterPassword.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		txtpnEnterPassword.setBackground(new Color(240, 248, 255));
-		txtpnEnterPassword.setBounds(69, 461, 526, 68);
-		panel_1.add(txtpnEnterPassword);
-		
 		JTextPane txtpnEnterPasswordAgain = new JTextPane();
 		txtpnEnterPasswordAgain.setText("Enter Password Again:");
 		txtpnEnterPasswordAgain.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -371,12 +381,26 @@ public class User extends JFrame {
 		panel_1.add(txtpnEnterPasswordAgain);
 		
 		JCheckBox chckbxDietican = new JCheckBox("Dietican");
+		chckbxDietican.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent e) {
+				 System.out.println(e.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : e.getID()); //add what happens
+			}
+		});
 		chckbxDietican.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		chckbxDietican.setBackground(new Color(240, 248, 255));
 		chckbxDietican.setBounds(69, 636, 412, 41);
 		panel_1.add(chckbxDietican);
 		
 		JCheckBox chckbxShowOnlyRecipes = new JCheckBox("Show only Recipes adapted to Alergies");
+		chckbxShowOnlyRecipes.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent d) {
+				 System.out.println(d.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : d.getID()); //add what happens
+			}
+		});
 		chckbxShowOnlyRecipes.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		chckbxShowOnlyRecipes.setBackground(new Color(240, 248, 255));
 		chckbxShowOnlyRecipes.setBounds(69, 895, 866, 69);
@@ -390,24 +414,52 @@ public class User extends JFrame {
 		panel_1.add(txtpnExpiryDate_1);
 		
 		JCheckBox chckbxDairy_1 = new JCheckBox("Dairy");
+		chckbxDairy_1.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent c) {
+				 System.out.println(c.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : c.getID()); //add what happens
+			}
+		});
 		chckbxDairy_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		chckbxDairy_1.setBackground(new Color(240, 248, 255));
 		chckbxDairy_1.setBounds(1027, 1069, 226, 41);
 		panel_1.add(chckbxDairy_1);
 		
 		JCheckBox chckbxLactose = new JCheckBox("Lactose");
+		chckbxLactose.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent b) {
+				 System.out.println(b.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : b.getID()); //add what happens
+			}
+		});
 		chckbxLactose.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		chckbxLactose.setBackground(new Color(240, 248, 255));
 		chckbxLactose.setBounds(1027, 996, 226, 41);
 		panel_1.add(chckbxLactose);
 		
 		JCheckBox chckbxChocolate = new JCheckBox("Chocolate");
+		chckbxChocolate.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent a) {
+				 System.out.println(a.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : a.getID()); //add what happens
+			}
+		});
 		chckbxChocolate.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		chckbxChocolate.setBackground(new Color(240, 248, 255));
 		chckbxChocolate.setBounds(1307, 1069, 281, 41);
 		panel_1.add(chckbxChocolate);
 		
 		JCheckBox chckbxFoodAcidity = new JCheckBox("Food Acidity");
+		chckbxFoodAcidity.addActionListener(new ActionListener() {
+			 @Override
+			public void actionPerformed(ActionEvent j) {
+				 System.out.println(j.getID() == ActionEvent.ACTION_PERFORMED
+		                    ? "ACTION_PERFORMED" : j.getID()); //add what happens
+			}
+		});
 		chckbxFoodAcidity.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		chckbxFoodAcidity.setBackground(new Color(240, 248, 255));
 		chckbxFoodAcidity.setBounds(1307, 996, 281, 41);
