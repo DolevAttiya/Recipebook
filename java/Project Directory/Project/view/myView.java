@@ -215,7 +215,7 @@ public class myView extends Observable implements View {
 		notifyObservers(ev);
 	}
 }
-
+/*
 //---------Login Page------------
 case "user_login": // DONE
 case "user_register": //DONE
