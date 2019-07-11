@@ -42,9 +42,4 @@ public class SingletonDBConnection {
 		}
 	}
 
-
-	public static void main(String[] args) {
-		getConnection();
-		closeConnection();
-	}
 }

@@ -72,7 +72,7 @@ class Testentities {
 		Double recipeTotalProtein=0.0;
 		Double recipeTotalFat=0.0;
 		Integer recipeKashruth=0;
-		Time recipeTimeToMake= new Time(225);
+		Integer recipeTimeToMake= 3;
 		Integer[] recipeAllergen= {0,0,0,0,1,0,0,1,0,0,1,0};
 		User Daenerys= Models.GetUserFromDB("drakarisValyrian.com");
 		Integer recipeComplex=3;
@@ -171,7 +171,7 @@ class Testentities {
 		Double recipeTotalProtein=0.0;
 		Double recipeTotalFat=0.0;
 		Integer recipeKashruth=0;
-		Time recipeTimeToMake= new Time(225);
+		Integer recipeTimeToMake=3;
 		Integer[] recipeAllergen= {0,0,0,0,1,0,0,1,0,0,1,0};
 		User Daenerys= Models.GetUserFromDB("drakarisValyrian.com");
 		Integer recipeComplex=3;
