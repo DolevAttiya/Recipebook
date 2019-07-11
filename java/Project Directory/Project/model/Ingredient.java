@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.image.BufferedImage;
+
 import java.util.ArrayList;
 
 public class Ingredient extends Entities {
@@ -14,11 +14,10 @@ public class Ingredient extends Entities {
 	private Double ingredientProtein;
 	private Double ingredientFat;
 	private Integer ingredientKashruth;
-	private BufferedImage ingredientImage;
 
 	/*Contractors*/
 
-	public Ingredient( Integer ingredientId,String  ingredientName,Integer ingredientAllergen[],Double ingredientCalories,Double ingredientCarbohydrate,Double ingredientProtein,Double ingredientFat, Integer ingredientKashruth, BufferedImage ingredientImage)
+	public Ingredient( Integer ingredientId,String  ingredientName,Integer ingredientAllergen[],Double ingredientCalories,Double ingredientCarbohydrate,Double ingredientProtein,Double ingredientFat, Integer ingredientKashruth)
 	{
 		this.setIngredientId(ingredientId);
 		this.setIngredientName(ingredientName);
@@ -28,7 +27,6 @@ public class Ingredient extends Entities {
 		this.setIngredientProtein(ingredientProtein);
 		this.setIngredientFat(ingredientFat);
 		this.setIngredientKashruth(ingredientKashruth);
-		this.setIngredientImage(ingredientImage);
 	}
 	public Integer getIngredientId() {
 		return ingredientId.intValue();
@@ -72,12 +70,6 @@ public class Ingredient extends Entities {
 	public void setIngredientFat(Double ingredientFat) {
 		this.ingredientFat = ingredientFat;
 	}
-	public BufferedImage getIngredientImage() {
-		return ingredientImage;
-	}
-	public void setIngredientImage(BufferedImage ingredientImage) {
-		this.ingredientImage = ingredientImage;
-	}
 	public Integer[] getIngredientAllergen() {
 		return ingredientAllergen;
 	}
@@ -101,7 +93,7 @@ public class Ingredient extends Entities {
 	protected String Class() {return " Ingredient";}
 	@Override
 	protected String getEntitieAttributesNames() {
-		return " ingredientId , ingredientName , ingredientCalories , ingredientCarbohydrate , ingredientProtein , ingredientFat , ingredientKashruth , ingredientImage ";
+		return " ingredientId , ingredientName , ingredientCalories , ingredientCarbohydrate , ingredientProtein , ingredientFat , ingredientKashruth ";
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
@@ -111,9 +103,7 @@ public class Ingredient extends Entities {
 				this.getIngredientCarbohydrate().toString() +" , " +
 				this.getIngredientProtein().toString() +" , " +
 				this.getIngredientFat().toString() +" , " +
-				this.getIngredientKashruth().toString() +" , " +
-				this.getIngredientImage()+" ";
-	}
+				this.getIngredientKashruth().toString() +" ";	}
 	@Override
 	protected String getEntitieAttributesNamesValues() {
 		return  " ingredientId = "+this.getIngredientId().toString() +" , " +
@@ -122,26 +112,8 @@ public class Ingredient extends Entities {
 				" ingredientCarbohydrate = "+	this.getIngredientCarbohydrate().toString() +" , " +
 				" ingredientProtein = "+	this.getIngredientProtein().toString() +" , " +
 				" ingredientFat = "+	this.getIngredientKashruth().toString() +" , " +
-				" ingredientKashruth = "+	this.getIngredientKashruth().toString() +" , " +
-				" ingredientImage = "+	this.getIngredientImage()+" ";
+				" ingredientKashruth = "+	this.getIngredientKashruth().toString() +" ";
 	}
-	/*@Override
-public void getPsmtmt(PreparedStatement pstmt) {
-	try {
-
-		pstmt.setInt(1, (int)this.getIngredientId());
-		pstmt.setString(2, this.getIngredientName());
-		pstmt.setInt(3, this.getIngredientCalories());
-		pstmt.setInt(4, this.getIngredientCarbohydrate());
-		pstmt.setInt(5, this.getIngredientProtein());
-		pstmt.setInt(6, this.getIngredientFat());
-		pstmt.setInt(7, this.getIngredientKashruth());
-		pstmt.setBlob(8, this.getIngredientImage());
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-}
-	 */
 	@Override
 	protected String getAllergenInsert(int place) {
 		return this.ingredientAllergen[place].toString();

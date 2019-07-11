@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.image.BufferedImage;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -9,9 +9,9 @@ public class Dietitian extends Person {
 	private Integer dietitianId;
 	private LocalDate dietitianStatDate;
 	public Dietitian(String personEmail, String personFirstName, String personLastName, LocalDate personDateOfBirth,
-			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, BufferedImage personImage,Integer dietitianId, LocalDate dietitianStatDate) {
-		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe,
-				personImage);
+			String personHashPass, ArrayList<Integer> personsFavoriteRecipe,Integer dietitianId, LocalDate dietitianStatDate) {
+		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe
+				);
 		setDietitianId(dietitianId);
 		setDietitianStatDate(dietitianStatDate);
 	}
@@ -95,16 +95,16 @@ public void getPsmtmt(PreparedStatement pstmt) {
 	}
 	@Override
 	protected String getPersonAttributesNames() {
-		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personImage";
+		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass ";
 	}
 	@Override
 	protected String getPersonAttributesValues() {
-		return " \""+this.getPersonEmail()+"\" , \""+this.getPersonFirstName()+"\" , \""+this.getPersonLastName()+"\" , \""+this.getPersonDateOfBirth().toString()+"\" , \""+this.getPersonHashPass()+"\" , "+this.getPersonImage()+ " ";
+		return " \""+this.getPersonEmail()+"\" , \""+this.getPersonFirstName()+"\" , \""+this.getPersonLastName()+"\" , \""+this.getPersonDateOfBirth().toString()+"\" , \""+this.getPersonHashPass()+"\" ";
 	}
 	@Override
 	protected String getPersonAttributesNamesValues() {
 		// TODO Auto-generated method stub
-		return " personFirstName = \""+this.getPersonFirstName()+"\" , personLastName = \""+this.getPersonLastName()+"\" , personDateOfBirth = \""+this.getPersonDateOfBirth().toString()+"\" , personHashPass = \""+ this.getPersonHashPass() + "\" , personImage = "+ this.getPersonImage();
+		return " personFirstName = \""+this.getPersonFirstName()+"\" , personLastName = \""+this.getPersonLastName()+"\" , personDateOfBirth = \""+this.getPersonDateOfBirth().toString()+"\" , personHashPass = \""+ this.getPersonHashPass() + "\" ";
 
 	}
 	@Override

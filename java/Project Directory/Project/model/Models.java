@@ -1,10 +1,6 @@
 package model;
 
-/*import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.sql.Blob;*/
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +17,7 @@ public class Models extends Observable implements model  {
 
 	public Models() {
 	}
-	
+
 	public void myFavoriteRecipes(String Email) {
 		ev=new Event();
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
@@ -48,13 +44,17 @@ public class Models extends Observable implements model  {
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		String sql= " Select * From Recipe Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
 		if(search.get(2)!=null)
-			sql+=" AND recipeKashruth = "+search.get(2);
+			if((int)search.get(2)!=4)
+				sql+=" AND recipeKashruth = "+(int)search.get(2);
+			else 
+				sql+=" AND recipeKashruth != 3";
 		if(search.get(3)!=null)
-			sql+=" AND recipeComplex = "+search.get(3);
+
+			sql+=" AND recipeComplex = "+(int)search.get(3);
 		if(search.get(4)!=null)
-			sql+=" AND recipeTimeToMake = "+search.get(4);
+			sql+=" AND recipeTimeToMake = "+(int)search.get(4);
 		if(search.get(5)!=null)
-			sql+=" AND recipeRate  "+search.get(5);
+			sql+=" AND recipeRate  "+(int)search.get(5);
 		if(search.get(6)!=null)
 			for(int i=0;i<((ArrayList<Integer>)search.get(6)).size();i++)
 			{
@@ -182,7 +182,7 @@ public class Models extends Observable implements model  {
 	private static User GetUserParser(ResultSet rs) {
 		Integer[] ar=new Integer[1];
 		ar[0]=0;
-		User per=new User(null,null,null,null,null,null,null, null, ar,false,false); 
+		User per=new User(null,null,null,null,null,null, null, ar,false,false); 
 		try {
 			per.setUserId(rs.getInt("userId"));
 			ResultSet userAllergens = Models.SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
@@ -205,15 +205,6 @@ public class Models extends Observable implements model  {
 			while(favorite.next())
 				personsFavoriteRecipes.add(rs.getInt("recipeId"));
 			per.setPersonsFavoriteRecipe(personsFavoriteRecipes);
-			/*Blob blob = rs.getBlob("personImage");               
-			byte [] data = blob.getBytes( 1, ( int ) blob.length() );
-			BufferedImage img = null;
-			try {
-			img = ImageIO.read(new ByteArrayInputStream(data));
-			} catch (IOException e) {
-			    e.printStackTrace();
-			}
-			per.setPersonImage(img);*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
@@ -274,7 +265,7 @@ public class Models extends Observable implements model  {
 	return dietitian;
 	}
 	private static Dietitian GetDietitianParser(ResultSet rs) {
-		Dietitian per=new Dietitian(null,null,null,null,null,null,null, null, null); 
+		Dietitian per=new Dietitian(null,null,null,null,null,null, null, null); 
 		try {
 			per.setDietitianId(rs.getInt("dietitianId"));
 			//LocalDate d = LocalDate.parse(rs.getString("dietitianStatDate"));
@@ -426,7 +417,7 @@ public class Models extends Observable implements model  {
 	private static Ingredient GetIngredientParser(ResultSet rs) {
 		Integer[] ar=new Integer[1];
 		ar[0]=0;
-		Ingredient ingredient = new Ingredient(null,null,ar,null,null,null,null,null,null);
+		Ingredient ingredient = new Ingredient(null,null,ar,null,null,null,null,null);
 		try {
 			ingredient.setIngredientId(rs.getInt("ingredientId"));
 			ingredient.setIngredientName(rs.getString("ingredientName"));
@@ -577,7 +568,7 @@ public class Models extends Observable implements model  {
 	private static Recipe GetRecipeParser(ResultSet rs) {
 		Integer[] ar=new Integer[1];
 		ar[0]=0;
-		Recipe recipe = new Recipe(null,null,ar,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+		Recipe recipe = new Recipe(null,null,ar,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 		try {
 			recipe.setRecipeId(rs.getInt("recipeId"));
 			recipe.setRecipeName(rs.getString("recipeName"));
@@ -672,7 +663,7 @@ public class Models extends Observable implements model  {
 		notifyObservers(ev);
 	}	
 
-	
+
 	public static ResultSet SelectSpecificFrom(String Select, String Table, String Key,String Value) {
 		String sql;
 		if(Key!=null)
@@ -716,5 +707,5 @@ public class Models extends Observable implements model  {
 
 
 
-	
+
 }

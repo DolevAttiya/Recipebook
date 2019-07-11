@@ -1,12 +1,11 @@
 package model;
-import java.sql.Blob;
+
 import java.util.ArrayList;
 public class Recipe extends Entities{
 
 	/*Attributes*/
 	private Integer recipeId;
 	private String  recipeName;
-	private Blob recipeImage;
 	private Double recipeTotalCalories;
 	private Double recipeTotalCarbohydrate;
 	private Double recipeTotalProtein;
@@ -25,7 +24,7 @@ public class Recipe extends Entities{
 
 
 	/*Contractor*/
-	public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Double recipeTotalCalories,Double recipeTotalCarbohydrate,Double recipeTotalProtein,Double recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Integer recipeTimeToMake ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcess ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Double> recipeIngredientsAmount)
+	public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Double recipeTotalCalories,Double recipeTotalCarbohydrate,Double recipeTotalProtein,Double recipeTotalFat, Integer recipeKashruth, Integer recipeTimeToMake ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcess ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Double> recipeIngredientsAmount)
 	{ 
 		this.setRecipeAllergen(recipeAllergen);
 		this.setRecipeId(recipeId);
@@ -44,7 +43,6 @@ public class Recipe extends Entities{
 		this.setRecipeRate(recipeRate);
 		this.setRecipeDescription(recipeDescription);
 		this.setRecipeProcess(recipeProcess);	
-		this.setRecipeImage(recipeImage);
 	}
 	@Override
 	protected String Class() {
@@ -76,7 +74,7 @@ public class Recipe extends Entities{
 	public void setRecipeIngredientId(ArrayList<Integer> recipeIngredientId) {
 		this.recipeIngredientId = new ArrayList<Integer>();
 		if(recipeIngredientId!=null)
-		recipeIngredientId.forEach(n -> this.recipeIngredientId.add(n));
+			recipeIngredientId.forEach(n -> this.recipeIngredientId.add(n));
 	}
 	public ArrayList<Integer> getRecipeIngredientsType() {
 		return recipeIngredientsType;
@@ -84,7 +82,7 @@ public class Recipe extends Entities{
 	public void setRecipeIngredientsType(ArrayList<Integer> recipeIngredientsType) {
 		this.recipeIngredientsType = new ArrayList<Integer>();
 		if(recipeIngredientsType!=null)
-		recipeIngredientsType.forEach((n) -> this.recipeIngredientsType.add(n));
+			recipeIngredientsType.forEach((n) -> this.recipeIngredientsType.add(n));
 	}
 	public ArrayList<Double> getRecipeIngredientsAmount() {
 		return recipeIngredientsAmount;
@@ -92,7 +90,7 @@ public class Recipe extends Entities{
 	public void setRecipeIngredientsAmount(ArrayList<Double> recipeIngredientsAmount) {
 		this.recipeIngredientsAmount = new ArrayList<Double>();
 		if(recipeIngredientsAmount!=null)
-		recipeIngredientsAmount.forEach((n) -> this.recipeIngredientsAmount.add(n));
+			recipeIngredientsAmount.forEach((n) -> this.recipeIngredientsAmount.add(n));
 	}
 	public Double getRecipeTotalCalories() {
 		return recipeTotalCalories;
@@ -123,12 +121,6 @@ public class Recipe extends Entities{
 	}
 	public void setRecipeTotalFat(Double recipeTotalFat) {
 		this.recipeTotalFat = recipeTotalFat;
-	}
-	public Blob getRecipeImage() {
-		return recipeImage;
-	}
-	public void setRecipeImage(Blob recipeImage) {
-		this.recipeImage = recipeImage;
 	}
 	public Integer getRecipeTimeToMake() {
 		return recipeTimeToMake;
@@ -199,13 +191,12 @@ public class Recipe extends Entities{
 	}
 	@Override
 	protected String getEntitieAttributesNames() {
-		return " recipeId , recipeName , recipeImage , recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein , recipeTotalFat , recipeKashruth , recipeTimeToMake, recipeComplex , recipeRate , recipeDescription  , recipeProcess, PersonEmail ";
+		return " recipeId , recipeName  , recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein , recipeTotalFat , recipeKashruth , recipeTimeToMake, recipeComplex , recipeRate , recipeDescription  , recipeProcess, PersonEmail ";
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
 		return this.getRecipeId().toString() +" , \"" +
 				this.getRecipeName() +"\" , " +
-				this.getRecipeImage()+" , " +
 				this.getRecipeTotalCalories().toString() +" , " +
 				this.getRecipeTotalCarbohydrate().toString() +" , " +
 				this.getRecipeTotalProtein().toString() +" , " +
@@ -222,7 +213,6 @@ public class Recipe extends Entities{
 	protected String getEntitieAttributesNamesValues() {
 		return  " recipeId = "+this.getRecipeId().toString() +" , " +
 				" recipeName = \""+	this.getRecipeName() +"\" , " +
-				//" recipeImage = "+	this.getRecipeImage().toString() +" , " +
 				" recipeTotalCalories = "+	this.getRecipeTotalCalories().toString() +" , " +
 				" recipeTotalCarbohydrate = "+	this.getRecipeTotalCarbohydrate().toString() +" , " +
 				" recipeTotalProtein = "+	this.getRecipeTotalProtein().toString() +" , " +

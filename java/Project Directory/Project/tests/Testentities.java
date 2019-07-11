@@ -3,7 +3,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 //import java.awt.image.BufferedImage;
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -47,7 +46,7 @@ class Testentities {
 	@Test
 	void insertAndDeleteIngredient() {
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		pe= new Ingredient(99,"\"test\"",al,99.9,99.9,99.9,99.9,0,null);
+		pe= new Ingredient(99,"\"test\"",al,99.9,99.9,99.9,99.9,0);
 		pe.Insert();
 		pe1=Models.GetIngredientFromDB(99);
 		assertNotNull(pe1);
@@ -65,7 +64,6 @@ class Testentities {
 	void insertAndDeleteRecipe() {
 		Integer recipeId= 99;
 		String recipeName="lazania";
-		Blob recipeImage=null;
 		Double recipeTotalCalories=0.0;
 		Double recipeTotalCarbohydrate=0.0;
 		Double recipeTotalProtein=0.0;
@@ -144,7 +142,7 @@ class Testentities {
 		recipeIngredientsAmount.add(1.0);
 		recipeIngredientsAmount.add(50.0);
 		recipeIngredientsAmount.add(50.0);
-		re= new Recipe(recipeId, recipeName, recipeAllergen, recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein, recipeTotalFat, recipeKashruth, recipeImage, recipeTimeToMake, recipeComplex,Daenerys.getPersonEmail() , recipeRate, recipeDescription, recipeProcses, recipeIngredientId,recipeIngredientsType ,recipeIngredientsAmount );
+		re= new Recipe(recipeId, recipeName, recipeAllergen, recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein, recipeTotalFat, recipeKashruth, recipeTimeToMake, recipeComplex,Daenerys.getPersonEmail() , recipeRate, recipeDescription, recipeProcses, recipeIngredientId,recipeIngredientsType ,recipeIngredientsAmount );
 		re.Insert();
 		re1=Models.GetRecipeFromDB(99);
 		assertNotNull(re1);
@@ -164,7 +162,6 @@ class Testentities {
 	{
 		Integer recipeId= 99;
 		String recipeName="lazania";
-		Blob recipeImage=null;
 		Double recipeTotalCalories=0.0;
 		Double recipeTotalCarbohydrate=0.0;
 		Double recipeTotalProtein=0.0;
@@ -243,7 +240,7 @@ class Testentities {
 		recipeIngredientsAmount.add(1.0);
 		recipeIngredientsAmount.add(50.0);
 		recipeIngredientsAmount.add(50.0);
-		re= new Recipe(recipeId, recipeName, recipeAllergen, recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein, recipeTotalFat, recipeKashruth, recipeImage, recipeTimeToMake, recipeComplex,Daenerys.getPersonEmail() , recipeRate, recipeDescription, recipeProcses, recipeIngredientId,recipeIngredientsType ,recipeIngredientsAmount );
+		re= new Recipe(recipeId, recipeName, recipeAllergen, recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein, recipeTotalFat, recipeKashruth, recipeTimeToMake, recipeComplex,Daenerys.getPersonEmail() , recipeRate, recipeDescription, recipeProcses, recipeIngredientId,recipeIngredientsType ,recipeIngredientsAmount );
 		re.Insert();
 		re=Models.GetRecipeFromDB(99);
 		re.setRecipeRate(9);
@@ -277,7 +274,7 @@ class Testentities {
 	@Test
 	void insertAndDeleteUser() {
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		us= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, null, 99, al, true, false);
+		us= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, al, true, false);
 		us.Insert();
 		us1=Models.GetUserFromDB("idontknowhatemailis");
 		assertNotNull(us1);
@@ -293,7 +290,7 @@ class Testentities {
 	}
 	@Test
 	void updateDietitian() {
-		dt= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, null, 99, LocalDate.parse("2010-06-17"));
+		dt= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
 		dt.Insert();
 		dt.setDietitianStatDate(LocalDate.parse("1996-06-17"));
 		dt.Update();
@@ -303,10 +300,10 @@ class Testentities {
 	}
 	private	void reupdateDietitian() {		dt1=Models.GetDietitianFromDB("idontknowhatemailis");
 	dt1.Delete();
-}
+	}
 	@Test
 	void insertAndDeleteDietitian() {
-		dt= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, null, 99, LocalDate.parse("2010-06-17"));
+		dt= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
 		dt.Insert();
 		dt1=Models.GetDietitianFromDB("idontknowhatemailis");
 		assertNotNull(dt1);
