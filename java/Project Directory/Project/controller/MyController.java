@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.Observable;
-import java.util.function.BooleanSupplier;
 import java.util.ArrayList;
 import model.*;
 import model.User;
@@ -19,7 +18,6 @@ public class MyController implements Controller{
 	}
 
 	public void update(Observable o, Object arg) {
-		String x =((String)((Event)arg).getArr().get(0));
 		switch ((String)((Event)arg).getArr().get(0)) {
 		//---------Login Page------------
 		case "user_login":
