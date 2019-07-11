@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.Observable;
-import java.util.function.BooleanSupplier;
 import java.util.ArrayList;
 import model.*;
 import model.User;
@@ -10,19 +9,12 @@ import view.*;
 
 public class MyController implements Controller{
 
-	public static boolean visit=false;
 	private model model;
 	private View view;
-	private View test;
 
-	public MyController(model model, View view, View test){
+	public MyController(model model, View view){
 		this.view = view;
 		this.model = model;
-		this.test = test;
-	}
-
-	public MyController() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public void update(Observable o, Object arg) {
@@ -32,20 +24,20 @@ public class MyController implements Controller{
 			/* 0 - Event name
 			   1 - User name
 			   2 - Password */
-			visit=true;
 			((Models)model).CheckPasswordAndEmail((String)((Event)arg).getArr().get(1),(String)((Event)arg).getArr().get(2));
 			break;
 
 		case "user_login_response":
 			/* 0 - Event name
 			   1 - Array list */
-			((myView)view).loginResponse((ArrayList<User>)((Event)arg).getArr().get(1));
+			System.out.println("hey");
+			//((myView)view).loginResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_login_response":
 			/* 0 - Event name
 			   1 - Array list */
-			((myView)view).loginResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
+			//((myView)view).loginResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 
 		case "user_register":
@@ -53,7 +45,7 @@ public class MyController implements Controller{
 			break;
 
 		case "user_register_response":
-			((myView)view).uRegisterResponse((ArrayList<User>)((Event)arg).getArr().get(1));
+			//((myView)view).uRegisterResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_register":
@@ -127,10 +119,10 @@ public class MyController implements Controller{
 			break;
 
 		case "menu_search":
-			((Models)model).Search((String)((Event)arg).getArr().get(1));
+			((Models)model).Search((ArrayList<Object>)((Event)arg).getArr());
 			break;
 
-		case "advenced_search":
+		case "advanced_search":
 			/* 0 - Event name
 			   1 - search string
 			   2 - kashrot
@@ -138,7 +130,7 @@ public class MyController implements Controller{
 			   4 - cooking time
 			   5 - rate above
 			   5 - allergen array */
-			((Models)model).Search((String)((Event)arg).getArr().get(1));
+			((Models)model).Search((ArrayList<Object>)((Event)arg).getArr());
 			break;
 
 		case "search_response":
