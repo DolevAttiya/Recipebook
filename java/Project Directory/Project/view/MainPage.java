@@ -51,10 +51,11 @@ public class MainPage extends JFrame {
 				}
 			}
 		});
+		
 	}
-public void close() {
-	WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
-	Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
+	public void close() {
+		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
 
 	/**
 	 * Create the frame.
@@ -112,6 +113,14 @@ public void close() {
 		txtpnSearch.setText("Search a Recipe");
 		
 		JButton btnNewButton = new JButton("Advanced Search");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent v) {
+				AdvancedSearch a=new AdvancedSearch();
+				a.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
+			}
+		});
 		btnNewButton.setBounds(202, 235, 310, 45);
 		panel_2.add(btnNewButton);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -124,6 +133,15 @@ public void close() {
 		panel.add(panel_6);
 		
 		JTextPane txtpnAllRecipies = new JTextPane();
+		txtpnAllRecipies.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
+			}
+		});
 		txtpnAllRecipies.setText("All Recipies");
 		txtpnAllRecipies.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 60));
 		txtpnAllRecipies.setBackground(new Color(240, 248, 255));
@@ -138,6 +156,15 @@ public void close() {
 		panel.add(panel_7);
 		
 		JTextPane txtpnAddNewRecipe_1 = new JTextPane();
+		txtpnAddNewRecipe_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				NewRecipe a=new NewRecipe();
+				a.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
+			}
+		});
 		txtpnAddNewRecipe_1.setText("Add New Recipe");
 		txtpnAddNewRecipe_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 60));
 		txtpnAddNewRecipe_1.setBackground(new Color(240, 248, 255));
@@ -166,9 +193,10 @@ public void close() {
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User c=new User();
-				c.setVisible(true);
-				close();
+				User f=new User();
+				f.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
 			}
 		});
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
@@ -182,9 +210,10 @@ public void close() {
 		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AdvancedSearch c=new AdvancedSearch();
-				c.setVisible(true);
-				close();
+				AdvancedSearch d=new AdvancedSearch();
+				d.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
 			}
 		});
 		txtpnAdvancedSearch_1.setText("Advanced Search");
@@ -204,11 +233,13 @@ public void close() {
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MyFavourites c=new MyFavourites();
-				c.setVisible(true);
-				close();
+				MyFavourites d=new MyFavourites();
+				d.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
 			}
 		});
+
 		txtpnFavouriteRecipes.setBounds(524, 7, 210, 87);
 		panel_1.add(txtpnFavouriteRecipes);
 		txtpnFavouriteRecipes.setText("Favourite Recipes");
@@ -230,7 +261,8 @@ public void close() {
 			public void mouseClicked(MouseEvent e) {
 				MyRecipes c=new MyRecipes();
 				c.setVisible(true);
-				close();
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
 			}
 		});
 		txtpnMyRecipes.setText("My Recipes");
@@ -243,18 +275,22 @@ public void close() {
 		JTextPane txtpnTaimli = new JTextPane();
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				MainPage a=new MainPage();
-				a.setVisible(true);
-				close();
+			public void mouseClicked(MouseEvent arg0) {
+				MainPage b=new MainPage();
+				b.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
 			}
 		});
+		
+		
 		txtpnTaimli.setText("Taimli");
 		txtpnTaimli.setForeground(Color.WHITE);
 		txtpnTaimli.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnTaimli.setBackground(new Color(65, 105, 225));
 		txtpnTaimli.setBounds(0, -7, 343, 96);
 		panel_1.add(txtpnTaimli);
-	}}		
+	}	
+}		
 		
 
