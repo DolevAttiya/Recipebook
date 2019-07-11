@@ -1,9 +1,10 @@
 package model;
 
-import java.awt.image.BufferedImage;
+/*import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.sql.Blob;
+import javax.imageio.ImageIO;
+import java.sql.Blob;*/
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import javax.imageio.ImageIO;
 
 import controller.Event;
 public class Models extends Observable implements model  {
@@ -21,6 +21,83 @@ public class Models extends Observable implements model  {
 
 	public Models() {
 	}
+	
+	public void myFavoriteRecipes(String Email) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join PersonFavoriteRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
+
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("favorite_recipes_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	@SuppressWarnings("unchecked")
+	public void Search(ArrayList<Object> search) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
+		if(search.get(2)!=null)
+			sql+=" AND recipeKashruth = "+search.get(2);
+		if(search.get(3)!=null)
+			sql+=" AND recipeComplex = "+search.get(3);
+		if(search.get(4)!=null)
+			sql+=" AND recipeTimeToMake = "+search.get(4);
+		if(search.get(5)!=null)
+			sql+=" AND recipeRate  "+search.get(5);
+		if(search.get(6)!=null)
+			for(int i=0;i<((ArrayList<Integer>)search.get(6)).size();i++)
+			{
+				sql+=" AND AllergenId is not"+((ArrayList<Integer>)search.get(6)).get(i);
+			}
+		sql+=" Orderby recipeRate ";
+
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("search_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void myRecipes(String Email) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join PersonRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
+
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("my_recipes_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+
 	public void top10(){
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
@@ -200,7 +277,7 @@ public class Models extends Observable implements model  {
 		Dietitian per=new Dietitian(null,null,null,null,null,null,null, null, null); 
 		try {
 			per.setDietitianId(rs.getInt("dietitianId"));
-			LocalDate d = LocalDate.parse(rs.getString("dietitianStatDate"));
+			//LocalDate d = LocalDate.parse(rs.getString("dietitianStatDate"));
 			per.setDietitianStatDate(LocalDate.parse(rs.getString("dietitianStatDate")));
 			per.setPersonEmail(rs.getString("personEmail"));
 			per.setPersonFirstName(rs.getString("personFirstName"));
@@ -594,26 +671,7 @@ public class Models extends Observable implements model  {
 		setChanged();
 		notifyObservers(ev);
 	}	
-	public void myFavoriteRecipes(String Email) {
-		ev=new Event();
-		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		String sql= " Select * From Recipe Join PersonFavoriteRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
 
-		ResultSet rs =getFromWithDB(sql);
-		try {
-			while(rs.next())
-			{
-				recipe.add(GetRecipeParser(rs));	
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ev.getArr().add("favorite_recipes_response");
-		ev.getArr().add(recipe);
-		setChanged();
-		notifyObservers(ev);
-	}
 	
 	public static ResultSet SelectSpecificFrom(String Select, String Table, String Key,String Value) {
 		String sql;
@@ -656,61 +714,7 @@ public class Models extends Observable implements model  {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	public void Search(ArrayList<Object> search) {
-		ev=new Event();
-		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		String sql= " Select * From Recipe Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
-		if(search.get(2)!=null)
-			sql+=" AND recipeKashruth = "+search.get(2);
-		if(search.get(3)!=null)
-			sql+=" AND recipeComplex = "+search.get(3);
-		if(search.get(4)!=null)
-			sql+=" AND recipeTimeToMake = "+search.get(4);
-		if(search.get(5)!=null)
-			sql+=" AND recipeRate  "+search.get(5);
-		if(search.get(6)!=null)
-			for(int i=0;i<((ArrayList<Integer>)search.get(6)).size();i++)
-			{
-				sql+=" AND AllergenId is not"+((ArrayList<Integer>)search.get(6)).get(i);
-			}
-		sql+=" Orderby recipeRate ";
 
-		ResultSet rs =getFromWithDB(sql);
-		try {
-			while(rs.next())
-			{
-				recipe.add(GetRecipeParser(rs));	
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ev.getArr().add("search_response");
-		ev.getArr().add(recipe);
-		setChanged();
-		notifyObservers(ev);
-	}
-	public void myRecipes(String Email) {
-		ev=new Event();
-		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		String sql= " Select * From Recipe Join PersonRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
-
-		ResultSet rs =getFromWithDB(sql);
-		try {
-			while(rs.next())
-			{
-				recipe.add(GetRecipeParser(rs));	
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ev.getArr().add("my_recipes_response");
-		ev.getArr().add(recipe);
-		setChanged();
-		notifyObservers(ev);
-	}
 
 	
 }
