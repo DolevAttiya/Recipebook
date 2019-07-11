@@ -1,9 +1,10 @@
 package model;
 
-import java.awt.image.BufferedImage;
+
 import java.time.LocalDate;
 //import java.sql.PreparedStatement;
 import java.util.ArrayList;
+
 public class User extends Person {
 
 	private Integer userId;
@@ -11,9 +12,8 @@ public class User extends Person {
 	private Boolean userAllergens;
 	private Boolean userKashruth;
 	public User(String personEmail, String personFirstName, String personLastName, LocalDate personDateOfBirth,
-			String personHashPass, ArrayList<Integer> personsFavoriteRecipe, BufferedImage personImage,Integer userId, Integer userAllergen[],Boolean userAllergens, Boolean userKashruth) {
-		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe,
-				personImage);
+			String personHashPass, ArrayList<Integer> personsFavoriteRecipe,Integer userId, Integer userAllergen[],Boolean userAllergens, Boolean userKashruth) {
+		super(personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personsFavoriteRecipe);
 		this.setUserId(userId);
 		this.setUserAllergen(userAllergen);
 		this.setUserAllergens(userAllergens);
@@ -44,7 +44,7 @@ public class User extends Person {
 
 	public void setUserKashruth(Boolean userKashruth) {
 		if(userKashruth)
-		this.userKashruth = true;
+			this.userKashruth = true;
 		else
 			this.userKashruth =false;
 	}
@@ -56,8 +56,8 @@ public class User extends Person {
 	public void setUserAllergens(Boolean userAllergens) {
 		if(userAllergens)
 			this.userAllergens = true;
-			else
-				this.userAllergens =false;	}
+		else
+			this.userAllergens =false;	}
 	@Override
 	protected String getEntitieKey() {	
 		return " userId ";
@@ -74,7 +74,7 @@ public class User extends Person {
 	protected String getEntitieAttributesValues() {
 		return " "+this.getUserId().toString()+" , "+this.getUserAllergens().toString()+" , "+this.getUserKashruth().toString()+" , \""+this.getPersonEmail()+"\" ";
 	}
-	
+
 	protected String getEntitieAttributesNamesValues() {
 		return " "+getEntitieKey()+" = "+this.getUserId().toString()+" , userAllergen = "+this.getUserAllergens().toString()+" , userKashruth = "+this.getUserKashruth().toString()+" , personEmail = \""+this.getPersonEmail()+ "\" ";
 	}
@@ -121,16 +121,16 @@ public void getPsmtmt(PreparedStatement pstmt) {
 
 	@Override
 	protected String getPersonAttributesNames() {
-		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personImage";
+		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass";
 	}
 	@Override
 	protected String getPersonAttributesValues() {
-		return " \""+this.getPersonEmail()+"\" , \""+this.getPersonFirstName()+"\" , \""+this.getPersonLastName()+"\" , \""+this.getPersonDateOfBirth().toString()+"\" , \""+this.getPersonHashPass()+"\" , "+this.getPersonImage()+ " ";
+		return " \""+this.getPersonEmail()+"\" , \""+this.getPersonFirstName()+"\" , \""+this.getPersonLastName()+"\" , \""+this.getPersonDateOfBirth().toString()+"\" , \""+this.getPersonHashPass()+"\"  ";
 	}
 	@Override
 	protected String getPersonAttributesNamesValues() {
 		// TODO Auto-generated method stub
-		return " personFirstName = \""+this.getPersonFirstName()+"\" , personLastName = \""+this.getPersonLastName()+"\" , personDateOfBirth = \""+this.getPersonDateOfBirth().toString()+"\" , personHashPass = \""+ this.getPersonHashPass() + "\" , personImage = "+ this.getPersonImage();
+		return " personFirstName = \""+this.getPersonFirstName()+"\" , personLastName = \""+this.getPersonLastName()+"\" , personDateOfBirth = \""+this.getPersonDateOfBirth().toString()+"\" , personHashPass = \""+ this.getPersonHashPass() + "\" ";
 
 	}
 	@Override
