@@ -1,6 +1,5 @@
 package model;
 import java.sql.Blob;
-import java.sql.Time;
 import java.util.ArrayList;
 public class Recipe extends Entities{
 
@@ -13,7 +12,7 @@ public class Recipe extends Entities{
 	private Double recipeTotalProtein;
 	private Double recipeTotalFat;
 	private Integer recipeKashruth;
-	private Time recipeTimeToMake;
+	private Integer recipeTimeToMake;
 	private Integer recipeComplex;
 	private Integer recipeRate;
 	private String recipeDescription;
@@ -26,7 +25,7 @@ public class Recipe extends Entities{
 
 
 	/*Contractor*/
-	public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Double recipeTotalCalories,Double recipeTotalCarbohydrate,Double recipeTotalProtein,Double recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Time recipeTimeToMake ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcess ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Double> recipeIngredientsAmount)
+	public Recipe( Integer recipeId,String  recipeName, Integer[] recipeAllergen,Double recipeTotalCalories,Double recipeTotalCarbohydrate,Double recipeTotalProtein,Double recipeTotalFat, Integer recipeKashruth, Blob recipeImage, Integer recipeTimeToMake ,Integer recipeComplex,String recipePersonEmail,Integer recipeRate, String recipeDescription, String recipeProcess ,ArrayList<Integer> recipeIngredientId, ArrayList<Integer> recipeIngredientsType, ArrayList<Double> recipeIngredientsAmount)
 	{ 
 		this.setRecipeAllergen(recipeAllergen);
 		this.setRecipeId(recipeId);
@@ -131,10 +130,10 @@ public class Recipe extends Entities{
 	public void setRecipeImage(Blob recipeImage) {
 		this.recipeImage = recipeImage;
 	}
-	public Time getRecipeTimeToMake() {
+	public Integer getRecipeTimeToMake() {
 		return recipeTimeToMake;
 	}
-	public void setRecipeTimeToMake(Time recipeTimeToMake) {
+	public void setRecipeTimeToMake(Integer recipeTimeToMake) {
 		this.recipeTimeToMake = recipeTimeToMake;
 	}
 	public Integer getRecipeComplex() {
