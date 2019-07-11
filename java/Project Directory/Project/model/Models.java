@@ -1,9 +1,10 @@
 package model;
 
-import java.awt.image.BufferedImage;
+/*import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.sql.Blob;
+import javax.imageio.ImageIO;
+import java.sql.Blob;*/
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import javax.imageio.ImageIO;
 
 import controller.Event;
 public class Models extends Observable implements model  {
@@ -277,7 +277,7 @@ public class Models extends Observable implements model  {
 		Dietitian per=new Dietitian(null,null,null,null,null,null,null, null, null); 
 		try {
 			per.setDietitianId(rs.getInt("dietitianId"));
-			LocalDate d = LocalDate.parse(rs.getString("dietitianStatDate"));
+			//LocalDate d = LocalDate.parse(rs.getString("dietitianStatDate"));
 			per.setDietitianStatDate(LocalDate.parse(rs.getString("dietitianStatDate")));
 			per.setPersonEmail(rs.getString("personEmail"));
 			per.setPersonFirstName(rs.getString("personFirstName"));
