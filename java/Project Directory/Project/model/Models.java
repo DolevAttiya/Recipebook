@@ -44,10 +44,13 @@ public class Models extends Observable implements model  {
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		String sql= " Select * From Recipe Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
 		if(search.get(2)!=null)
-			if((int)search.get(2)!=4)
-				sql+=" AND recipeKashruth = "+(int)search.get(2);
-			else 
-				sql+=" AND recipeKashruth != 3";
+			if(search.get(7)!= null) {
+				if((int)search.get(2)!=4)
+
+					sql+=" AND recipeKashruth = "+(int)search.get(2);
+				else 
+					sql+=" AND recipeKashruth != 3";
+			}
 		if(search.get(3)!=null)
 
 			sql+=" AND recipeComplex = "+(int)search.get(3);
