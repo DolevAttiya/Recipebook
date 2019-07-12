@@ -81,7 +81,7 @@ public class Login extends JFrame {
 		JLabel lblUserName = new JLabel("Email:");
 		lblUserName.setFont(new Font("Dialog", Font.PLAIN, 70));
 		lblUserName.setForeground(new Color(255, 255, 255));
-		lblUserName.setBounds(302, 504, 536, 72);
+		lblUserName.setBounds(302, 504, 350, 72);
 		contentPane.add(lblUserName);
 		
 		JLabel lblPassword = new JLabel("Password:");

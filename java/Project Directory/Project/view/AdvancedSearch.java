@@ -217,7 +217,18 @@ public class AdvancedSearch extends JFrame {
 		comboBox_3.setBounds(307, 617, 90, 53);
 		panel_1.add(comboBox_3);
 		
-		JComboBox comboBox = new JComboBox();
+		
+		String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
+
+		JComboBox comboBox = new JComboBox(petStrings);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox = (JComboBox)e.getSource();
+		        String petName = (String)comboBox.getSelectedItem();
+		        //updateLabel(petName);
+			}
+		});
+
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		comboBox.setBounds(373, 352, 317, 49);
 		panel_1.add(comboBox);
@@ -312,7 +323,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		checkBox_1.setBackground(new Color(240, 248, 255));
-		checkBox_1.setBounds(999, 531, 345, 41);
+		checkBox_1.setBounds(999, 531, 269, 41);
 		panel_1.add(checkBox_1);
 		
 		JCheckBox checkBox_3 = new JCheckBox("Tree Nuts");
@@ -351,7 +362,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		checkBox_5.setBackground(new Color(240, 248, 255));
-		checkBox_5.setBounds(999, 463, 345, 41);
+		checkBox_5.setBounds(999, 463, 269, 41);
 		panel_1.add(checkBox_5);
 		
 		JCheckBox checkBox_6 = new JCheckBox("Coffie");
@@ -364,7 +375,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		checkBox_6.setBackground(new Color(240, 248, 255));
-		checkBox_6.setBounds(999, 598, 345, 41);
+		checkBox_6.setBounds(999, 598, 269, 41);
 		panel_1.add(checkBox_6);
 		
 		JCheckBox checkBox_7 = new JCheckBox("Gluten");
@@ -377,7 +388,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		checkBox_7.setBackground(new Color(240, 248, 255));
-		checkBox_7.setBounds(999, 671, 345, 41);
+		checkBox_7.setBounds(999, 671, 255, 41);
 		panel_1.add(checkBox_7);
 		
 		JCheckBox checkBox_9 = new JCheckBox("Dairy");
