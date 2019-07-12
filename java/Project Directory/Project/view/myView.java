@@ -2,6 +2,7 @@ package view;
 
 import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -25,27 +26,22 @@ public class myView extends Observable implements View {
 	public static myView statview = new myView();
 	User myUser;
 	Dietitian myDietitian;
-	public String ConvertPassToHash(String password)  {
-		MessageDigest digest;
-		try {
-			digest = MessageDigest.getInstance("SHA3_256");
-			final byte[] hashbytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-			String sha3_256hex = bytesToHex(hashbytes);
-			return sha3_256hex;
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} return null;
-	}
-	private static String bytesToHex(byte[] hashInBytes) {
-
-		StringBuilder sb = new StringBuilder();
-		for (byte b : hashInBytes) {
-			sb.append(String.format("%02x", b));
-		}
-		return sb.toString();
-
-	}
+	public static String ConvertPassToHash(String input)  {
+		try { 
+			MessageDigest md = MessageDigest.getInstance("SHA-256"); 
+			byte[] messageDigest = md.digest(input.getBytes()); 
+			BigInteger no = new BigInteger(1, messageDigest); 
+			String hashtext = no.toString(16); 
+			while (hashtext.length() < 32) { 
+				hashtext = "0" + hashtext; 
+			} 
+			return hashtext; 
+		} 
+		catch (NoSuchAlgorithmException e) { 
+			System.out.println("Exception thrown" + " for incorrect algorithm: " + e); 
+			return null; 
+		} 
+	} 
 	public void login (String email, String pass)
 	{
 		pass=ConvertPassToHash(pass);
@@ -72,13 +68,13 @@ public class myView extends Observable implements View {
 		hashPass = ConvertPassToHash(pass);
 		if (isDietitian==true)
 		{
-			newDietitian = new Dietitian(email, firstName, lastName, dateOfBirth, hashPass, null, null, dietitianNum, dietitianStatDate);
+			newDietitian = new Dietitian(email, firstName, lastName, dateOfBirth, hashPass, null, dietitianNum, dietitianStatDate);
 			ev.getArr().add("dietitian_register");
 			ev.getArr().add(newDietitian);
 		}
 		else
 		{
-			newUser=new model.User(email, firstName, lastName, dateOfBirth, hashPass, null, null, 1, allergies, wantAllerg, isKosher);
+			newUser=new model.User(email, firstName, lastName, dateOfBirth, hashPass, null, 1, allergies, wantAllerg, isKosher);
 			ev.getArr().add("user_register");
 			ev.getArr().add(newUser);
 		}
@@ -123,6 +119,9 @@ public class myView extends Observable implements View {
 			if (myUser.getUserAllergens()==true) // wants to see adapted results
 				ev.getArr().add(myUser.getUserAllergen()); // sends the user's allergies
 			else ev.getArr().add(null); // null means wants all results
+			if (myUser.getUserKashruth()==true) // wants to see adapted results
+				ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
+			else ev.getArr().add(null); // null means wants all results
 		}
 		else // Dietitian
 		{
@@ -131,6 +130,7 @@ public class myView extends Observable implements View {
 			ev.getArr().add(null); // Cooking Time - Irrelevant in search from menu
 			ev.getArr().add(null); // Rate Above - Irrelevant in search from menu
 			ev.getArr().add(null); // null means wants all results
+			ev.getArr().add(null);
 		}
 		setChanged();
 		notifyObservers(ev);
@@ -147,6 +147,9 @@ public class myView extends Observable implements View {
 		ev.getArr().add(timeToMake); 
 		ev.getArr().add(rateAbove);
 		ev.getArr().add(allergies); // sends the user's allergies
+		if (showOnlyKosher==true) // wants to see adapted results
+			ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
+		else ev.getArr().add(null); // null means wants all results
 		setChanged();
 		notifyObservers(ev);
 	}
@@ -241,23 +244,23 @@ case "select_dietitian":
 case "ingredient_insert":
 case "ingredient_update":
 case "ingredient_delete": // we need to discuss that !
-
+*/
 	/*
- * timeToMake:
- * 0 - 0-30 minutes
- * 1 - 30-60 minutes
- * 2 - 60-90 minutes
- * 3 - 90-120 minutes
- * 4 - more than 2 hours 
- * rateAbove:
- * 0 - 0 stars
- * 1 - 5 stars
- * 2 - 10 stars
- * 3 - 15 stars
- * 4 - 20 stars
- * catagory:
- * 0 - חלבי
- * 1 - בשרי
- * 2 - פרווה
- * 3 - לא כשר יענו בייקון וכו?
- */
+	 * timeToMake:
+	 * 0 - 0-30 minutes
+	 * 1 - 30-60 minutes
+	 * 2 - 60-90 minutes
+	 * 3 - 90-120 minutes
+	 * 4 - more than 2 hours 
+	 * rateAbove:
+	 * 0 - 0 stars
+	 * 1 - 5 stars
+	 * 2 - 10 stars
+	 * 3 - 15 stars
+	 * 4 - 20 stars
+	 * catagory:
+	 * 0 - חלבי
+	 * 1 - בשרי
+	 * 2 - פרווה
+	 * 3 - לא כשר יענו בייקון וכו?
+	 */
