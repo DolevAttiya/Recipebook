@@ -34,16 +34,25 @@ public class ControlerModelIntegration {
 	}
 
 	@Test
-	void userLoginTest() {
+	void userLoginTrueTest() {
 		ev = new Event();
 		ev.getArr().add("user_login");
-		ev.getArr().add("username");
-		ev.getArr().add("password");
+		ev.getArr().add("drakarisValyrian.com");
+		ev.getArr().add("89d31d9d76e49bcbb132e6f01cb05625bd03e48c59f62573f97077ef12e14947");
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+
 	@Test
-	void userRegisterTest() {
+	void userLoginFalseTest() {
+		ev = new Event();
+		ev.getArr().add("user_login");
+		ev.getArr().add("saywhattttt");
+		ev.getArr().add("idontknow");
+		((MyController)controllerTest).update(null, ev);
+	}
+
+	@Test
+	void userRegisterTrueTest() {
 		ev = new Event();
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
 		user= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, al, true, false);
@@ -53,27 +62,63 @@ public class ControlerModelIntegration {
 		user = Models.GetUserFromDB("idontknowhatemailis");
 		user.Delete();
 	}
-	
+
 	@Test
-	void dietitianRegisterTest() {
+	void userRegisterFalseTest() {
 		ev = new Event();
-		dietitian = new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
-		ev.getArr().add("dietitian_register");
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		user = new User("drakarisValyrian.com", "Daenerys", "Targaryen",LocalDate.parse("2019-06-17"), "eladvald", null, 99, al, true, false);
+		ev.getArr().add("user_register");
 		ev.getArr().add(user);
 		((MyController)controllerTest).update(null, ev);
-		dietitian = Models.GetDietitianFromDB("idontknowhatemailis");
-		dietitian.Delete();
+		user = Models.GetUserFromDB("idontknowhatemailis");
+		user.Delete();
 	}
-	
+
 	@Test
-	void userUpdateTest() {
+	void dietitianRegisterTrueTest() {
 		ev = new Event();
-		user= Models.GetUserFromDB("drakarisValyrian.com");
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		user= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, al, true, false);
+		ev.getArr().add("user_register");
+		ev.getArr().add(user);
+		((MyController)controllerTest).update(null, ev);
+		user = Models.GetUserFromDB("idontknowhatemailis");
+		user.Delete();
+	}
+
+	@Test
+	void dietitianRegisterFalseTest() {
+		ev = new Event();
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		user = new User("midget@kingslanding.com", "Daenerys", "Targaryen",LocalDate.parse("2019-06-17"), "eladvald", null, 99, al, true, false);
+		ev.getArr().add("user_register");
+		ev.getArr().add(user);
+		((MyController)controllerTest).update(null, ev);
+		user = Models.GetUserFromDB("idontknowhatemailis");
+		user.Delete();
+	}
+
+	@Test
+	void userUpdateTrueTest() {
+		ev = new Event();
+		user = Models.GetUserFromDB("drakarisValyrian.com");
 		user.setUserKashruth(true);
 		ev.getArr().add("user_update");
 		ev.getArr().add(user);
 		((MyController)controllerTest).update(null, ev);
 		user.setUserKashruth(false);
 	}
-	
+
+	@Test
+	void userUpdateFalseTest() {
+		ev = new Event();
+		user = Models.GetUserFromDB("randommail");
+		user.setUserKashruth(true);
+		ev.getArr().add("user_update");
+		ev.getArr().add(user);
+		((MyController)controllerTest).update(null, ev);
+		user.setUserKashruth(false);
+	}
+
 }
