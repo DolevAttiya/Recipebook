@@ -89,10 +89,6 @@ public class NewRecipe extends JFrame {
 		textField_2.setBounds(747, 37, 340, 43);
 		panel.add(textField_2);
 
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1512, 0, 79, 73);
-		panel.add(panel_3);
-
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
@@ -213,10 +209,6 @@ public class NewRecipe extends JFrame {
 		txtpnPerGrams.setBackground(new Color(240, 248, 255));
 		txtpnPerGrams.setBounds(1238, 654, 160, 31);
 		panel_1.add(txtpnPerGrams);
-
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(1102, 182, 422, 375);
-		panel_1.add(panel_2);
 
 		JTextPane txtpnProtein = new JTextPane();
 		txtpnProtein.setText("Protein:");
@@ -347,11 +339,6 @@ public class NewRecipe extends JFrame {
 		textField_7.setColumns(10);
 		textField_7.setBounds(1287, 876, 237, 49);
 		panel_1.add(textField_7);
-
-		JButton button = new JButton("Edit Photo");
-		button.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		button.setBounds(1238, 557, 161, 31);
-		panel_1.add(button);
 
 		JTextArea textArea = new JTextArea();
 		textArea.setRows(15);

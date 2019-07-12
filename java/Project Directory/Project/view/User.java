@@ -90,10 +90,6 @@ public class User extends JFrame {
 		contentPane_1.add(panel);
 		panel.setLayout(null);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1512, 0, 79, 73);
-		panel.add(panel_3);
-		
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
@@ -246,10 +242,6 @@ public class User extends JFrame {
 		chckbxFish.setBackground(new Color(240, 248, 255));
 		chckbxFish.setBounds(1027, 783, 345, 41);
 		panel_1.add(chckbxFish);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(1109, 163, 456, 390);
-		panel_1.add(panel_2);
 		
 		JButton btnDeletePhoto = new JButton("Edit Photo");
 		btnDeletePhoto.setFont(new Font("Tahoma", Font.PLAIN, 25));

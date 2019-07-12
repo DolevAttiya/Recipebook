@@ -84,10 +84,6 @@ public class RecipeView extends JFrame {
 		textField_2.setBounds(747, 37, 340, 43);
 		panel.add(textField_2);
 
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1512, 0, 79, 73);
-		panel.add(panel_3);
-
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
@@ -198,10 +194,6 @@ public class RecipeView extends JFrame {
 		txtpnPerGrams.setBackground(new Color(240, 248, 255));
 		txtpnPerGrams.setBounds(1238, 654, 160, 31);
 		panel_1.add(txtpnPerGrams);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(1102, 182, 422, 375);
-		panel_1.add(panel_2);
 		
 		JTextPane txtpnProtein = new JTextPane();
 		txtpnProtein.setText("Protein:");

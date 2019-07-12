@@ -81,10 +81,6 @@ public class Component extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1512, 0, 79, 73);
-		panel.add(panel_3);
-		
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override

@@ -185,10 +185,6 @@ public class MainPage extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(1512, 0, 79, 73);
-		panel_1.add(panel_5);
-		
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override

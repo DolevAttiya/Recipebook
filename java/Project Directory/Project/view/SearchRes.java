@@ -79,10 +79,6 @@ public class SearchRes extends JFrame {
 		textField_2.setBounds(747, 37, 340, 43);
 		panel.add(textField_2);
 
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1512, 0, 79, 73);
-		panel.add(panel_3);
-
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
