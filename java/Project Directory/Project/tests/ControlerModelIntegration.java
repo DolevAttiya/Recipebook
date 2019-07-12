@@ -2,15 +2,19 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import controller.Event;
+import controller.Controller;
 import controller.MyController;
+import model.Dietitian;
 import model.Models;
+import model.User;
 import model.model;
 import view.View;
 import view.myView;
-import controller.Controller;
 
 public class ControlerModelIntegration {
 
@@ -18,6 +22,8 @@ public class ControlerModelIntegration {
 	static model m;
 	static View v;
 	static Controller controllerTest;
+	User user;
+	Dietitian dietitian;
 
 	@BeforeAll
 	static void setup() {
@@ -39,9 +45,35 @@ public class ControlerModelIntegration {
 	@Test
 	void userRegisterTest() {
 		ev = new Event();
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		user= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, al, true, false);
 		ev.getArr().add("user_register");
-		ev.getArr().add("username");
-		ev.getArr().add("password");
+		ev.getArr().add(user);
 		((MyController)controllerTest).update(null, ev);
+		user = Models.GetUserFromDB("idontknowhatemailis");
+		user.Delete();
 	}
+	
+	@Test
+	void dietitianRegisterTest() {
+		ev = new Event();
+		dietitian = new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
+		ev.getArr().add("dietitian_register");
+		ev.getArr().add(user);
+		((MyController)controllerTest).update(null, ev);
+		dietitian = Models.GetDietitianFromDB("idontknowhatemailis");
+		dietitian.Delete();
+	}
+	
+	@Test
+	void userUpdateTest() {
+		ev = new Event();
+		user= Models.GetUserFromDB("drakarisValyrian.com");
+		user.setUserKashruth(true);
+		ev.getArr().add("user_update");
+		ev.getArr().add(user);
+		((MyController)controllerTest).update(null, ev);
+		user.setUserKashruth(false);
+	}
+	
 }
