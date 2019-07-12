@@ -93,7 +93,7 @@ public class Login extends JFrame {
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.login(passwordField_1.getText(), String.copyValueOf(passwordField.getPassword()));
+				myView.statview.login(textField.getText(), String.copyValueOf(passwordField.getPassword()));
 				MainPage a=new MainPage();
 				a.setVisible(true);
 				close();

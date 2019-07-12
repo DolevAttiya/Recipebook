@@ -1,9 +1,6 @@
 package model;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.sql.Blob;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import javax.imageio.ImageIO;
 
 import controller.Event;
 public class Models extends Observable implements model  {
@@ -21,6 +17,90 @@ public class Models extends Observable implements model  {
 
 	public Models() {
 	}
+
+	public void myFavoriteRecipes(String Email) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join PersonFavoriteRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
+
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("favorite_recipes_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	@SuppressWarnings("unchecked")
+	public void Search(ArrayList<Object> search) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
+		if(search.get(2)!=null)
+			if(search.get(7)!= null) {
+				if((int)search.get(2)!=4)
+
+					sql+=" AND recipeKashruth = "+(int)search.get(2);
+				else 
+					sql+=" AND recipeKashruth != 3";
+			}
+		if(search.get(3)!=null)
+
+			sql+=" AND recipeComplex = "+(int)search.get(3);
+		if(search.get(4)!=null)
+			sql+=" AND recipeTimeToMake = "+(int)search.get(4);
+		if(search.get(5)!=null)
+			sql+=" AND recipeRate  "+(int)search.get(5);
+		if(search.get(6)!=null)
+			for(int i=0;i<((ArrayList<Integer>)search.get(6)).size();i++)
+			{
+				sql+=" AND AllergenId is not"+((ArrayList<Integer>)search.get(6)).get(i);
+			}
+		sql+=" Orderby recipeRate ";
+
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("search_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void myRecipes(String Email) {
+		ev=new Event();
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		String sql= " Select * From Recipe Join PersonRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
+
+		ResultSet rs =getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("my_recipes_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+
 	public void top10(){
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
@@ -105,7 +185,7 @@ public class Models extends Observable implements model  {
 	private static User GetUserParser(ResultSet rs) {
 		Integer[] ar=new Integer[1];
 		ar[0]=0;
-		User per=new User(null,null,null,null,null,null,null, null, ar,false,false); 
+		User per=new User(null,null,null,null,null,null, null, ar,false,false); 
 		try {
 			per.setUserId(rs.getInt("userId"));
 			ResultSet userAllergens = Models.SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
@@ -128,15 +208,6 @@ public class Models extends Observable implements model  {
 			while(favorite.next())
 				personsFavoriteRecipes.add(rs.getInt("recipeId"));
 			per.setPersonsFavoriteRecipe(personsFavoriteRecipes);
-			/*Blob blob = rs.getBlob("personImage");               
-			byte [] data = blob.getBytes( 1, ( int ) blob.length() );
-			BufferedImage img = null;
-			try {
-			img = ImageIO.read(new ByteArrayInputStream(data));
-			} catch (IOException e) {
-			    e.printStackTrace();
-			}
-			per.setPersonImage(img);*/
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
@@ -146,14 +217,24 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<User> user= new ArrayList<User>();
-		if(us.Insert())
-		{
-			user.add(GetUserFromDB(us.getPersonEmail()));
-		}
-		ev.getArr().add("user_register_response");
-		ev.getArr().add(user);
-		setChanged();
-		notifyObservers(ev);
+		ResultSet rs =Models.SelectSpecificFrom("Max( userId ) as max", "User", null, null);
+		try {
+			us.setUserId(rs.getInt("max")+1);
+			if(us.Insert()) {
+				user.add(GetUserFromDB(us.getPersonEmail()));
+
+				ev.getArr().add("user_register_response");
+				ev.getArr().add(user);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			ev.getArr().add("user_register_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
+		}	
 	}
 	public void updateUser(User us){
 		ev=new Event();
@@ -197,10 +278,10 @@ public class Models extends Observable implements model  {
 	return dietitian;
 	}
 	private static Dietitian GetDietitianParser(ResultSet rs) {
-		Dietitian per=new Dietitian(null,null,null,null,null,null,null, null, null); 
+		Dietitian per=new Dietitian(null,null,null,null,null,null, null, null); 
 		try {
 			per.setDietitianId(rs.getInt("dietitianId"));
-			LocalDate d = LocalDate.parse(rs.getString("dietitianStatDate"));
+			//LocalDate d = LocalDate.parse(rs.getString("dietitianStatDate"));
 			per.setDietitianStatDate(LocalDate.parse(rs.getString("dietitianStatDate")));
 			per.setPersonEmail(rs.getString("personEmail"));
 			per.setPersonFirstName(rs.getString("personFirstName"));
@@ -349,7 +430,7 @@ public class Models extends Observable implements model  {
 	private static Ingredient GetIngredientParser(ResultSet rs) {
 		Integer[] ar=new Integer[1];
 		ar[0]=0;
-		Ingredient ingredient = new Ingredient(null,null,ar,null,null,null,null,null,null);
+		Ingredient ingredient = new Ingredient(null,null,ar,null,null,null,null,null);
 		try {
 			ingredient.setIngredientId(rs.getInt("ingredientId"));
 			ingredient.setIngredientName(rs.getString("ingredientName"));
@@ -379,14 +460,27 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
-		if(ing.Insert())
-		{
-			ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "Ingredient", null, null);
+		try {
+			ing.setIngredientId(rs.getInt("max")+1);
+			if(ing.Insert())
+			{
+				ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+			}
+			ev.getArr().add("ingredient_insert_response");
+			ev.getArr().add(ingredient);
+			setChanged();
+			notifyObservers(ev);
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("ingredient_insert_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("ingredient_insert_response");
-		ev.getArr().add(ingredient);
-		setChanged();
-		notifyObservers(ev);
+
 	}
 	public void updateIngredient(Ingredient ing){
 		ev=new Event();
@@ -500,7 +594,7 @@ public class Models extends Observable implements model  {
 	private static Recipe GetRecipeParser(ResultSet rs) {
 		Integer[] ar=new Integer[1];
 		ar[0]=0;
-		Recipe recipe = new Recipe(null,null,ar,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+		Recipe recipe = new Recipe(null,null,ar,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 		try {
 			recipe.setRecipeId(rs.getInt("recipeId"));
 			recipe.setRecipeName(rs.getString("recipeName"));
@@ -549,14 +643,26 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		if(res.Insert())
-		{
-			recipe.add(GetRecipeFromDB(res.getRecipeId()));
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+			res.setRecipeId(rs.getInt("max")+1);
+
+			if(res.Insert())
+			{
+				recipe.add(GetRecipeFromDB(res.getRecipeId()));
+			}
+			ev.getArr().add("recipe_insert_response");
+			ev.getArr().add(recipe);
+			setChanged();
+			notifyObservers(ev);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("recipe_insert_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("recipe_insert_response");
-		ev.getArr().add(recipe);
-		setChanged();
-		notifyObservers(ev);
 	}
 	public void updateRecipe(Recipe res){
 		ev=new Event();
@@ -594,27 +700,8 @@ public class Models extends Observable implements model  {
 		setChanged();
 		notifyObservers(ev);
 	}	
-	public void myFavoriteRecipes(String Email) {
-		ev=new Event();
-		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		String sql= " Select * From Recipe Join PersonFavoriteRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
 
-		ResultSet rs =getFromWithDB(sql);
-		try {
-			while(rs.next())
-			{
-				recipe.add(GetRecipeParser(rs));	
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ev.getArr().add("favorite_recipes_response");
-		ev.getArr().add(recipe);
-		setChanged();
-		notifyObservers(ev);
-	}
-	
+
 	public static ResultSet SelectSpecificFrom(String Select, String Table, String Key,String Value) {
 		String sql;
 		if(Key!=null)
@@ -656,61 +743,7 @@ public class Models extends Observable implements model  {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	public void Search(ArrayList<Object> search) {
-		ev=new Event();
-		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		String sql= " Select * From Recipe Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
-		if(search.get(2)!=null)
-			sql+=" AND recipeKashruth = "+search.get(2);
-		if(search.get(3)!=null)
-			sql+=" AND recipeComplex = "+search.get(3);
-		if(search.get(4)!=null)
-			sql+=" AND recipeTimeToMake = "+search.get(4);
-		if(search.get(5)!=null)
-			sql+=" AND recipeRate  "+search.get(5);
-		if(search.get(6)!=null)
-			for(int i=0;i<((ArrayList<Integer>)search.get(6)).size();i++)
-			{
-				sql+=" AND AllergenId is not"+((ArrayList<Integer>)search.get(6)).get(i);
-			}
-		sql+=" Orderby recipeRate ";
 
-		ResultSet rs =getFromWithDB(sql);
-		try {
-			while(rs.next())
-			{
-				recipe.add(GetRecipeParser(rs));	
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ev.getArr().add("search_response");
-		ev.getArr().add(recipe);
-		setChanged();
-		notifyObservers(ev);
-	}
-	public void myRecipes(String Email) {
-		ev=new Event();
-		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		String sql= " Select * From Recipe Join PersonRecipe using (RecipeId) Where recipeID = "+" \""+Email+"\" ";
 
-		ResultSet rs =getFromWithDB(sql);
-		try {
-			while(rs.next())
-			{
-				recipe.add(GetRecipeParser(rs));	
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ev.getArr().add("my_recipes_response");
-		ev.getArr().add(recipe);
-		setChanged();
-		notifyObservers(ev);
-	}
 
-	
 }
