@@ -2,6 +2,7 @@ package view;
 
 import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -25,30 +26,44 @@ public class myView extends Observable implements View {
 	public static myView statview = new myView();
 	User myUser;
 	Dietitian myDietitian;
-	public String ConvertPassToHash(String password)  {
-		MessageDigest digest;
-		try {
-			digest = MessageDigest.getInstance("SHA3_256");
-			final byte[] hashbytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-			String sha3_256hex = bytesToHex(hashbytes);
-			return sha3_256hex;
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} return null;
-	}
-	private static String bytesToHex(byte[] hashInBytes) {
+	public static String getSHA(String input) 
+	{ 
 
-		StringBuilder sb = new StringBuilder();
-		for (byte b : hashInBytes) {
-			sb.append(String.format("%02x", b));
-		}
-		return sb.toString();
+		try { 
 
-	}
+			// Static getInstance method is called with hashing SHA 
+			MessageDigest md = MessageDigest.getInstance("SHA-256"); 
+
+			// digest() method called 
+			// to calculate message digest of an input 
+			// and return array of byte 
+			byte[] messageDigest = md.digest(input.getBytes()); 
+
+			// Convert byte array into signum representation 
+			BigInteger no = new BigInteger(1, messageDigest); 
+
+			// Convert message digest into hex value 
+			String hashtext = no.toString(16); 
+
+			while (hashtext.length() < 32) { 
+				hashtext = "0" + hashtext; 
+			} 
+
+			return hashtext; 
+		} 
+
+		// For specifying wrong message digest algorithms 
+		catch (NoSuchAlgorithmException e) { 
+			System.out.println("Exception thrown"
+							+ " for incorrect algorithm: " + e); 
+
+			return null; 
+		} 
+	} 
+	
 	public void login (String email, String pass)
 	{
-		pass=ConvertPassToHash(pass);
+		pass=getSHA(pass);
 		Event ev=new Event();
 		ev.getArr().add("user_login");
 		ev.getArr().add(email);
@@ -69,16 +84,16 @@ public class myView extends Observable implements View {
 		model.User newUser;
 		String hashPass;
 		Event ev=new Event();
-		hashPass = ConvertPassToHash(pass);
+		hashPass = getSHA(pass);
 		if (isDietitian==true)
 		{
-			newDietitian = new Dietitian(email, firstName, lastName, dateOfBirth, hashPass, null, null, dietitianNum, dietitianStatDate);
+			newDietitian = new Dietitian(email, firstName, lastName, dateOfBirth, hashPass, null, dietitianNum, dietitianStatDate);
 			ev.getArr().add("dietitian_register");
 			ev.getArr().add(newDietitian);
 		}
 		else
 		{
-			newUser=new model.User(email, firstName, lastName, dateOfBirth, hashPass, null, null, 1, allergies, wantAllerg, isKosher);
+			newUser=new model.User(email, firstName, lastName, dateOfBirth, hashPass, null, 1, allergies, wantAllerg, isKosher);
 			ev.getArr().add("user_register");
 			ev.getArr().add(newUser);
 		}
@@ -186,7 +201,7 @@ public class myView extends Observable implements View {
 	public void addRecipeResponse() {}
 	public void userUpdate(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
 		String hashPass;
-		hashPass = ConvertPassToHash(pass);
+		hashPass = getSHA(pass);
 		Event ev=new Event();
 		if (myUser!=null) // user
 		{

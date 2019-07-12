@@ -217,16 +217,23 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<User> user= new ArrayList<User>();
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
 		ResultSet rs =Models.SelectSpecificFrom("Max( userId ) as max", "User", null, null);
 		try {
 			us.setUserId(rs.getInt("max")+1);
-			if(us.Insert()) {
+			if(us.Insert()&&saftie.getInt("count")==0) {
 				user.add(GetUserFromDB(us.getPersonEmail()));
-
 				ev.getArr().add("user_register_response");
 				ev.getArr().add(user);
 				setChanged();
 				notifyObservers(ev);
+			}
+			else
+			{
+			ev.getArr().add("user_register_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -239,28 +246,59 @@ public class Models extends Observable implements model  {
 	public void updateUser(User us){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
+		
 		ArrayList<User> user= new ArrayList<User>();
-		if(us.Update())
-		{
-			user.add(GetUserFromDB(us.getPersonEmail()));
+		try {
+			if(saftie.getInt("count")==0&&us.Update())
+			{
+				user.add(GetUserFromDB(us.getPersonEmail()));
+			
+			ev.getArr().add("user_update_response");
+			ev.getArr().add(user);
+			setChanged();
+			notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("user_update_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		ev.getArr().add("user_update_response");
-		ev.getArr().add(user);
-		setChanged();
-		notifyObservers(ev);
 	}
 	public void deleteUser(User us){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<User> user= new ArrayList<User>();
-		if(!us.Delete())
-		{
-			user.add(GetUserFromDB(us.getPersonEmail()));
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
+		try {
+			if(saftie.getInt("count")==1&&!us.Delete())
+			{
+				user.add(GetUserFromDB(us.getPersonEmail()));
+				ev.getArr().add("user_delete_response");
+				ev.getArr().add(user);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+			ev.getArr().add("user_delete_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			ev.getArr().add("user_delete_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("user_delete_response");
-		ev.getArr().add(user);
-		setChanged();
-		notifyObservers(ev);
 	}
 	public void selectUser(String Email) {
 		ev=new Event();
