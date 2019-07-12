@@ -217,14 +217,24 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<User> user= new ArrayList<User>();
-		if(us.Insert())
-		{
-			user.add(GetUserFromDB(us.getPersonEmail()));
-		}
-		ev.getArr().add("user_register_response");
-		ev.getArr().add(user);
-		setChanged();
-		notifyObservers(ev);
+		ResultSet rs =Models.SelectSpecificFrom("Max( userId ) as max", "User", null, null);
+		try {
+			us.setUserId(rs.getInt("max")+1);
+			if(us.Insert()) {
+				user.add(GetUserFromDB(us.getPersonEmail()));
+
+				ev.getArr().add("user_register_response");
+				ev.getArr().add(user);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			ev.getArr().add("user_register_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
+		}	
 	}
 	public void updateUser(User us){
 		ev=new Event();
@@ -450,14 +460,27 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
-		if(ing.Insert())
-		{
-			ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "Ingredient", null, null);
+		try {
+			ing.setIngredientId(rs.getInt("max")+1);
+			if(ing.Insert())
+			{
+				ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+			}
+			ev.getArr().add("ingredient_insert_response");
+			ev.getArr().add(ingredient);
+			setChanged();
+			notifyObservers(ev);
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("ingredient_insert_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("ingredient_insert_response");
-		ev.getArr().add(ingredient);
-		setChanged();
-		notifyObservers(ev);
+
 	}
 	public void updateIngredient(Ingredient ing){
 		ev=new Event();
@@ -620,14 +643,26 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		if(res.Insert())
-		{
-			recipe.add(GetRecipeFromDB(res.getRecipeId()));
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+			res.setRecipeId(rs.getInt("max")+1);
+
+			if(res.Insert())
+			{
+				recipe.add(GetRecipeFromDB(res.getRecipeId()));
+			}
+			ev.getArr().add("recipe_insert_response");
+			ev.getArr().add(recipe);
+			setChanged();
+			notifyObservers(ev);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("recipe_insert_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("recipe_insert_response");
-		ev.getArr().add(recipe);
-		setChanged();
-		notifyObservers(ev);
 	}
 	public void updateRecipe(Recipe res){
 		ev=new Event();
