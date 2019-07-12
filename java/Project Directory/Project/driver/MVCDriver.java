@@ -13,7 +13,7 @@ public class MVCDriver {
 		View view = new myView();
 		Controller controller = new MyController(model, view);
 		
-		model.addObserver(controller);
-		view.addObserver(controller);
+		((Models)model).addObserver(controller);
+		((myView)view).addObserver(controller);
 	}
 }

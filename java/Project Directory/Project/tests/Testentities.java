@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
@@ -72,7 +71,7 @@ class Testentities {
 		Double recipeTotalProtein=0.0;
 		Double recipeTotalFat=0.0;
 		Integer recipeKashruth=0;
-		Time recipeTimeToMake= new Time(225);
+		Integer recipeTimeToMake= 3;
 		Integer[] recipeAllergen= {0,0,0,0,1,0,0,1,0,0,1,0};
 		User Daenerys= Models.GetUserFromDB("drakarisValyrian.com");
 		Integer recipeComplex=3;
@@ -171,7 +170,7 @@ class Testentities {
 		Double recipeTotalProtein=0.0;
 		Double recipeTotalFat=0.0;
 		Integer recipeKashruth=0;
-		Time recipeTimeToMake= new Time(225);
+		Integer recipeTimeToMake=3;
 		Integer[] recipeAllergen= {0,0,0,0,1,0,0,1,0,0,1,0};
 		User Daenerys= Models.GetUserFromDB("drakarisValyrian.com");
 		Integer recipeComplex=3;
