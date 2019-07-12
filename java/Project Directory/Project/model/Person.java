@@ -1,11 +1,12 @@
 package model;
 
-import java.awt.image.BufferedImage;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 
 public abstract class Person extends Entities{
 	private String personEmail;
@@ -14,15 +15,13 @@ public abstract class Person extends Entities{
 	private	LocalDate personDateOfBirth;
 	private	String personHashPass;
 	private ArrayList<Integer> personsFavoriteRecipe;
-	private BufferedImage personImage;
-	public Person( String personEmail, String personFirstName, String personLastName, LocalDate personDateOfBirth, String personHashPass, ArrayList<Integer> personsFavoriteRecipe,BufferedImage personImage) {
+	public Person( String personEmail, String personFirstName, String personLastName, LocalDate personDateOfBirth, String personHashPass, ArrayList<Integer> personsFavoriteRecipe) {
 		setPersonEmail(personEmail);
 		setPersonFirstName(personFirstName);
 		setPersonLastName(personLastName);
 		setPersonDateOfBirth(personDateOfBirth);
 		setPersonHashPass(personHashPass);
 		setPersonsFavoriteRecipe(personsFavoriteRecipe);
-		setPersonImage(personImage);
 	}
 	@Override
 	protected String Class() {
@@ -63,13 +62,7 @@ public abstract class Person extends Entities{
 	}
 	public void setPersonsFavoriteRecipe(ArrayList<Integer> personsFavoriteRecipe) {
 		if( personsFavoriteRecipe!=null)
-		personsFavoriteRecipe.forEach((n) -> this.personsFavoriteRecipe.add(n));
-	}
-	public BufferedImage getPersonImage() {
-		return personImage;
-	}
-	public void setPersonImage(BufferedImage img) {
-		this.personImage = img;
+			personsFavoriteRecipe.forEach((n) -> this.personsFavoriteRecipe.add(n));
 	}
 	public String ConvertPassTOHash(String password) throws NoSuchAlgorithmException {
 
@@ -99,16 +92,16 @@ public abstract class Person extends Entities{
 	}
 	@Override
 	protected String getEntitieAttributesNames() {
-		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass, personImage";
+		return "personEmail, personFirstName, personLastName, personDateOfBirth, personHashPass ";
 	}
 	@Override
 	protected String getEntitieAttributesValues() {
-		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , "+this.getPersonDateOfBirth()+" , "+this.getPersonHashPass()+" , "+this.getPersonImage();
+		return this.getPersonEmail()+" , "+this.getPersonFirstName()+" , "+this.getPersonLastName()+" , "+this.getPersonDateOfBirth()+" , "+this.getPersonHashPass()+" ";
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() {
 		// TODO Auto-generated method stub
-		return "personEmail = "+ this.getPersonEmail()+" , personFirstName = "+this.getPersonFirstName()+" , personLastName = "+this.getPersonLastName()+" , personDateOfBirth = "+this.getPersonDateOfBirth()+" , personHashPass = "+ this.getPersonHashPass() + " , personImage = "+ this.getPersonImage();
+		return "personEmail = "+ this.getPersonEmail()+" , personFirstName = "+this.getPersonFirstName()+" , personLastName = "+this.getPersonLastName()+" , personDateOfBirth = "+this.getPersonDateOfBirth()+" , personHashPass = "+ this.getPersonHashPass() + " ";
 
 	}
 	/*@Override
