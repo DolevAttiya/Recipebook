@@ -221,7 +221,7 @@ public class Models extends Observable implements model  {
 		ResultSet rs =Models.SelectSpecificFrom("Max( userId ) as max", "User", null, null);
 		try {
 			us.setUserId(rs.getInt("max")+1);
-			if(us.Insert()&&saftie.getInt("count")==0) {
+			if(saftie.getInt("count")==0&&us.Insert()) {
 				user.add(GetUserFromDB(us.getPersonEmail()));
 				ev.getArr().add("user_register_response");
 				ev.getArr().add(user);
@@ -230,10 +230,10 @@ public class Models extends Observable implements model  {
 			}
 			else
 			{
-			ev.getArr().add("user_register_response");
-			ev.getArr().add(null);
-			setChanged();
-			notifyObservers(ev);
+				ev.getArr().add("user_register_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -247,17 +247,17 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
-		
+
 		ArrayList<User> user= new ArrayList<User>();
 		try {
-			if(saftie.getInt("count")==0&&us.Update())
+			if(saftie.getInt("count")!=0&&us.Update())
 			{
 				user.add(GetUserFromDB(us.getPersonEmail()));
-			
-			ev.getArr().add("user_update_response");
-			ev.getArr().add(user);
-			setChanged();
-			notifyObservers(ev);
+
+				ev.getArr().add("user_update_response");
+				ev.getArr().add(user);
+				setChanged();
+				notifyObservers(ev);
 			}
 			else
 			{
@@ -277,7 +277,7 @@ public class Models extends Observable implements model  {
 		ArrayList<User> user= new ArrayList<User>();
 		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
 		try {
-			if(saftie.getInt("count")==1&&!us.Delete())
+			if(saftie.getInt("count")==0||!us.Delete())
 			{
 				user.add(GetUserFromDB(us.getPersonEmail()));
 				ev.getArr().add("user_delete_response");
@@ -287,10 +287,10 @@ public class Models extends Observable implements model  {
 			}
 			else
 			{
-			ev.getArr().add("user_delete_response");
-			ev.getArr().add(null);
-			setChanged();
-			notifyObservers(ev);
+				ev.getArr().add("user_delete_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -349,40 +349,91 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
-		if(dt.Insert())
-		{
-			dietitian.add(GetDietitianFromDB(dt.getPersonEmail()));
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", dt.getPersonEmail());
+		try {
+			if(saftie.getInt("count")==0&&dt.Insert())
+			{
+				dietitian.add(GetDietitianFromDB(dt.getPersonEmail()));
+				ev.getArr().add("dietitian_register_response");
+				ev.getArr().add(dietitian);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("dietitian_register_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			ev.getArr().add("dietitian_register_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("dietitian_register_response");
-		ev.getArr().add(dietitian);
-		setChanged();
-		notifyObservers(ev);
 	}
 	public void updateDietitian(Dietitian dt){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
-		if(dt.Update())
-		{
-			dietitian.add(GetDietitianFromDB(dt.getPersonEmail()));
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", dt.getPersonEmail());
+
+		try {
+			if(saftie.getInt("count")!=0&&dt.Update())
+			{
+				dietitian.add(GetDietitianFromDB(dt.getPersonEmail()));
+				ev.getArr().add("dietitian_update_response");
+				ev.getArr().add(dietitian);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else {
+				ev.getArr().add("dietitian_update_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			ev.getArr().add("dietitian_update_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("dietitian_update_response");
-		ev.getArr().add(dietitian);
-		setChanged();
-		notifyObservers(ev);
 	}
 	public void deleteDietitian(Dietitian dt){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
-		if(!dt.Delete())
-		{
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", dt.getPersonEmail());
+		try {
+			if(saftie.getInt("count")==0&&!dt.Delete())
+			{
+				dietitian.add(GetDietitianFromDB(dt.getPersonEmail()));
+
+				ev.getArr().add("dietitian_delete_response");
+				ev.getArr().add(dietitian);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("dietitian_delete_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			dietitian.add(GetDietitianFromDB(dt.getPersonEmail()));
+			ev.getArr().add("dietitian_delete_response");
+			ev.getArr().add(dietitian);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("dietitian_delete_response");
-		ev.getArr().add(dietitian);
-		setChanged();
-		notifyObservers(ev);
 	}
 	public void selectDietitian(String Email) {
 		ev=new Event();
@@ -413,41 +464,95 @@ public class Models extends Observable implements model  {
 	public void insertAllergen(Allergen al){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( allergenId ) as count", "Dietitian", "allergenId", al.getAllergenId().toString());
 		ArrayList<Allergen> allergen= new ArrayList<Allergen>();
-		if(al.Insert())
-		{
-			allergen.add(GetAllergenFromDB(al.getAllergenId()));
+		try {
+			if(saftie.getInt("count")==0&&al.Insert())
+			{
+				allergen.add(GetAllergenFromDB(al.getAllergenId()));
+				ev.getArr().add("allergen_insert_response");
+				ev.getArr().add(allergen);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("allergen_insert_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("allergen_insert_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("allergen_insert_response");
-		ev.getArr().add(allergen);
-		setChanged();
-		notifyObservers(ev);
 	}
 	public void updateAllergen(Allergen al){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Allergen> allergen= new ArrayList<Allergen>();
-		if(al.Update())
-		{
-			allergen.add(GetAllergenFromDB(al.getAllergenId()));
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( allergenId ) as count", "Dietitian", "allergenId", al.getAllergenId().toString());
+		try {
+			if(saftie.getInt("count")!=0&&al.Update())
+			{
+				allergen.add(GetAllergenFromDB(al.getAllergenId()));
+				ev.getArr().add("allergen_update_response");
+				ev.getArr().add(allergen);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("allergen_update_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("allergen_update_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
+
 		}
-		ev.getArr().add("allergen_update_response");
-		ev.getArr().add(allergen);
-		setChanged();
-		notifyObservers(ev);
+
 	}
 	public void deleteAllergen(Allergen al){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Allergen> allergen= new ArrayList<Allergen>();
-		if(!al.Delete())
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( allergenId ) as count", "Dietitian", "allergenId", al.getAllergenId().toString());
+
+		try
+		{if(saftie.getInt("count")==0&&!al.Delete())
 		{
 			allergen.add(GetAllergenFromDB(al.getAllergenId()));
+			ev.getArr().add("allergen_delete_response");
+			ev.getArr().add(allergen);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("allergen_delete_response");
-		ev.getArr().add(allergen);
-		setChanged();
-		notifyObservers(ev);
+		else
+		{
+			ev.getArr().add("allergen_delete_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("allergen_delete_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
+		}
 	}
 	public void selectAllergen(Integer id) {
 		ev=new Event();
@@ -498,17 +603,26 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientId",ing.getIngredientId().toString());
 		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "Ingredient", null, null);
 		try {
 			ing.setIngredientId(rs.getInt("max")+1);
-			if(ing.Insert())
+			if(saftie.getInt("count")==0&&ing.Insert())
 			{
 				ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+				ev.getArr().add("ingredient_insert_response");
+				ev.getArr().add(ingredient);
+				setChanged();
+				notifyObservers(ev);
 			}
-			ev.getArr().add("ingredient_insert_response");
-			ev.getArr().add(ingredient);
-			setChanged();
-			notifyObservers(ev);
+			else
+			{
+				ev.getArr().add("ingredient_insert_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+
 		} catch (SQLException e) {
 
 			// TODO Auto-generated catch block
@@ -523,28 +637,68 @@ public class Models extends Observable implements model  {
 	public void updateIngredient(Ingredient ing){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientId",ing.getIngredientId().toString());
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
-		if(ing.Update())
-		{
-			ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+		try {
+
+			if(saftie.getInt("count")!=0&&ing.Update())
+			{
+				ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+				ev.getArr().add("ingredient_update_response");
+				ev.getArr().add(ingredient);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("ingredient_update_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("ingredient_update_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("ingredient_update_response");
-		ev.getArr().add(ingredient);
-		setChanged();
-		notifyObservers(ev);
 	}
 	public void deleteIngredient(Ingredient ing){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientId",ing.getIngredientId().toString());
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
-		if(!ing.Delete())
+		try {
+
+			if(saftie.getInt("count")!=0&&!ing.Delete())
 		{
 			ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+			ev.getArr().add("ingredient_delete_response");
+			ev.getArr().add(ingredient);
+			setChanged();
+			notifyObservers(ev);
 		}
+		else
+		{
+			ev.getArr().add("ingredient_delete_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
+		}
+
+	} catch (SQLException e) {
+
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 		ev.getArr().add("ingredient_delete_response");
-		ev.getArr().add(ingredient);
+		ev.getArr().add(null);
 		setChanged();
 		notifyObservers(ev);
+	}
 	}
 	public void selectIngredient(Integer id) {
 		ev=new Event();
@@ -574,44 +728,106 @@ public class Models extends Observable implements model  {
 		}
 		return ingredientType;
 	}
-	public void insertIngredientType(IngredientType ingty){
+	public void insertIngredientType(IngredientType ing){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
-		if(ingty.Insert())
-		{
-			ingredientType.add(GetIngredientTypeFromDB(ingty.getIngredientTypeId()));
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientTypeId ) as count", "IngredientType", "ingredientTypeId",ing.getIngredientTypeId().toString());
+		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientTypeId ) as max", "IngredientType", null, null);
+		try {
+			ing.setIngredientTypeId(rs.getInt("max")+1);
+			if(saftie.getInt("count")==0&&ing.Insert())
+			{
+				ingredientType.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
+				ev.getArr().add("ingredientType_insert_response");
+				ev.getArr().add(ingredientType);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("ingredientType_insert_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("ingredientType_insert_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("ingredientType_insert_response");
-		ev.getArr().add(ingredientType);
-		setChanged();
-		notifyObservers(ev);
+
 	}
-	public void updateIngredientType(IngredientType ingty){
+	public void updateIngredientType(IngredientType ing){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientTypeId ) as count", "IngredientType", "ingredientTypeId",ing.getIngredientTypeId().toString());
 		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
-		if(ingty.Update())
-		{
-			ingredientType.add(GetIngredientTypeFromDB(ingty.getIngredientTypeId()));
+		try {
+
+			if(saftie.getInt("count")!=0&&ing.Update())
+			{
+				ingredientType.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
+				ev.getArr().add("ingredientType_update_response");
+				ev.getArr().add(ingredientType);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("ingredientType_update_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("ingredientType_update_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("ingredientType_update_response");
-		ev.getArr().add(ingredientType);
-		setChanged();
-		notifyObservers(ev);
 	}
-	public void deleteIngredientType(IngredientType ingty){
+	public void deleteIngredientType(IngredientType ing){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientTypeId ) as count", "IngredientType", "ingredientTypeId",ing.getIngredientTypeId().toString());
 		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
-		if(!ingty.Delete())
+		try {
+
+			if(saftie.getInt("count")!=0&&!ing.Delete())
 		{
-			ingredientType.add(GetIngredientTypeFromDB(ingty.getIngredientTypeId()));
+			ingredientType.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
+			ev.getArr().add("ingredientType_delete_response");
+			ev.getArr().add(ingredientType);
+			setChanged();
+			notifyObservers(ev);
 		}
+		else
+		{
+			ev.getArr().add("ingredientType_delete_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
+		}
+
+	} catch (SQLException e) {
+
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 		ev.getArr().add("ingredientType_delete_response");
-		ev.getArr().add(ingredientType);
+		ev.getArr().add(null);
 		setChanged();
 		notifyObservers(ev);
+	}
 	}
 	public void selectIngredientTypeType(Integer id) {
 		ev=new Event();
@@ -681,19 +897,28 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( recipeId ) as count", "Recipe", "recipeId",res.getRecipeId().toString());
 		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
 		try {
 			res.setRecipeId(rs.getInt("max")+1);
-
-			if(res.Insert())
+			if(saftie.getInt("count")==0&&res.Insert())
 			{
 				recipe.add(GetRecipeFromDB(res.getRecipeId()));
+				ev.getArr().add("recipe_insert_response");
+				ev.getArr().add(recipe);
+				setChanged();
+				notifyObservers(ev);
 			}
-			ev.getArr().add("recipe_insert_response");
-			ev.getArr().add(recipe);
-			setChanged();
-			notifyObservers(ev);
+			else
+			{
+				ev.getArr().add("recipe_insert_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+
 		} catch (SQLException e) {
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			ev.getArr().add("recipe_insert_response");
@@ -701,32 +926,73 @@ public class Models extends Observable implements model  {
 			setChanged();
 			notifyObservers(ev);
 		}
+
 	}
 	public void updateRecipe(Recipe res){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( recipeId ) as count", "Recipe", "recipeId",res.getRecipeId().toString());
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		if(res.Update())
-		{
-			recipe.add(GetRecipeFromDB(res.getRecipeId()));
+		try {
+
+			if(saftie.getInt("count")!=0&&res.Update())
+			{
+				recipe.add(GetRecipeFromDB(res.getRecipeId()));
+				ev.getArr().add("recipe_update_response");
+				ev.getArr().add(recipe);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("recipe_update_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ev.getArr().add("recipe_update_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
 		}
-		ev.getArr().add("recipe_update_response");
-		ev.getArr().add(recipe);
-		setChanged();
-		notifyObservers(ev);
 	}
 	public void deleteRecipe(Recipe res){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( recipeId ) as count", "Recipe", "recipeId",res.getRecipeId().toString());
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		if(!res.Delete())
+		try {
+
+			if(saftie.getInt("count")!=0&&!res.Delete())
 		{
 			recipe.add(GetRecipeFromDB(res.getRecipeId()));
+			ev.getArr().add("recipe_delete_response");
+			ev.getArr().add(recipe);
+			setChanged();
+			notifyObservers(ev);
 		}
+		else
+		{
+			ev.getArr().add("recipe_delete_response");
+			ev.getArr().add(null);
+			setChanged();
+			notifyObservers(ev);
+		}
+
+	} catch (SQLException e) {
+
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 		ev.getArr().add("recipe_delete_response");
-		ev.getArr().add(recipe);
+		ev.getArr().add(null);
 		setChanged();
 		notifyObservers(ev);
+	}
 	}
 	public void selectRecipe(Integer id) {
 		ev=new Event();
