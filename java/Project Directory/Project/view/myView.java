@@ -17,6 +17,7 @@ import java.util.Observable;
 import javax.swing.JOptionPane;
 import controller.Event;
 import model.Dietitian;
+import model.Ingredient;
 import model.Models;
 import model.Recipe;
 import model.User;
@@ -24,8 +25,9 @@ import model.User;
 public class myView extends Observable implements View {
 	public myView() {};
 	public static myView statview = new myView();
-	User myUser;
-	Dietitian myDietitian;
+	static boolean check=true;
+	static User myUser;
+	static Dietitian myDietitian;
 	public static String ConvertPassToHash(String input)  {
 		try { 
 			MessageDigest md = MessageDigest.getInstance("SHA-256"); 
@@ -52,13 +54,21 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}	
-	public void loginResponse (ArrayList<model.User> us) {
-		if(us.get(0)!=null) // if the user exists in the DB
+	public void dloginResponse (ArrayList<Dietitian> usD) {
+		if(usD.get(0)!=null) // if the user exists in the DB
 		{
-			myUser=us.get(0);
-			//open mainPage
+			myDietitian=usD.get(0);
+			check=true; // open main page
 		}
-		else JOptionPane.showMessageDialog(null,"One of the parameters is wrong, Please try again");
+		else check=false; // show error
+	}
+	public void uloginResponse (ArrayList<model.User> usU) {
+		if(usU.get(0)!=null) // if the user exists in the DB
+		{
+			myUser=usU.get(0);
+			check=true; // open main page
+		}
+		else check=false; // show error
 	}
 	public void register(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
 		Dietitian newDietitian;
@@ -82,20 +92,26 @@ public class myView extends Observable implements View {
 		notifyObservers(ev);		
 	}
 	public void dRegisterResponse(ArrayList<Dietitian> usD) {
-		if(usD.get(0)!=null) // if the user exists in the DB
+		if (usD.get(0)!=null)
 		{
+			check=true; // everything was OK
 			myDietitian=usD.get(0);
-			//open mainPage
 		}
-		else JOptionPane.showMessageDialog(null,"Something went wrong, Please try again");
+		else // something went wrong (could'nt save / already exist)
+		{
+			check=false;
+		}			
 	}
 	public void uRegisterResponse(ArrayList<model.User> usU) {
-		if(usU.get(0)!=null) // if the user exists in the DB
+		if (usU.get(0)!=null)
 		{
+			check=true; // everything was OK
 			myUser=usU.get(0);
-			//open mainPage
 		}
-		else JOptionPane.showMessageDialog(null,"Something went wrong, Please try again");
+		else // something went wrong (could'nt save / already exist)
+		{
+			check=false;
+		}	
 	}
 	public void getTop10(ArrayList<Recipe> r) {
 		Event ev=new Event();
@@ -153,13 +169,18 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void addIngredient (String ingredientName, Integer catagory, Integer[] allergies, Integer measureType, Integer calories, Integer suger, Integer fat, Integer protein) { }
-	public void addIngredientResponse(Integer ingredientId) {
-		if (ingredientId!=null)
-			JOptionPane.showMessageDialog(null,"Updated Succesfully!");
-		else
-			JOptionPane.showMessageDialog(null,"Something is Wrong, Please try again.");
-		// open main
+	public void addIngredient (String ingredientName, Integer catagory, Integer[] allergies, Integer[] measureType, Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth) { 
+		Ingredient newIngredient=new Ingredient(null, ingredientName, allergies, calories, carbohydrate, protein, fat, kashruth);
+		Event ev=new Event();
+		ev.getArr().add("ingredient_insert");
+		ev.getArr().add(newIngredient);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void addIngredientResponse(Ingredient newIngredient) {
+		if (newIngredient.getIngredientId()!=null)
+			check=true; // updated successfully
+		else check=false; // not successfully
 	}
 	public void myFavorite ()
 	{
@@ -185,8 +206,15 @@ public class myView extends Observable implements View {
 		notifyObservers(ev);
 	}
 	public void myRecipesResponse() {} // find out how to show the information in the window
-	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate) {} 
-	public void addRecipeResponse() {}
+	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient>, Integer[] allergies) {
+		//	String ingredientName, Integer catagory, Integer[] allergies, Integer[] measureType, Double calories, 
+		//  Double carbohydrate, Double fat, Double protein, Integer kashruth
+	} 
+	public void addRecipeResponse(Recipe newRecipe) {
+		if (newRecipe.getRecipeId()!=null)
+			check=true; // updated successfully
+		else check=false; // not successfully
+	}
 	public void userUpdate(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
 		String hashPass;
 		hashPass = ConvertPassToHash(pass);
@@ -217,6 +245,16 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
+	public void userUpdateResponse(User usU) {
+		if (usU!=null)
+			check=true;
+		check=false;
+	}
+	public void dietitianUpdateResponse(Dietitian usD) {
+		if (usD!=null)
+			check=true;
+		check=false;
+	}
 }
 /*
 //---------Login Page------------
@@ -241,26 +279,26 @@ case "recipe_delete": // we need to discuss that !
 case "select_user":
 case "select_dietitian":
 	//---------Ingredient Page-------
-case "ingredient_insert":
+case "ingredient_insert": //DONE
 case "ingredient_update":
 case "ingredient_delete": // we need to discuss that !
-*/
-	/*
-	 * timeToMake:
-	 * 0 - 0-30 minutes
-	 * 1 - 30-60 minutes
-	 * 2 - 60-90 minutes
-	 * 3 - 90-120 minutes
-	 * 4 - more than 2 hours 
-	 * rateAbove:
-	 * 0 - 0 stars
-	 * 1 - 5 stars
-	 * 2 - 10 stars
-	 * 3 - 15 stars
-	 * 4 - 20 stars
-	 * catagory:
-	 * 0 - חלבי
-	 * 1 - בשרי
-	 * 2 - פרווה
-	 * 3 - לא כשר יענו בייקון וכו?
-	 */
+ */
+/*
+ * timeToMake:
+ * 0 - 0-30 minutes
+ * 1 - 30-60 minutes
+ * 2 - 60-90 minutes
+ * 3 - 90-120 minutes
+ * 4 - more than 2 hours 
+ * rateAbove:
+ * 0 - 0 stars
+ * 1 - 5 stars
+ * 2 - 10 stars
+ * 3 - 15 stars
+ * 4 - 20 stars
+ * catagory:
+ * 0 - חלבי
+ * 1 - בשרי
+ * 2 - פרווה
+ * 3 - לא כשר יענו בייקון וכו?
+ */

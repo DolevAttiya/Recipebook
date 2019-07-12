@@ -4,4 +4,6 @@ import java.util.Observable;
 import controller.Event;
 import view.myView;
 
-public interface View { }
+public interface View {
+	
+}
