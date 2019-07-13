@@ -31,13 +31,13 @@ public class MyController implements Controller{
 			/* 0 - Event name
 			   1 - Array list */
 			System.out.println("loged in");
-			//((myView)view).loginResponse((ArrayList<User>)((Event)arg).getArr().get(1));
+			((myView)view).loginResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_login_response":
 			/* 0 - Event name
 			   1 - Array list */
-			//((myView)view).loginResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
+			((myView)view).loginResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 
 		case "user_register":
@@ -46,7 +46,7 @@ public class MyController implements Controller{
 
 		case "user_register_response":
 			System.out.println("user registered");
-			//((myView)view).uRegisterResponse((ArrayList<User>)((Event)arg).getArr().get(1));
+			((myView)view).uRegisterResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_register":
@@ -193,19 +193,19 @@ public class MyController implements Controller{
 			//rotem's function
 			break;
 
-		case "ingredient_update":
+		case "ingredient_update": //not in use in the meanwhile for future implementation (manager function)
 			((Models)model).updateIngredient((Ingredient)((Event)arg).getArr().get(1));
 			break;
 
-		case "ingredient_update_response":
+		case "ingredient_update_response": //not in use in the meanwhile for future implementation (manager function)
 			//rotem's function
 			break;
 
-		case "ingredient_delete":
+		case "ingredient_delete": //not in use in the meanwhile for future implementation (manager function)
 			((Models)model).deleteIngredient((Ingredient)((Event)arg).getArr().get(1));
 			break;
 
-		case "ingredient_delete_response":
+		case "ingredient_delete_response": //not in use in the meanwhile for future implementation (manager function)
 			//rotem's function
 			break;
 			//-------------------------------
