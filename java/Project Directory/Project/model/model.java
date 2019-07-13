@@ -6,6 +6,8 @@ public interface model {
 	public void top10();
 	public void CheckPasswordAndEmail(String Email, String Password);
 	public void Search(ArrayList<Object> search);
+	public void myFavoriteRecipes(String Email);
+	public void myRecipes(String Email);
 
 	public void insertUser(User us);
 	public void updateUser(User us);
