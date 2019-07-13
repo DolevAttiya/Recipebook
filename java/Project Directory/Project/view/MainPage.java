@@ -144,6 +144,11 @@ public class MainPage extends JFrame {
 		panel_2.setBackground(new Color(240, 248, 255));
 		panel_2.setLayout(null);
 		
+		JButton button = new JButton("Go!");
+		button.setFont(new Font("Tahoma", Font.BOLD, 15));
+		button.setBounds(601, 142, 71, 70);
+		panel_2.add(button);
+		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField.setBounds(40, 142, 632, 70);
@@ -240,6 +245,19 @@ public class MainPage extends JFrame {
 				MainPage.this.setVisible(false);
 			}
 		});
+		
+		JButton btnAdd = new JButton("Go!");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
+			}
+		});
+		btnAdd.setBounds(1016, 37, 71, 42);
+		panel_1.add(btnAdd);
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
 		panel_1.add(txtpnUserDetails);
 		txtpnUserDetails.setForeground(new Color(255, 255, 255));
