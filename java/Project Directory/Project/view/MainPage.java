@@ -274,6 +274,7 @@ public class MainPage extends JFrame {
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
 				MyFavourites d=new MyFavourites();
 				d.setVisible(true);
 				MainPage.this.dispose();

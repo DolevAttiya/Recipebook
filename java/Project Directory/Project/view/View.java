@@ -18,13 +18,13 @@ public interface View {
 	public void uRegisterResponse(ArrayList<model.User> usU);
 	public void getTop10Response(ArrayList<Recipe> r);
 	public void searchResponse(ArrayList<Recipe> r);
-	public void addIngredientResponse(Integer ingredientId);
 	public void myFavoriteResponse(ArrayList<Recipe> r);
 	public void myRecipesResponse(ArrayList<Recipe> r); 
 	public void addRecipeResponse(ArrayList<Recipe> r);
 	public void addIngredientResponse(ArrayList<Ingredient> in);
 	public void userUpdateResponse(ArrayList<User> usU);
 	public void dietitianUpdateResponse(ArrayList<Dietitian> usD);
+	
 	//update ingredient, remove ingredient
 	//update recipe
 }
