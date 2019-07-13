@@ -208,19 +208,15 @@ public class SearchRes extends JFrame {
                 "Description",
                 "Rate",
                 "Calories",
-                "Kosher"}; // name, description, rate, calories, kosher, 
-		Object[][] data = {
-			    {"Kathy", "Smith",
-			     "Snowboarding", new Integer(5), new Boolean(false)},
-			    {"John", "Doe",
-			     "Rowing", new Integer(3), new Boolean(true)},
-			    {"Sue", "Black",
-			     "Knitting", new Integer(2), new Boolean(false)},
-			    {"Jane", "White",
-			     "Speed reading", new Integer(20), new Boolean(true)},
-			    {"Joe", "Brown",
-			     "Pool", new Integer(10), new Boolean(false)}
-			};
+                "Kosher"}; 
+		Object[][] data = new Object[myView.recipeArray.size()][5];
+		for(int row=0;row<myView.recipeArray.size();row++) {
+			data[row][0]=myView.recipeArray.get(row).getRecipeName();
+			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
+			data[row][3]=myView.recipeArray.get(row).getRecipeTotalCalories();
+			data[row][4]=myView.recipeArray.get(row).getRecipeKashruth();
+		}
 		
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
