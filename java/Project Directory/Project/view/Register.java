@@ -93,8 +93,14 @@ public class Register extends JFrame {
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User f=new User();
+				if (myView.myUser!=null) {
+					User f=new User();
 				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
 				Register.this.dispose();
 				Register.this.setVisible(false);
 			}
@@ -425,7 +431,7 @@ public class Register extends JFrame {
 		});
 		chckbxDietican.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		chckbxDietican.setBackground(new Color(240, 248, 255));
-		chckbxDietican.setBounds(69, 636, 412, 41);
+		chckbxDietican.setBounds(69, 636, 237, 41);
 		panel_1.add(chckbxDietican);
 
 		JCheckBox chckbxShowOnlyRecipes = new JCheckBox("Show only Recipes adapted to Alergies");
