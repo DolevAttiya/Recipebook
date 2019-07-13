@@ -71,14 +71,13 @@ public class MyFavourites extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		//panelkavuaa
 		JPanel panel = new JPanel();
 		panel.setBounds(26, 15, 1603, 87);
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,7 +90,6 @@ public class MyFavourites extends JFrame {
 		btnAdd.setBounds(1016, 37, 71, 42);
 		panel.add(btnAdd);
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
-		
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
@@ -108,7 +106,7 @@ public class MyFavourites extends JFrame {
 		txtpnUserDetails.setText("user details");
 		txtpnUserDetails.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
-		
+
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
 		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -125,13 +123,13 @@ public class MyFavourites extends JFrame {
 		txtpnAdvancedSearch_1.setBackground(new Color(65, 105, 225));
 		txtpnAdvancedSearch_1.setBounds(1146, 7, 215, 80);
 		panel.add(txtpnAdvancedSearch_1);
-		
+
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_5.setColumns(10);
 		textField_5.setBounds(747, 37, 340, 43);
 		panel.add(textField_5);
-		
+
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
@@ -148,7 +146,7 @@ public class MyFavourites extends JFrame {
 		txtpnFavouriteRecipes.setForeground(Color.WHITE);
 		txtpnFavouriteRecipes.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
 		txtpnFavouriteRecipes.setBackground(new Color(65, 105, 225));
-		
+
 		JTextPane txtpnSearch_1 = new JTextPane();
 		txtpnSearch_1.setText("Search");
 		txtpnSearch_1.setForeground(Color.WHITE);
@@ -156,7 +154,7 @@ public class MyFavourites extends JFrame {
 		txtpnSearch_1.setBackground(new Color(65, 105, 225));
 		txtpnSearch_1.setBounds(844, 0, 146, 42);
 		panel.add(txtpnSearch_1);
-		
+
 		JTextPane txtpnMyRecipes = new JTextPane();
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
@@ -173,7 +171,7 @@ public class MyFavourites extends JFrame {
 		txtpnMyRecipes.setBackground(new Color(65, 105, 225));
 		txtpnMyRecipes.setBounds(347, 7, 175, 80);
 		panel.add(txtpnMyRecipes);
-		
+
 		JTextPane txtpnTaimli = new JTextPane();
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
@@ -190,40 +188,36 @@ public class MyFavourites extends JFrame {
 		txtpnTaimli.setBackground(new Color(65, 105, 225));
 		txtpnTaimli.setBounds(0, -7, 343, 96);
 		panel.add(txtpnTaimli);
-		
+
 		//panelkavuaa
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(240, 248, 255));
 		panel_1.setBounds(11, 106, 1610, 1299);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		
+
 		JTextPane txtpnAdvancedSearch = new JTextPane();
 		txtpnAdvancedSearch.setText("My Favourites");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
 		txtpnAdvancedSearch.setBounds(507, 55, 934, 99);
 		panel_1.add(txtpnAdvancedSearch);
-		
+
 		String[] columnNames = {"Recipe Name",
-                "Description",
-                "Rate",
-                "Calories",
-                "Kosher"}; 
-		Object[][] data = { // get data from the database
-			    {"Kathy", "Smith",
-			     "Snowboarding", new Integer(5), new Boolean(false)},
-			    {"John", "Doe",
-			     "Rowing", new Integer(3), new Boolean(true)},
-			    {"Sue", "Black",
-			     "Knitting", new Integer(2), new Boolean(false)},
-			    {"Jane", "White",
-			     "Speed reading", new Integer(20), new Boolean(true)},
-			    {"Joe", "Brown",
-			     "Pool", new Integer(10), new Boolean(false)}
-			};
-		
+				"Description",
+				"Rate",
+				"Calories",
+		"Kosher"}; 
+
+		Object[][] data = new Object[myView.recipeArray.size()][5];
+		for(int row=0;row<myView.recipeArray.size();row++) {
+			data[row][0]=myView.recipeArray.get(row).getRecipeName();
+			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
+			data[row][3]=myView.recipeArray.get(row).getRecipeTotalCalories();
+			data[row][4]=myView.recipeArray.get(row).getRecipeKashruth();
+		}
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		table.setRowHeight(50);
@@ -238,6 +232,5 @@ public class MyFavourites extends JFrame {
 		scrollPane.setLocation(46, 154);
 		//TableColumn column = null;
 		panel_1.add(scrollPane);
-		
 	}
 }
