@@ -30,11 +30,13 @@ import javax.swing.JProgressBar;
 import java.awt.Choice;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
+import javax.swing.JList;
 
 public class User extends JFrame {
 
@@ -47,7 +49,6 @@ public class User extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_2;
 	private JTextField textField_7;
-	private JTextField textField_8;
 	private JTextField textField_4;
 
 	/**
@@ -95,8 +96,14 @@ public class User extends JFrame {
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User f=new User();
+				if (myView.myUser!=null) {
+					User f=new User();
 				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
 				User.this.dispose();
 				User.this.setVisible(false);
 			}
@@ -210,17 +217,29 @@ public class User extends JFrame {
 		contentPane_1.add(panel_1);
 		panel_1.setLayout(null);
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		textField_4.setColumns(10);
-		textField_4.setBounds(738, 695, 237, 49);
-		panel_1.add(textField_4);
+		String[] days = { "---","01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+		JComboBox comboBox = new JComboBox(days);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JComboBox comboBox = (JComboBox)arg0.getSource();
+		        String days = (String)comboBox.getSelectedItem();
+			}
+		});
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		comboBox.setBounds(464, 620, 105, 49);
+		panel_1.add(comboBox);
 		
-		textField_8 = new JTextField();
-		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		textField_8.setColumns(10);
-		textField_8.setBounds(738, 632, 237, 49);
-		panel_1.add(textField_8);
+		String[] months = { "---","01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+		JComboBox comboBox_3 = new JComboBox(months);
+		comboBox_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JComboBox comboBox_3 = (JComboBox)arg0.getSource();
+		        String months = (String)comboBox.getSelectedItem();
+			}
+		});
+		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		comboBox_3.setBounds(349, 620, 105, 49);
+		panel_1.add(comboBox_3);
 		
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -259,13 +278,6 @@ public class User extends JFrame {
 		panel_1.add(chckbxFish);
 		setVisible(true);
 		
-		JTextPane txtpnEnterDieticanNumber = new JTextPane();
-		txtpnEnterDieticanNumber.setText("Enter Dietican Number:");
-		txtpnEnterDieticanNumber.setFont(new Font("Tahoma", Font.PLAIN, 38));
-		txtpnEnterDieticanNumber.setBackground(new Color(240, 248, 255));
-		txtpnEnterDieticanNumber.setBounds(316, 632, 406, 55);
-		panel_1.add(txtpnEnterDieticanNumber);
-		
 		JCheckBox chckbxPeanut = new JCheckBox("Peanut");
 		chckbxPeanut.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		chckbxPeanut.setBackground(new Color(240, 248, 255));
@@ -284,7 +296,8 @@ public class User extends JFrame {
 		chckbxEggs.setBounds(1307, 352, 281, 55);
 		panel_1.add(chckbxEggs);
 		
-		textField_1 = new JTextField();
+		//myView.myUser.getPersonFirstName()
+		textField_1 = new JTextField("rotem");
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_1.setColumns(10);
 		textField_1.setBounds(316, 183, 693, 49);
@@ -307,7 +320,7 @@ public class User extends JFrame {
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Show only Kosher Recipies");
 		chckbxNewCheckBox.setBackground(new Color(240, 248, 255));
 		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxNewCheckBox.setBounds(69, 811, 697, 64);
+		chckbxNewCheckBox.setBounds(67, 713, 697, 64);
 		panel_1.add(chckbxNewCheckBox);
 		
 		JTextPane txtpnAdvancedSearch = new JTextPane();
@@ -366,6 +379,8 @@ public class User extends JFrame {
 		JButton btnSearch = new JButton("Update!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//public void userUpdate(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
+				//myView.statview.userUpdate(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_1.getText(), textField_1.getText(), false, 654321, true, textField_1.getText(),  allergies, false) 
 				MainPage f=new MainPage();
 				f.setVisible(true);
 				User.this.dispose();
@@ -389,19 +404,6 @@ public class User extends JFrame {
 		txtpnEnterPasswordAgain.setBounds(69, 520, 462, 63);
 		panel_1.add(txtpnEnterPasswordAgain);
 		
-		JCheckBox chckbxDietican = new JCheckBox("Dietican");
-		chckbxDietican.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent e) {
-				 System.out.println(e.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : e.getID()); //add what happens
-			}
-		});
-		chckbxDietican.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxDietican.setBackground(new Color(240, 248, 255));
-		chckbxDietican.setBounds(69, 636, 237, 41);
-		panel_1.add(chckbxDietican);
-		
 		JCheckBox chckbxShowOnlyRecipes = new JCheckBox("Show only Recipes adapted to Alergies");
 		chckbxShowOnlyRecipes.addActionListener(new ActionListener() {
 			 @Override
@@ -412,15 +414,8 @@ public class User extends JFrame {
 		});
 		chckbxShowOnlyRecipes.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		chckbxShowOnlyRecipes.setBackground(new Color(240, 248, 255));
-		chckbxShowOnlyRecipes.setBounds(69, 895, 866, 69);
+		chckbxShowOnlyRecipes.setBounds(67, 797, 866, 69);
 		panel_1.add(chckbxShowOnlyRecipes);
-		
-		JTextPane txtpnExpiryDate_1 = new JTextPane();
-		txtpnExpiryDate_1.setText("Expiry Date:");
-		txtpnExpiryDate_1.setFont(new Font("Tahoma", Font.PLAIN, 38));
-		txtpnExpiryDate_1.setBackground(new Color(240, 248, 255));
-		txtpnExpiryDate_1.setBounds(316, 695, 360, 55);
-		panel_1.add(txtpnExpiryDate_1);
 		
 		JCheckBox chckbxDairy_1 = new JCheckBox("Dairy");
 		chckbxDairy_1.addActionListener(new ActionListener() {
@@ -480,5 +475,20 @@ public class User extends JFrame {
 		txtpnEnterPassword.setBackground(new Color(240, 248, 255));
 		txtpnEnterPassword.setBounds(69, 450, 489, 63);
 		panel_1.add(txtpnEnterPassword);
+		
+		JTextPane txtpnDateOfBirth = new JTextPane();
+		txtpnDateOfBirth.setText("Date of Birth:");
+		txtpnDateOfBirth.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		txtpnDateOfBirth.setBackground(new Color(240, 248, 255));
+		txtpnDateOfBirth.setBounds(69, 611, 275, 69);
+		panel_1.add(txtpnDateOfBirth);
+		
+		textField_4 = new JTextField();
+		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		textField_4.setColumns(10);
+		textField_4.setBounds(581, 620, 171, 49);
+		panel_1.add(textField_4);
+		
+		//LocalDate.parse(rs.getString("personDateOfBirth")) äîøú ñèøéðâ ùì úàøéê ìlocaldate
 	}
 }
