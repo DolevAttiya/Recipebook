@@ -80,12 +80,6 @@ public class ViewMock implements View {
 	}
 
 	@Override
-	public void addIngredientResponse(Integer ingredientId) {//not in use, delete after merge with rotem
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void addRecipeResponse(ArrayList<Recipe> r) {
 		// TODO Auto-generated method stub
 
