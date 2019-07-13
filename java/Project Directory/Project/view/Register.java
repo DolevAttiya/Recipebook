@@ -56,6 +56,7 @@ public class Register extends JFrame {
 				try {
 					Register frame = new Register();
 					frame.setVisible(true);
+					frame.setTitle("Taimli!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

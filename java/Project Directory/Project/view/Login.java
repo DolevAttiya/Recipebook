@@ -41,6 +41,7 @@ public class Login extends JFrame {
 				try {
 					Login frame = new Login();
 					  frame.setVisible(true);
+					  frame.setTitle("Taimli!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -56,6 +57,7 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public Login() {
 		setSize(1664, 1493);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -92,11 +94,12 @@ public class Login extends JFrame {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent f) {
 				myView.statview.login(textField.getText(), String.copyValueOf(passwordField.getPassword()));
 				MainPage a=new MainPage();
 				a.setVisible(true);
-				close();
+				Login.this.dispose();
+				Login.this.setVisible(false);
 			}
 		});
 		btnLogin.setBounds(589, 867, 421, 93);

@@ -29,12 +29,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
 import javax.swing.JList;
+import javax.swing.JScrollBar;
+import java.awt.ScrollPane;
+import java.awt.TextArea;
 
 public class NewRecipe extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
 	private JTextField textField_5;
 	private JTextField textField_3;
 	private JTextField txtRecipebook;
@@ -42,6 +44,9 @@ public class NewRecipe extends JFrame {
 	private JTextField textField_4;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_1;
+	private JTextField textField_9;
 
 	/**
 	 * Launch the application.
@@ -52,6 +57,7 @@ public class NewRecipe extends JFrame {
 				try {
 					NewRecipe frame = new NewRecipe();
 					frame.setVisible(true);
+					frame.setTitle("Taimli!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -191,76 +197,147 @@ public class NewRecipe extends JFrame {
 		panel_1.setBounds(11, 106, 1610, 1299);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
+		
+		TextArea textArea = new TextArea();
+		textArea.setBounds(32, 824, 1011, 282);
+		panel_1.add(textArea);
 
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_1.setBounds(824, 282, 229, 49);
+		comboBox_1.setBounds(738, 355, 229, 49);
 		panel_1.add(comboBox_1);
 
 
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(713, 282, 105, 49);
+		textField_3.setBounds(627, 355, 105, 49);
 		panel_1.add(textField_3);
 
+		//ALLERGIES
+				JCheckBox checkBox_7 = new JCheckBox("Gluten");
+				checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_7.setBackground(new Color(240, 248, 255));
+				checkBox_7.setBounds(1076, 515, 255, 41);
+				panel_1.add(checkBox_7);
+				
+				JCheckBox checkBox_4 = new JCheckBox("Eggs");
+				checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_4.setBackground(new Color(240, 248, 255));
+				checkBox_4.setBounds(1342, 300, 243, 55);
+				panel_1.add(checkBox_4);
+				
+				JCheckBox checkBox_11 = new JCheckBox("Food Acidity");
+				checkBox_11.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_11.setBackground(new Color(240, 248, 255));
+				checkBox_11.setBounds(1342, 588, 265, 41);
+				panel_1.add(checkBox_11);
+				
+				JCheckBox checkBox_1 = new JCheckBox("Seeds");
+				checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_1.setBackground(new Color(240, 248, 255));
+				checkBox_1.setBounds(1342, 375, 243, 41);
+				panel_1.add(checkBox_1);
+				
+				JCheckBox checkBox_9 = new JCheckBox("Lactose");
+				checkBox_9.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_9.setBackground(new Color(240, 248, 255));
+				checkBox_9.setBounds(1076, 588, 226, 41);
+				panel_1.add(checkBox_9);
+				
+				JCheckBox checkBox = new JCheckBox("Peanut");
+				checkBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox.setBackground(new Color(240, 248, 255));
+				checkBox.setBounds(1342, 515, 192, 41);
+				panel_1.add(checkBox);
+				
+				JCheckBox checkBox_10 = new JCheckBox("Chocolate");
+				checkBox_10.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_10.setBackground(new Color(240, 248, 255));
+				checkBox_10.setBounds(1342, 661, 243, 41);
+				panel_1.add(checkBox_10);
+				
+				JTextPane textPane = new JTextPane();
+				textPane.setText("Allergies:");
+				textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
+				textPane.setBackground(new Color(240, 248, 255));
+				textPane.setBounds(1154, 227, 340, 72);
+				panel_1.add(textPane);
+				
+				JCheckBox checkBox_3 = new JCheckBox("Tree Nuts");
+				checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_3.setBackground(new Color(240, 248, 255));
+				checkBox_3.setBounds(1342, 442, 231, 41);
+				panel_1.add(checkBox_3);
+				
+				JCheckBox checkBox_2 = new JCheckBox("Strawberries");
+				checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_2.setBackground(new Color(240, 248, 255));
+				checkBox_2.setBounds(1076, 375, 269, 41);
+				panel_1.add(checkBox_2);
+				
+				JCheckBox checkBox_6 = new JCheckBox("Coffie");
+				checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_6.setBackground(new Color(240, 248, 255));
+				checkBox_6.setBounds(1076, 442, 269, 41);
+				panel_1.add(checkBox_6);
+				
+				JCheckBox checkBox_8 = new JCheckBox("Dairy");
+				checkBox_8.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_8.setBackground(new Color(240, 248, 255));
+				checkBox_8.setBounds(1076, 661, 226, 41);
+				panel_1.add(checkBox_8);
+				
+				JCheckBox checkBox_5 = new JCheckBox("Fish");
+				checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
+				checkBox_5.setBackground(new Color(240, 248, 255));
+				checkBox_5.setBounds(1076, 307, 269, 41);
+				panel_1.add(checkBox_5);
+		
 		JTextPane txtpnPerGrams = new JTextPane();
 		txtpnPerGrams.setText("per 100 grams");
 		txtpnPerGrams.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnPerGrams.setBackground(new Color(240, 248, 255));
-		txtpnPerGrams.setBounds(1238, 654, 160, 31);
+		txtpnPerGrams.setBounds(1264, 825, 160, 31);
 		panel_1.add(txtpnPerGrams);
 
 		JTextPane txtpnProtein = new JTextPane();
 		txtpnProtein.setText("Protein:");
 		txtpnProtein.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnProtein.setBackground(new Color(240, 248, 255));
-		txtpnProtein.setBounds(1102, 864, 173, 61);
+		txtpnProtein.setBounds(1128, 1035, 173, 61);
 		panel_1.add(txtpnProtein);
 
 		JTextPane txtpnFat = new JTextPane();
 		txtpnFat.setText("Fat:");
 		txtpnFat.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnFat.setBackground(new Color(240, 248, 255));
-		txtpnFat.setBounds(1102, 809, 173, 61);
+		txtpnFat.setBounds(1128, 980, 173, 61);
 		panel_1.add(txtpnFat);
 
 		JTextPane txtpnSugar = new JTextPane();
-		txtpnSugar.setText("Sugar:");
+		txtpnSugar.setText("Carbs:");
 		txtpnSugar.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnSugar.setBackground(new Color(240, 248, 255));
-		txtpnSugar.setBounds(1102, 746, 173, 61);
+		txtpnSugar.setBounds(1128, 917, 173, 61);
 		panel_1.add(txtpnSugar);
 
 		JTextPane txtpnCalories = new JTextPane();
 		txtpnCalories.setText("Calories:");
 		txtpnCalories.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnCalories.setBackground(new Color(240, 248, 255));
-		txtpnCalories.setBounds(1102, 687, 173, 61);
+		txtpnCalories.setBounds(1128, 858, 173, 61);
 		panel_1.add(txtpnCalories);
-
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		textField_1.setColumns(10);
-		textField_1.setBounds(278, 186, 775, 57);
-		panel_1.add(textField_1);
-
-		JTextPane txtpnSearchFor = new JTextPane();
-		txtpnSearchFor.setText("Description:");
-		txtpnSearchFor.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		txtpnSearchFor.setBackground(new Color(240, 248, 255));
-		txtpnSearchFor.setBounds(22, 182, 350, 61);
-		panel_1.add(txtpnSearchFor);
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox.setBounds(365, 282, 339, 49);
+		comboBox.setBounds(366, 355, 255, 49);
 		panel_1.add(comboBox);
 
 		JTextPane txtpnCategory = new JTextPane();
 		txtpnCategory.setText("Name:");
 		txtpnCategory.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		txtpnCategory.setBackground(new Color(240, 248, 255));
-		txtpnCategory.setBounds(485, 248, 97, 31);
+		txtpnCategory.setBounds(452, 321, 97, 31);
 		panel_1.add(txtpnCategory);
 
 		JTextPane txtpnAdvancedSearch = new JTextPane();
@@ -272,77 +349,114 @@ public class NewRecipe extends JFrame {
 
 		JButton btnSearch = new JButton("Add!");
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
-		btnSearch.setBounds(608, 1138, 326, 69);
+		btnSearch.setBounds(553, 1202, 326, 69);
 		panel_1.add(btnSearch);
 
 		JTextPane txtpnNutritionValues = new JTextPane();
 		txtpnNutritionValues.setText("Nutrition Values:");
 		txtpnNutritionValues.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
 		txtpnNutritionValues.setBackground(new Color(240, 248, 255));
-		txtpnNutritionValues.setBounds(1161, 598, 326, 58);
+		txtpnNutritionValues.setBounds(1187, 769, 326, 58);
 		panel_1.add(txtpnNutritionValues);
 
 		JTextPane txtpnIngredients = new JTextPane();
 		txtpnIngredients.setText("Add Ingredients:");
 		txtpnIngredients.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnIngredients.setBackground(new Color(240, 248, 255));
-		txtpnIngredients.setBounds(22, 252, 453, 61);
+		txtpnIngredients.setBounds(26, 343, 340, 61);
 		panel_1.add(txtpnIngredients);
 
 		JTextPane txtpnInstructions = new JTextPane();
-		txtpnInstructions.setText("Instructions");
+		txtpnInstructions.setText("Instructions:");
 		txtpnInstructions.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnInstructions.setBackground(new Color(240, 248, 255));
-		txtpnInstructions.setBounds(22, 630, 326, 49);
+		txtpnInstructions.setBounds(32, 769, 326, 49);
 		panel_1.add(txtpnInstructions);
 
 		JTextPane txtpnAmount = new JTextPane();
 		txtpnAmount.setText("Amount:");
 		txtpnAmount.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		txtpnAmount.setBackground(new Color(240, 248, 255));
-		txtpnAmount.setBounds(713, 248, 105, 31);
+		txtpnAmount.setBounds(627, 321, 105, 31);
 		panel_1.add(txtpnAmount);
 
 		JTextPane txtpnMeauring = new JTextPane();
 		txtpnMeauring.setText("Measuring:");
 		txtpnMeauring.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		txtpnMeauring.setBackground(new Color(240, 248, 255));
-		txtpnMeauring.setBounds(849, 248, 138, 38);
+		txtpnMeauring.setBounds(763, 321, 138, 38);
 		panel_1.add(txtpnMeauring);
-
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setColumns(30);
-		textArea_1.setRows(15);
-		textArea_1.setBounds(32, 345, 1021, 271);
-		panel_1.add(textArea_1);
 
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_2.setColumns(10);
-		textField_2.setBounds(1287, 699, 237, 49);
+		textField_2.setBounds(1313, 870, 237, 49);
 		panel_1.add(textField_2);
 
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_4.setColumns(10);
-		textField_4.setBounds(1287, 758, 237, 49);
+		textField_4.setBounds(1313, 929, 237, 49);
 		panel_1.add(textField_4);
 
 		textField_6 = new JTextField();
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_6.setColumns(10);
-		textField_6.setBounds(1287, 817, 237, 49);
+		textField_6.setBounds(1313, 988, 237, 49);
 		panel_1.add(textField_6);
 
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_7.setColumns(10);
-		textField_7.setBounds(1287, 876, 237, 49);
+		textField_7.setBounds(1313, 1047, 237, 49);
 		panel_1.add(textField_7);
-
-		JTextArea textArea = new JTextArea();
-		textArea.setRows(15);
-		textArea.setColumns(30);
-		textArea.setBounds(32, 703, 1021, 271);
-		panel_1.add(textArea);
-	}}
+		
+		TextArea textArea_1 = new TextArea();
+		textArea_1.setBounds(32, 419, 1021, 357);
+		panel_1.add(textArea_1);
+		
+		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setText("Kashruth:");
+		textPane_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textPane_1.setBackground(new Color(240, 248, 255));
+		textPane_1.setBounds(26, 1112, 198, 49);
+		panel_1.add(textPane_1);
+		
+		textField_8 = new JTextField();
+		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textField_8.setColumns(10);
+		textField_8.setBounds(233, 1112, 300, 57);
+		panel_1.add(textField_8);
+		
+		JTextPane textPane_2 = new JTextPane();
+		textPane_2.setText("Name:");
+		textPane_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textPane_2.setBackground(new Color(240, 248, 255));
+		textPane_2.setBounds(32, 182, 141, 61);
+		panel_1.add(textPane_2);
+		
+		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textField_1.setColumns(10);
+		textField_1.setBounds(177, 186, 632, 57);
+		panel_1.add(textField_1);
+		
+		JTextPane textPane_3 = new JTextPane();
+		textPane_3.setText("Description:");
+		textPane_3.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textPane_3.setBackground(new Color(240, 248, 255));
+		textPane_3.setBounds(32, 257, 243, 61);
+		panel_1.add(textPane_3);
+		
+		textField_9 = new JTextField();
+		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textField_9.setColumns(10);
+		textField_9.setBounds(288, 261, 775, 57);
+		panel_1.add(textField_9);
+		
+		JButton btnAdd = new JButton("Add");
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnAdd.setBounds(975, 355, 79, 49);
+		panel_1.add(btnAdd);
+	}	
+}

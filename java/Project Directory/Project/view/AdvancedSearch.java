@@ -48,6 +48,7 @@ public class AdvancedSearch extends JFrame {
 				try {
 					AdvancedSearch frame = new AdvancedSearch();
 					frame.setVisible(true);
+					frame.setTitle("Taimli!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -197,7 +198,8 @@ public class AdvancedSearch extends JFrame {
 		comboBox_1.setBounds(373, 504, 317, 49);
 		panel_1.add(comboBox_1);
 		
-		JComboBox comboBox_4 = new JComboBox();
+		String[] complexity = { "---","Easy", "Medium", "Hard"};
+		JComboBox comboBox_4 = new JComboBox(complexity);
 		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		comboBox_4.setBounds(373, 427, 317, 49);
 		panel_1.add(comboBox_4);
@@ -208,32 +210,23 @@ public class AdvancedSearch extends JFrame {
 		textField_1.setBounds(297, 220, 1246, 58);
 		panel_1.add(textField_1);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox_3.setBounds(307, 617, 90, 53);
-		panel_1.add(comboBox_3);
-		
-		
-		String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
-
-		JComboBox comboBox = new JComboBox(petStrings);
+		String[] kashruth = { "---","Meat", "Dairy", "Parve", "Not Kosher", "Kosher"};
+		JComboBox comboBox = new JComboBox(kashruth);
 		comboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JComboBox comboBox = (JComboBox)e.getSource();
-		        String petName = (String)comboBox.getSelectedItem();
-		        //updateLabel(petName);
+			public void actionPerformed(ActionEvent arg0) {
+				JComboBox comboBox = (JComboBox)arg0.getSource();
+		        String kashruth = (String)comboBox_1.getSelectedItem();
 			}
 		});
-
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox.setBounds(373, 352, 317, 49);
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		comboBox.setBounds(297, 356, 442, 49);
 		panel_1.add(comboBox);
 		
 		JTextPane txtpnCategory = new JTextPane();
 		txtpnCategory.setText("Category:");
 		txtpnCategory.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnCategory.setBackground(new Color(240, 248, 255));
-		txtpnCategory.setBounds(50, 341, 317, 64);
+		txtpnCategory.setBounds(50, 341, 226, 64);
 		panel_1.add(txtpnCategory);
 		
 		JTextPane txtpnRateAbove = new JTextPane();
@@ -254,7 +247,7 @@ public class AdvancedSearch extends JFrame {
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
 		btnSearch.setBounds(607, 1068, 326, 69);
 		panel_1.add(btnSearch);
-		
+		// add open and close
 		JTextPane textPane = new JTextPane();
 		textPane.setText("Allergies:");
 		textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));

@@ -59,6 +59,7 @@ public class User extends JFrame {
 				try {
 					User frame = new User();
 					frame.setVisible(true);
+					frame.setTitle("Taimli!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

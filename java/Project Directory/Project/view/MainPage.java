@@ -28,8 +28,12 @@ import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
+import javax.swing.table.JTableHeader;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class MainPage extends JFrame {
 
@@ -46,6 +50,7 @@ public class MainPage extends JFrame {
 				try {
 					MainPage frame = new MainPage();
 					frame.setVisible(true);
+					frame.setTitle("Taimli!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -84,6 +89,46 @@ public class MainPage extends JFrame {
 		panel_3.setBackground(new Color(240, 248, 255));
 		panel_3.setBounds(26, 162, 848, 1077);
 		panel.add(panel_3);
+		
+		String[] columnNames = {"Recipe Name",
+                "Description",
+                "Rate"}; 
+		Object[][] data = {
+			    {"Kathy", "Smith",
+			     "Snowboarding"},
+			    {"John", "Doe",
+			     "Rowing"},
+			    {"Sue", "Black",
+			     "Knitting"},
+			    {"Jane", "White",
+			     "Speed reading"},
+			    {"Joe", "Brown",
+			     "Pool"},
+			    {"Joe", "Brown",
+				     "Pool"},
+			    {"Joe", "Brown",
+				     "Pool"},
+			    {"Joe", "Brown",
+				     "Pool"},
+			    {"Joe", "Brown",
+				     "Pool"},
+			    {"Joe", "Brown",
+				     "Pool"}
+			};
+		
+		JTable table = new JTable(data, columnNames);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		table.setRowHeight(80);
+		JTableHeader th = table.getTableHeader();
+		th.setPreferredSize(new Dimension(100, 100));
+		Font bigFont = new Font("Tahoma", Font.PLAIN, 32);
+		table.getTableHeader().setFont(bigFont);
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		scrollPane.setSize(796, 900);
+		scrollPane.setLocation(26, 108);
+		//TableColumn column = null;
+		panel_3.add(scrollPane);
 		
 		JTextPane txtpnTopTen = new JTextPane();
 		txtpnTopTen.setText("Top Ten!!");
