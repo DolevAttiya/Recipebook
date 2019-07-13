@@ -30,7 +30,7 @@ public class MyController implements Controller{
 		case "user_login_response":
 			/* 0 - Event name
 			   1 - Array list */
-			System.out.println("hey");
+			System.out.println("loged in");
 			//((myView)view).loginResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
@@ -45,6 +45,7 @@ public class MyController implements Controller{
 			break;
 
 		case "user_register_response":
+			System.out.println("user registered");
 			//((myView)view).uRegisterResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
@@ -53,6 +54,7 @@ public class MyController implements Controller{
 			break;
 
 		case "dietitian_register_response":
+			System.out.println("dietitian registered");
 			((myView)view).dRegisterResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
