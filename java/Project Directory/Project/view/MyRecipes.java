@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,6 +26,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class MyRecipes extends JFrame {
 
@@ -43,6 +45,7 @@ public class MyRecipes extends JFrame {
 				try {
 					MyRecipes frame = new MyRecipes();
 					frame.setVisible(true);
+					frame.setTitle("Taimli!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -73,10 +76,6 @@ public class MyRecipes extends JFrame {
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1512, 0, 79, 73);
-		panel.add(panel_3);
 		
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
@@ -192,38 +191,38 @@ public class MyRecipes extends JFrame {
 		txtpnAdvancedSearch.setBounds(507, 55, 644, 99);
 		panel_1.add(txtpnAdvancedSearch);
 		
-		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column", "New column"
-			}
-		));
-		table.getColumnModel().getColumn(0).setPreferredWidth(79);
-		table.setBounds(46, 154, 1514, 1001);
-		panel_1.add(table);
+		String[] columnNames = {"Recipe Name",
+                "Description",
+                "Rate",
+                "Calories",
+                "Kosher"}; // name, description, rate, calories, kosher, 
+		Object[][] data = {
+			    {"Kathy", "Smith",
+			     "Snowboarding", new Integer(5), new Boolean(false)},
+			    {"John", "Doe",
+			     "Rowing", new Integer(3), new Boolean(true)},
+			    {"Sue", "Black",
+			     "Knitting", new Integer(2), new Boolean(false)},
+			    {"Jane", "White",
+			     "Speed reading", new Integer(20), new Boolean(true)},
+			    {"Joe", "Brown",
+			     "Pool", new Integer(10), new Boolean(false)}
+			};
+		
+		JTable table = new JTable(data, columnNames);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		table.setRowHeight(50);
+		JTableHeader th = table.getTableHeader();
+		th.setPreferredSize(new Dimension(100, 100));
+		Font bigFont = new Font("Tahoma", Font.PLAIN, 45);
+		table.getTableHeader().setFont(bigFont);
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		table.setRowHeight(1, 60);
+		scrollPane.setSize(1514, 1001);
+		scrollPane.setLocation(46, 154);
+		//TableColumn column = null;
+		panel_1.add(scrollPane);
 
 		JButton button = new JButton("Previous Page");
 		button.setFont(new Font("Tahoma", Font.BOLD, 30));
