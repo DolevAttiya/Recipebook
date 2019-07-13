@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import java.awt.event.WindowEvent;
-	
+
 public class Login extends JFrame {
 
 	private JTextField textField;
@@ -42,13 +42,14 @@ public class Login extends JFrame {
 					Login frame = new Login();
 					  frame.setVisible(true);
 					  frame.setTitle("Taimli!");
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-	
+
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
@@ -61,7 +62,7 @@ public class Login extends JFrame {
 	public Login() {
 		setSize(1664, 1493);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		
+
 		this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(65, 105, 225));
@@ -69,8 +70,8 @@ public class Login extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
+
+
 		//components:
 		JTextPane txtpnWelcomeToRecipebook = new JTextPane();
 		txtpnWelcomeToRecipebook.setForeground(new Color(255, 255, 255));
@@ -79,13 +80,13 @@ public class Login extends JFrame {
 		txtpnWelcomeToRecipebook.setText("Welcome To Taimli !");
 		txtpnWelcomeToRecipebook.setBounds(302, 234, 1028, 160);
 		contentPane.add(txtpnWelcomeToRecipebook);
-		
+
 		JLabel lblUserName = new JLabel("Email:");
 		lblUserName.setFont(new Font("Dialog", Font.PLAIN, 70));
 		lblUserName.setForeground(new Color(255, 255, 255));
 		lblUserName.setBounds(302, 504, 350, 72);
 		contentPane.add(lblUserName);
-		
+
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Dialog", Font.PLAIN, 70));
 		lblPassword.setForeground(new Color(255, 255, 255));
@@ -96,20 +97,24 @@ public class Login extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent f) {
 				myView.statview.login(textField.getText(), String.copyValueOf(passwordField.getPassword()));
-				MainPage a=new MainPage();
-				a.setVisible(true);
-				Login.this.dispose();
-				Login.this.setVisible(false);
+				if (myView.check)
+				{
+					MainPage a=new MainPage();
+					a.setVisible(true);
+					Login.this.dispose();
+					Login.this.setVisible(false);
+				}
+				else JOptionPane.showMessageDialog(null,"One of the parameters is wrong, Please try again");
 			}
 		});
 		btnLogin.setBounds(589, 867, 421, 93);
 		contentPane.add(btnLogin);
-		
+
 		passwordField = new JPasswordField(50);
 		passwordField.setFont(new Font("Dialog", Font.PLAIN, 50));
 		passwordField.setBounds(662, 615, 641, 65);
 		contentPane.add(passwordField);
-		
+
 		JButton btnRegister = new JButton("Sign up!");
 		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 70));
 		btnRegister.addActionListener(new ActionListener() {
@@ -121,7 +126,7 @@ public class Login extends JFrame {
 		});
 		btnRegister.setBounds(589, 976, 421, 93);
 		contentPane.add(btnRegister);
-		
+
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField.setColumns(10);
