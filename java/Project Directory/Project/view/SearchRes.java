@@ -201,7 +201,7 @@ public class SearchRes extends JFrame {
 		txtpnAdvancedSearch.setText("Search Results");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
-		txtpnAdvancedSearch.setBounds(452, 56, 969, 99);
+		txtpnAdvancedSearch.setBounds(452, 54, 969, 99);
 		panel_1.add(txtpnAdvancedSearch);
 
 		String[] columnNames = {"Recipe Name",
