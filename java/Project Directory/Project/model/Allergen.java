@@ -49,14 +49,14 @@ public class Allergen extends  Entities{
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() {
-		return "allergenId= "+this.getAllergenId().toString()+", allergenName"+this.getAllergenName();
+		return " allergenName"+this.getAllergenName();
 	}
 	@Override
 	protected String getAllergenInsert(int place) {
 		return null;
 	}
 	@Override
-	protected String getIngredientInsert(int place) {
+	protected String getSubtbleInsert(int place) {
 		return null;
 	}
 	@Override
@@ -64,15 +64,15 @@ public class Allergen extends  Entities{
 		return null;
 	}
 	@Override
-	protected ArrayList<Integer> getIngredientArray() {
+	protected ArrayList<Integer> getSubtbleArray() {
 		return null;
 	}
 	@Override
-	protected int getmaxIngredieantCount() {
+	protected int getmaxSubtbleCount() {
 		return 0;
 	}
 	@Override
-	protected String getIngredientDelete(int place) {
+	protected String getSubtbleDelete(int place) {
 		// TODO Auto-generated method stub
 		return null;
 	}
