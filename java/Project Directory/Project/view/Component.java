@@ -82,12 +82,31 @@ public class Component extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
+		JButton btnAdd = new JButton("Go!");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				Component.this.dispose();
+				Component.this.setVisible(false);
+			}
+		});
+		btnAdd.setBounds(1016, 37, 71, 42);
+		panel.add(btnAdd);
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User f=new User();
+				if (myView.myUser!=null) {
+					User f=new User();
 				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
 				Component.this.dispose();
 				Component.this.setVisible(false);
 			}
@@ -211,10 +230,16 @@ public class Component extends JFrame {
 		txtpnAdvancedSearch.setText("Add an Ingredient");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
-		txtpnAdvancedSearch.setBounds(507, 55, 944, 99);
+		txtpnAdvancedSearch.setBounds(340, 54, 944, 99);
 		panel_1.add(txtpnAdvancedSearch);
 		
 		JButton btnSearch = new JButton("Add!");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Component.this.dispose();
+				Component.this.setVisible(false);
+			}
+		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
 		btnSearch.setBounds(607, 1068, 326, 69);
 		panel_1.add(btnSearch);

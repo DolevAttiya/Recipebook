@@ -79,19 +79,39 @@ public class AdvancedSearch extends JFrame {
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
+
+		JButton btnAdd = new JButton("Go!");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				AdvancedSearch.this.dispose();
+				AdvancedSearch.this.setVisible(false);
+			}
+		});
+		btnAdd.setBounds(1016, 37, 71, 42);
+		panel.add(btnAdd);
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User f=new User();
+				if (myView.myUser!=null) {
+					User f=new User();
 				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
 				AdvancedSearch.this.dispose();
 				AdvancedSearch.this.setVisible(false);
 			}
 		});
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
 		panel.add(txtpnUserDetails);
+		
 		txtpnUserDetails.setForeground(new Color(255, 255, 255));
 		txtpnUserDetails.setText("user details");
 		txtpnUserDetails.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -193,7 +213,7 @@ public class AdvancedSearch extends JFrame {
 		checkBox_2.setBounds(1279, 671, 281, 41);
 		panel_1.add(checkBox_2);
 		
-		String[] times = { "---","0-30", "30-60", "hour-2 hours", "more than 2 hours"};
+		String[] times = { "---","0-30", "30-60", "60-120", "more than 2 hours"};
 		JComboBox comboBox_1 = new JComboBox(times);
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -202,13 +222,13 @@ public class AdvancedSearch extends JFrame {
 			}
 		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox_1.setBounds(373, 504, 366, 49);
+		comboBox_1.setBounds(373, 504, 403, 49);
 		panel_1.add(comboBox_1);
 		
 		String[] complexity = { "---","Easy", "Medium", "Hard"};
 		JComboBox comboBox_4 = new JComboBox(complexity);
 		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox_4.setBounds(373, 427, 366, 49);
+		comboBox_4.setBounds(373, 427, 403, 49);
 		panel_1.add(comboBox_4);
 		
 		textField_1 = new JTextField();
@@ -226,11 +246,11 @@ public class AdvancedSearch extends JFrame {
 			}
 		});
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox.setBounds(297, 356, 442, 49);
+		comboBox.setBounds(297, 356, 479, 49);
 		panel_1.add(comboBox);
 		
 		JTextPane txtpnCategory = new JTextPane();
-		txtpnCategory.setText("Category:");
+		txtpnCategory.setText("Kashruth");
 		txtpnCategory.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnCategory.setBackground(new Color(240, 248, 255));
 		txtpnCategory.setBounds(50, 341, 226, 64);
@@ -251,6 +271,14 @@ public class AdvancedSearch extends JFrame {
 		panel_1.add(txtpnAdvancedSearch);
 		
 		JButton btnSearch = new JButton("Search!");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchRes f=new SearchRes();
+				f.setVisible(true);
+				AdvancedSearch.this.dispose();
+				AdvancedSearch.this.setVisible(false);
+			}
+		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
 		btnSearch.setBounds(607, 1068, 326, 69);
 		panel_1.add(btnSearch);
@@ -261,19 +289,6 @@ public class AdvancedSearch extends JFrame {
 		textPane.setBackground(new Color(240, 248, 255));
 		textPane.setBounds(1091, 383, 340, 72);
 		panel_1.add(textPane);
-		
-		JCheckBox checkBox_8 = new JCheckBox("Show only Kosher Recipies");
-		checkBox_8.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent k) {
-				 System.out.println(k.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : k.getID()); //add what happens
-			}
-		});
-		checkBox_8.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		checkBox_8.setBackground(new Color(240, 248, 255));
-		checkBox_8.setBounds(50, 758, 697, 64);
-		panel_1.add(checkBox_8);
 		
 		JTextPane txtpnSearchFor = new JTextPane();
 		txtpnSearchFor.setText("Search For:");

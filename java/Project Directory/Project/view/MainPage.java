@@ -93,29 +93,12 @@ public class MainPage extends JFrame {
 		String[] columnNames = {"Recipe Name",
                 "Description",
                 "Rate"}; 
-		Object[][] data = {
-			    {"Kathy", "Smith",
-			     "Snowboarding"},
-			    {"John", "Doe",
-			     "Rowing"},
-			    {"Sue", "Black",
-			     "Knitting"},
-			    {"Jane", "White",
-			     "Speed reading"},
-			    {"Joe", "Brown",
-			     "Pool"},
-			    {"Joe", "Brown",
-				     "Pool"},
-			    {"Joe", "Brown",
-				     "Pool"},
-			    {"Joe", "Brown",
-				     "Pool"},
-			    {"Joe", "Brown",
-				     "Pool"},
-			    {"Joe", "Brown",
-				     "Pool"}
-			};
-		
+		Object[][] data = new Object[myView.recipeArray.size()][3];
+		for(int row=0;row<myView.recipeArray.size();row++) {
+			data[row][0]=myView.recipeArray.get(row).getRecipeName();
+			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
+		}
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		table.setRowHeight(80);
@@ -143,6 +126,11 @@ public class MainPage extends JFrame {
 		panel.add(panel_2);
 		panel_2.setBackground(new Color(240, 248, 255));
 		panel_2.setLayout(null);
+		
+		JButton button = new JButton("Go!");
+		button.setFont(new Font("Tahoma", Font.BOLD, 15));
+		button.setBounds(601, 142, 71, 70);
+		panel_2.add(button);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 50));
@@ -234,12 +222,31 @@ public class MainPage extends JFrame {
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User f=new User();
+				if (myView.myUser!=null) {
+					User f=new User();
 				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
 				MainPage.this.dispose();
 				MainPage.this.setVisible(false);
 			}
 		});
+		
+		JButton btnAdd = new JButton("Go!");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
+			}
+		});
+		btnAdd.setBounds(1016, 37, 71, 42);
+		panel_1.add(btnAdd);
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
 		panel_1.add(txtpnUserDetails);
 		txtpnUserDetails.setForeground(new Color(255, 255, 255));
@@ -274,6 +281,7 @@ public class MainPage extends JFrame {
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
 				MyFavourites d=new MyFavourites();
 				d.setVisible(true);
 				MainPage.this.dispose();
