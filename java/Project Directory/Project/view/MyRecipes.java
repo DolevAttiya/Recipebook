@@ -4,6 +4,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
@@ -81,12 +83,32 @@ public class MyRecipes extends JFrame {
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User f=new User();
+				if (myView.myUser!=null) {
+					User f=new User();
 				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
 				MyRecipes.this.dispose();
 				MyRecipes.this.setVisible(false);
 			}
 		});
+		
+		JButton btnAdd = new JButton("Go!");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				MyRecipes.this.dispose();
+				MyRecipes.this.setVisible(false);
+			}
+		});
+		btnAdd.setBounds(1016, 37, 71, 42);
+		panel.add(btnAdd);
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
 		panel.add(txtpnUserDetails);
 		txtpnUserDetails.setForeground(new Color(255, 255, 255));
@@ -223,15 +245,5 @@ public class MyRecipes extends JFrame {
 		scrollPane.setLocation(46, 154);
 		//TableColumn column = null;
 		panel_1.add(scrollPane);
-
-		JButton button = new JButton("Previous Page");
-		button.setFont(new Font("Tahoma", Font.BOLD, 30));
-		button.setBounds(511, 1183, 268, 41);
-		panel_1.add(button);
-		
-		JButton btnNextPage = new JButton("Next Page");
-		btnNextPage.setFont(new Font("Tahoma", Font.BOLD, 30));
-		btnNextPage.setBounds(786, 1184, 268, 41);
-		panel_1.add(btnNextPage);
 	}
 }

@@ -14,6 +14,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -81,6 +83,19 @@ public class RecipeView extends JFrame {
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+		JButton btnAdd = new JButton("Go!");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				RecipeView.this.dispose();
+				RecipeView.this.setVisible(false);
+			}
+		});
+		btnAdd.setBounds(1016, 37, 71, 42);
+		panel.add(btnAdd);
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
 
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -92,8 +107,14 @@ public class RecipeView extends JFrame {
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User f=new User();
+				if (myView.myUser!=null) {
+					User f=new User();
 				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
 				RecipeView.this.dispose();
 				RecipeView.this.setVisible(false);
 			}
@@ -327,7 +348,15 @@ public class RecipeView extends JFrame {
 		txtpnAdvancedSearch.setBounds(507, 55, 886, 99);
 		panel_1.add(txtpnAdvancedSearch);
 		
-		JButton btnSearch = new JButton("Add!");
+		JButton btnSearch = new JButton("Edit");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NewRecipe f=new NewRecipe();
+				f.setVisible(true);
+				RecipeView.this.dispose();
+				RecipeView.this.setVisible(false);
+			}
+		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
 		btnSearch.setBounds(608, 1138, 326, 69);
 		panel_1.add(btnSearch);
@@ -417,7 +446,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(textField_9);
 		
 		TextArea textArea_1 = new TextArea();
-		textArea_1.setBounds(26, 384, 1021, 240);
+		textArea_1.setBounds(26, 394, 1021, 240);
 		panel_1.add(textArea_1);
 		
 		TextArea textArea = new TextArea();

@@ -16,6 +16,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -76,6 +78,19 @@ public class SearchRes extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
+		JButton btnAdd = new JButton("Go!");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				SearchRes.this.dispose();
+				SearchRes.this.setVisible(false);
+			}
+		});
+		btnAdd.setBounds(1016, 37, 71, 42);
+		panel.add(btnAdd);
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_2.setColumns(10);
@@ -86,8 +101,14 @@ public class SearchRes extends JFrame {
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User f=new User();
+				if (myView.myUser!=null) {
+					User f=new User();
 				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
 				SearchRes.this.dispose();
 				SearchRes.this.setVisible(false);
 			}
@@ -193,19 +214,15 @@ public class SearchRes extends JFrame {
                 "Description",
                 "Rate",
                 "Calories",
-                "Kosher"}; // name, description, rate, calories, kosher, 
-		Object[][] data = {
-			    {"Kathy", "Smith",
-			     "Snowboarding", new Integer(5), new Boolean(false)},
-			    {"John", "Doe",
-			     "Rowing", new Integer(3), new Boolean(true)},
-			    {"Sue", "Black",
-			     "Knitting", new Integer(2), new Boolean(false)},
-			    {"Jane", "White",
-			     "Speed reading", new Integer(20), new Boolean(true)},
-			    {"Joe", "Brown",
-			     "Pool", new Integer(10), new Boolean(false)}
-			};
+                "Kosher"}; 
+		Object[][] data = new Object[myView.recipeArray.size()][5];
+		for(int row=0;row<myView.recipeArray.size();row++) {
+			data[row][0]=myView.recipeArray.get(row).getRecipeName();
+			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
+			data[row][3]=myView.recipeArray.get(row).getRecipeTotalCalories();
+			data[row][4]=myView.recipeArray.get(row).getRecipeKashruth();
+		}
 		
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -221,15 +238,5 @@ public class SearchRes extends JFrame {
 		scrollPane.setLocation(46, 154);
 		//TableColumn column = null;
 		panel_1.add(scrollPane);
-
-		JButton button = new JButton("Previous Page");
-		button.setFont(new Font("Tahoma", Font.BOLD, 30));
-		button.setBounds(511, 1183, 268, 41);
-		panel_1.add(button);
-
-		JButton btnNextPage = new JButton("Next Page");
-		btnNextPage.setFont(new Font("Tahoma", Font.BOLD, 30));
-		btnNextPage.setBounds(786, 1184, 268, 41);
-		panel_1.add(btnNextPage);
 	}
 }

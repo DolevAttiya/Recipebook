@@ -15,6 +15,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
@@ -44,7 +46,6 @@ public class NewRecipe extends JFrame {
 	private JTextField textField_4;
 	private JTextField textField_6;
 	private JTextField textField_7;
-	private JTextField textField_8;
 	private JTextField textField_1;
 	private JTextField textField_9;
 
@@ -88,6 +89,19 @@ public class NewRecipe extends JFrame {
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+		JButton btnAdd = new JButton("Go!");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				NewRecipe.this.dispose();
+				NewRecipe.this.setVisible(false);
+			}
+		});
+		btnAdd.setBounds(1016, 37, 71, 42);
+		panel.add(btnAdd);
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
 
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -99,8 +113,14 @@ public class NewRecipe extends JFrame {
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				User f=new User();
+				if (myView.myUser!=null) {
+					User f=new User();
 				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
 				NewRecipe.this.dispose();
 				NewRecipe.this.setVisible(false);
 			}
@@ -202,7 +222,14 @@ public class NewRecipe extends JFrame {
 		textArea.setBounds(32, 824, 1011, 282);
 		panel_1.add(textArea);
 
-		JComboBox comboBox_1 = new JComboBox();
+		String[] mesuring = { "---","Cup", "Spoon", "Grams", "Mililiter"};
+		JComboBox comboBox_1 = new JComboBox(mesuring);
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox_1 = (JComboBox)e.getSource();
+		        String mesuring = (String)comboBox_1.getSelectedItem();
+			}
+		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox_1.setBounds(738, 355, 229, 49);
 		panel_1.add(comboBox_1);
@@ -415,19 +442,6 @@ public class NewRecipe extends JFrame {
 		textArea_1.setBounds(32, 419, 1021, 357);
 		panel_1.add(textArea_1);
 		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setText("Kashruth:");
-		textPane_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		textPane_1.setBackground(new Color(240, 248, 255));
-		textPane_1.setBounds(26, 1112, 198, 49);
-		panel_1.add(textPane_1);
-		
-		textField_8 = new JTextField();
-		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		textField_8.setColumns(10);
-		textField_8.setBounds(233, 1112, 300, 57);
-		panel_1.add(textField_8);
-		
 		JTextPane textPane_2 = new JTextPane();
 		textPane_2.setText("Name:");
 		textPane_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
@@ -454,9 +468,40 @@ public class NewRecipe extends JFrame {
 		textField_9.setBounds(288, 261, 775, 57);
 		panel_1.add(textField_9);
 		
-		JButton btnAdd = new JButton("Add");
-		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnAdd.setBounds(975, 355, 79, 49);
-		panel_1.add(btnAdd);
+		
+		JButton btnAddNewIngredient = new JButton("Add New Ingredient");
+		btnAddNewIngredient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Component c=new Component();
+				c.setVisible(true);
+			}
+		});
+		btnAddNewIngredient.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnAddNewIngredient.setBounds(1137, 1148, 397, 69);
+		panel_1.add(btnAddNewIngredient);
+		
+		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setText("Kashruth:");
+		textPane_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textPane_1.setBackground(new Color(240, 248, 255));
+		textPane_1.setBounds(32, 1112, 214, 61);
+		panel_1.add(textPane_1);
+		
+		String[] kashruth = { "---","Meat", "Dairy", "Parve", "Not Kosher"};
+		JComboBox comboBox_2 = new JComboBox(kashruth);
+		comboBox_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox_2 = (JComboBox)e.getSource();
+		        String kashruth = (String)comboBox_2.getSelectedItem();
+			}
+		});
+		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		comboBox_2.setBounds(251, 1123, 442, 49);
+		panel_1.add(comboBox_2);
+		
+		JButton btnAdd_1 = new JButton("Add");
+		btnAdd_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAdd_1.setBounds(973, 355, 81, 49);
+		panel_1.add(btnAdd_1);
 	}	
 }
