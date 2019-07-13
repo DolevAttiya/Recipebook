@@ -123,7 +123,7 @@ public class ModelMock implements model {
 	@Override
 	public void deleteIngredientType(IngredientType ingty) {
 		assertEquals(99, ingty.getIngredientTypeId());
-
+ 
 	}
 
 	@Override
