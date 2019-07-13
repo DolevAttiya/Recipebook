@@ -1,20 +1,12 @@
 package view;
 
-import java.awt.datatransfer.StringSelection;
-import java.awt.image.BufferedImage;
+
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.Observable;
-
-import javax.swing.JOptionPane;
 import controller.Event;
 import model.Dietitian;
 import model.Ingredient;
@@ -30,7 +22,7 @@ public class myView extends Observable implements View {
 	static Dietitian myDietitian;
 	public static ArrayList<Ingredient> ingedientArray=new ArrayList<Ingredient>();
 	public static ArrayList<Recipe> recipeArray=new ArrayList<Recipe>();
-	
+
 	public static String ConvertPassToHash(String input)  {
 		try { 
 			MessageDigest md = MessageDigest.getInstance("SHA-256"); 
@@ -73,7 +65,9 @@ public class myView extends Observable implements View {
 		}
 		else check=false; // show error
 	}
-	public void register(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
+	public void register(String firstName, String lastName, String email, String pass,String pass2, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
+		if ((pass.length()<6) || (pass.compareTo(pass2)==0))
+			check=false; // can't save > we will show an error ! 
 		Dietitian newDietitian;
 		model.User newUser;
 		String hashPass;
@@ -309,47 +303,54 @@ public class myView extends Observable implements View {
 			check=true; // updated successfully
 		else check=false; // not successfully
 	}
-	public void userUpdate(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
+
+	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2, LocalDate dateOfBirth, boolean isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate , boolean wantAllerg) {
+		if ((pass.length()<6) || (pass.compareTo(pass2)==0))
+			check=false; // can't save > we will show an error ! 
 		String hashPass;
 		hashPass = ConvertPassToHash(pass);
 		Event ev=new Event();
-		if (myUser!=null) // user
-		{
-			ev.getArr().add("user_update");
-			myUser.setPersonFirstName(firstName);
-			myUser.setPersonLastName(lastName);
-			myUser.setPersonEmail(email);
-			myUser.setPersonDateOfBirth(dateOfBirth);
-			myUser.setPersonHashPass(hashPass);
-			myUser.setUserKashruth(isKosher);
-			myUser.setUserAllergen(allergies);
-			myUser.setUserAllergens(wantAllerg);
-		}
-		else // dietitian
-		{
-			ev.getArr().add("dietitian_update");
-			myDietitian.setPersonFirstName(firstName);
-			myDietitian.setPersonLastName(lastName);
-			myDietitian.setPersonEmail(email);
-			myDietitian.setPersonDateOfBirth(dateOfBirth);
-			myDietitian.setPersonHashPass(hashPass);
-			myDietitian.setDietitianStatDate(dietitianStatDate);
-			//	myDietitian.setDietitianId(dietitianNum);
-		}
+		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
+		ev.getArr().add("user_update");
+		myUser.setPersonFirstName(firstName);
+		myUser.setPersonLastName(lastName);
+		myUser.setPersonEmail(email);
+		myUser.setPersonDateOfBirth(dateOfBirth);
+		myUser.setPersonHashPass(hashPass);
+		myUser.setUserKashruth(isKosher);
+		myUser.setUserAllergen(allergies);
+		myUser.setUserAllergens(wantAllerg);
 		setChanged();
 		notifyObservers(ev);
 	}
+	public void dietitianUpdate(String firstName, String lastName, String email, String pass, String pass2, LocalDate dateOfBirth, Integer dietitianNum, LocalDate dietitianStatDate) {
+		if ((pass.length()<6) || (pass.compareTo(pass2)==0))
+			check=false; // can't save > we will show an error ! 
+		String hashPass;
+		hashPass = ConvertPassToHash(pass);
+		Event ev=new Event();
+		ev.getArr().add("dietitian_update");
+		myDietitian.setPersonFirstName(firstName);
+		myDietitian.setPersonLastName(lastName);
+		myDietitian.setPersonEmail(email);
+		myDietitian.setPersonDateOfBirth(dateOfBirth);
+		myDietitian.setPersonHashPass(hashPass);
+		myDietitian.setDietitianStatDate(dietitianStatDate);
+		//	myDietitian.setDietitianId(dietitianNum);
+		setChanged();
+		notifyObservers(ev);
+	}
+
 	public void userUpdateResponse(ArrayList<User> usU) {
 		if (usU.get(0)!=null)
-			check=true;
-		check=false;
+			check=true; // everything was OK
+		check=false; // something went wrong (could'nt save / already exist)
 	}
 	public void dietitianUpdateResponse(ArrayList<Dietitian> usD) {
 		if (usD.get(0)!=null)
-			check=true;
-		check=false;
+			check=true; // everything was OK
+		check=false; // something went wrong (could'nt save / already exist)
 	}
-
 }
 /*
 //---------Login Page------------

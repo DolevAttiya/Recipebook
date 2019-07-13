@@ -93,29 +93,12 @@ public class MainPage extends JFrame {
 		String[] columnNames = {"Recipe Name",
                 "Description",
                 "Rate"}; 
-		Object[][] data = {
-			    {"Kathy", "Smith",
-			     "Snowboarding"},
-			    {"John", "Doe",
-			     "Rowing"},
-			    {"Sue", "Black",
-			     "Knitting"},
-			    {"Jane", "White",
-			     "Speed reading"},
-			    {"Joe", "Brown",
-			     "Pool"},
-			    {"Joe", "Brown",
-				     "Pool"},
-			    {"Joe", "Brown",
-				     "Pool"},
-			    {"Joe", "Brown",
-				     "Pool"},
-			    {"Joe", "Brown",
-				     "Pool"},
-			    {"Joe", "Brown",
-				     "Pool"}
-			};
-		
+		Object[][] data = new Object[myView.recipeArray.size()][3];
+		for(int row=0;row<myView.recipeArray.size();row++) {
+			data[row][0]=myView.recipeArray.get(row).getRecipeName();
+			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
+		}
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		table.setRowHeight(80);
