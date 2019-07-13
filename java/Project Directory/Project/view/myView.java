@@ -177,8 +177,8 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void addIngredientResponse(Ingredient newIngredient) {
-		if (newIngredient.getIngredientId()!=null)
+	public void addIngredientResponse(ArrayList<Ingredient> in) {
+		if (in.get(0).getIngredientId()!=null)
 			check=true; // updated successfully
 		else check=false; // not successfully
 	}
@@ -193,7 +193,7 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void myFavoriteResponse() {} // find out how to show the information in the window
+	public void myFavoriteResponse(ArrayList<Recipe> r) {} // find out how to show the information in the window
 	public void myRecipes ()
 	{
 		Event ev=new Event();
@@ -205,13 +205,13 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void myRecipesResponse() {} // find out how to show the information in the window
-	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient>, Integer[] allergies) {
+	public void myRecipesResponse(ArrayList<Recipe> r) {} // find out how to show the information in the window
+	//public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient>, Integer[] allergies) {
 		//	String ingredientName, Integer catagory, Integer[] allergies, Integer[] measureType, Double calories, 
 		//  Double carbohydrate, Double fat, Double protein, Integer kashruth
-	} 
-	public void addRecipeResponse(Recipe newRecipe) {
-		if (newRecipe.getRecipeId()!=null)
+	//} 
+	public void addRecipeResponse(ArrayList<Recipe> r) {
+		if (r.get(0).getRecipeId()!=null)
 			check=true; // updated successfully
 		else check=false; // not successfully
 	}
@@ -245,13 +245,13 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void userUpdateResponse(User usU) {
-		if (usU!=null)
+	public void userUpdateResponse(ArrayList<User> usU) {
+		if (usU.get(0)!=null)
 			check=true;
 		check=false;
 	}
-	public void dietitianUpdateResponse(Dietitian usD) {
-		if (usD!=null)
+	public void dietitianUpdateResponse(ArrayList<Dietitian> usD) {
+		if (usD.get(0)!=null)
 			check=true;
 		check=false;
 	}
