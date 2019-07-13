@@ -50,6 +50,7 @@ public class Component extends JFrame {
 				try {
 					Component frame = new Component();
 					frame.setVisible(true);
+					  frame.setTitle("Taimli!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,10 +81,6 @@ public class Component extends JFrame {
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1512, 0, 79, 73);
-		panel.add(panel_3);
 		
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
@@ -188,11 +185,18 @@ public class Component extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(240, 248, 255));
-		panel_1.setBounds(-292, 325, 1610, 1299);
+		panel_1.setBounds(11, 106, 1610, 1299);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		String[] kashruth = { "---","Meat", "Dairy", "Parve", "Not Kosher"};
+		JComboBox comboBox_1 = new JComboBox(kashruth);
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JComboBox comboBox_1 = (JComboBox)arg0.getSource();
+		        String kashruth = (String)comboBox_1.getSelectedItem();
+			}
+		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox_1.setBounds(277, 277, 442, 49);
 		panel_1.add(comboBox_1);
@@ -288,19 +292,6 @@ public class Component extends JFrame {
 		txtpnMes.setBounds(60, 404, 678, 88);
 		panel_1.add(txtpnMes);
 		
-		JCheckBox chckbxKosher = new JCheckBox("Kosher");
-		chckbxKosher.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent j) {
-				 System.out.println(j.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : j.getID()); //add what happens
-			}
-		});
-		chckbxKosher.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxKosher.setBackground(new Color(240, 248, 255));
-		chckbxKosher.setBounds(60, 799, 697, 64);
-		panel_1.add(chckbxKosher);
-		
 		JCheckBox chckbxCup = new JCheckBox("Cup");
 		chckbxCup.addActionListener(new ActionListener() {
 			 @Override
@@ -361,10 +352,10 @@ public class Component extends JFrame {
 		panel_1.add(txtpnComponentName);
 		
 		JTextPane txtpnCategory_1 = new JTextPane();
-		txtpnCategory_1.setText("Category:");
+		txtpnCategory_1.setText("Kashruth:");
 		txtpnCategory_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnCategory_1.setBackground(new Color(240, 248, 255));
-		txtpnCategory_1.setBounds(58, 266, 255, 61);
+		txtpnCategory_1.setBounds(58, 266, 214, 61);
 		panel_1.add(txtpnCategory_1);
 	}
 }

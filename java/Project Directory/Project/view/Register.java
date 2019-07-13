@@ -56,6 +56,7 @@ public class Register extends JFrame {
 				try {
 					Register frame = new Register();
 					frame.setVisible(true);
+					frame.setTitle("Taimli!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -87,10 +88,6 @@ public class Register extends JFrame {
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
-
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1512, 0, 79, 73);
-		panel.add(panel_3);
 
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
@@ -246,15 +243,6 @@ public class Register extends JFrame {
 		chckbxFish.setBackground(new Color(240, 248, 255));
 		chckbxFish.setBounds(1027, 783, 345, 41);
 		panel_1.add(chckbxFish);
-
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(1109, 163, 456, 390);
-		panel_1.add(panel_2);
-
-		JButton btnDeletePhoto = new JButton("Edit Photo");
-		btnDeletePhoto.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnDeletePhoto.setBounds(1274, 552, 161, 31);
-		panel_1.add(btnDeletePhoto);
 		setVisible(true);
 
 		JTextPane txtpnEnterDieticanNumber = new JTextPane();
