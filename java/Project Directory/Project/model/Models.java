@@ -139,7 +139,7 @@ public class Models extends Observable implements model  {
 			}
 			else
 			{
-				args.add(0, "Dietitian");
+				args.set(0, "Dietitian");
 				rs=search("CheckPasswordAndEmail",args);
 				if(rs.next()){
 					ArrayList<Dietitian> diet= new ArrayList<Dietitian>();
@@ -217,7 +217,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<User> user= new ArrayList<User>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail"," \"" +us.getPersonEmail()+"\" ");
 		ResultSet rs =Models.SelectSpecificFrom("Max( userId ) as max", "User", null, null);
 		try {
 			us.setUserId(rs.getInt("max")+1);
@@ -246,7 +246,7 @@ public class Models extends Observable implements model  {
 	public void updateUser(User us){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail"," \"" +us.getPersonEmail()+"\" ");
 
 		ArrayList<User> user= new ArrayList<User>();
 		try {
@@ -275,7 +275,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<User> user= new ArrayList<User>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail"," \"" +us.getPersonEmail()+"\" ");
 		try {
 			if(saftie.getInt("count")==0||!us.Delete())
 			{
@@ -349,7 +349,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", dt.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", " \"" +dt.getPersonEmail()+"\" ");
 		try {
 			if(saftie.getInt("count")==0&&dt.Insert())
 			{
@@ -378,7 +378,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", dt.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail"," \"" +dt.getPersonEmail()+"\" ");
 
 		try {
 			if(saftie.getInt("count")!=0&&dt.Update())
@@ -407,7 +407,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", dt.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", " \"" +dt.getPersonEmail()+"\" ");
 		try {
 			if(saftie.getInt("count")==0&&!dt.Delete())
 			{
