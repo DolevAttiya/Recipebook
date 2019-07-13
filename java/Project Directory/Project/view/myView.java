@@ -2,6 +2,7 @@ package view;
 
 import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,6 +17,7 @@ import java.util.Observable;
 import javax.swing.JOptionPane;
 import controller.Event;
 import model.Dietitian;
+import model.Ingredient;
 import model.Models;
 import model.Recipe;
 import model.User;
@@ -23,29 +25,25 @@ import model.User;
 public class myView extends Observable implements View {
 	public myView() {};
 	public static myView statview = new myView();
-	User myUser;
-	Dietitian myDietitian;
-	public String ConvertPassToHash(String password)  {
-		MessageDigest digest;
-		try {
-			digest = MessageDigest.getInstance("SHA3_256");
-			final byte[] hashbytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-			String sha3_256hex = bytesToHex(hashbytes);
-			return sha3_256hex;
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} return null;
-	}
-	private static String bytesToHex(byte[] hashInBytes) {
-
-		StringBuilder sb = new StringBuilder();
-		for (byte b : hashInBytes) {
-			sb.append(String.format("%02x", b));
-		}
-		return sb.toString();
-
-	}
+	static boolean check=true;
+	static User myUser;
+	static Dietitian myDietitian;
+	public static String ConvertPassToHash(String input)  {
+		try { 
+			MessageDigest md = MessageDigest.getInstance("SHA-256"); 
+			byte[] messageDigest = md.digest(input.getBytes()); 
+			BigInteger no = new BigInteger(1, messageDigest); 
+			String hashtext = no.toString(16); 
+			while (hashtext.length() < 32) { 
+				hashtext = "0" + hashtext; 
+			} 
+			return hashtext;  
+		} 
+		catch (NoSuchAlgorithmException e) { 
+			System.out.println("Exception thrown" + " for incorrect algorithm: " + e); 
+			return null; 
+		} 
+	} 
 	public void login (String email, String pass)
 	{
 		pass=ConvertPassToHash(pass);
@@ -56,13 +54,21 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}	
-	public void loginResponse (ArrayList<model.User> us) {
-		if(us.get(0)!=null) // if the user exists in the DB
+	public void dloginResponse (ArrayList<Dietitian> usD) {
+		if(usD.get(0)!=null) // if the user exists in the DB
 		{
-			myUser=us.get(0);
-			//open mainPage
+			myDietitian=usD.get(0);
+			check=true; // open main page
 		}
-		else JOptionPane.showMessageDialog(null,"One of the parameters is wrong, Please try again");
+		else check=false; // show error
+	}
+	public void uloginResponse (ArrayList<model.User> usU) {
+		if(usU.get(0)!=null) // if the user exists in the DB
+		{
+			myUser=usU.get(0);
+			check=true; // open main page
+		}
+		else check=false; // show error
 	}
 	public void register(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
 		Dietitian newDietitian;
@@ -72,13 +78,13 @@ public class myView extends Observable implements View {
 		hashPass = ConvertPassToHash(pass);
 		if (isDietitian==true)
 		{
-			newDietitian = new Dietitian(email, firstName, lastName, dateOfBirth, hashPass, null, null, dietitianNum, dietitianStatDate);
+			newDietitian = new Dietitian(email, firstName, lastName, dateOfBirth, hashPass, null, dietitianNum, dietitianStatDate);
 			ev.getArr().add("dietitian_register");
 			ev.getArr().add(newDietitian);
 		}
 		else
 		{
-			newUser=new model.User(email, firstName, lastName, dateOfBirth, hashPass, null, null, 1, allergies, wantAllerg, isKosher);
+			newUser=new model.User(email, firstName, lastName, dateOfBirth, hashPass, null, 1, allergies, wantAllerg, isKosher);
 			ev.getArr().add("user_register");
 			ev.getArr().add(newUser);
 		}
@@ -86,20 +92,26 @@ public class myView extends Observable implements View {
 		notifyObservers(ev);		
 	}
 	public void dRegisterResponse(ArrayList<Dietitian> usD) {
-		if(usD.get(0)!=null) // if the user exists in the DB
+		if (usD.get(0)!=null)
 		{
+			check=true; // everything was OK
 			myDietitian=usD.get(0);
-			//open mainPage
 		}
-		else JOptionPane.showMessageDialog(null,"Something went wrong, Please try again");
+		else // something went wrong (could'nt save / already exist)
+		{
+			check=false;
+		}			
 	}
 	public void uRegisterResponse(ArrayList<model.User> usU) {
-		if(usU.get(0)!=null) // if the user exists in the DB
+		if (usU.get(0)!=null)
 		{
+			check=true; // everything was OK
 			myUser=usU.get(0);
-			//open mainPage
 		}
-		else JOptionPane.showMessageDialog(null,"Something went wrong, Please try again");
+		else // something went wrong (could'nt save / already exist)
+		{
+			check=false;
+		}	
 	}
 	public void getTop10(ArrayList<Recipe> r) {
 		Event ev=new Event();
@@ -123,6 +135,9 @@ public class myView extends Observable implements View {
 			if (myUser.getUserAllergens()==true) // wants to see adapted results
 				ev.getArr().add(myUser.getUserAllergen()); // sends the user's allergies
 			else ev.getArr().add(null); // null means wants all results
+			if (myUser.getUserKashruth()==true) // wants to see adapted results
+				ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
+			else ev.getArr().add(null); // null means wants all results
 		}
 		else // Dietitian
 		{
@@ -131,6 +146,7 @@ public class myView extends Observable implements View {
 			ev.getArr().add(null); // Cooking Time - Irrelevant in search from menu
 			ev.getArr().add(null); // Rate Above - Irrelevant in search from menu
 			ev.getArr().add(null); // null means wants all results
+			ev.getArr().add(null);
 		}
 		setChanged();
 		notifyObservers(ev);
@@ -147,16 +163,24 @@ public class myView extends Observable implements View {
 		ev.getArr().add(timeToMake); 
 		ev.getArr().add(rateAbove);
 		ev.getArr().add(allergies); // sends the user's allergies
+		if (showOnlyKosher==true) // wants to see adapted results
+			ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
+		else ev.getArr().add(null); // null means wants all results
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void addIngredient (String ingredientName, Integer catagory, Integer[] allergies, Integer measureType, Integer calories, Integer suger, Integer fat, Integer protein) { }
-	public void addIngredientResponse(Integer ingredientId) {
-		if (ingredientId!=null)
-			JOptionPane.showMessageDialog(null,"Updated Succesfully!");
-		else
-			JOptionPane.showMessageDialog(null,"Something is Wrong, Please try again.");
-		// open main
+	public void addIngredient (String ingredientName, Integer catagory, Integer[] allergies, Integer[] measureType, Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth) { 
+		Ingredient newIngredient=new Ingredient(null, ingredientName, allergies, calories, carbohydrate, protein, fat, kashruth);
+		Event ev=new Event();
+		ev.getArr().add("ingredient_insert");
+		ev.getArr().add(newIngredient);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void addIngredientResponse(Ingredient newIngredient) {
+		if (newIngredient.getIngredientId()!=null)
+			check=true; // updated successfully
+		else check=false; // not successfully
 	}
 	public void myFavorite ()
 	{
@@ -182,8 +206,15 @@ public class myView extends Observable implements View {
 		notifyObservers(ev);
 	}
 	public void myRecipesResponse() {} // find out how to show the information in the window
-	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate) {} 
-	public void addRecipeResponse() {}
+	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient>, Integer[] allergies) {
+		//	String ingredientName, Integer catagory, Integer[] allergies, Integer[] measureType, Double calories, 
+		//  Double carbohydrate, Double fat, Double protein, Integer kashruth
+	} 
+	public void addRecipeResponse(Recipe newRecipe) {
+		if (newRecipe.getRecipeId()!=null)
+			check=true; // updated successfully
+		else check=false; // not successfully
+	}
 	public void userUpdate(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
 		String hashPass;
 		hashPass = ConvertPassToHash(pass);
@@ -214,6 +245,16 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
+	public void userUpdateResponse(User usU) {
+		if (usU!=null)
+			check=true;
+		check=false;
+	}
+	public void dietitianUpdateResponse(Dietitian usD) {
+		if (usD!=null)
+			check=true;
+		check=false;
+	}
 }
 /*
 //---------Login Page------------
@@ -238,11 +279,11 @@ case "recipe_delete": // we need to discuss that !
 case "select_user":
 case "select_dietitian":
 	//---------Ingredient Page-------
-case "ingredient_insert":
+case "ingredient_insert": //DONE
 case "ingredient_update":
 case "ingredient_delete": // we need to discuss that !
-
-	/*
+ */
+/*
  * timeToMake:
  * 0 - 0-30 minutes
  * 1 - 30-60 minutes

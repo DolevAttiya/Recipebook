@@ -19,5 +19,4 @@ public interface View {
 	public void myFavoriteResponse();
 	public void myRecipesResponse();
 	public void addRecipeResponse();
-	
 }

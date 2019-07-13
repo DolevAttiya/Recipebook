@@ -1,4 +1,4 @@
-package view;
+package view; 
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -48,6 +48,7 @@ public class AdvancedSearch extends JFrame {
 				try {
 					AdvancedSearch frame = new AdvancedSearch();
 					frame.setVisible(true);
+					frame.setTitle("Taimli!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -78,10 +79,6 @@ public class AdvancedSearch extends JFrame {
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(1512, 0, 79, 73);
-		panel.add(panel_3);
 		
 		JTextPane txtpnUserDetails = new JTextPane();
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
@@ -196,14 +193,22 @@ public class AdvancedSearch extends JFrame {
 		checkBox_2.setBounds(1279, 671, 281, 41);
 		panel_1.add(checkBox_2);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		String[] times = { "---","0-30", "30-60", "hour-2 hours", "more than 2 hours"};
+		JComboBox comboBox_1 = new JComboBox(times);
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox_1 = (JComboBox)e.getSource();
+		        String times = (String)comboBox_1.getSelectedItem();
+			}
+		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox_1.setBounds(373, 504, 317, 49);
+		comboBox_1.setBounds(373, 504, 366, 49);
 		panel_1.add(comboBox_1);
 		
-		JComboBox comboBox_4 = new JComboBox();
+		String[] complexity = { "---","Easy", "Medium", "Hard"};
+		JComboBox comboBox_4 = new JComboBox(complexity);
 		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox_4.setBounds(373, 427, 317, 49);
+		comboBox_4.setBounds(373, 427, 366, 49);
 		panel_1.add(comboBox_4);
 		
 		textField_1 = new JTextField();
@@ -212,21 +217,23 @@ public class AdvancedSearch extends JFrame {
 		textField_1.setBounds(297, 220, 1246, 58);
 		panel_1.add(textField_1);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox_3.setBounds(307, 617, 90, 53);
-		panel_1.add(comboBox_3);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox.setBounds(373, 352, 317, 49);
+		String[] kashruth = { "---","Meat", "Dairy", "Parve", "Not Kosher", "Kosher"};
+		JComboBox comboBox = new JComboBox(kashruth);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JComboBox comboBox = (JComboBox)arg0.getSource();
+		        String kashruth = (String)comboBox.getSelectedItem();
+			}
+		});
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		comboBox.setBounds(297, 356, 442, 49);
 		panel_1.add(comboBox);
 		
 		JTextPane txtpnCategory = new JTextPane();
 		txtpnCategory.setText("Category:");
 		txtpnCategory.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnCategory.setBackground(new Color(240, 248, 255));
-		txtpnCategory.setBounds(50, 341, 317, 64);
+		txtpnCategory.setBounds(50, 341, 226, 64);
 		panel_1.add(txtpnCategory);
 		
 		JTextPane txtpnRateAbove = new JTextPane();
@@ -247,7 +254,7 @@ public class AdvancedSearch extends JFrame {
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
 		btnSearch.setBounds(607, 1068, 326, 69);
 		panel_1.add(btnSearch);
-		
+		// add open and close
 		JTextPane textPane = new JTextPane();
 		textPane.setText("Allergies:");
 		textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
@@ -312,7 +319,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		checkBox_1.setBackground(new Color(240, 248, 255));
-		checkBox_1.setBounds(999, 531, 345, 41);
+		checkBox_1.setBounds(999, 531, 269, 41);
 		panel_1.add(checkBox_1);
 		
 		JCheckBox checkBox_3 = new JCheckBox("Tree Nuts");
@@ -351,7 +358,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		checkBox_5.setBackground(new Color(240, 248, 255));
-		checkBox_5.setBounds(999, 463, 345, 41);
+		checkBox_5.setBounds(999, 463, 269, 41);
 		panel_1.add(checkBox_5);
 		
 		JCheckBox checkBox_6 = new JCheckBox("Coffie");
@@ -364,7 +371,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		checkBox_6.setBackground(new Color(240, 248, 255));
-		checkBox_6.setBounds(999, 598, 345, 41);
+		checkBox_6.setBounds(999, 598, 269, 41);
 		panel_1.add(checkBox_6);
 		
 		JCheckBox checkBox_7 = new JCheckBox("Gluten");
@@ -377,7 +384,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		checkBox_7.setBackground(new Color(240, 248, 255));
-		checkBox_7.setBounds(999, 671, 345, 41);
+		checkBox_7.setBounds(999, 671, 255, 41);
 		panel_1.add(checkBox_7);
 		
 		JCheckBox checkBox_9 = new JCheckBox("Dairy");
@@ -431,5 +438,17 @@ public class AdvancedSearch extends JFrame {
 		checkBox_12.setBackground(new Color(240, 248, 255));
 		checkBox_12.setBounds(1279, 744, 281, 41);
 		panel_1.add(checkBox_12);
+		
+		String[] rating = { "---","0-50", "50-100", "100-150", "150-200"};
+		JComboBox comboBox_2 = new JComboBox(rating);
+		comboBox_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox_2 = (JComboBox)e.getSource();
+		        String rating = (String)comboBox.getSelectedItem();
+			}
+		});
+		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		comboBox_2.setBounds(307, 615, 293, 49);
+		panel_1.add(comboBox_2);
 	}
 }
