@@ -193,15 +193,22 @@ public class AdvancedSearch extends JFrame {
 		checkBox_2.setBounds(1279, 671, 281, 41);
 		panel_1.add(checkBox_2);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		String[] times = { "---","0-30", "30-60", "hour-2 hours", "more than 2 hours"};
+		JComboBox comboBox_1 = new JComboBox(times);
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox_1 = (JComboBox)e.getSource();
+		        String times = (String)comboBox_1.getSelectedItem();
+			}
+		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox_1.setBounds(373, 504, 317, 49);
+		comboBox_1.setBounds(373, 504, 366, 49);
 		panel_1.add(comboBox_1);
 		
 		String[] complexity = { "---","Easy", "Medium", "Hard"};
 		JComboBox comboBox_4 = new JComboBox(complexity);
 		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox_4.setBounds(373, 427, 317, 49);
+		comboBox_4.setBounds(373, 427, 366, 49);
 		panel_1.add(comboBox_4);
 		
 		textField_1 = new JTextField();
@@ -215,7 +222,7 @@ public class AdvancedSearch extends JFrame {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JComboBox comboBox = (JComboBox)arg0.getSource();
-		        String kashruth = (String)comboBox_1.getSelectedItem();
+		        String kashruth = (String)comboBox.getSelectedItem();
 			}
 		});
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -431,5 +438,17 @@ public class AdvancedSearch extends JFrame {
 		checkBox_12.setBackground(new Color(240, 248, 255));
 		checkBox_12.setBounds(1279, 744, 281, 41);
 		panel_1.add(checkBox_12);
+		
+		String[] rating = { "---","0-50", "50-100", "100-150", "150-200"};
+		JComboBox comboBox_2 = new JComboBox(rating);
+		comboBox_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox_2 = (JComboBox)e.getSource();
+		        String rating = (String)comboBox.getSelectedItem();
+			}
+		});
+		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		comboBox_2.setBounds(307, 615, 293, 49);
+		panel_1.add(comboBox_2);
 	}
 }
