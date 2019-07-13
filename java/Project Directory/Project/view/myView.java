@@ -37,7 +37,7 @@ public class myView extends Observable implements View {
 			while (hashtext.length() < 32) { 
 				hashtext = "0" + hashtext; 
 			} 
-			return hashtext; 
+			return hashtext;  
 		} 
 		catch (NoSuchAlgorithmException e) { 
 			System.out.println("Exception thrown" + " for incorrect algorithm: " + e); 
