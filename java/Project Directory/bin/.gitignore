@@ -1,1 +1,6 @@
+/controller/
+/database/
+/driver/
 /view/
+/tests/
+/model/
