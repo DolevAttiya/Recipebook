@@ -1,6 +1,8 @@
 package tests;
 
 import static org.junit.Assert.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.Dietitian;
@@ -51,7 +53,7 @@ public class ViewMock implements View {
 	@Override
 	public void dietitianUpdateResponse(ArrayList<Dietitian> usD) {
 		if(usD!=null)
-			assertEquals("1996-06-17", usD.get(0).getDietitianStatDate());
+			assertEquals("1996-06-17", usD.get(0).getDietitianStatDate().toString());
 		else
 			assertNull(usD);
 	}

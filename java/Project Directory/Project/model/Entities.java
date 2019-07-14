@@ -14,11 +14,11 @@ public abstract class  Entities  {
 	protected abstract String getEntitieAttributesValues(); //Override for all. return the attributes values for the table
 	protected abstract String getEntitieAttributesNamesValues();//Override for all. return the attributes names + values for the table
 	protected abstract String getAllergenInsert(int place);//Override for Ingredient, User, Recipe. making the sql string for the connection Allergen table
-	protected abstract String getIngredientInsert(int place);//Override for recipe. making the sql string for the connection Ingredients table for Insert
-	protected abstract String getIngredientDelete(int place);//Override for recipe. making the sql string for the connection Ingredients table for Delete
+	protected abstract String getSubtbleInsert(int place);//Override for recipe. making the sql string for the connection Ingredients table for Insert
+	protected abstract String getSubtbleDelete(int place);//Override for recipe. making the sql string for the connection Ingredients table for Delete
 	protected abstract Integer[] getAllergenArray(); //Override for Ingredient, User, Recipe. retrieve the array list of the allergens from the class 
-	protected abstract ArrayList<Integer> getIngredientArray();//Override for Recipe. retrieve the array list of the ingredient from the class 
-	protected abstract int getmaxIngredieantCount();//Override for recipe. receive the count of the ingredients for each recipe
+	protected abstract ArrayList<Integer> getSubtbleArray();//Override for Recipe. retrieve the array list of the ingredient from the class 
+	protected abstract int getmaxSubtbleCount();//Override for recipe. receive the count of the ingredients for each recipe
 	protected abstract String getPersonAttributesNamesValues();//Override for all. return the attributes names + values for the table
 	protected abstract String getPersonAttributesValues();
 	protected abstract String getPersonAttributesNames();
@@ -34,11 +34,16 @@ public abstract class  Entities  {
 		sql+=" ) ";
 		return sql;}
 	private String getStringIngredientForInsert(int i) {
-		return " INSERT INTO " +this.Class()+"Ingredient " + " ( " +this.getEntitieKey()+ " , ingredientId , ingredientAmount ,  ingredientTypeId ) VALUES ( "+this.getEntitieKeyValue()+" , "+this.getIngredientInsert(i)+" ) ";}
+		return " INSERT INTO " +this.Class()+"Ingredient " + " ( " +this.getEntitieKey()+ " , ingredientId , ingredientAmount ,  ingredientTypeId ) VALUES ( "+this.getEntitieKeyValue()+" , "+this.getSubtbleInsert(i)+" ) ";}
 	private String getStringAllergiesForDelete(int i) {
 		return " DELETE FROM "+ this.Class()+"Allergen	 "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"allergenId = "+i;}
 	private String getStringIngredientForDelete(int i) {
-		return " DELETE FROM "+ this.Class()+"Ingredient "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"ingredientId = "+getIngredientDelete(i);}
+		return " DELETE FROM "+ this.Class()+"Ingredient "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"ingredientId = "+getSubtbleDelete(i);}
+	private String getStringRecipeForInsert(int i) {
+		return " INSERT INTO PersonFavoriteRecipe ( " +this.getEntitieKey()+ " , ingredientId , ingredientAmount ,  ingredientTypeId ) VALUES ( "+this.getEntitieKeyValue()+" , "+this.getSubtbleInsert(i)+" ) ";}
+	private String getStringRecipeForDelete(int i) {
+		return " DELETE FROM PersonFavoriteRecipe WHERE personEmail = "+this.getPersonKeyValue()+" and "+"recipeId = "+getSubtbleDelete(i);}
+	
 	protected int getResultSetSize(ResultSet rs) {
 		int size =0;
 		if (rs != null) 
@@ -60,9 +65,57 @@ public abstract class  Entities  {
 		Integer[] dbal;
 		String sql;
 		if(this.Class().compareTo(" User")==0||this.Class().compareTo(" Dietitian")==0) {
+			ResultSet rs;
 			sql=" UPDATE  Person SET"+this.getPersonAttributesNamesValues()+" WHERE personEmail = "+this.getPersonKeyValue()+" ";
 			q= Models.preformWithDB(sql);
-		}
+			
+			
+			ArrayList<Integer> favoriteRecipeToUpDate= getSubtbleArray();
+			Collections.sort(favoriteRecipeToUpDate);
+			rs=Models.SelectSpecific("PersonFavoriteRecipe ", "personEmail", this.getPersonKeyValue());//
+			ArrayList<Integer> recipeFromDB= new ArrayList<Integer>();
+			try {
+				while(rs.next())
+
+					recipeFromDB.add(rs.getInt("recipeId"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+			Collections.sort(recipeFromDB);
+			int i=0,j=0;
+			while(recipeFromDB.size()!=i&&favoriteRecipeToUpDate.size()!=j)
+			{
+				if(recipeFromDB.get(i)!=favoriteRecipeToUpDate.get(j))
+				{
+					if(recipeFromDB.get(i)<favoriteRecipeToUpDate.get(j)) {
+						sqlconnections=getStringRecipeForDelete(recipeFromDB.get(i));
+						i++;}
+					else 
+					{	
+						sqlconnections=getStringRecipeForInsert(i);
+						j++;
+					}
+					Models.preformWithDB(sqlconnections);	
+				}
+				else {i++;j++;}
+			}
+			while(recipeFromDB.size()!=i)
+			{
+				sqlconnections=getStringRecipeForDelete(recipeFromDB.get(i));
+				i++;
+				Models.preformWithDB(sqlconnections);	
+
+			}
+			while(favoriteRecipeToUpDate.size()!=j)
+			{	
+				sqlconnections=getStringRecipeForInsert(j);
+				j++;
+				Models.preformWithDB(sqlconnections);	
+
+			
+			}}
+		
 		sql=" UPDATE "+this.Class()+" SET "+this.getEntitieAttributesNamesValues()+" WHERE "+ this.getEntitieKey()+ " = \"" +this.getEntitieKeyValue()+"\" ";
 		if (this.Class().compareTo(" Ingredient")==0||this.Class().compareTo(" User")==0) //case connection with allergen table need to be updated
 		{
@@ -118,7 +171,7 @@ public abstract class  Entities  {
 				e.printStackTrace();
 				return false;
 			}
-			ArrayList<Integer> ingredientToUpDate= getIngredientArray();
+			ArrayList<Integer> ingredientToUpDate= getSubtbleArray();
 			Collections.sort(ingredientToUpDate);
 			rs=Models.SelectSpecific(this.Class()+"Ingredient ", this.getEntitieKey(), this.getEntitieKeyValue());
 			ArrayList<Integer> ingredientFromDB= new ArrayList<Integer>();
@@ -152,11 +205,13 @@ public abstract class  Entities  {
 			{
 				sqlconnections=getStringIngredientForDelete(ingredientFromDB.get(i));
 				i++;
+				Models.preformWithDB(sqlconnections);	
 			}
-			while(ingredientFromDB.size()!=j)
+			while(ingredientToUpDate.size()!=j)
 			{	
-				sqlconnections=getStringIngredientForInsert(i);
+				sqlconnections=getStringIngredientForInsert(j);
 				j++;
+				Models.preformWithDB(sqlconnections);	
 			}
 		}
 		z=Models.preformWithDB(sql);
@@ -170,6 +225,9 @@ public abstract class  Entities  {
 		if(this.Class().compareTo(" User")==0||this.Class().compareTo(" Dietitian")==0) {
 			sql=" INSERT INTO Person ("+this.getPersonAttributesNames()+" ) VALUES ( "+this.getPersonAttributesValues()+" ) ";
 			q= Models.preformWithDB(sql);
+			for (int i =0; i<this.getmaxSubtbleCount();i++) {
+			sql=" INSERT INTO PersonFavoriteRecipe ( recipeId , personEmail ) VALUES ( "+this.getSubtbleInsert(i)+" , "+this.getPersonKeyValue()+" ) ";
+			q= Models.preformWithDB(sql);}
 		}
 		sql=" INSERT INTO " +this.Class()+" ("+this.getEntitieAttributesNames()+" ) VALUES ( "+this.getEntitieAttributesValues()+" ) ";
 		z= Models.preformWithDB(sql);
@@ -185,7 +243,7 @@ public abstract class  Entities  {
 
 			if (this.Class()==" Recipe")//case connection with Recipe and Ingredient table need to be added
 			{
-				int nmax= this.getmaxIngredieantCount();
+				int nmax= this.getmaxSubtbleCount();
 				for(int i=0;i<nmax&&x;i++) {
 					sqlconnections=getStringIngredientForInsert(i);
 					x= Models.preformWithDB(sqlconnections); 
@@ -212,7 +270,7 @@ public abstract class  Entities  {
 			}
 			if (this.Class().compareTo(" Recipe")==0)//case connection with Recipe and Ingredient table need to be deleted
 			{
-				int nmax= this.getmaxIngredieantCount();
+				int nmax= this.getmaxSubtbleCount();
 				for(int i=0;i<nmax&&y;i++)
 				{
 					sqlconnections=getStringIngredientForDelete(i);
@@ -222,8 +280,12 @@ public abstract class  Entities  {
 		}
 		z= Models.preformWithDB(sql);
 		if(this.Class().compareTo(" User")==0||this.Class().compareTo(" Dietitian")==0) {
+			for (int i =0; i<this.getmaxSubtbleCount();i++) {
+				sql=" Delete From PersonFavoriteRecipe WHERE personEmail =  "+this.getPersonKeyValue()+" AND recipeId = "+getSubtbleDelete(i) +" ";
+				q&= Models.preformWithDB(sql);}
 			sql=" Delete From Person WHERE personEmail = "+this.getPersonKeyValue();
 			q= Models.preformWithDB(sql);
+			
 		}
 		return x&&y&&z&&q; 
 
