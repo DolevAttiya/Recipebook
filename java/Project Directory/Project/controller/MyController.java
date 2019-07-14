@@ -56,6 +56,7 @@ public class MyController implements Controller{
 			view.dRegisterResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
+			
 			//---------User Settings---------
 		case "user_update":
 			model.updateUser((User)((Event)arg).getArr().get(1));
@@ -89,7 +90,16 @@ public class MyController implements Controller{
 			//rotem's function
 			break;
 			//-------------------------------
+			
 			//---------Menu Page-------------	
+		/*case "all_recipes":
+			model.allRecipes();
+			break;
+
+		case "all_recipes_response":
+			view. getRecipesResponse(ArrayList<Recipe>)((Event)arg).getArr().get(1));
+			break;*/
+			
 		case "top_10":
 			model.top10();
 			break;
@@ -115,7 +125,7 @@ public class MyController implements Controller{
 			break;
 
 		case "favorite_recipes_response":
-			//rotem's function
+			view.myFavoriteResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
 
 		case "menu_search":
@@ -137,13 +147,14 @@ public class MyController implements Controller{
 			view.searchResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
+			
 			//---------Recipe Page-----------
 		case "recipe_insert":
 			model.insertRecipe((Recipe)((Event)arg).getArr().get(1));
 			break;
 
 		case "recipe_insert_response":
-			//rotem's function
+			view.addRecipeResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
 
 		case "recipe_update":
@@ -161,34 +172,15 @@ public class MyController implements Controller{
 		case "recipe_delete_response":
 			//rotem's function
 			break;
-
-		case "select_user":
-			/* 0 - Event name
-			   1 - user email */
-			model.selectUser((String)((Event)arg).getArr().get(1));
-			break;
-
-		case "select_user_response":
-			//rotem's function
-			break;
-
-		case "select_dietitian":
-			/* 0 - Event name
-			   1 - dietitian email */
-			model.selectDietitian((String)((Event)arg).getArr().get(1));
-			break;
-
-		case "select_dietitian_response":
-			//rotem's function
-			break;
 			//-------------------------------
+			
 			//---------Ingredient Page-------
 		case "ingredient_insert":
 			model.insertIngredient((Ingredient)((Event)arg).getArr().get(1));
 			break;
 
 		case "ingredient_insert_response":
-			//rotem's function
+			view.addIngredientResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
 			break;
 
 		case "ingredient_update": //not in use in the meanwhile for future implementation (manager function)

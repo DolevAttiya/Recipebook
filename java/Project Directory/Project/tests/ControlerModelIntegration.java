@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -126,6 +128,29 @@ public class ControlerModelIntegration {
 		((MyController)controllerTest).update(null, ev);
 		user.setUserKashruth(false);
 	}
+	
+	/*@Test
+	void userDeleteTrueTest() {
+		ev = new Event();
+		user = Models.GetUserFromDB("drakarisValyrian.com");
+		user.setUserKashruth(true);
+		ev.getArr().add("user_update");
+		ev.getArr().add(user);
+		((MyController)controllerTest).update(null, ev);
+		user.setUserKashruth(false);
+	}*/
+
+	/*@Test
+	void userDeleteFalseTest() {
+		ev = new Event();
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		user= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, al, true, false);
+		user.setUserKashruth(true);
+		ev.getArr().add("user_update");
+		ev.getArr().add(user);
+		((MyController)controllerTest).update(null, ev);
+		user.setUserKashruth(false);
+	}*/
 
 	@Test
 	void dietitianUpdateTrueTest() {
@@ -147,25 +172,120 @@ public class ControlerModelIntegration {
 		ev.getArr().add("dietitian_update");
 		ev.getArr().add(dietitian);
 		((MyController)controllerTest).update(null, ev);
-
 	}
+	
+	/*@Test
+	void dietitianDeleteTrueTest() {
+		ev = new Event();
+		dietitian = Models.GetDietitianFromDB("midget@kingslanding.com");
+		dietitian.setDietitianStatDate(LocalDate.parse("1996-06-17"));
+		ev.getArr().add("dietitian_update");
+		ev.getArr().add(dietitian);
+		((MyController)controllerTest).update(null, ev);
+		dietitian.setDietitianStatDate(LocalDate.parse("2000-01-01"));
+		dietitian.Update();
+	}*/
+
+	/*@Test
+	void dietitianDeleteFalseTest() {
+		ev = new Event();
+		dietitian= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
+		dietitian.setDietitianStatDate(LocalDate.parse("1996-06-17"));
+		ev.getArr().add("dietitian_update");
+		ev.getArr().add(dietitian);
+		((MyController)controllerTest).update(null, ev);
+	}*/
+	
+	@Test
+	void getAllRecipesTest() {
+		ev = new Event();
+		ev.getArr().add("all_recipes");
+		((MyController)controllerTest).update(null, ev);
+	}
+	
 	@Test
 	void Top10Test() {
 		ev = new Event();
 		ev.getArr().add("top_10");
 		((MyController)controllerTest).update(null, ev);
 	}
+	
+	@Test
+	void myRecipesTest() {
+		ev = new Event();
+		ev.getArr().add("my_recipes");
+		((MyController)controllerTest).update(null, ev);
+	}
+	
 	@Test
 	void myFavoriteRecipesTest() {
 		ev = new Event();
 		ev.getArr().add("favorite_recipes");
 		((MyController)controllerTest).update(null, ev);
 	}
+	
 	@Test
-	void myRecipes() {
+	void searchTrueTest() {
 		ev = new Event();
-		ev.getArr().add("my_recipes");
+		ev.getArr().add("search");
+		ev.getArr().add("ommlete");
 		((MyController)controllerTest).update(null, ev);
 	}
-
+	
+	@Test
+	void searchFalseTest() {
+		ev = new Event();
+		ev.getArr().add("search");
+		ev.getArr().add("banana");
+		((MyController)controllerTest).update(null, ev);
+	}
+	
+	@Test
+	void addRecipeTrueTest() {
+		Integer[] rA= {0,0,0,0,1,0,0,1,0,0,1,0};
+		ev = new Event();
+		user = Models.GetUserFromDB("drakarisValyrian.com");
+		recipe = new Recipe(null, "yuval's matkon", rA, null, null, null, null, null, null, null, "drakarisValyrian.com", null, null, null, null, null, null);
+		ev.getArr().add("recipe_insert");
+		ev.getArr().add(recipe);
+		((MyController)controllerTest).update(null, ev);
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+		recipe = Models.GetRecipeFromDB(rs.getInt("max"));
+		recipe.Delete();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void addRecipeFalseTest() {
+		Integer[] rA= {0,0,0,0,1,0,0,1,0,0,1,0};
+		ev = new Event();
+		recipe = new Recipe(null, "ommlete", rA, null, null, null, null, null, null, null, "drakarisValyrian.com", null, null, null, null, null, null);
+		ev.getArr().add("recipe_insert");
+		ev.getArr().add(recipe);
+		((MyController)controllerTest).update(null, ev);
+	}
+	
+	@Test
+	void updateRecipeTest() {
+		ev = new Event();
+		ev.getArr().add("recipe_update");
+		((MyController)controllerTest).update(null, ev);
+	}
+	
+	@Test
+	void deleteRecipeTest() {
+		ev = new Event();
+		ev.getArr().add("recipe_delete");
+		((MyController)controllerTest).update(null, ev);
+	}
+	
+	@Test
+	void addIngredientTest() {
+		ev = new Event();
+		ev.getArr().add("ingredient_insert");
+		((MyController)controllerTest).update(null, ev);
+	}
 }
