@@ -22,6 +22,7 @@ public class myView extends Observable implements View {
 	static Dietitian myDietitian;
 	public static ArrayList<Ingredient> ingredientArray=new ArrayList<Ingredient>();
 	public static ArrayList<Recipe> recipeArray=new ArrayList<Recipe>();
+	Event ev;
 
 	public static String ConvertPassToHash(String input)  {
 		try { 
@@ -42,7 +43,7 @@ public class myView extends Observable implements View {
 	public void login (String email, String pass)
 	{
 		pass=ConvertPassToHash(pass);
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("user_login");
 		ev.getArr().add(email);
 		ev.getArr().add(pass);
@@ -71,7 +72,7 @@ public class myView extends Observable implements View {
 		Dietitian newDietitian;
 		model.User newUser;
 		String hashPass;
-		Event ev=new Event();
+		ev=new Event();
 		hashPass = ConvertPassToHash(pass);
 		if (isDietitian==true)
 		{
@@ -112,7 +113,7 @@ public class myView extends Observable implements View {
 		}	
 	}
 	public void getTop10(ArrayList<Recipe> r) {
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("top_10");
 		setChanged();
 		notifyObservers(ev);
@@ -121,7 +122,7 @@ public class myView extends Observable implements View {
 		recipeArray=r;
 	}
 	public void mainSearch(String s) {
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("menu_search");
 		ev.getArr().add(s); // what string we want to search
 		if (myUser!=null) // User
@@ -156,7 +157,7 @@ public class myView extends Observable implements View {
 	} 
 	public void advancedSearch(String s, Integer kashruth, Integer complexity, String timeToMake, String rateAbove,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate) {
 		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("advanced_search");
 		ev.getArr().add(s); // what string we want to search
 		if (kashruth==4) // wants to see adapted results
@@ -274,7 +275,7 @@ public class myView extends Observable implements View {
 		Recipe re = new Recipe(recipeId, recipeName, recipeAllergen, recipeTotalCalories, recipeTotalCarbohydrate, recipeTotalProtein, recipeTotalFat, recipeKashruth, recipeTimeToMake, recipeComplex,Daenerys.getPersonEmail() , recipeRate, recipeDescription, recipeProcses, recipeIngredientId,recipeIngredientsType ,recipeIngredientsAmount );
 		recipeArray.add(0,re);
 		recipeArray.add(1,re);
-		/*Event ev=new Event();
+		/*ev=new Event();
 		ev.getArr().add("favorite_recipes");
 		if (myUser!=null) // User
 			ev.getArr().add(myUser);
@@ -288,7 +289,7 @@ public class myView extends Observable implements View {
 	} 
 	public void myRecipes ()
 	{
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("my_recipes");
 		if (myUser!=null) // User
 			ev.getArr().add(myUser);
@@ -307,7 +308,7 @@ public class myView extends Observable implements View {
 		else check=false; // not successfully (couldn't save / already exist at the DB)
 	}
 	public void getRecipes() {
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("all_recipes");
 		setChanged();
 		notifyObservers(ev);
@@ -320,7 +321,7 @@ public class myView extends Observable implements View {
 			check=false; // can't save > we will show an error ! 
 		String hashPass;
 		hashPass = ConvertPassToHash(pass);
-		Event ev=new Event();
+		ev=new Event();
 		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
 		ev.getArr().add("user_update");
 		myUser.setPersonFirstName(firstName);
@@ -344,7 +345,7 @@ public class myView extends Observable implements View {
 			check=false; // can't save > we will show an error ! 
 		String hashPass;
 		hashPass = ConvertPassToHash(pass);
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("dietitian_update");
 		myDietitian.setPersonFirstName(firstName);
 		myDietitian.setPersonLastName(lastName);
@@ -362,7 +363,7 @@ public class myView extends Observable implements View {
 		check=false; // something went wrong (could'nt save / already exist)
 	}
 	public void deleteUser() {
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("user_delete");
 		ev.getArr().add(myUser);
 		setChanged();
@@ -377,7 +378,7 @@ public class myView extends Observable implements View {
 		else check=false; // error
 	}
 	public void deleteDietitian() {
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("dietitian_delete");
 		ev.getArr().add(myDietitian);
 		setChanged();
@@ -392,7 +393,7 @@ public class myView extends Observable implements View {
 		else check=false; // error
 	}
 	public void deleteIngredient(Ingredient ing) {
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("ingredient_delete");
 		ev.getArr().add(ing);
 		setChanged();
@@ -407,7 +408,7 @@ public class myView extends Observable implements View {
 		else check=false; // error
 	}
 	public void deleteRecipe(Recipe rec) {
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("recipe_delete");
 		ev.getArr().add(rec);
 		setChanged();
@@ -422,7 +423,7 @@ public class myView extends Observable implements View {
 		else check=false; // error
 	}
 	public void recipeUpdate(Recipe rec) {
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("recipe_update");
 		ev.getArr().add(rec);
 		setChanged();
@@ -434,7 +435,7 @@ public class myView extends Observable implements View {
 		check=false; // something went wrong 
 	}
 	public void ingredientUpdate(Ingredient ing) {
-		Event ev=new Event();
+		ev=new Event();
 		ev.getArr().add("ingredient_update");
 		ev.getArr().add(ing);
 		setChanged();
