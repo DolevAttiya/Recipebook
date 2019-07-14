@@ -1,6 +1,8 @@
 package tests;
 
 import static org.junit.Assert.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.Dietitian;
@@ -51,7 +53,7 @@ public class ViewMock implements View {
 	@Override
 	public void dietitianUpdateResponse(ArrayList<Dietitian> usD) {
 		if(usD!=null)
-			assertEquals("1996-06-17", usD.get(0).getDietitianStatDate());
+			assertEquals("1996-06-17", usD.get(0).getDietitianStatDate().toString());
 		else
 			assertNull(usD);
 	}
@@ -77,12 +79,6 @@ public class ViewMock implements View {
 			assertNotNull(r);
 		else
 			assertNull(r);
-	}
-
-	@Override
-	public void addIngredientResponse(Integer ingredientId) {//not in use, delete after merge with rotem
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

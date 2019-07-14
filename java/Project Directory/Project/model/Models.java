@@ -168,9 +168,9 @@ public class Models extends Observable implements model  {
 			sql="  select * from Recipe order by recipeRate desc ";
 		if(typeSearch.compareTo("CheckPasswordAndEmail")==0)
 			if (((String)args.get(0)).compareTo("User")==0)
-				sql="  select * from UserPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\"And userId is not null";
+				sql="  select * from UserPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\" And userId is not null ";
 			else
-				sql="  select * from DietitianPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\"And dietitianId is not null";
+				sql="  select * from DietitianPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\" And dietitianId is not null ";
 		ResultSet rs =getFromWithDB(sql) ;
 		return rs;
 
@@ -190,7 +190,7 @@ public class Models extends Observable implements model  {
 			per.setUserId(rs.getInt("userId"));
 			ResultSet userAllergens = Models.SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
 			Integer[] allergen= new Integer[userAllergens.getInt("counter")];
-			userAllergens = SelectSpecific("UserAllergen","allergenId",per.getUserId().toString());
+			userAllergens = SelectSpecific("UserAllergen","userId",per.getUserId().toString());
 			while(userAllergens.next())
 			{
 				allergen[userAllergens.getInt("allergenId")]=1;
@@ -204,9 +204,9 @@ public class Models extends Observable implements model  {
 			per.setPersonDateOfBirth(LocalDate.parse(rs.getString("personDateOfBirth")));
 			per.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
-			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail","\""+per.getPersonEmail()+"\"");
+			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail"," \""+per.getPersonEmail()+"\" ");
 			while(favorite.next())
-				personsFavoriteRecipes.add(rs.getInt("recipeId"));
+				personsFavoriteRecipes.add(favorite.getInt("recipeId"));
 			per.setPersonsFavoriteRecipe(personsFavoriteRecipes);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -327,9 +327,9 @@ public class Models extends Observable implements model  {
 			per.setPersonDateOfBirth(LocalDate.parse(rs.getString("personDateOfBirth")));
 			per.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
-			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail","\""+per.getPersonEmail()+"\"");
+			ResultSet favorite =SelectSpecific(" PersonFavoriteRecipe "," personEmail " , " \""+per.getPersonEmail()+"\" ");
 			while(favorite.next())
-				personsFavoriteRecipes.add(rs.getInt("recipeId"));
+				personsFavoriteRecipes.add(favorite.getInt("recipeId"));
 			per.setPersonsFavoriteRecipe(personsFavoriteRecipes);
 			/*Blob blob = rs.getBlob("personImage");               
 			byte [] data = blob.getBytes( 1, ( int ) blob.length() );
