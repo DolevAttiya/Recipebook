@@ -17,7 +17,24 @@ public class Models extends Observable implements model  {
 
 	public Models() {
 	}
-
+	public void allRecipes() {
+		String sql= " Select * From Recipe orderby recipeRate";
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		ResultSet rs=getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("all_recipe_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
 	public void myFavoriteRecipes(String Email) {
 		ev=new Event();
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
@@ -45,19 +62,19 @@ public class Models extends Observable implements model  {
 		String sql= " Select * From Recipe Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
 		if(search.get(2)!=null)
 			if(search.get(7)!= null) {
-				if((int)search.get(2)!=4)
+				Integer x= 4;
+				if((String)search.get(2)!=x.toString())
 
-					sql+=" AND recipeKashruth = "+(int)search.get(2);
+					sql+=" AND recipeKashruth = "+(String)search.get(2);
 				else 
 					sql+=" AND recipeKashruth != 3";
 			}
 		if(search.get(3)!=null)
-
-			sql+=" AND recipeComplex = "+(int)search.get(3);
+			sql+=" AND recipeComplex <= "+(int)search.get(3);
 		if(search.get(4)!=null)
-			sql+=" AND recipeTimeToMake = "+(int)search.get(4);
+			sql+=" AND recipeTimeToMake <= "+(String)search.get(4);
 		if(search.get(5)!=null)
-			sql+=" AND recipeRate  "+(int)search.get(5);
+			sql+=" AND recipeRate >= "+(String)search.get(5);
 		if(search.get(6)!=null)
 			for(int i=0;i<((ArrayList<Integer>)search.get(6)).size();i++)
 			{
@@ -603,7 +620,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientId",ing.getIngredientId().toString());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientName",ing.getIngredientName());
 		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "Ingredient", null, null);
 		try {
 			ing.setIngredientId(rs.getInt("max")+1);
@@ -897,7 +914,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( recipeId ) as count", "Recipe", "recipeId",res.getRecipeId().toString());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( recipeId ) as count", "Recipe", "recipeName",res.getRecipeName());
 		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
 		try {
 			res.setRecipeId(rs.getInt("max")+1);
