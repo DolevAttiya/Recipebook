@@ -20,7 +20,7 @@ public class myView extends Observable implements View {
 	static boolean check=true;
 	static User myUser;
 	static Dietitian myDietitian;
-	public static ArrayList<Ingredient> ingedientArray=new ArrayList<Ingredient>();
+	public static ArrayList<Ingredient> ingredientArray=new ArrayList<Ingredient>();
 	public static ArrayList<Recipe> recipeArray=new ArrayList<Recipe>();
 
 	public static String ConvertPassToHash(String input)  {
@@ -65,7 +65,7 @@ public class myView extends Observable implements View {
 		}
 		else check=false; // show error
 	}
-	public void register(String firstName, String lastName, String email, String pass,String pass2, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
+	public void register(String firstName, String lastName, String email, String pass,String pass2, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, boolean wantAllerg) {
 		if ((pass.length()<6) || (pass.compareTo(pass2)==0))
 			check=false; // can't save > we will show an error ! 
 		Dietitian newDietitian;
@@ -81,6 +81,7 @@ public class myView extends Observable implements View {
 		}
 		else
 		{
+			Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
 			newUser=new model.User(email, firstName, lastName, dateOfBirth, hashPass, null, 1, allergies, wantAllerg, isKosher);
 			ev.getArr().add("user_register");
 			ev.getArr().add(newUser);
@@ -145,7 +146,7 @@ public class myView extends Observable implements View {
 			ev.getArr().add(null); // Cooking Time - Irrelevant in search from menu
 			ev.getArr().add(null); // Rate Above - Irrelevant in search from menu
 			ev.getArr().add(null); // null means wants all results
-			ev.getArr().add(null);
+			ev.getArr().add(null); // null means wants all results
 		}
 		setChanged();
 		notifyObservers(ev);
@@ -153,24 +154,29 @@ public class myView extends Observable implements View {
 	public void searchResponse (ArrayList<Recipe> r) {
 		recipeArray=r;
 	} 
-	public void advancedSearch(String s, Integer catagory, Integer complexity, Integer timeToMake, Integer rateAbove, ArrayList<Integer> allergies, Boolean showOnlyKosher) {
+	public void advancedSearch(String s, Integer kashruth, Integer complexity, String timeToMake, String rateAbove,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate) {
+		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
 		Event ev=new Event();
 		ev.getArr().add("advanced_search");
 		ev.getArr().add(s); // what string we want to search
-		if (showOnlyKosher==true) // wants to see adapted results
+		if (kashruth==4) // wants to see adapted results
 			ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
 		else ev.getArr().add(null); // null means wants all results
 		ev.getArr().add(complexity);
 		ev.getArr().add(timeToMake); 
 		ev.getArr().add(rateAbove);
-		ev.getArr().add(allergies); // sends the user's allergies
-		if (showOnlyKosher==true) // wants to see adapted results
+		if (myUser!=null) // connected as User
+			ev.getArr().add(allergies); // sends the user's allergies
+		else // connected as Dietitian
+			ev.getArr().add(null); // Dietitian doesn't have allergies
+		if (kashruth==4) // wants to see adapted results
 			ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
 		else ev.getArr().add(null); // null means wants all results
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void addIngredient (String ingredientName, Integer catagory, Integer[] allergies, Integer[] measureType, Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth) { 
+	public void addIngredient (String ingredientName, Integer catagory,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Integer[] measureType, Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth) { 
+		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
 		Ingredient newIngredient=new Ingredient(null, ingredientName, allergies, calories, carbohydrate, protein, fat, kashruth);
 		Event ev=new Event();
 		ev.getArr().add("ingredient_insert");
@@ -181,7 +187,7 @@ public class myView extends Observable implements View {
 	public void addIngredientResponse(ArrayList<Ingredient> in) {
 		if (in.get(0).getIngredientId()!=null)
 			check=true; // updated successfully
-		else check=false; // not successfully
+		else check=false; // not successfully (couldn't save / already exist at the DB)
 	}
 	public void myFavorite ()
 	{
@@ -294,16 +300,21 @@ public class myView extends Observable implements View {
 	public void myRecipesResponse(ArrayList<Recipe> r) {
 		recipeArray=r;
 	} 
-	//public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient>, Integer[] allergies) {
-	//	String ingredientName, Integer catagory, Integer[] allergies, Integer[] measureType, Double calories, 
-	//  Double carbohydrate, Double fat, Double protein, Integer kashruth
-	//} 
+	//public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient>, Integer[] allergies) {} 
 	public void addRecipeResponse(ArrayList<Recipe> r) {
 		if (r.get(0).getRecipeId()!=null)
 			check=true; // updated successfully
-		else check=false; // not successfully
+		else check=false; // not successfully (couldn't save / already exist at the DB)
 	}
-
+	public void getRecipes() {
+		Event ev=new Event();
+		ev.getArr().add("all_recipes");
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void getAllRecipesResponse(ArrayList<Recipe> r) {
+		recipeArray=r;
+	}
 	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2, LocalDate dateOfBirth, boolean isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate , boolean wantAllerg) {
 		if ((pass.length()<6) || (pass.compareTo(pass2)==0))
 			check=false; // can't save > we will show an error ! 
@@ -323,6 +334,11 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
+	public void userUpdateResponse(ArrayList<User> usU) {
+		if (usU.get(0)!=null)
+			check=true; // everything was OK
+		check=false; // something went wrong (could'nt save / already exist)
+	}
 	public void dietitianUpdate(String firstName, String lastName, String email, String pass, String pass2, LocalDate dateOfBirth, Integer dietitianNum, LocalDate dietitianStatDate) {
 		if ((pass.length()<6) || (pass.compareTo(pass2)==0))
 			check=false; // can't save > we will show an error ! 
@@ -340,16 +356,94 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
-
-	public void userUpdateResponse(ArrayList<User> usU) {
-		if (usU.get(0)!=null)
-			check=true; // everything was OK
-		check=false; // something went wrong (could'nt save / already exist)
-	}
 	public void dietitianUpdateResponse(ArrayList<Dietitian> usD) {
 		if (usD.get(0)!=null)
 			check=true; // everything was OK
 		check=false; // something went wrong (could'nt save / already exist)
+	}
+	public void deleteUser() {
+		Event ev=new Event();
+		ev.getArr().add("user_delete");
+		ev.getArr().add(myUser);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void deleteUserResponse(ArrayList<User> usU) {
+		if (usU.get(0)==null) // was able to delete
+		{
+			check=true; // move to login
+			myUser=null;
+		}	
+		else check=false; // error
+	}
+	public void deleteDietitian() {
+		Event ev=new Event();
+		ev.getArr().add("dietitian_delete");
+		ev.getArr().add(myDietitian);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void deleteDietitianResponse(ArrayList<Dietitian> usD) {
+		if (usD.get(0)==null) // was able to delete
+		{
+			check=true; // move to login
+			myDietitian=null;
+		}	
+		else check=false; // error
+	}
+	public void deleteIngredient(Ingredient ing) {
+		Event ev=new Event();
+		ev.getArr().add("ingredient_delete");
+		ev.getArr().add(ing);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void deleteIngredientResponse(ArrayList<Ingredient> in) {
+		if (in.get(0)==null)
+		{
+			check=true; // move to menu
+			ingredientArray=in;
+		}
+		else check=false; // error
+	}
+	public void deleteRecipe(Recipe rec) {
+		Event ev=new Event();
+		ev.getArr().add("recipe_delete");
+		ev.getArr().add(rec);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void deleteRecipeResponse(ArrayList<Recipe> rec) {
+		if (rec.get(0)==null)
+		{
+			check=true; // move to menu
+			recipeArray=rec;
+		}
+		else check=false; // error
+	}
+	public void recipeUpdate(Recipe rec) {
+		Event ev=new Event();
+		ev.getArr().add("recipe_update");
+		ev.getArr().add(rec);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void recipeUpdateResponse(ArrayList<Recipe> r) {
+		if (r.get(0)!=null)
+			check=true; // everything was OK
+		check=false; // something went wrong 
+	}
+	public void ingredientUpdate(Ingredient ing) {
+		Event ev=new Event();
+		ev.getArr().add("ingredient_update");
+		ev.getArr().add(ing);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void ingredientUpdateResponse(ArrayList<Ingredient> in) {
+		if (in.get(0)!=null)
+			check=true; // everything was OK
+		check=false; // something went wrong 
 	}
 }
 /*
