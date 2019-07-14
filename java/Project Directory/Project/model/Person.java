@@ -61,6 +61,7 @@ public abstract class Person extends Entities{
 		return personsFavoriteRecipe;
 	}
 	public void setPersonsFavoriteRecipe(ArrayList<Integer> personsFavoriteRecipe) {
+		this.personsFavoriteRecipe= new ArrayList<Integer>();
 		if( personsFavoriteRecipe!=null)
 			personsFavoriteRecipe.forEach((n) -> this.personsFavoriteRecipe.add(n));
 	}
@@ -101,7 +102,7 @@ public abstract class Person extends Entities{
 	@Override
 	protected String getEntitieAttributesNamesValues() {
 		// TODO Auto-generated method stub
-		return "personEmail = "+ this.getPersonEmail()+" , personFirstName = "+this.getPersonFirstName()+" , personLastName = "+this.getPersonLastName()+" , personDateOfBirth = "+this.getPersonDateOfBirth()+" , personHashPass = "+ this.getPersonHashPass() + " ";
+		return " personFirstName = "+this.getPersonFirstName()+" , personLastName = "+this.getPersonLastName()+" , personDateOfBirth = "+this.getPersonDateOfBirth()+" , personHashPass = "+ this.getPersonHashPass() + " ";
 
 	}
 	/*@Override

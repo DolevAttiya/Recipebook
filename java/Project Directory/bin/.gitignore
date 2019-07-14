@@ -1,6 +1,6 @@
 /controller/
 /database/
 /driver/
-/view/
-/tests/
 /model/
+/tests/
+/view/

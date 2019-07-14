@@ -118,7 +118,8 @@ public class ControlerModelIntegration {
 	@Test
 	void userUpdateFalseTest() {
 		ev = new Event();
-		user = Models.GetUserFromDB("randommail");
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		user= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, al, true, false);
 		user.setUserKashruth(true);
 		ev.getArr().add("user_update");
 		ev.getArr().add(user);
@@ -129,36 +130,38 @@ public class ControlerModelIntegration {
 	@Test
 	void dietitianUpdateTrueTest() {
 		ev = new Event();
-		dietitian = Models.GetDietitianFromDB("drakarisValyrian.com");
+		dietitian = Models.GetDietitianFromDB("midget@kingslanding.com");
 		dietitian.setDietitianStatDate(LocalDate.parse("1996-06-17"));
 		ev.getArr().add("dietitian_update");
 		ev.getArr().add(dietitian);
 		((MyController)controllerTest).update(null, ev);
 		dietitian.setDietitianStatDate(LocalDate.parse("2000-01-01"));
+		dietitian.Update();
 	}
 
 	@Test
 	void dietitianUpdateFalseTest() {
 		ev = new Event();
-		dietitian = Models.GetDietitianFromDB("randommail");
+		dietitian= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
 		dietitian.setDietitianStatDate(LocalDate.parse("1996-06-17"));
 		ev.getArr().add("dietitian_update");
 		ev.getArr().add(dietitian);
 		((MyController)controllerTest).update(null, ev);
-	}
 
+	}
+	@Test
 	void Top10Test() {
 		ev = new Event();
 		ev.getArr().add("top_10");
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+	@Test
 	void myFavoriteRecipesTest() {
 		ev = new Event();
 		ev.getArr().add("favorite_recipes");
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+	@Test
 	void myRecipes() {
 		ev = new Event();
 		ev.getArr().add("my_recipes");
