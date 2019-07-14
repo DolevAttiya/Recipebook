@@ -55,7 +55,7 @@ public class Dietitian extends Person {
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() { 
-		return " dietitianId = "+this.getDietitianId().toString()+" , dietitianStatDate = \""+this.getDietitianStatDate().toString()+"\", personEmail = \""+this.getPersonEmail()+"\" ";
+		return " dietitianStatDate = \""+this.getDietitianStatDate().toString()+"\" ";
 	}
 	/*@Override
 public void getPsmtmt(PreparedStatement pstmt) {
@@ -73,25 +73,25 @@ public void getPsmtmt(PreparedStatement pstmt) {
 		return null;
 	}
 	@Override
-	protected String getIngredientInsert(int place) {
-		return null;
+	protected String getSubtbleInsert(int place) {
+		return this.getPersonsFavoriteRecipe().get(place).toString();
 	}
 	@Override
 	protected Integer[] getAllergenArray() {
 		return null;
 	}
 	@Override
-	protected ArrayList<Integer> getIngredientArray() {
-		return null;
+	protected ArrayList<Integer> getSubtbleArray() {
+		return this.getPersonsFavoriteRecipe();
 	}
 	@Override
-	protected int getmaxIngredieantCount() {
-		return 0;
+	protected int getmaxSubtbleCount() {
+		return this.getPersonsFavoriteRecipe().size();
 	}
 	@Override
-	protected String getIngredientDelete(int place) {
+	protected String getSubtbleDelete(int place) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getPersonsFavoriteRecipe().get(place).toString();
 	}
 	@Override
 	protected String getPersonAttributesNames() {

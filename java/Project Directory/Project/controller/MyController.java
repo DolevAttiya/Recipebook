@@ -24,51 +24,49 @@ public class MyController implements Controller{
 			/* 0 - Event name
 			   1 - User name
 			   2 - Password */
-			((Models)model).CheckPasswordAndEmail((String)((Event)arg).getArr().get(1),(String)((Event)arg).getArr().get(2));
+			model.CheckPasswordAndEmail((String)((Event)arg).getArr().get(1),(String)((Event)arg).getArr().get(2));
 			break;
 
 		case "user_login_response":
 			/* 0 - Event name
 			   1 - Array list */
 			System.out.println("loged in");
-			//((myView)view).loginResponse((ArrayList<User>)((Event)arg).getArr().get(1));
+			view.uloginResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_login_response":
 			/* 0 - Event name
 			   1 - Array list */
-			//((myView)view).loginResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
+			view.dloginResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 
 		case "user_register":
-			((Models)model).insertUser((User)((Event)arg).getArr().get(1));
+			model.insertUser((User)((Event)arg).getArr().get(1));
 			break;
 
 		case "user_register_response":
-			System.out.println("user registered");
-			//((myView)view).uRegisterResponse((ArrayList<User>)((Event)arg).getArr().get(1));
+			view.uRegisterResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_register":
-			((Models)model).insertDietitian((Dietitian)((Event)arg).getArr().get(1));
+			model.insertDietitian((Dietitian)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_register_response":
-			System.out.println("dietitian registered");
-			((myView)view).dRegisterResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
+			view.dRegisterResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
 			//---------User Settings---------
 		case "user_update":
-			((Models)model).updateUser((User)((Event)arg).getArr().get(1));
+			model.updateUser((User)((Event)arg).getArr().get(1));
 			break;
 
 		case "user_update_response":
-			//rotem's function
+			view.userUpdateResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
 		case "user_delete":
-			((Models)model).deleteUser((User)((Event)arg).getArr().get(1));
+			model.deleteUser((User)((Event)arg).getArr().get(1));
 			break;
 
 		case "user_delete_response":
@@ -76,15 +74,15 @@ public class MyController implements Controller{
 			break;
 
 		case "dietitian_update":
-			((Models)model).updateDietitian((Dietitian)((Event)arg).getArr().get(1));
+			model.updateDietitian((Dietitian)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_update_response":
-			//rotem's function
+			view.dietitianUpdateResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_delete":
-			((Models)model).deleteDietitian((Dietitian)((Event)arg).getArr().get(1));
+			model.deleteDietitian((Dietitian)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_delete_response":
@@ -93,27 +91,27 @@ public class MyController implements Controller{
 			//-------------------------------
 			//---------Menu Page-------------	
 		case "top_10":
-			((Models)model).top10();
+			model.top10();
 			break;
 
 		case "top_10_response":
-			//rotem's function
+			view.getTop10Response((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;	
 
 		case "my_recipes":
 			/* 0 - Event name
 			   1 - user email */
-			((Models)model).myRecipes((String)((Event)arg).getArr().get(1));
+			model.myRecipes((String)((Event)arg).getArr().get(1));
 			break;
 
 		case "my_recipes_response":
-			//rotem's function
+			view.myRecipesResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
 
 		case "favorite_recipes":
 			/* 0 - Event name
 			   1 - user email */
-			((Models)model).myFavoriteRecipes((String)((Event)arg).getArr().get(1));
+			model.myFavoriteRecipes((String)((Event)arg).getArr().get(1));
 			break;
 
 		case "favorite_recipes_response":
@@ -121,7 +119,7 @@ public class MyController implements Controller{
 			break;
 
 		case "menu_search":
-			((Models)model).Search((ArrayList<Object>)((Event)arg).getArr());
+			model.Search((ArrayList<Object>)((Event)arg).getArr());
 			break;
 
 		case "advanced_search":
@@ -132,16 +130,16 @@ public class MyController implements Controller{
 			   4 - cooking time
 			   5 - rate above
 			   5 - allergen array */
-			((Models)model).Search((ArrayList<Object>)((Event)arg).getArr());
+			model.Search((ArrayList<Object>)((Event)arg).getArr());
 			break;
 
 		case "search_response":
-			((myView)view).searchResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
+			view.searchResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
 			//---------Recipe Page-----------
 		case "recipe_insert":
-			((Models)model).insertRecipe((Recipe)((Event)arg).getArr().get(1));
+			model.insertRecipe((Recipe)((Event)arg).getArr().get(1));
 			break;
 
 		case "recipe_insert_response":
@@ -149,7 +147,7 @@ public class MyController implements Controller{
 			break;
 
 		case "recipe_update":
-			((Models)model).updateRecipe((Recipe)((Event)arg).getArr().get(1));
+			model.updateRecipe((Recipe)((Event)arg).getArr().get(1));
 			break;
 
 		case "recipe_update_response":
@@ -157,7 +155,7 @@ public class MyController implements Controller{
 			break;
 
 		case "recipe_delete":
-			((Models)model).deleteRecipe((Recipe)((Event)arg).getArr().get(1));
+			model.deleteRecipe((Recipe)((Event)arg).getArr().get(1));
 			break;
 
 		case "recipe_delete_response":
@@ -167,7 +165,7 @@ public class MyController implements Controller{
 		case "select_user":
 			/* 0 - Event name
 			   1 - user email */
-			((Models)model).selectUser((String)((Event)arg).getArr().get(1));
+			model.selectUser((String)((Event)arg).getArr().get(1));
 			break;
 
 		case "select_user_response":
@@ -177,7 +175,7 @@ public class MyController implements Controller{
 		case "select_dietitian":
 			/* 0 - Event name
 			   1 - dietitian email */
-			((Models)model).selectDietitian((String)((Event)arg).getArr().get(1));
+			model.selectDietitian((String)((Event)arg).getArr().get(1));
 			break;
 
 		case "select_dietitian_response":
@@ -186,29 +184,33 @@ public class MyController implements Controller{
 			//-------------------------------
 			//---------Ingredient Page-------
 		case "ingredient_insert":
-			((Models)model).insertIngredient((Ingredient)((Event)arg).getArr().get(1));
+			model.insertIngredient((Ingredient)((Event)arg).getArr().get(1));
 			break;
 
 		case "ingredient_insert_response":
 			//rotem's function
 			break;
 
-		case "ingredient_update":
-			((Models)model).updateIngredient((Ingredient)((Event)arg).getArr().get(1));
+		case "ingredient_update": //not in use in the meanwhile for future implementation (manager function)
+			model.updateIngredient((Ingredient)((Event)arg).getArr().get(1));
 			break;
 
-		case "ingredient_update_response":
+		case "ingredient_update_response": //not in use in the meanwhile for future implementation (manager function)
 			//rotem's function
 			break;
 
-		case "ingredient_delete":
-			((Models)model).deleteIngredient((Ingredient)((Event)arg).getArr().get(1));
+		case "ingredient_delete": //not in use in the meanwhile for future implementation (manager function)
+			model.deleteIngredient((Ingredient)((Event)arg).getArr().get(1));
 			break;
 
-		case "ingredient_delete_response":
+		case "ingredient_delete_response": //not in use in the meanwhile for future implementation (manager function)
 			//rotem's function
 			break;
 			//-------------------------------
+			
+		default:
+			System.out.println("error");
+			
 		}	
 	}	
 }

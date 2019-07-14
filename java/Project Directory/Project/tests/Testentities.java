@@ -268,13 +268,15 @@ class Testentities {
 
 	private	void reupdateUser() {
 		us1=Models.GetUserFromDB("drakarisValyrian.com");
-		us.setUserKashruth(true);
+		us.setUserKashruth(false);
 		us.Update();}
 
 	@Test
 	void insertAndDeleteUser() {
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		us= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, al, true, false);
+		ArrayList<Integer> favres = new ArrayList<Integer>();
+		favres.add(1);
+		us= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", favres, 99, al, true, false);
 		us.Insert();
 		us1=Models.GetUserFromDB("idontknowhatemailis");
 		assertNotNull(us1);
@@ -303,7 +305,9 @@ class Testentities {
 	}
 	@Test
 	void insertAndDeleteDietitian() {
-		dt= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
+		ArrayList<Integer> favres = new ArrayList<Integer>();
+		favres.add(1);
+		dt= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", favres, 99, LocalDate.parse("2010-06-17"));
 		dt.Insert();
 		dt1=Models.GetDietitianFromDB("idontknowhatemailis");
 		assertNotNull(dt1);

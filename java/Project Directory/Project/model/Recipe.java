@@ -211,8 +211,7 @@ public class Recipe extends Entities{
 	}
 	@Override
 	protected String getEntitieAttributesNamesValues() {
-		return  " recipeId = "+this.getRecipeId().toString() +" , " +
-				" recipeName = \""+	this.getRecipeName() +"\" , " +
+		return  " recipeName = \""+	this.getRecipeName() +"\" , " +
 				" recipeTotalCalories = "+	this.getRecipeTotalCalories().toString() +" , " +
 				" recipeTotalCarbohydrate = "+	this.getRecipeTotalCarbohydrate().toString() +" , " +
 				" recipeTotalProtein = "+	this.getRecipeTotalProtein().toString() +" , " +
@@ -227,11 +226,11 @@ public class Recipe extends Entities{
 	}
 
 	@Override
-	protected int getmaxIngredieantCount(){return this.recipeIngredientId.size();}
+	protected int getmaxSubtbleCount(){return this.recipeIngredientId.size();}
 	@Override
 	protected String getAllergenInsert(int place){return this.recipeAllergen[place].toString();}
 	@Override
-	protected String getIngredientInsert(int place){return " "+this.recipeIngredientId.get(place).toString()+" , "+this.recipeIngredientsAmount.get(place).toString()+" , "+this.recipeIngredientsType.get(place)+" ";}
+	protected String getSubtbleInsert(int place){return " "+this.recipeIngredientId.get(place).toString()+" , "+this.recipeIngredientsAmount.get(place).toString()+" , "+this.recipeIngredientsType.get(place)+" ";}
 
 	//"INSERT INTO <CLASS NAME> (<ATTRIBUTES>) VALUES (<VALUES>)"
 	@Override
@@ -239,11 +238,11 @@ public class Recipe extends Entities{
 		return this.getRecipeAllergen();
 	}
 	@Override
-	protected ArrayList<Integer> getIngredientArray() {
+	protected ArrayList<Integer> getSubtbleArray() {
 		return this.getRecipeIngredientId();
 	}
 	@Override
-	protected String getIngredientDelete(int place) {
+	protected String getSubtbleDelete(int place) {
 		// TODO Auto-generated method stub
 		return this.recipeIngredientId.get(place).toString();
 	}

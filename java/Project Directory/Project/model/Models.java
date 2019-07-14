@@ -17,7 +17,24 @@ public class Models extends Observable implements model  {
 
 	public Models() {
 	}
-
+	public void allRecipes() {
+		String sql= " Select * From Recipe orderby recipeRate";
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		ResultSet rs=getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("all_recipe_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
 	public void myFavoriteRecipes(String Email) {
 		ev=new Event();
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
@@ -45,19 +62,19 @@ public class Models extends Observable implements model  {
 		String sql= " Select * From Recipe Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
 		if(search.get(2)!=null)
 			if(search.get(7)!= null) {
-				if((int)search.get(2)!=4)
+				Integer x= 4;
+				if((String)search.get(2)!=x.toString())
 
-					sql+=" AND recipeKashruth = "+(int)search.get(2);
+					sql+=" AND recipeKashruth = "+(String)search.get(2);
 				else 
 					sql+=" AND recipeKashruth != 3";
 			}
 		if(search.get(3)!=null)
-
-			sql+=" AND recipeComplex = "+(int)search.get(3);
+			sql+=" AND recipeComplex <= "+(int)search.get(3);
 		if(search.get(4)!=null)
-			sql+=" AND recipeTimeToMake = "+(int)search.get(4);
+			sql+=" AND recipeTimeToMake <= "+(String)search.get(4);
 		if(search.get(5)!=null)
-			sql+=" AND recipeRate  "+(int)search.get(5);
+			sql+=" AND recipeRate >= "+(String)search.get(5);
 		if(search.get(6)!=null)
 			for(int i=0;i<((ArrayList<Integer>)search.get(6)).size();i++)
 			{
@@ -139,7 +156,7 @@ public class Models extends Observable implements model  {
 			}
 			else
 			{
-				args.add(0, "Dietitian");
+				args.set(0, "Dietitian");
 				rs=search("CheckPasswordAndEmail",args);
 				if(rs.next()){
 					ArrayList<Dietitian> diet= new ArrayList<Dietitian>();
@@ -168,9 +185,9 @@ public class Models extends Observable implements model  {
 			sql="  select * from Recipe order by recipeRate desc ";
 		if(typeSearch.compareTo("CheckPasswordAndEmail")==0)
 			if (((String)args.get(0)).compareTo("User")==0)
-				sql="  select * from UserPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\"And userId is not null";
+				sql="  select * from UserPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\" And userId is not null ";
 			else
-				sql="  select * from DietitianPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\"And dietitianId is not null";
+				sql="  select * from DietitianPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\" And dietitianId is not null ";
 		ResultSet rs =getFromWithDB(sql) ;
 		return rs;
 
@@ -190,7 +207,7 @@ public class Models extends Observable implements model  {
 			per.setUserId(rs.getInt("userId"));
 			ResultSet userAllergens = Models.SelectSpecificFrom("Count( allergenId ) as counter", "Allergen", null, null);
 			Integer[] allergen= new Integer[userAllergens.getInt("counter")];
-			userAllergens = SelectSpecific("UserAllergen","allergenId",per.getUserId().toString());
+			userAllergens = SelectSpecific("UserAllergen","userId",per.getUserId().toString());
 			while(userAllergens.next())
 			{
 				allergen[userAllergens.getInt("allergenId")]=1;
@@ -204,9 +221,9 @@ public class Models extends Observable implements model  {
 			per.setPersonDateOfBirth(LocalDate.parse(rs.getString("personDateOfBirth")));
 			per.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
-			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail","\""+per.getPersonEmail()+"\"");
+			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail"," \""+per.getPersonEmail()+"\" ");
 			while(favorite.next())
-				personsFavoriteRecipes.add(rs.getInt("recipeId"));
+				personsFavoriteRecipes.add(favorite.getInt("recipeId"));
 			per.setPersonsFavoriteRecipe(personsFavoriteRecipes);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -217,7 +234,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<User> user= new ArrayList<User>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail"," \"" +us.getPersonEmail()+"\" ");
 		ResultSet rs =Models.SelectSpecificFrom("Max( userId ) as max", "User", null, null);
 		try {
 			us.setUserId(rs.getInt("max")+1);
@@ -246,7 +263,7 @@ public class Models extends Observable implements model  {
 	public void updateUser(User us){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail"," \"" +us.getPersonEmail()+"\" ");
 
 		ArrayList<User> user= new ArrayList<User>();
 		try {
@@ -275,7 +292,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<User> user= new ArrayList<User>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail", us.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail"," \"" +us.getPersonEmail()+"\" ");
 		try {
 			if(saftie.getInt("count")==0||!us.Delete())
 			{
@@ -327,9 +344,9 @@ public class Models extends Observable implements model  {
 			per.setPersonDateOfBirth(LocalDate.parse(rs.getString("personDateOfBirth")));
 			per.setPersonHashPass(rs.getString("personHashPass"));
 			ArrayList<Integer> personsFavoriteRecipes = new ArrayList<Integer>();
-			ResultSet favorite =SelectSpecific("PersonFavoriteRecipe","personEmail","\""+per.getPersonEmail()+"\"");
+			ResultSet favorite =SelectSpecific(" PersonFavoriteRecipe "," personEmail " , " \""+per.getPersonEmail()+"\" ");
 			while(favorite.next())
-				personsFavoriteRecipes.add(rs.getInt("recipeId"));
+				personsFavoriteRecipes.add(favorite.getInt("recipeId"));
 			per.setPersonsFavoriteRecipe(personsFavoriteRecipes);
 			/*Blob blob = rs.getBlob("personImage");               
 			byte [] data = blob.getBytes( 1, ( int ) blob.length() );
@@ -349,7 +366,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", dt.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", " \"" +dt.getPersonEmail()+"\" ");
 		try {
 			if(saftie.getInt("count")==0&&dt.Insert())
 			{
@@ -378,7 +395,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", dt.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail"," \"" +dt.getPersonEmail()+"\" ");
 
 		try {
 			if(saftie.getInt("count")!=0&&dt.Update())
@@ -407,7 +424,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", dt.getPersonEmail());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", " \"" +dt.getPersonEmail()+"\" ");
 		try {
 			if(saftie.getInt("count")==0&&!dt.Delete())
 			{
@@ -603,7 +620,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientId",ing.getIngredientId().toString());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientName",ing.getIngredientName());
 		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "Ingredient", null, null);
 		try {
 			ing.setIngredientId(rs.getInt("max")+1);
@@ -897,7 +914,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( recipeId ) as count", "Recipe", "recipeId",res.getRecipeId().toString());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( recipeId ) as count", "Recipe", "recipeName",res.getRecipeName());
 		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
 		try {
 			res.setRecipeId(rs.getInt("max")+1);
