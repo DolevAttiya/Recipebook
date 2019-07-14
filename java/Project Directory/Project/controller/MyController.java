@@ -17,6 +17,7 @@ public class MyController implements Controller{
 		this.model = model;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void update(Observable o, Object arg) {
 		switch ((String)((Event)arg).getArr().get(0)) {
 		//---------Login Page------------
@@ -30,7 +31,6 @@ public class MyController implements Controller{
 		case "user_login_response":
 			/* 0 - Event name
 			   1 - Array list */
-			System.out.println("loged in");
 			view.uloginResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
@@ -71,7 +71,7 @@ public class MyController implements Controller{
 			break;
 
 		case "user_delete_response":
-			//rotem's function
+			view.deleteUserResponse((ArrayList<User>)((Event)arg).getArr().get(1));
 			break;
 
 		case "dietitian_update":
@@ -87,18 +87,18 @@ public class MyController implements Controller{
 			break;
 
 		case "dietitian_delete_response":
-			//rotem's function
+			view.deleteDietitianResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
 			
 			//---------Menu Page-------------	
-		/*case "all_recipes":
+		case "all_recipes":
 			model.allRecipes();
 			break;
 
 		case "all_recipes_response":
-			view. getRecipesResponse(ArrayList<Recipe>)((Event)arg).getArr().get(1));
-			break;*/
+			view. getAllRecipesResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
+			break;
 			
 		case "top_10":
 			model.top10();
@@ -162,7 +162,7 @@ public class MyController implements Controller{
 			break;
 
 		case "recipe_update_response":
-			//rotem's function
+			view.recipeUpdateResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
 
 		case "recipe_delete":
@@ -170,7 +170,7 @@ public class MyController implements Controller{
 			break;
 
 		case "recipe_delete_response":
-			//rotem's function
+			view.deleteRecipeResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
 			
@@ -183,21 +183,21 @@ public class MyController implements Controller{
 			view.addIngredientResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
 			break;
 
-		case "ingredient_update": //not in use in the meanwhile for future implementation (manager function)
+		/*case "ingredient_update": //not in use in the meanwhile for future implementation (manager function)
 			model.updateIngredient((Ingredient)((Event)arg).getArr().get(1));
-			break;
+			break;*/
 
-		case "ingredient_update_response": //not in use in the meanwhile for future implementation (manager function)
-			//rotem's function
-			break;
+		/*case "ingredient_update_response": //not in use in the meanwhile for future implementation (manager function)
+			view.ingredientUpdateResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
+			break;*/
 
-		case "ingredient_delete": //not in use in the meanwhile for future implementation (manager function)
+		/*case "ingredient_delete": //not in use in the meanwhile for future implementation (manager function)
 			model.deleteIngredient((Ingredient)((Event)arg).getArr().get(1));
-			break;
+			break;*/
 
-		case "ingredient_delete_response": //not in use in the meanwhile for future implementation (manager function)
-			//rotem's function
-			break;
+		/*case "ingredient_delete_response": //not in use in the meanwhile for future implementation (manager function)
+			view.deleteIngredientResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
+			break;*/
 			//-------------------------------
 			
 		default:

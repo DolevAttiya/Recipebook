@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import controller.Event;
 import controller.Controller;
 import controller.MyController;
 import model.Dietitian;
+import model.Ingredient;
 import model.Models;
 import model.Recipe;
 import model.User;
@@ -28,6 +30,7 @@ public class ControlerModelIntegration {
 	User user;
 	Dietitian dietitian;
 	Recipe recipe;
+	Ingredient ingredient;
 
 	@BeforeAll
 	static void setup() {
@@ -54,7 +57,7 @@ public class ControlerModelIntegration {
 		ev.getArr().add("idontknow");
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+
 	@Test
 	void dietitianLoginTrueTest() {
 		ev = new Event();
@@ -128,29 +131,32 @@ public class ControlerModelIntegration {
 		((MyController)controllerTest).update(null, ev);
 		user.setUserKashruth(false);
 	}
-	
-	/*@Test
+
+	@Test
 	void userDeleteTrueTest() {
 		ev = new Event();
-		user = Models.GetUserFromDB("drakarisValyrian.com");
-		user.setUserKashruth(true);
-		ev.getArr().add("user_update");
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		ArrayList<Integer> favres = new ArrayList<Integer>();
+		favres.add(1);
+		user = new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", favres, 99, al, true, false);
+		user.Insert();
+		user = Models.GetUserFromDB("idontknowhatemailis");
+		ev.getArr().add("user_delete");
 		ev.getArr().add(user);
 		((MyController)controllerTest).update(null, ev);
-		user.setUserKashruth(false);
-	}*/
+	}
 
-	/*@Test
+	@Test
 	void userDeleteFalseTest() {
 		ev = new Event();
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		user= new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, al, true, false);
-		user.setUserKashruth(true);
-		ev.getArr().add("user_update");
+		ArrayList<Integer> favres = new ArrayList<Integer>();
+		favres.add(1);
+		user = new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", favres, 99, al, true, false);
+		ev.getArr().add("user_delete");
 		ev.getArr().add(user);
 		((MyController)controllerTest).update(null, ev);
-		user.setUserKashruth(false);
-	}*/
+	}
 
 	@Test
 	void dietitianUpdateTrueTest() {
@@ -173,119 +179,217 @@ public class ControlerModelIntegration {
 		ev.getArr().add(dietitian);
 		((MyController)controllerTest).update(null, ev);
 	}
-	
-	/*@Test
+
+	@Test
 	void dietitianDeleteTrueTest() {
 		ev = new Event();
-		dietitian = Models.GetDietitianFromDB("midget@kingslanding.com");
-		dietitian.setDietitianStatDate(LocalDate.parse("1996-06-17"));
-		ev.getArr().add("dietitian_update");
+		ArrayList<Integer> favres = new ArrayList<Integer>();
+		favres.add(1);
+		dietitian = new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", favres, 99, LocalDate.parse("2010-06-17"));
+		dietitian.Insert();
+		dietitian = Models.GetDietitianFromDB("idontknowhatemailis");
+		ev.getArr().add("dietitian_delete");
 		ev.getArr().add(dietitian);
 		((MyController)controllerTest).update(null, ev);
-		dietitian.setDietitianStatDate(LocalDate.parse("2000-01-01"));
-		dietitian.Update();
-	}*/
+	}
 
-	/*@Test
+	@Test
 	void dietitianDeleteFalseTest() {
 		ev = new Event();
-		dietitian= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
-		dietitian.setDietitianStatDate(LocalDate.parse("1996-06-17"));
-		ev.getArr().add("dietitian_update");
+		ArrayList<Integer> favres = new ArrayList<Integer>();
+		favres.add(1);
+		dietitian = new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", favres, 99, LocalDate.parse("2010-06-17"));
+		ev.getArr().add("dietitian_delete");
 		ev.getArr().add(dietitian);
 		((MyController)controllerTest).update(null, ev);
-	}*/
-	
+	}
+
 	@Test
 	void getAllRecipesTest() {
 		ev = new Event();
 		ev.getArr().add("all_recipes");
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+
 	@Test
 	void Top10Test() {
 		ev = new Event();
 		ev.getArr().add("top_10");
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+
 	@Test
 	void myRecipesTest() {
 		ev = new Event();
 		ev.getArr().add("my_recipes");
+		ev.getArr().add("drakarisValyrian.com");
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+
 	@Test
 	void myFavoriteRecipesTest() {
 		ev = new Event();
 		ev.getArr().add("favorite_recipes");
+		ev.getArr().add("drakarisValyrian.com");
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+
 	@Test
 	void searchTrueTest() {
 		ev = new Event();
-		ev.getArr().add("search");
+		ev.getArr().add("menu_search");
 		ev.getArr().add("ommlete");
+		ev.getArr().add(null);
+		ev.getArr().add(null);
+		ev.getArr().add(null);
+		ev.getArr().add(null);
+		ev.getArr().add(null);
+		((MyController)controllerTest).update(null, ev);
+	}
+
+	@Test
+	void searchFalseTest() {
+		ev = new Event();
+		ev.getArr().add("menu_search");
+		ev.getArr().add("banana");
+		ev.getArr().add(null);
+		ev.getArr().add(null);
+		ev.getArr().add(null);
+		ev.getArr().add(null);
+		ev.getArr().add(null);
+		ev.getArr().add(null);
+
 		((MyController)controllerTest).update(null, ev);
 	}
 	
 	@Test
-	void searchFalseTest() {
+	void advSearchTrueTest() {
 		ev = new Event();
-		ev.getArr().add("search");
-		ev.getArr().add("banana");
+		Integer[] al = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0};
+		ev.getArr().add("advanced_search");
+		ev.getArr().add("ommlete");
+		ev.getArr().add(0);
+		ev.getArr().add(0);
+		ev.getArr().add("0");
+		ev.getArr().add("0");
+		ev.getArr().add(al);
+		ev.getArr().add(1);
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+
+	@Test
+	void advSearchFalseTest() {
+		ev = new Event();
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		ev.getArr().add("advanced_search");
+		ev.getArr().add("banana");
+		ev.getArr().add(0);
+		ev.getArr().add(0);
+		ev.getArr().add("0");
+		ev.getArr().add("0");
+		ev.getArr().add(al);
+		ev.getArr().add(1);
+		((MyController)controllerTest).update(null, ev);
+	}
+
 	@Test
 	void addRecipeTrueTest() {
 		Integer[] rA= {0,0,0,0,1,0,0,1,0,0,1,0};
 		ev = new Event();
 		user = Models.GetUserFromDB("drakarisValyrian.com");
-		recipe = new Recipe(null, "yuval's matkon", rA, null, null, null, null, null, null, null, "drakarisValyrian.com", null, null, null, null, null, null);
+		recipe = new Recipe(null, "yuvals matkon", rA, 0.0,0.0,0.0,0.0, 0, 0, 0, "drakarisValyrian.com", 0, "", "", null, null, null);
 		ev.getArr().add("recipe_insert");
 		ev.getArr().add(recipe);
 		((MyController)controllerTest).update(null, ev);
 		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
 		try {
-		recipe = Models.GetRecipeFromDB(rs.getInt("max"));
-		recipe.Delete();
+			recipe = Models.GetRecipeFromDB(rs.getInt("max"));
+			recipe.Delete();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	void addRecipeFalseTest() {
 		Integer[] rA= {0,0,0,0,1,0,0,1,0,0,1,0};
 		ev = new Event();
-		recipe = new Recipe(null, "ommlete", rA, null, null, null, null, null, null, null, "drakarisValyrian.com", null, null, null, null, null, null);
+		recipe = new Recipe(null, "Ommlete", rA, 0.0,0.0,0.0,0.0, 0, 0, 0, "drakarisValyrian.com", 0, "", "", null, null, null);
 		ev.getArr().add("recipe_insert");
 		ev.getArr().add(recipe);
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+
 	@Test
-	void updateRecipeTest() {
+	void updateRecipeTrueTest() {
 		ev = new Event();
+		recipe = Models.GetRecipeFromDB(1);
+		recipe.setRecipeKashruth(1);
 		ev.getArr().add("recipe_update");
+		ev.getArr().add(recipe);
+		((MyController)controllerTest).update(null, ev);
+		recipe.setRecipeKashruth(0);
+		recipe.Update();
+	}
+
+	@Test
+	void updateRecipeFalseTest() {
+		ev = new Event();
+		Integer[] rA= {0,0,0,0,1,0,0,1,0,0,1,0};
+		recipe = new Recipe(null, "yuvals matkon", rA, 0.0,0.0,0.0,0.0, 0, 0, 0, "drakarisValyrian.com", 0, "", "", null, null, null);
+		recipe.setRecipeKashruth(1);
+		ev.getArr().add("recipe_update");
+		ev.getArr().add(recipe);
 		((MyController)controllerTest).update(null, ev);
 	}
-	
+
 	@Test
-	void deleteRecipeTest() {
+	void deleteRecipeTrueTest() {
 		ev = new Event();
+		Integer[] rA= {0,0,0,0,1,0,0,1,0,0,1,0};
+		ArrayList<Integer> ar= new ArrayList<Integer>();
+		ArrayList<Double> ar1= new ArrayList<Double>();
+		ar.add(1);
+		ar1.add(1.1);
+		recipe = new Recipe(9999, "yuvals matkon", rA, 0.0,0.0,0.0,0.0, 0, 0, 0, "drakarisValyrian.com", 0, "", "", ar, ar, ar1);
+		recipe.Insert();
 		ev.getArr().add("recipe_delete");
+		ev.getArr().add(recipe);
 		((MyController)controllerTest).update(null, ev);
+	}
+
+	@Test
+	void deleteRecipeFalseTest() {
+		ev = new Event();
+		Integer[] rA= {0,0,0,0,1,0,0,1,0,0,1,0};
+		ArrayList<Integer> ar= new ArrayList<Integer>();
+		ArrayList<Double> ar1= new ArrayList<Double>();
+		ar.add(1);
+		ar1.add(1.1);
+		recipe = new Recipe(9999, "yuvals matkon", rA, 0.0,0.0,0.0,0.0, 0, 0, 0, "drakarisValyrian.com", 0, "", "", ar, ar, ar1);
+		ev.getArr().add("recipe_delete");
+		ev.getArr().add(recipe);
+		((MyController)controllerTest).update(null, ev);
+	}
+
+	@Test
+	void addIngredientTrueTest() {
+		ev = new Event();
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		ingredient = new Ingredient(99,"\"test\"",al,99.9,99.9,99.9,99.9,0);
+		ev.getArr().add("ingredient_insert");
+		ev.getArr().add(ingredient);
+		((MyController)controllerTest).update(null, ev);
+		ingredient.Delete();
 	}
 	
 	@Test
-	void addIngredientTest() {
+	void addIngredientFalseTest() {
 		ev = new Event();
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		ingredient = new Ingredient(100,"\"test\"",al,99.9,99.9,99.9,99.9,0);
 		ev.getArr().add("ingredient_insert");
+		ev.getArr().add(ingredient);
 		((MyController)controllerTest).update(null, ev);
 	}
 }

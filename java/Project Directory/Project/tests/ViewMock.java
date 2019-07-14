@@ -50,13 +50,13 @@ public class ViewMock implements View {
 			assertNull(usU);
 	}
 
-	/*@Override
-	public void userDelete {
+	@Override
+	public void deleteUserResponse(ArrayList<User> usU) {
 		if(usU!=null)
-			assertTrue(usU.get(0).getUserKashruth());
+			assertNotNull(usU.get(0));
 		else
 			assertNull(usU);
-	}*/
+	}
 	
 	@Override
 	public void dietitianUpdateResponse(ArrayList<Dietitian> usD) {
@@ -66,18 +66,18 @@ public class ViewMock implements View {
 			assertNull(usD);
 	}
 	
-	/*@Override
-	public void dietitianDelete {
-		if(usU!=null)
-			assertTrue(usU.get(0).getUserKashruth());
+	@Override
+	public void deleteDietitianResponse(ArrayList<Dietitian> usD) {
+		if(usD!=null)
+			assertNotNull(usD.get(0));
 		else
-			assertNull(usU);
-	}*/
+			assertNull(usD);
+	}
 	
-	/*@Override
-	public void getRecipesResponse(ArrayList<Recipe> r) { //waiting for merge
+	@Override
+	public void getAllRecipesResponse(ArrayList<Recipe> r) { 
 		assertNotEquals(0,r.size());
-	}*/
+	}
 
 	@Override
 	public void getTop10Response(ArrayList<Recipe> r) {
@@ -96,7 +96,7 @@ public class ViewMock implements View {
 
 	@Override
 	public void searchResponse(ArrayList<Recipe> r) {
-		if(r!=null)
+		if(r.size()!=0)
 			assertNotNull(r);
 		else
 			assertEquals(0, r.size());
@@ -110,43 +110,43 @@ public class ViewMock implements View {
 			assertNull(r);
 	}
 	
-	/*@Override
-	public void updateRecipes {
-		if(usU!=null)
-			assertTrue(usU.get(0).getUserKashruth());
+	@Override
+	public void recipeUpdateResponse(ArrayList<Recipe> r) {
+		if(r!=null)
+			assertEquals(1,(int)r.get(0).getRecipeKashruth());
 		else
-			assertNull(usU);
-	}*/
+			assertNull(r);
+	}
 	
-	/*@Override
-	public void deleteRecipes {
-		if(usU!=null)
-			assertTrue(usU.get(0).getUserKashruth());
+	@Override
+	public void deleteRecipeResponse(ArrayList<Recipe> rec) {
+		if(rec!=null)
+			assertNotNull(rec.get(0));
 		else
-			assertNull(usU);
-	}*/
+			assertNull(rec);
+	}
 	
 	@Override
 	public void addIngredientResponse(ArrayList<Ingredient> in) {
 		if(in!=null)
-			assertNotNull(in);
+			assertNotNull(in.get(0));
+		else
+			assertNull(in);
+	}
+
+	/*@Override
+	public void ingredientUpdateResponse(ArrayList<Ingredient> in) {
+		if(in!=null)
+			assertNotNull(in.get(0));
 		else
 			assertNull(in);
 	}
 	
-	/*@Override
-	public void updateIngredient {
-		if(usU!=null)
-			assertTrue(usU.get(0).getUserKashruth());
+	@Override
+	public void deleteIngredientResponse(ArrayList<Ingredient> in) {
+		if(in!=null)
+			assertNotNull(in.get(0));
 		else
-			assertNull(usU);
-	}*/
-	
-	/*@Override
-	public void deleteIngredient {
-		if(usU!=null)
-			assertTrue(usU.get(0).getUserKashruth());
-		else
-			assertNull(usU);
+			assertNull(in);
 	}*/
 }
