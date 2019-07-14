@@ -383,7 +383,7 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void deleteDietitianResponse(ArrayList<User> usD) {
+	public void deleteDietitianResponse(ArrayList<Dietitian> usD) {
 		if (usD.get(0)==null) // was able to delete
 		{
 			check=true; // move to login
