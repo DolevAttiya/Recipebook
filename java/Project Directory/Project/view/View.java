@@ -29,7 +29,7 @@ public interface View {
 	public void dietitianUpdateResponse(ArrayList<Dietitian> usD);
 	public void getAllRecipesResponse(ArrayList<Recipe> r);
 	public void deleteUserResponse(ArrayList<User> usU);
-	public void deleteDietitianResponse(ArrayList<User> usD);
+	public void deleteDietitianResponse(ArrayList<Dietitian> usD);
 	public void deleteIngredientResponse(ArrayList<Ingredient> in);
 	public void deleteRecipeResponse(ArrayList<Recipe> rec);
 	public void recipeUpdateResponse(ArrayList<Recipe> r);
