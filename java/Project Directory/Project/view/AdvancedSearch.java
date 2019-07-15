@@ -38,6 +38,19 @@ public class AdvancedSearch extends JFrame {
 	private JTextField txtRecipebook;
 	private JTextField textField_5;
 	private JTextField textField_1;
+	public int isFish=0;
+	public int isStrawberries=0;
+	public int isCoffie=0;
+	public int isGluten=0;
+	public int isLactose=0;
+	public int isMilk=0;
+	public int isEggs=0;
+	public int isSeeds=0;
+	public int isTreeNuts=0;
+	public int isPeanut=0;
+	public int isAcidity=0;
+	public int isChocolate=0;
+	
 
 	/**
 	 * Launch the application.
@@ -208,25 +221,40 @@ public class AdvancedSearch extends JFrame {
 		panel_1.setLayout(null);
 		
 		JCheckBox checkBox_2 = new JCheckBox("Peanut");
+		checkBox_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 if(checkBox_2.isSelected()){  
+					  isPeanut=1;   } 
+				 else {
+					 isPeanut=0;
+				 }
+			}
+		});
 		checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		checkBox_2.setBackground(new Color(240, 248, 255));
 		checkBox_2.setBounds(1279, 671, 281, 41);
 		panel_1.add(checkBox_2);
 		
-		String[] times = { "---","0-30", "30-60", "60-120", "more than 2 hours"};
+		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
 		JComboBox comboBox_1 = new JComboBox(times);
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_1 = (JComboBox)e.getSource();
-		        String times = (String)comboBox_1.getSelectedItem();
+		        String timeToMake = (String)comboBox_1.getSelectedItem();
 			}
 		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox_1.setBounds(373, 504, 403, 49);
+		comboBox_1.setBounds(535, 504, 241, 49);
 		panel_1.add(comboBox_1);
 		
-		String[] complexity = { "---","Easy", "Medium", "Hard"};
+		String[] complexity = {"Easy", "Medium", "Hard"};
 		JComboBox comboBox_4 = new JComboBox(complexity);
+		comboBox_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox_4 = (JComboBox)e.getSource();
+		        int complexity = (int)comboBox_4.getSelectedIndex();
+			}
+		});
 		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		comboBox_4.setBounds(373, 427, 403, 49);
 		panel_1.add(comboBox_4);
@@ -237,12 +265,14 @@ public class AdvancedSearch extends JFrame {
 		textField_1.setBounds(297, 220, 1246, 58);
 		panel_1.add(textField_1);
 		
-		String[] kashruth = { "---","Meat", "Dairy", "Parve", "Not Kosher", "Kosher"};
+		String[] kashruth = {"Parve", "Dairy", "Meat","Not Kosher","Kosher"};
 		JComboBox comboBox = new JComboBox(kashruth);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JComboBox comboBox = (JComboBox)arg0.getSource();
-		        String kashruth = (String)comboBox.getSelectedItem();
+		        int kashruth = (int)comboBox.getSelectedIndex();
+		      
+		        //send kashruth level to DB
 			}
 		});
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -270,9 +300,12 @@ public class AdvancedSearch extends JFrame {
 		txtpnAdvancedSearch.setBounds(307, 56, 1061, 99);
 		panel_1.add(txtpnAdvancedSearch);
 		
+		
+		
 		JButton btnSearch = new JButton("Search!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			//	myView.statview.advancedSearch(textField_1.getText(), kashruth, complexity, timeToMake, rateAbove, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate);
 				SearchRes f=new SearchRes();
 				f.setVisible(true);
 				AdvancedSearch.this.dispose();
@@ -305,18 +338,21 @@ public class AdvancedSearch extends JFrame {
 		panel_1.add(txtpnComplexity_1);
 		
 		JTextPane txtpnCookingTime = new JTextPane();
-		txtpnCookingTime.setText("Cooking Time:");
+		txtpnCookingTime.setText("Cooking Time Up To:");
 		txtpnCookingTime.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnCookingTime.setBackground(new Color(240, 248, 255));
-		txtpnCookingTime.setBounds(50, 493, 317, 64);
+		txtpnCookingTime.setBounds(50, 493, 444, 64);
 		panel_1.add(txtpnCookingTime);
 		
 		JCheckBox checkBox = new JCheckBox("Seeds");
 		checkBox.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent v) {
-				 System.out.println(v.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : v.getID()); //add what happens
+				 if(checkBox.isSelected()){  
+					  isSeeds=1;   } 
+				 else {
+					 isSeeds=0;
+				 }
 			}
 		});
 		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -328,8 +364,11 @@ public class AdvancedSearch extends JFrame {
 		checkBox_1.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent u) {
-				 System.out.println(u.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : u.getID()); //add what happens
+				 if(checkBox_1.isSelected()){  
+					  isStrawberries=1;   } 
+				 else {
+					 isStrawberries=0;
+				 }
 			}
 		});
 		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -341,8 +380,11 @@ public class AdvancedSearch extends JFrame {
 		checkBox_3.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent t) {
-				 System.out.println(t.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : t.getID()); //add what happens
+				 if(checkBox_3.isSelected()){  
+					  isTreeNuts=1;   } 
+				 else {
+					 isTreeNuts=0;
+				 }
 			}
 		});
 		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -354,8 +396,11 @@ public class AdvancedSearch extends JFrame {
 		checkBox_4.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent s) {
-				 System.out.println(s.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : s.getID()); //add what happens
+				 if(checkBox_4.isSelected()){  
+					  isEggs=1;   } 
+				 else {
+					 isEggs=0;
+				 }
 			}
 		});
 		checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -367,8 +412,11 @@ public class AdvancedSearch extends JFrame {
 		checkBox_5.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent l) {
-				 System.out.println(l.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : l.getID()); //add what happens
+				 if(checkBox_5.isSelected()){  
+					  isFish=1;   } 
+				 else {
+					  isFish=0;
+				 }
 			}
 		});
 		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -380,8 +428,11 @@ public class AdvancedSearch extends JFrame {
 		checkBox_6.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent m) {
-				 System.out.println(m.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : m.getID()); //add what happens
+				 if(checkBox_6.isSelected()){  
+					  isCoffie=1;   } 
+				 else {
+					 isCoffie=0;
+				 }
 			}
 		});
 		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -393,8 +444,11 @@ public class AdvancedSearch extends JFrame {
 		checkBox_7.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent n) {
-				 System.out.println(n.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : n.getID()); //add what happens
+				 if(checkBox_7.isSelected()){  
+					  isGluten=1;   } 
+				 else {
+					 isGluten=0;
+				 }
 			}
 		});
 		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -406,8 +460,11 @@ public class AdvancedSearch extends JFrame {
 		checkBox_9.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent o) {
-				 System.out.println(o.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : o.getID()); //add what happens
+				 if(checkBox_9.isSelected()){  
+					  isMilk=1;   } 
+				 else {
+					 isMilk=0;
+				 }
 			}
 		});
 		checkBox_9.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -419,8 +476,11 @@ public class AdvancedSearch extends JFrame {
 		checkBox_10.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent p) {
-				 System.out.println(p.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : p.getID()); //add what happens
+				 if(checkBox_10.isSelected()){  
+					  isLactose=1;   } 
+				 else {
+					 isLactose=0;
+				 }
 			}
 		});
 		checkBox_10.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -432,8 +492,11 @@ public class AdvancedSearch extends JFrame {
 		checkBox_11.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent q) {
-				 System.out.println(q.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : q.getID()); //add what happens
+				 if(checkBox_11.isSelected()){  
+					  isChocolate=1;   } 
+				 else {
+					 isChocolate=0;
+				 }
 			}
 		});
 		checkBox_11.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -445,8 +508,11 @@ public class AdvancedSearch extends JFrame {
 		checkBox_12.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent r) {
-				 System.out.println(r.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : r.getID()); //add what happens
+				 if(checkBox_12.isSelected()){  
+					  isAcidity=1;   } 
+				 else {
+					 isAcidity=0;
+				 }
 			}
 		});
 		checkBox_12.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -454,7 +520,7 @@ public class AdvancedSearch extends JFrame {
 		checkBox_12.setBounds(1279, 744, 281, 41);
 		panel_1.add(checkBox_12);
 		
-		String[] rating = { "---","0-50", "50-100", "100-150", "150-200"};
+		String[] rating = {"0","50", "100", "150","200"};
 		JComboBox comboBox_2 = new JComboBox(rating);
 		comboBox_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -465,5 +531,6 @@ public class AdvancedSearch extends JFrame {
 		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		comboBox_2.setBounds(307, 615, 293, 49);
 		panel_1.add(comboBox_2);
+		
 	}
 }

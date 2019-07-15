@@ -153,7 +153,7 @@ public class myView extends Observable implements View {
 	public void searchResponse (ArrayList<Recipe> r) {
 		recipeArray=r;
 	} 
-	public void advancedSearch(String s, Integer catagory, Integer complexity, Integer timeToMake, Integer rateAbove, ArrayList<Integer> allergies, Boolean showOnlyKosher) {
+	public void advancedSearch(String s, Integer catagory, Integer complexity, String timeToMake, String rateAbove, ArrayList<Integer> allergies, Boolean showOnlyKosher) {
 		Event ev=new Event();
 		ev.getArr().add("advanced_search");
 		ev.getArr().add(s); // what string we want to search
