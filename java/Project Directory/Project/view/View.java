@@ -30,10 +30,8 @@ public interface View {
 	public void getAllRecipesResponse(ArrayList<Recipe> r);
 	public void deleteUserResponse(ArrayList<User> usU);
 	public void deleteDietitianResponse(ArrayList<Dietitian> usD);
-	public void deleteIngredientResponse(ArrayList<Ingredient> in);
 	public void deleteRecipeResponse(ArrayList<Recipe> rec);
 	public void recipeUpdateResponse(ArrayList<Recipe> r);
-	public void ingredientUpdateResponse(ArrayList<Ingredient> in);
 }
 	//update ingredient, remove ingredient
 	//update recipe
