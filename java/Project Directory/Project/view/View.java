@@ -50,6 +50,7 @@ public interface View {
 	public void recipeUpdate(Recipe rec);
 	public void ingredientUpdate(Ingredient ing);
 	public void getAllMeasuringTypes();
+	public void addIngredientToRecipe(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount); // small add button, adds to Recipe automatically
 }
 //update ingredient, remove ingredient
 //update recipe
