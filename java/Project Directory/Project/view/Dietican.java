@@ -325,7 +325,7 @@ public class Dietican extends JFrame {
 		txtpnExpiryDate_1.setText("Expiry Date:");
 		txtpnExpiryDate_1.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		txtpnExpiryDate_1.setBackground(new Color(240, 248, 255));
-		txtpnExpiryDate_1.setBounds(1089, 288, 360, 55);
+		txtpnExpiryDate_1.setBounds(1089, 286, 360, 55);
 		panel_1.add(txtpnExpiryDate_1);
 		
 		JTextPane txtpnEnterPassword = new JTextPane();

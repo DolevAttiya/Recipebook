@@ -93,9 +93,9 @@ public void getPsmtmt(PreparedStatement pstmt) {
 		return  this.userAllergen[place].toString();
 	}
 	@Override
-	protected String getIngredientInsert(int place) {
+	protected String getSubtbleInsert(int place) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getPersonsFavoriteRecipe().get(place).toString();
 	}
 	@Override
 	protected Integer[] getAllergenArray() {
@@ -103,20 +103,20 @@ public void getPsmtmt(PreparedStatement pstmt) {
 		return  this.getUserAllergen();
 	}
 	@Override
-	protected ArrayList<Integer> getIngredientArray() {
+	protected ArrayList<Integer> getSubtbleArray() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getPersonsFavoriteRecipe();
 	}
 	@Override
-	protected int getmaxIngredieantCount() {
+	protected int getmaxSubtbleCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.getPersonsFavoriteRecipe().size();
 	}
 
 	@Override
-	protected String getIngredientDelete(int place) {
+	protected String getSubtbleDelete(int place) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getPersonsFavoriteRecipe().get(place).toString();
 	}
 
 	@Override

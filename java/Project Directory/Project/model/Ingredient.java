@@ -106,8 +106,7 @@ public class Ingredient extends Entities {
 				this.getIngredientKashruth().toString() +" ";	}
 	@Override
 	protected String getEntitieAttributesNamesValues() {
-		return  " ingredientId = "+this.getIngredientId().toString() +" , " +
-				" ingredientName = \""+	this.getIngredientName() +"\" , " +
+		return  " ingredientName = \""+	this.getIngredientName() +"\" , " +
 				" ingredientCalories = "+	this.getIngredientCalories().toString() +" , " +
 				" ingredientCarbohydrate = "+	this.getIngredientCarbohydrate().toString() +" , " +
 				" ingredientProtein = "+	this.getIngredientProtein().toString() +" , " +
@@ -119,7 +118,7 @@ public class Ingredient extends Entities {
 		return this.ingredientAllergen[place].toString();
 	}
 	@Override
-	protected String getIngredientInsert(int place) {
+	protected String getSubtbleInsert(int place) {
 		return null;
 	}
 	@Override
@@ -127,15 +126,15 @@ public class Ingredient extends Entities {
 		return this.getIngredientAllergen();
 	}
 	@Override
-	protected ArrayList<Integer> getIngredientArray() {
+	protected ArrayList<Integer> getSubtbleArray() {
 		return null;
 	}
 	@Override
-	protected int getmaxIngredieantCount() {
+	protected int getmaxSubtbleCount() {
 		return 0;
 	}
 	@Override
-	protected String getIngredientDelete(int place) {
+	protected String getSubtbleDelete(int place) {
 		// TODO Auto-generated method stub
 		return null;
 	}

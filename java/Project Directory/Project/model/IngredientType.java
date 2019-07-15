@@ -62,8 +62,7 @@ public class IngredientType extends Entities {
 	@Override
 	protected String getEntitieAttributesNamesValues() {
 		// TODO Auto-generated method stub
-		return  "ingredientTypeId = "+ this.getIngredientTypeId().toString()+ " , "+
-		" ingredientTypeName = "+this.getIngredientTypeName()+ " , "+
+		return 	" ingredientTypeName = "+this.getIngredientTypeName()+ " , "+
 		" ingredientTypeValue = "+this.getIngredientTypeValue()+" ";
 	}
 	/*@Override
@@ -82,7 +81,7 @@ public class IngredientType extends Entities {
 		return null;
 	}
 	@Override
-	protected String getIngredientInsert(int place) {
+	protected String getSubtbleInsert(int place) {
 		return null;
 	}
 	@Override
@@ -90,15 +89,15 @@ public class IngredientType extends Entities {
 		return null;
 	}
 	@Override
-	protected ArrayList<Integer> getIngredientArray() {
+	protected ArrayList<Integer> getSubtbleArray() {
 		return null;
 	}
 	@Override
-	protected int getmaxIngredieantCount() {
+	protected int getmaxSubtbleCount() {
 		return 0;
 	}
 	@Override
-	protected String getIngredientDelete(int place) {
+	protected String getSubtbleDelete(int place) {
 		// TODO Auto-generated method stub
 		return null;
 	}
