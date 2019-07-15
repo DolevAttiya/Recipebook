@@ -158,38 +158,6 @@ public class Recipe extends Entities{
 	public void setRecipeProcess(String recipeProcess) {
 		this.recipeProcess = recipeProcess;
 	}
-	public void addIngredient(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
-	{	
-		Recipe recipe=null;// static 
-		if (recipe==null) {// can be another method
-		Integer[] ar=new Integer[1];
-		ar[0]=0;
-		recipe = new Recipe(null,"recipeName",ar,0.0,0.0,0.0,0.0,0,0,0,"personEmail",0,"recipeDescription","recipeProcess",new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Double>());
-		}
-		recipe.getRecipeIngredientId().add(newIngredient.getIngredientId()); 
-		recipe.getRecipeIngredientsType().add(newingredientType.getIngredientTypeId());
-		recipe.getRecipeIngredientsAmount().add(IngredientAmount);
-		recipe.setRecipeTotalCalories(recipe.getRecipeTotalCalories()+(newIngredient.getIngredientCalories()*IngredientAmount*newingredientType.getIngredientTypeValue()));
-		recipe.setRecipeTotalCarbohydrate(recipe.getRecipeTotalCarbohydrate()+newIngredient.getIngredientCarbohydrate()*IngredientAmount*newingredientType.getIngredientTypeValue());
-		recipe.setRecipeTotalFat(recipe.getRecipeTotalFat()+newIngredient.getIngredientFat()*IngredientAmount*newingredientType.getIngredientTypeValue());
-		recipe.setRecipeTotalProtein(recipe.getRecipeTotalProtein()+newIngredient.getIngredientProtein()*IngredientAmount*newingredientType.getIngredientTypeValue());
-		{
-			if(newIngredient.getIngredientKashruth()!=0) //*Kosher check*//
-				if(recipe.getRecipeKashruth()!=3)
-					if(recipe.getRecipeKashruth()==0) {recipe.setRecipeKashruth(newIngredient.getIngredientKashruth());}
-					else if (recipe.getRecipeKashruth()!=newIngredient.getIngredientKashruth())
-						recipe.setRecipeKashruth(3);
-		}
-		for( int i=0;i<newIngredient.getAllergenArray().length;i++)
-		{
-			if(newIngredient.getIngredientAllergen(i)>0)
-			{
-				Integer[] newarray= recipe.getRecipeAllergen();
-				newarray[i]+=1;
-				recipe.setRecipeAllergen(newarray);
-			}
-		}	 
-	}
 	@Override
 	protected String getEntitieKey() {
 		return "recipeId";
