@@ -17,7 +17,6 @@ import model.Recipe;
 import model.User;
 import model.model;
 import view.View;
-
 public class ControlerModelIntegration {
 
 	Event ev;
