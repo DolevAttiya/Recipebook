@@ -104,7 +104,6 @@ class ControllerViewIntegration {
 		Integer isChocolate=0; 
 		boolean wantAllerg=true;
 		v.register(firstName, lastName, email, pass, pass2, dateOfBirth, isDietitian, dietitianNum, isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
-		
 	}
 
 	
@@ -233,7 +232,7 @@ class ControllerViewIntegration {
 		assertNotNull(myView.recipeArray);
 	}
 
-
+/*
 	@Test
 	void testMainSearch() {
 		fail("Not yet implemented"); // TODO
@@ -314,6 +313,6 @@ class ControllerViewIntegration {
 	void testIngredientUpdate() {
 		fail("Not yet implemented"); // TODO
 	}
-
+*/
 
 }

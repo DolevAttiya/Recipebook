@@ -70,34 +70,36 @@ public class myView extends Observable implements View {
 	public void register(String firstName, String lastName, String email, String pass,String pass2, String dateOfBirth, boolean isDietitian, String dietitianNum, boolean isKosher, String dietitianStatDate,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, boolean wantAllerg) {
 		if ((pass.length()<6) || (pass.compareTo(pass2)==1))
 			check=false; // can't save > we will show an error ! 
-		Dietitian newDietitian;
-		model.User newUser;
-		String hashPass;
-		ev=new Event();
-		hashPass = ConvertPassToHash(pass);
-		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-mm-dd");
-		LocalDate dateBirth = LocalDate.parse(dateOfBirth, formatter);				
-		if (isDietitian==true)
-		{
-			Integer dietNum=Integer.parseInt(dietitianNum);
-			LocalDate dietitianDate = LocalDate.parse(dietitianStatDate, formatter);
-			newDietitian = new Dietitian(email, firstName, lastName, dateBirth, hashPass, null, dietNum, dietitianDate);
-			if (dietitianNum!=null)
-			{
-				ev.getArr().add("dietitian_register");
-				ev.getArr().add(newDietitian);
-			}
-			else check=false;
-		}
 		else
 		{
-			Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
-			newUser=new model.User(email, firstName, lastName, dateBirth, hashPass, null, 1, allergies, wantAllerg, isKosher);
-			ev.getArr().add("user_register");
-			ev.getArr().add(newUser);
+			Dietitian newDietitian;
+			model.User newUser;
+			String hashPass;
+			ev=new Event();
+			hashPass = ConvertPassToHash(pass);
+			LocalDate dateBirth = LocalDate.parse(dateOfBirth);				
+			if (isDietitian==true)
+			{
+				Integer dietNum=Integer.parseInt(dietitianNum);
+				LocalDate dietitianDate = LocalDate.parse(dietitianStatDate);
+				newDietitian = new Dietitian(email, firstName, lastName, dateBirth, hashPass, null, dietNum, dietitianDate);
+				if (dietitianNum!=null)
+				{
+					ev.getArr().add("dietitian_register");
+					ev.getArr().add(newDietitian);
+				}
+				else check=false;
+			}
+			else
+			{
+				Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
+				newUser=new model.User(email, firstName, lastName, dateBirth, hashPass, null, 1, allergies, wantAllerg, isKosher);
+				ev.getArr().add("user_register");
+				ev.getArr().add(newUser);
+			}
+			setChanged();
+			notifyObservers(ev);		
 		}
-		setChanged();
-		notifyObservers(ev);		
 	}
 	public void dRegisterResponse(ArrayList<Dietitian> usD) {
 		if (usD!=null)
