@@ -184,8 +184,7 @@ public class Models extends Observable implements model  {
 			sql="  select * from Recipe order by recipeRate desc ";
 		if(typeSearch.compareTo("CheckPasswordAndEmail")==0)
 			if (((String)args.get(0)).compareTo("User")==0)
-				sql="  select * from UserPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\" And userId is not null ";
-			else
+				sql="  select * from UserPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\" And userId is not null ";			else
 				sql="  select * from DietitianPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\" And dietitianId is not null ";
 		ResultSet rs =getFromWithDB(sql) ;
 		return rs;

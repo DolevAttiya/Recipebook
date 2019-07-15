@@ -49,6 +49,7 @@ class ControllerViewIntegration {
 		assertFalse(myView.check);
 	}
 
+	@SuppressWarnings("static-access")
 	@Test
 	void testTrueUserRegister() {
 		String firstName="rotem";
@@ -76,9 +77,10 @@ class ControllerViewIntegration {
 		boolean wantAllerg=true;
 		v.register(firstName, lastName, email, pass, pass2, dateOfBirth, isDietitian, dietitianNum, isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
 		assertTrue(myView.check);
+		((myView)v).myUser.Delete();
 	}
 
-@Test
+	@Test
 	void testTrueDietitianRegister() {
 		String firstName="rotem";
 		String lastName="hamalka";
@@ -104,9 +106,11 @@ class ControllerViewIntegration {
 		Integer isChocolate=0; 
 		boolean wantAllerg=true;
 		v.register(firstName, lastName, email, pass, pass2, dateOfBirth, isDietitian, dietitianNum, isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+		assertTrue(myView.check);
+		myView.myDietitian.Delete();
 	}
 
-	
+
 	@Test
 	void testPassLengthTrueCompareFalseRegister() {
 		String firstName="rotem";
@@ -136,7 +140,7 @@ class ControllerViewIntegration {
 		assertFalse(myView.check);
 
 	}
-	
+
 	@Test
 	void testPassLengthFalseCompareTrueRegister() {
 		String firstName="rotem";
@@ -165,7 +169,7 @@ class ControllerViewIntegration {
 		v.register(firstName, lastName, email, pass, pass2, dateOfBirth, isDietitian, dietitianNum, isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
 		assertFalse(myView.check);
 	}
-	
+
 	@Test
 	void testFalseRegister() // <6 & !=
 	{
@@ -227,20 +231,33 @@ class ControllerViewIntegration {
 	}
 
 	@Test
-	void testGetTop10() {
+	void testTrueGetTop10() {
 		v.getTop10();
 		assertNotNull(myView.recipeArray);
 	}
 
-/*
 	@Test
-	void testMainSearch() {
-		fail("Not yet implemented"); // TODO
+	void testTrueMainSearch() {
+		v.mainSearch("Ommlete");
+		assertNotNull(myView.recipeArray);
 	}
 
 	@Test
-	void testAdvancedSearch() {
-		fail("Not yet implemented"); // TODO
+	void testFalseMainSearch() {
+		v.mainSearch("rotem");
+		assertNull(myView.recipeArray);
+	}
+
+	@Test
+	void testTrueAdvancedSearch() {
+		v.advancedSearch("Ommelete", 0, 3, null, "50", 0,0,0,0,0,0,1,0,0,0,0,0);
+		assertNotNull(myView.recipeArray);
+	}
+
+	@Test
+	void testFalseAdvancedSearch() {
+		v.advancedSearch("lazania", 1, 0, "60", "100", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0);
+		assertNull(myView.recipeArray);
 	}
 
 	@Test
@@ -265,7 +282,7 @@ class ControllerViewIntegration {
 
 	@Test
 	void testGetRecipes() {
-		v.getRecipes();
+		v.getAllRecipes();
 		assertNotNull(myView.recipeArray);
 	}
 
@@ -313,6 +330,5 @@ class ControllerViewIntegration {
 	void testIngredientUpdate() {
 		fail("Not yet implemented"); // TODO
 	}
-*/
 
 }
