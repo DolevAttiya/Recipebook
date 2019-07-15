@@ -15,7 +15,42 @@ public class Models extends Observable implements model  {
 
 	public Models() {
 	}
-	
+	public void allIngredientType() {
+		String sql= " Select * From IngredientType";
+		ArrayList<IngredientType> ingredient= new ArrayList<IngredientType>();
+		ResultSet rs=getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				ingredient.add(GetIngredientTypeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("ingredient_type_getall_response");
+		ev.getArr().add(ingredient);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void allIngredient() {
+		String sql= " Select * From Ingredient";
+		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
+		ResultSet rs=getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				ingredient.add(GetIngredientParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block	
+			e.printStackTrace();
+		}
+		ev.getArr().add("ingredient_getall_response");
+		ev.getArr().add(ingredient);
+		setChanged();
+		notifyObservers(ev);
+	}
 	public void allRecipes() {
 		String sql= " Select * From Recipe order by recipeRate";
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
@@ -34,6 +69,7 @@ public class Models extends Observable implements model  {
 		setChanged();
 		notifyObservers(ev);
 	}
+
 	public void myFavoriteRecipes(String Email) {
 		ev=new Event();
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
@@ -54,7 +90,6 @@ public class Models extends Observable implements model  {
 		setChanged();
 		notifyObservers(ev);
 	}
-	@SuppressWarnings("unchecked")
 	public void Search(ArrayList<Object> search) {
 		ev=new Event();
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
@@ -754,41 +789,41 @@ public class Models extends Observable implements model  {
 	}	
 
 	public static IngredientType GetIngredientTypeFromDB(Integer id) {
-		ResultSet rs=SelectSpecific("IngredientType","ingredientTypeId",id.toString());
-		IngredientType ingredientType =GetIngredientTypeParser(rs);
-		return ingredientType;
+		ResultSet rs=SelectSpecific("IngredientType","ingredientId",id.toString());
+		IngredientType ingredient =GetIngredientTypeParser(rs);
+		return ingredient;
 	}
 	private static IngredientType GetIngredientTypeParser(ResultSet rs) {
 		@SuppressWarnings("null")
-		IngredientType ingredientType = new IngredientType( (Integer) null,null,null);
+		IngredientType ingredient = new IngredientType( (Integer) null,null,null);
 		try {
-			ingredientType.setIngredientTypeId(rs.getInt("ingredientTypeId"));
-			ingredientType.setIngredientTypeName(rs.getString("ingredientTypeValue"));
-			ingredientType.setIngredientTypeName(rs.getString("ingredientTypeName"));
+			ingredient.setIngredientTypeId(rs.getInt("ingredientId"));
+			ingredient.setIngredientTypeName(rs.getString("ingredientValue"));
+			ingredient.setIngredientTypeName(rs.getString("ingredientName"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ingredientType;
+		return ingredient;
 	}
 	public void insertIngredientType(IngredientType ing){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
-		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientTypeId ) as count", "IngredientType", "ingredientTypeId",ing.getIngredientTypeId().toString());
-		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientTypeId ) as max", "IngredientType", null, null);
+		ArrayList<IngredientType> ingredient= new ArrayList<IngredientType>();
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "IngredientType", "ingredientId",ing.getIngredientTypeId().toString());
+		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "IngredientType", null, null);
 		try {
 			ing.setIngredientTypeId(rs.getInt("max")+1);
 			if(saftie.getInt("count")==0&&ing.Insert())
 			{
-				ingredientType.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
-				ev.getArr().add("ingredientType_insert_response");
-				ev.getArr().add(ingredientType);
+				ingredient.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
+				ev.getArr().add("ingredient_insert_response");
+				ev.getArr().add(ingredient);
 				setChanged();
 				notifyObservers(ev);
 			}
 			else
 			{
-				ev.getArr().add("ingredientType_insert_response");
+				ev.getArr().add("ingredient_insert_response");
 				ev.getArr().add(null);
 				setChanged();
 				notifyObservers(ev);
@@ -798,7 +833,7 @@ public class Models extends Observable implements model  {
 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			ev.getArr().add("ingredientType_insert_response");
+			ev.getArr().add("ingredient_insert_response");
 			ev.getArr().add(null);
 			setChanged();
 			notifyObservers(ev);
@@ -808,21 +843,21 @@ public class Models extends Observable implements model  {
 	public void updateIngredientType(IngredientType ing){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientTypeId ) as count", "IngredientType", "ingredientTypeId",ing.getIngredientTypeId().toString());
-		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "IngredientType", "ingredientId",ing.getIngredientTypeId().toString());
+		ArrayList<IngredientType> ingredient= new ArrayList<IngredientType>();
 		try {
 
 			if(saftie.getInt("count")!=0&&ing.Update())
 			{
-				ingredientType.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
-				ev.getArr().add("ingredientType_update_response");
-				ev.getArr().add(ingredientType);
+				ingredient.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
+				ev.getArr().add("ingredient_update_response");
+				ev.getArr().add(ingredient);
 				setChanged();
 				notifyObservers(ev);
 			}
 			else
 			{
-				ev.getArr().add("ingredientType_update_response");
+				ev.getArr().add("ingredient_update_response");
 				ev.getArr().add(null);
 				setChanged();
 				notifyObservers(ev);
@@ -832,7 +867,7 @@ public class Models extends Observable implements model  {
 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			ev.getArr().add("ingredientType_update_response");
+			ev.getArr().add("ingredient_update_response");
 			ev.getArr().add(null);
 			setChanged();
 			notifyObservers(ev);
@@ -841,13 +876,13 @@ public class Models extends Observable implements model  {
 	public void deleteIngredientType(IngredientType ing){
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientTypeId ) as count", "IngredientType", "ingredientTypeId",ing.getIngredientTypeId().toString());
-		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "IngredientType", "ingredientId",ing.getIngredientTypeId().toString());
+		ArrayList<IngredientType> ingredient= new ArrayList<IngredientType>();
 		try {
 		if(saftie.getInt("count")==0)
 		{
-			ingredientType.add(ing);
-			ev.getArr().add("ingredientType_delete_response");
+			ingredient.add(ing);
+			ev.getArr().add("ingredient_delete_response");
 			ev.getArr().add(ing);
 			setChanged();
 			notifyObservers(ev);
@@ -855,22 +890,22 @@ public class Models extends Observable implements model  {
 		else if
 		(!ing.Delete())
 		{
-			ingredientType.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
-			ev.getArr().add("ingredientType_delete_response");
-			ev.getArr().add(ingredientType);
+			ingredient.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
+			ev.getArr().add("ingredient_delete_response");
+			ev.getArr().add(ingredient);
 			setChanged();
 			notifyObservers(ev);
 		}
 		else
 		{
-			ev.getArr().add("ingredientType_delete_response");
+			ev.getArr().add("ingredient_delete_response");
 			ev.getArr().add(null);
 			setChanged();
 			notifyObservers(ev);
 		}
 	} catch (SQLException e) {
 		e.printStackTrace();
-		ev.getArr().add("ingredientType_delete_response");
+		ev.getArr().add("ingredient_delete_response");
 		ev.getArr().add(null);
 		setChanged();
 		notifyObservers(ev);
@@ -879,10 +914,10 @@ public class Models extends Observable implements model  {
 	public void selectIngredientType(Integer id) {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
-		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
-		ingredientType.add(GetIngredientTypeFromDB(id));
-		ev.getArr().add("ingredientType_select_response");
-		ev.getArr().add(ingredientType);
+		ArrayList<IngredientType> ingredient= new ArrayList<IngredientType>();
+		ingredient.add(GetIngredientTypeFromDB(id));
+		ev.getArr().add("ingredient_select_response");
+		ev.getArr().add(ingredient);
 		setChanged();
 		notifyObservers(ev);
 	}	
@@ -915,7 +950,7 @@ public class Models extends Observable implements model  {
 
 			while(recipeIngredientVals.next())
 			{
-				IngredientsType.add(recipeIngredientVals.getInt("ingredientTypeId"));
+				IngredientsType.add(recipeIngredientVals.getInt("ingredientId"));
 				IngredientsAmount.add(recipeIngredientVals.getDouble("IngredientAmount"));
 				ingredients.add(recipeIngredientVals.getInt("IngredientId"));
 
@@ -1049,14 +1084,13 @@ public class Models extends Observable implements model  {
 	public void selectRecipe(Integer id) {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
-		ArrayList<IngredientType> ingredientType= new ArrayList<IngredientType>();
-		ingredientType.add(GetIngredientTypeFromDB(id));
-		ev.getArr().add("ingredientType_select_response");
-		ev.getArr().add(ingredientType);
+		ArrayList<IngredientType> ingredient= new ArrayList<IngredientType>();
+		ingredient.add(GetIngredientTypeFromDB(id));
+		ev.getArr().add("ingredient_select_response");
+		ev.getArr().add(ingredient);
 		setChanged();
 		notifyObservers(ev);
 	}	
-
 
 	public static ResultSet SelectSpecificFrom(String Select, String Table, String Key,String Value) {
 		String sql;
@@ -1098,4 +1132,5 @@ public class Models extends Observable implements model  {
 		}
 		return null;
 	}
+
 }

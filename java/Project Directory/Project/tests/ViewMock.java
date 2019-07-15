@@ -253,4 +253,126 @@ public class ViewMock implements View {
 		// TODO Auto-generated method stub
 		
 	}
+
+	/*@Override
+	public void ingredientUpdateResponse(ArrayList<Ingredient> in) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void login(String email, String pass) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void register(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth,
+			boolean isDietitian, String dietitianNum, boolean isKosher, String dietitianStatDate, Integer isFish,
+			Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk,
+			Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity,
+			Integer isChocolate, boolean wantAllerg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getTop10() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mainSearch(String s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void advancedSearch(String s, Integer kashruth, Integer complexity, String timeToMake, String rateAbove,
+			Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose,
+			Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity,
+			Integer isChocolate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addIngredient(String ingredientName, Integer catagory, Integer isFish, Integer isStrawberries,
+			Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds,
+			Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Integer[] measureType,
+			Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void myFavorite() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void myRecipes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getRecipes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2,
+			String dateOfBirth, boolean isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie,
+			Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts,
+			Integer isPeanut, Integer isAcidity, Integer isChocolate, boolean wantAllerg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dietitianUpdate(String firstName, String lastName, String email, String pass, String pass2,
+			String dateOfBirth, String dietitianNum, String dietitianStatDate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteUser() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteDietitian() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteIngredient(Ingredient ing) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteRecipe(Recipe rec) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void recipeUpdate(Recipe rec) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ingredientUpdate(Ingredient ing) {
+		// TODO Auto-generated method stub
+		
+	}
 }
