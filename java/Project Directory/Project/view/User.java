@@ -37,6 +37,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class User extends JFrame {
 
@@ -50,7 +51,10 @@ public class User extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_7;
 	private JTextField textField_4;
+	public Boolean userKosher=true; //(myView.myUser.getUserKashruth());
+	public Boolean userAllergy=true; //(myView.myUser.getUserAllergens());
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -217,7 +221,7 @@ public class User extends JFrame {
 		contentPane_1.add(panel_1);
 		panel_1.setLayout(null);
 		
-		String[] days = { "---","01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+		String[] days = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		JComboBox comboBox = new JComboBox(days);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -229,7 +233,7 @@ public class User extends JFrame {
 		comboBox.setBounds(464, 620, 105, 49);
 		panel_1.add(comboBox);
 		
-		String[] months = { "---","01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+		String[] months = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 		JComboBox comboBox_3 = new JComboBox(months);
 		comboBox_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -241,25 +245,26 @@ public class User extends JFrame {
 		comboBox_3.setBounds(349, 620, 105, 49);
 		panel_1.add(comboBox_3);
 		
-		textField_7 = new JTextField();
+		textField_7 = new JTextField(); //myView.myUser.getPersonHashPass()
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_7.setColumns(10);
-		textField_7.setBounds(553, 520, 456, 49);
+		textField_7.setBounds(588, 520, 421, 49);
 		panel_1.add(textField_7);
 		
-		textField_2 = new JTextField();
+		
+		textField_2 = new JTextField(); //myView.myUser.getPersonHashPass()
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_2.setColumns(10);
 		textField_2.setBounds(588, 461, 421, 49);
 		panel_1.add(textField_2);
 		
-		textField_3 = new JTextField();
+		textField_3 = new JTextField(); //myView.myUser.getPersonEmail()
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_3.setColumns(10);
 		textField_3.setBounds(205, 337, 804, 49);
 		panel_1.add(textField_3);
 		
-		textField_6 = new JTextField();
+		textField_6 = new JTextField(); //myView.myUser.getPersonLastName()
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_6.setColumns(10);
 		textField_6.setBounds(316, 254, 693, 49);
@@ -296,8 +301,7 @@ public class User extends JFrame {
 		chckbxEggs.setBounds(1307, 352, 281, 55);
 		panel_1.add(chckbxEggs);
 		
-		//myView.myUser.getPersonFirstName()
-		textField_1 = new JTextField("rotem");
+		textField_1 = new JTextField("rotem"); ////myView.myUser.getPersonFirstName()
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_1.setColumns(10);
 		textField_1.setBounds(316, 183, 693, 49);
@@ -318,6 +322,16 @@ public class User extends JFrame {
 		panel_1.add(txtpnRecipeId);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Show only Kosher Recipies");
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (userKosher==true) {
+					chckbxNewCheckBox.setSelected(true);
+				}
+				else {
+					chckbxNewCheckBox.setSelected(false);
+				}
+			}
+		});
 		chckbxNewCheckBox.setBackground(new Color(240, 248, 255));
 		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		chckbxNewCheckBox.setBounds(67, 713, 697, 64);
@@ -379,12 +393,18 @@ public class User extends JFrame {
 		JButton btnSearch = new JButton("Update!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//public void userUpdate(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
-				//myView.statview.userUpdate(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_1.getText(), textField_1.getText(), false, 654321, true, textField_1.getText(),  allergies, false) 
-				MainPage f=new MainPage();
-				f.setVisible(true);
-				User.this.dispose();
-				User.this.setVisible(false);
+				if((textField_1.getText().trim().isEmpty())||(textField_6.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textField_2.getText().trim().isEmpty())||(textField_7.getText().trim().isEmpty())||(textField_4.getText().trim().isEmpty())) {
+					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
+				}
+						
+				else {
+					//public void userUpdate(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
+					//myView.statview.userUpdate(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_1.getText(), textField_1.getText(), false, 654321, true, textField_1.getText(),  allergies, false) 
+					MainPage f=new MainPage();
+					f.setVisible(true);
+					User.this.dispose();
+					User.this.setVisible(false);
+					}
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
@@ -405,11 +425,16 @@ public class User extends JFrame {
 		panel_1.add(txtpnEnterPasswordAgain);
 		
 		JCheckBox chckbxShowOnlyRecipes = new JCheckBox("Show only Recipes adapted to Alergies");
+		//chckbxShowOnlyRecipes.setSelected(true);
 		chckbxShowOnlyRecipes.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent d) {
-				 System.out.println(d.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : d.getID()); //add what happens
+				if (userAllergy==true) {
+					chckbxShowOnlyRecipes.setSelected(true);
+				}
+				else {
+					chckbxShowOnlyRecipes.setSelected(false);
+				}
 			}
 		});
 		chckbxShowOnlyRecipes.setFont(new Font("Tahoma", Font.PLAIN, 45));
@@ -483,7 +508,7 @@ public class User extends JFrame {
 		txtpnDateOfBirth.setBounds(69, 611, 275, 69);
 		panel_1.add(txtpnDateOfBirth);
 		
-		textField_4 = new JTextField();
+		textField_4 = new JTextField(); // convert from localdate to strings
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_4.setColumns(10);
 		textField_4.setBounds(581, 620, 171, 49);

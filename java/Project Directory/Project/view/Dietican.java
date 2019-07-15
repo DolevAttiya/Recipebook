@@ -24,6 +24,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JEditorPane;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Component;
 import javax.swing.JScrollBar;
 import javax.swing.JProgressBar;
@@ -49,8 +51,8 @@ public class Dietican extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_7;
 	private JTextField textField_8;
-	private JTextField textField_4;
 	private JTextField textField_9;
+	private JTextField textField_4;
 
 	/**
 	 * Launch the application.
@@ -218,12 +220,6 @@ public class Dietican extends JFrame {
 		contentPane_1.add(panel_1);
 		panel_1.setLayout(null);
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		textField_4.setColumns(10);
-		textField_4.setBounds(1079, 341, 406, 49);
-		panel_1.add(textField_4);
-		
 		textField_8 = new JTextField();
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_8.setColumns(10);
@@ -262,8 +258,8 @@ public class Dietican extends JFrame {
 		txtpnEnterDieticanNumber.setBounds(1079, 183, 406, 55);
 		panel_1.add(txtpnEnterDieticanNumber);
 		
-		//myView.myUser.getPersonFirstName()
-		textField_1 = new JTextField("rotem");
+		
+		textField_1 = new JTextField("rotem");//myView.myDietitian.getPersonFirstName()
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_1.setColumns(10);
 		textField_1.setBounds(316, 183, 693, 49);
@@ -293,12 +289,19 @@ public class Dietican extends JFrame {
 		JButton btnSearch = new JButton("Update!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//public void userUpdate(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
-				//myView.statview.userUpdate(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_1.getText(), textField_1.getText(), false, 654321, true, textField_1.getText(),  allergies, false) 
-				MainPage f=new MainPage();
-				f.setVisible(true);
-				Dietican.this.dispose();
-				Dietican.this.setVisible(false);
+				if((textField_1.getText().trim().isEmpty())||(textField_6.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textField_2.getText().trim().isEmpty())||(textField_7.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())||(textField_8.getText().trim().isEmpty())||(textField_4.getText().trim().isEmpty())) {
+					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
+				}
+						
+				else {
+					//public void userUpdate(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
+					//myView.statview.userUpdate(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_1.getText(), textField_1.getText(), false, 654321, true, textField_1.getText(),  allergies, false) 
+					MainPage f=new MainPage();
+					f.setVisible(true);
+					Dietican.this.dispose();
+					Dietican.this.setVisible(false);
+					}
+				
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
@@ -336,23 +339,43 @@ public class Dietican extends JFrame {
 		txtpnDateOfBirth.setText("Date of Birth:");
 		txtpnDateOfBirth.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnDateOfBirth.setBackground(new Color(240, 248, 255));
-		txtpnDateOfBirth.setBounds(69, 611, 275, 69);
+		txtpnDateOfBirth.setBounds(69, 634, 275, 69);
 		panel_1.add(txtpnDateOfBirth);
 		
-		JComboBox comboBox = new JComboBox(new Object[]{});
+		String[] months = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+		JComboBox comboBox = new JComboBox(months);
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox.setBounds(463, 618, 105, 49);
+		comboBox.setBounds(463, 641, 105, 49);
 		panel_1.add(comboBox);
 		
-		JComboBox comboBox_1 = new JComboBox(new Object[]{});
+		String[] days = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+		JComboBox comboBox_1 = new JComboBox(days);
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_1.setBounds(348, 618, 105, 49);
+		comboBox_1.setBounds(348, 641, 105, 49);
 		panel_1.add(comboBox_1);
 		
 		textField_9 = new JTextField();
 		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_9.setColumns(10);
-		textField_9.setBounds(580, 618, 171, 49);
+		textField_9.setBounds(580, 641, 171, 49);
 		panel_1.add(textField_9);
+		
+		String[] daysDietitian = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+		JComboBox comboBox_2 = new JComboBox(daysDietitian);
+		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		comboBox_2.setBounds(1082, 350, 105, 49);
+		panel_1.add(comboBox_2);
+		
+		String[] monthsDietitian = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+		JComboBox comboBox_3 = new JComboBox(monthsDietitian);
+		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		comboBox_3.setBounds(1197, 350, 105, 49);
+		panel_1.add(comboBox_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		textField_4.setColumns(10);
+		textField_4.setBounds(1314, 350, 171, 49);
+		panel_1.add(textField_4);
 	}
 }
