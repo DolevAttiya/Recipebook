@@ -127,7 +127,7 @@ public class ModelMock implements model {
 	}
 
 	@Override
-	public void selectIngredientTypeType(Integer id) {
+	public void selectIngredientType(Integer id) {
 		assertEquals(99, id,0);
 	}
 
@@ -163,5 +163,13 @@ public class ModelMock implements model {
 	public void myRecipes(String Email) {
 		assertEquals("idontknowhatemailis", Email);
 	}
+
+	@Override
+	public void allRecipes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }
