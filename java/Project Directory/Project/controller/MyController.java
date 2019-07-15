@@ -184,7 +184,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "ingredient_type_getall":
-			model.insertIngredient((Ingredient)((Event)arg).getArr().get(1));//////..................
+			model.allIngredientType();
 			break;
 
 		case "ingredient_type_getall_response":
@@ -192,7 +192,7 @@ public class MyController implements Controller{
 			break;
 			
 		case "ingredient_getall":
-			model.insertIngredient((Ingredient)((Event)arg).getArr().get(1));//////.....................
+			model.allIngredient();
 			break;
 
 		case "ingredient_getall_response":
