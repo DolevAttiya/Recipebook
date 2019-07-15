@@ -128,6 +128,15 @@ public class MainPage extends JFrame {
 		panel_2.setLayout(null);
 		
 		JButton button = new JButton("Go!");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				myView.statview.mainSearch(textField.getText());  
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
+			}
+		});
 		button.setFont(new Font("Tahoma", Font.BOLD, 15));
 		button.setBounds(601, 142, 71, 70);
 		panel_2.add(button);
@@ -169,6 +178,7 @@ public class MainPage extends JFrame {
 		txtpnAllRecipies.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//call function
 				SearchRes d=new SearchRes();
 				d.setVisible(true);
 				MainPage.this.dispose();
@@ -178,7 +188,7 @@ public class MainPage extends JFrame {
 		txtpnAllRecipies.setText("All Recipies");
 		txtpnAllRecipies.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 60));
 		txtpnAllRecipies.setBackground(new Color(240, 248, 255));
-		txtpnAllRecipies.setBounds(129, 119, 529, 139);
+		txtpnAllRecipies.setBounds(129, 119, 529, 204);
 		panel_6.add(txtpnAllRecipies);
 		
 		JPanel panel_7 = new JPanel();
@@ -238,6 +248,7 @@ public class MainPage extends JFrame {
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				myView.statview.mainSearch(textField_5.getText());  
 				SearchRes d=new SearchRes();
 				d.setVisible(true);
 				MainPage.this.dispose();
@@ -274,7 +285,7 @@ public class MainPage extends JFrame {
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_5.setColumns(10);
-		textField_5.setBounds(747, 37, 340, 43);
+		textField_5.setBounds(747, 37, 268, 43);
 		panel_1.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
@@ -308,6 +319,7 @@ public class MainPage extends JFrame {
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
 				MyRecipes c=new MyRecipes();
 				c.setVisible(true);
 				MainPage.this.dispose();
