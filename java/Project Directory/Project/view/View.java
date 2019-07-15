@@ -1,5 +1,8 @@
 package view;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -24,7 +27,11 @@ public interface View {
 	public void addIngredientResponse(ArrayList<Ingredient> in);
 	public void userUpdateResponse(ArrayList<User> usU);
 	public void dietitianUpdateResponse(ArrayList<Dietitian> usD);
-	
+	public void getAllRecipesResponse(ArrayList<Recipe> r);
+	public void deleteUserResponse(ArrayList<User> usU);
+	public void deleteDietitianResponse(ArrayList<Dietitian> usD);
+	public void deleteRecipeResponse(ArrayList<Recipe> rec);
+	public void recipeUpdateResponse(ArrayList<Recipe> r);
+}
 	//update ingredient, remove ingredient
 	//update recipe
-}

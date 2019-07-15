@@ -8,6 +8,7 @@ public interface model {
 	public void Search(ArrayList<Object> search);
 	public void myFavoriteRecipes(String Email);
 	public void myRecipes(String Email);
+	public void allRecipes();
 
 	public void insertUser(User us);
 	public void updateUser(User us);
@@ -32,7 +33,7 @@ public interface model {
 	public void insertIngredientType(IngredientType ingty);
 	public void updateIngredientType(IngredientType ingty);
 	public void deleteIngredientType(IngredientType ingty);
-	public void selectIngredientTypeType(Integer id);
+	public void selectIngredientType(Integer id);
 
 	public void insertRecipe(Recipe res);
 	public void updateRecipe(Recipe res);
