@@ -294,9 +294,10 @@ public class Models extends Observable implements model  {
 		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail"," \"" +us.getPersonEmail()+"\" ");
 		try {
 			if(saftie.getInt("count")==0)
-			{
+			{	
+				user.add(us);
 				ev.getArr().add("user_delete_response");
-				ev.getArr().add(us);
+				ev.getArr().add(user);
 				setChanged();
 				notifyObservers(ev);
 			}
@@ -435,8 +436,9 @@ public class Models extends Observable implements model  {
 		try {
 			if(saftie.getInt("count")==0)
 			{
+				dietitian.add(dt);
 				ev.getArr().add("dietitian_delete_response");
-				ev.getArr().add(dt);
+				ev.getArr().add(dietitian);
 				setChanged();
 				notifyObservers(ev);
 			}
@@ -560,6 +562,7 @@ public class Models extends Observable implements model  {
 		try {
 		if(saftie.getInt("count")==0)
 		{
+			allergen.add(al);
 			ev.getArr().add("allergen_delete_response");
 			ev.getArr().add(al);
 			setChanged();
@@ -710,6 +713,7 @@ public class Models extends Observable implements model  {
 		try {
 		if(saftie.getInt("count")==0)
 		{
+			ingredient.add(ing);
 			ev.getArr().add("ingredient_delete_response");
 			ev.getArr().add(ing);
 			setChanged();
@@ -843,6 +847,7 @@ public class Models extends Observable implements model  {
 		try {
 		if(saftie.getInt("count")==0)
 		{
+			ingredientType.add(ing);
 			ev.getArr().add("ingredientType_delete_response");
 			ev.getArr().add(ing);
 			setChanged();
@@ -1012,8 +1017,9 @@ public class Models extends Observable implements model  {
 		try {
 		if(saftie.getInt("count")==0)
 		{
+			recipe.add(res);
 			ev.getArr().add("recipe_delete_response");
-			ev.getArr().add(res);
+			ev.getArr().add(recipe);
 			setChanged();
 			notifyObservers(ev);
 		}
