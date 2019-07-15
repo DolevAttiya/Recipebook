@@ -54,7 +54,6 @@ public class Models extends Observable implements model  {
 		setChanged();
 		notifyObservers(ev);
 	}
-	@SuppressWarnings("unchecked")
 	public void Search(ArrayList<Object> search) {
 		ev=new Event();
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();

@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,8 +19,6 @@ import model.Recipe;
 import model.User;
 import model.model;
 import view.View;
-import view.myView;
-
 public class ControlerModelIntegration {
 
 	Event ev;
