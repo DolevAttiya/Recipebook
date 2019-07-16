@@ -284,7 +284,7 @@ class ControllerViewIntegration {
 	void testTrueUserLikePressed() // changed the data
 	{
 		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
-		
+		myView.myRecipe=Models.GetRecipeFromDB(1);
 		v.likePressed();
 		assertTrue(myView.check);
 	}
