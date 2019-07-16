@@ -459,6 +459,26 @@ public class myView extends Observable implements View {
 			check=true; // everything was OK
 		check=false; // something went wrong 
 	}
+	public void recipeReport(Integer allergy) {
+		ev=new Event();
+		ev.getArr().add("recipe_report");
+		ev.getArr().add(allergy);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void recipeReportResponse(ArrayList<Recipe> r) {
+		recipeArray=r;
+	}
+	public void ingredientReport(Integer allergy) {
+		ev=new Event();
+		ev.getArr().add("ingredient_report");
+		ev.getArr().add(allergy);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void ingredientReportResponse(ArrayList<Ingredient> ing) {
+		ingredientArray=ing;
+	}
 }
 /*
 //---------Login Page------------
