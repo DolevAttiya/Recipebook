@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
@@ -28,12 +30,15 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
 import javax.swing.JList;
 import javax.swing.JScrollBar;
 import java.awt.ScrollPane;
 import java.awt.TextArea;
+import javax.swing.JScrollPane;
+import java.awt.Component;
 
 public class NewRecipe extends JFrame {
 
@@ -43,9 +48,6 @@ public class NewRecipe extends JFrame {
 	private JTextField textField_3;
 	private JTextField txtRecipebook;
 	private JTextField textField_2;
-	private JTextField textField_4;
-	private JTextField textField_6;
-	private JTextField textField_7;
 	private JTextField textField_1;
 	private JTextField textField_9;
 
@@ -218,6 +220,35 @@ public class NewRecipe extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
+		String[] columnNames = {"Ingredient Name",
+                "Amount",
+                "Mesuring"}; 
+		Object[][] dataIngredients = new Object[myView.recipeArray.size()][3];
+		//for(int row=0;row<myView.myRecipe.getRecipeIngredient.size();row++) {
+			//data[row][0]=myView.myRecipe.getRecipeIngredient.get(row).getIngredientName();
+			//data[row][1]=myView.myRecipe.getRecipeIngredientAmount.get(row).toString();
+			//data[row][2]=myView.myRecipe.getRecipeIngredientType.get(row).getIngredientTypeName();
+	//	}
+		JTable table = new JTable(dataIngredients, columnNames);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		table.setRowHeight(80);
+		JTableHeader th = table.getTableHeader();
+		th.setPreferredSize(new Dimension(100, 100));
+		Font bigFont = new Font("Tahoma", Font.PLAIN, 32);
+		table.getTableHeader().setFont(bigFont);
+		
+		JComboBox comboBox_5 = new JComboBox(new Object[]{});
+		comboBox_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		comboBox_5.setBounds(1076, 1018, 509, 49);
+		panel_1.add(comboBox_5);
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		scrollPane.setSize(1018, 358);
+		scrollPane.setLocation(36, 413);
+		//TableColumn column = null;
+		panel_1.add(scrollPane);
+		
 		TextArea textArea = new TextArea();
 		textArea.setBounds(32, 824, 1011, 282);
 		panel_1.add(textArea);
@@ -319,41 +350,6 @@ public class NewRecipe extends JFrame {
 				checkBox_5.setBackground(new Color(240, 248, 255));
 				checkBox_5.setBounds(1076, 307, 269, 41);
 				panel_1.add(checkBox_5);
-		
-		JTextPane txtpnPerGrams = new JTextPane();
-		txtpnPerGrams.setText("per 100 grams");
-		txtpnPerGrams.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtpnPerGrams.setBackground(new Color(240, 248, 255));
-		txtpnPerGrams.setBounds(1264, 825, 160, 31);
-		panel_1.add(txtpnPerGrams);
-
-		JTextPane txtpnProtein = new JTextPane();
-		txtpnProtein.setText("Protein:");
-		txtpnProtein.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		txtpnProtein.setBackground(new Color(240, 248, 255));
-		txtpnProtein.setBounds(1128, 1035, 173, 61);
-		panel_1.add(txtpnProtein);
-
-		JTextPane txtpnFat = new JTextPane();
-		txtpnFat.setText("Fat:");
-		txtpnFat.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		txtpnFat.setBackground(new Color(240, 248, 255));
-		txtpnFat.setBounds(1128, 980, 173, 61);
-		panel_1.add(txtpnFat);
-
-		JTextPane txtpnSugar = new JTextPane();
-		txtpnSugar.setText("Carbs:");
-		txtpnSugar.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		txtpnSugar.setBackground(new Color(240, 248, 255));
-		txtpnSugar.setBounds(1128, 917, 173, 61);
-		panel_1.add(txtpnSugar);
-
-		JTextPane txtpnCalories = new JTextPane();
-		txtpnCalories.setText("Calories:");
-		txtpnCalories.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		txtpnCalories.setBackground(new Color(240, 248, 255));
-		txtpnCalories.setBounds(1128, 858, 173, 61);
-		panel_1.add(txtpnCalories);
 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -378,13 +374,6 @@ public class NewRecipe extends JFrame {
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
 		btnSearch.setBounds(553, 1202, 326, 69);
 		panel_1.add(btnSearch);
-
-		JTextPane txtpnNutritionValues = new JTextPane();
-		txtpnNutritionValues.setText("Nutrition Values:");
-		txtpnNutritionValues.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
-		txtpnNutritionValues.setBackground(new Color(240, 248, 255));
-		txtpnNutritionValues.setBounds(1187, 769, 326, 58);
-		panel_1.add(txtpnNutritionValues);
 
 		JTextPane txtpnIngredients = new JTextPane();
 		txtpnIngredients.setText("Add Ingredients:");
@@ -413,34 +402,6 @@ public class NewRecipe extends JFrame {
 		txtpnMeauring.setBackground(new Color(240, 248, 255));
 		txtpnMeauring.setBounds(763, 321, 138, 38);
 		panel_1.add(txtpnMeauring);
-
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		textField_2.setColumns(10);
-		textField_2.setBounds(1313, 870, 237, 49);
-		panel_1.add(textField_2);
-
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		textField_4.setColumns(10);
-		textField_4.setBounds(1313, 929, 237, 49);
-		panel_1.add(textField_4);
-
-		textField_6 = new JTextField();
-		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		textField_6.setColumns(10);
-		textField_6.setBounds(1313, 988, 237, 49);
-		panel_1.add(textField_6);
-
-		textField_7 = new JTextField();
-		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		textField_7.setColumns(10);
-		textField_7.setBounds(1313, 1047, 237, 49);
-		panel_1.add(textField_7);
-		
-		TextArea textArea_1 = new TextArea();
-		textArea_1.setBounds(32, 419, 1021, 357);
-		panel_1.add(textArea_1);
 		
 		JTextPane textPane_2 = new JTextPane();
 		textPane_2.setText("Name:");
@@ -472,12 +433,12 @@ public class NewRecipe extends JFrame {
 		JButton btnAddNewIngredient = new JButton("Add New Ingredient");
 		btnAddNewIngredient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Component c=new Component();
-				c.setVisible(true);
+				//Component c=new Component();
+				//c.setVisible(true);
 			}
 		});
 		btnAddNewIngredient.setFont(new Font("Tahoma", Font.BOLD, 30));
-		btnAddNewIngredient.setBounds(1137, 1148, 397, 69);
+		btnAddNewIngredient.setBounds(1137, 738, 397, 69);
 		panel_1.add(btnAddNewIngredient);
 		
 		JTextPane textPane_1 = new JTextPane();
@@ -500,8 +461,44 @@ public class NewRecipe extends JFrame {
 		panel_1.add(comboBox_2);
 		
 		JButton btnAdd_1 = new JButton("Add");
+		btnAdd_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Integer> ing=new ArrayList<Integer>();
+				//ing.add(btnAdd_1.getText());
+				//myView.statview.addIgredientToRecipe (arrayIng.get(comboBox.getSelectedIndex()),textField_3.getText,arrayIng.get(comboBox_1.getSelectedIndex())  )
+				//dataIngredients= new Object [myview.myRecipe.getRecipeIngredient.Size()][3];
+				//for(int row=0;i<myview.myRecipe.getRecipeIngredient.Size();row++)
+				//{
+					//data[row][0]=myView.myRecipe.getRecipeIngredient.get(row).getIngredientName();
+					//data[row][1]=myView.myRecipe.getRecipeIngredientAmount.get(row).toString();
+					//data[row][2]=myView.myRecipe.getRecipeIngredientType.get(row).getIngredientTypeName();
+			//	}
+				;
+			}
+		});
 		btnAdd_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnAdd_1.setBounds(973, 355, 81, 49);
 		panel_1.add(btnAdd_1);
+		
+		String[] kashruthing = {"Parve", "Dairy", "Meat","Not Kosher","Kosher"};
+		
+		JTextPane textPane_5 = new JTextPane();
+		textPane_5.setText("Complexity:");
+		textPane_5.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textPane_5.setBackground(new Color(240, 248, 255));
+		textPane_5.setBounds(1071, 828, 243, 64);
+		panel_1.add(textPane_5);
+		
+		JComboBox comboBox_4 = new JComboBox(new Object[]{});
+		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		comboBox_4.setBounds(1076, 893, 508, 49);
+		panel_1.add(comboBox_4);
+		
+		JTextPane textPane_6 = new JTextPane();
+		textPane_6.setText("Cooking Time Up To:");
+		textPane_6.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textPane_6.setBackground(new Color(240, 248, 255));
+		textPane_6.setBounds(1072, 950, 444, 64);
+		panel_1.add(textPane_6);
 	}	
 }
