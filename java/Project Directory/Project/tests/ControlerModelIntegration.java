@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import controller.Event;
@@ -17,6 +16,7 @@ import model.Recipe;
 import model.User;
 import model.model;
 import view.View;
+
 public class ControlerModelIntegration {
 
 	Event ev;
@@ -206,16 +206,18 @@ public class ControlerModelIntegration {
 		ev.getArr().add("all_recipes");
 		((MyController)controllerTest).update(null, ev);
 	}
+	
 	@Test
 	void getAllIngredientsTest() {
 		ev = new Event();
-		ev.getArr().add("all_ingredients");
+		ev.getArr().add("ingredient_getall");
 		((MyController)controllerTest).update(null, ev);
 	}
+	
 	@Test
 	void getAllIngredientsTypeTest() {
 		ev = new Event();
-		ev.getArr().add("all_ingredientsType");
+		ev.getArr().add("ingredient_type_getall");
 		((MyController)controllerTest).update(null, ev);
 	}
 
@@ -395,7 +397,7 @@ public class ControlerModelIntegration {
 	void addIngredientFalseTest() {
 		ev = new Event();
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		ingredient = new Ingredient(100,"\"test\"",al,99.9,99.9,99.9,99.9,0);
+		ingredient = new Ingredient(100,"\"Parmesan\"",al,99.9,99.9,99.9,99.9,0);
 		ev.getArr().add("ingredient_insert");
 		ev.getArr().add(ingredient);
 		((MyController)controllerTest).update(null, ev);
