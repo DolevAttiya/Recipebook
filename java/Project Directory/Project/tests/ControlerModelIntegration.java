@@ -206,6 +206,18 @@ public class ControlerModelIntegration {
 		ev.getArr().add("all_recipes");
 		((MyController)controllerTest).update(null, ev);
 	}
+	@Test
+	void getAllIngredientsTest() {
+		ev = new Event();
+		ev.getArr().add("all_ingredients");
+		((MyController)controllerTest).update(null, ev);
+	}
+	@Test
+	void getAllIngredientsTypeTest() {
+		ev = new Event();
+		ev.getArr().add("all_ingredientsType");
+		((MyController)controllerTest).update(null, ev);
+	}
 
 	@Test
 	void Top10Test() {
