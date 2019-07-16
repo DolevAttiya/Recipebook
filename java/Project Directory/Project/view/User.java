@@ -115,6 +115,7 @@ public class User extends JFrame {
 		panel.setLayout(null);
 		
 		JTextPane txtpnUserDetails = new JTextPane();
+		txtpnUserDetails.setEditable(false);
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -159,6 +160,7 @@ public class User extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
+		txtpnAdvancedSearch_1.setEditable(false);
 		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -182,6 +184,7 @@ public class User extends JFrame {
 		panel.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
+		txtpnFavouriteRecipes.setEditable(false);
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -200,6 +203,7 @@ public class User extends JFrame {
 		txtpnFavouriteRecipes.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnSearch_1 = new JTextPane();
+		txtpnSearch_1.setEditable(false);
 		txtpnSearch_1.setText("Search");
 		txtpnSearch_1.setForeground(Color.WHITE);
 		txtpnSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -208,6 +212,7 @@ public class User extends JFrame {
 		panel.add(txtpnSearch_1);
 		
 		JTextPane txtpnMyRecipes = new JTextPane();
+		txtpnMyRecipes.setEditable(false);
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -226,6 +231,7 @@ public class User extends JFrame {
 		panel.add(txtpnMyRecipes);
 		
 		JTextPane txtpnTaimli = new JTextPane();
+		txtpnTaimli.setEditable(false);
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -380,6 +386,7 @@ public class User extends JFrame {
 		panel_1.add(textField_1);
 		
 		JTextPane txtpnSearchFor = new JTextPane();
+		txtpnSearchFor.setEditable(false);
 		txtpnSearchFor.setText("First Name:");
 		txtpnSearchFor.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnSearchFor.setBackground(new Color(240, 248, 255));
@@ -387,6 +394,7 @@ public class User extends JFrame {
 		panel_1.add(txtpnSearchFor);
 		
 		JTextPane txtpnRecipeId = new JTextPane();
+		txtpnRecipeId.setEditable(false);
 		txtpnRecipeId.setText("Last Name:");
 		txtpnRecipeId.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnRecipeId.setBackground(new Color(240, 248, 255));
@@ -413,6 +421,7 @@ public class User extends JFrame {
 		panel_1.add(chckbxNewCheckBox);
 		
 		JTextPane txtpnAdvancedSearch = new JTextPane();
+		txtpnAdvancedSearch.setEditable(false);
 		txtpnAdvancedSearch.setText("User Details");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
@@ -435,6 +444,7 @@ public class User extends JFrame {
 		panel_1.add(chckbxDairy);
 		
 		JTextPane txtpnAllergies = new JTextPane();
+		txtpnAllergies.setEditable(false);
 		txtpnAllergies.setText("Allergies:");
 		txtpnAllergies.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
 		txtpnAllergies.setBackground(new Color(240, 248, 255));
@@ -492,12 +502,14 @@ public class User extends JFrame {
 		panel_1.add(btnSearch);
 		
 		JTextPane txtpnEmail = new JTextPane();
+		txtpnEmail.setEditable(false);
 		txtpnEmail.setText("Email:");
 		txtpnEmail.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnEmail.setBackground(new Color(240, 248, 255));
 		txtpnEmail.setBounds(69, 337, 129, 69);
 		panel_1.add(txtpnEmail);
 		JTextPane txtpnEnterPasswordAgain = new JTextPane();
+		txtpnEnterPasswordAgain.setEditable(false);
 		txtpnEnterPasswordAgain.setText("Enter Password Again:");
 		txtpnEnterPasswordAgain.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		txtpnEnterPasswordAgain.setBackground(new Color(240, 248, 255));
@@ -586,6 +598,7 @@ public class User extends JFrame {
 		panel_1.add(chckbxFoodAcidity);
 		
 		JTextPane txtpnEnterPassword = new JTextPane();
+		txtpnEnterPassword.setEditable(false);
 		txtpnEnterPassword.setText("Enter Password (6 digits):");
 		txtpnEnterPassword.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		txtpnEnterPassword.setBackground(new Color(240, 248, 255));
@@ -593,6 +606,7 @@ public class User extends JFrame {
 		panel_1.add(txtpnEnterPassword);
 		
 		JTextPane txtpnDateOfBirth = new JTextPane();
+		txtpnDateOfBirth.setEditable(false);
 		txtpnDateOfBirth.setText("Date of Birth:");
 		txtpnDateOfBirth.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnDateOfBirth.setBackground(new Color(240, 248, 255));
@@ -617,6 +631,7 @@ public class User extends JFrame {
 		panel_1.add(button);
 		
 		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane.setText("Don't delete unless you're sure!");
 		textPane.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		textPane.setBackground(new Color(240, 248, 255));
