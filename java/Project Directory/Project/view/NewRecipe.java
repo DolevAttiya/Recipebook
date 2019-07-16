@@ -117,10 +117,16 @@ public class NewRecipe extends JFrame {
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SearchRes d=new SearchRes();
+				myView.statview.mainSearch(textField_2.getText());  
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+					SearchRes d=new SearchRes();
 				d.setVisible(true);
 				NewRecipe.this.dispose();
 				NewRecipe.this.setVisible(false);
+				}	
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
@@ -130,7 +136,7 @@ public class NewRecipe extends JFrame {
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_2.setColumns(10);
-		textField_2.setBounds(747, 37, 340, 43);
+		textField_2.setBounds(747, 37, 269, 43);
 		panel.add(textField_2);
 
 		JTextPane txtpnUserDetails = new JTextPane();
@@ -179,6 +185,7 @@ public class NewRecipe extends JFrame {
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
 				MyFavourites f=new MyFavourites();
 				f.setVisible(true);
 				NewRecipe.this.dispose();
@@ -204,6 +211,7 @@ public class NewRecipe extends JFrame {
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
 				MyRecipes f=new MyRecipes();
 				f.setVisible(true);
 				NewRecipe.this.dispose();
@@ -246,10 +254,10 @@ public class NewRecipe extends JFrame {
 				"Amount",
 		"Mesuring"}; 
 		 dataIngredients = new Object[myView.recipeArray.size()][3];
-		for(int row=0;row<myView.ingredientArrayForNewRecipe.size();row++) {
-			dataIngredients[row][0]=myView.ingredientArrayForNewRecipe.get(row).getIngredientName();
+		for(int row=0;row<myView.ingredientArrayForRecipe.size();row++) {
+			dataIngredients[row][0]=myView.ingredientArrayForRecipe.get(row).getIngredientName();
 			dataIngredients[row][1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();
-			dataIngredients[row][2]=myView.myMeasuringForNewRecipe.get(row).getIngredientTypeName();
+			dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
 		}
 		JTable table = new JTable(dataIngredients, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -522,7 +530,8 @@ public class NewRecipe extends JFrame {
 				}
 
 				else {
-					//myView.addRecipe(textField_1.getText(), isFish,  isStrawberries,  isCoffie,  isGluten,  isLactose,  isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, textField_9.getText(), Complexity, timeToMake, textArea.getText())
+					
+					myView.statview.addRecipe(textField_1.getText(), isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, textField_9.getText(), Complexity, timeToMake, textArea.getText());
 					RecipeView f=new RecipeView();
 					f.setVisible(true);
 					NewRecipe.this.dispose();
@@ -592,7 +601,7 @@ public class NewRecipe extends JFrame {
 		JButton btnAddNewIngredient = new JButton("Add New Ingredient");
 		btnAddNewIngredient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Component f=new Component();
+				view.Ingredient f=new view.Ingredient();
 				f.setVisible(true);
 			}
 		});

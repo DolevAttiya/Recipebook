@@ -96,6 +96,7 @@ public class Dietican extends JFrame {
 		panel.setLayout(null);
 		
 		JTextPane txtpnUserDetails = new JTextPane();
+		txtpnUserDetails.setEditable(false);
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -115,10 +116,16 @@ public class Dietican extends JFrame {
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SearchRes d=new SearchRes();
+				myView.statview.mainSearch(textField_5.getText());  
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+					SearchRes d=new SearchRes();
 				d.setVisible(true);
 				Dietican.this.dispose();
 				Dietican.this.setVisible(false);
+				}
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
@@ -133,6 +140,7 @@ public class Dietican extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
+		txtpnAdvancedSearch_1.setEditable(false);
 		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -152,13 +160,15 @@ public class Dietican extends JFrame {
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_5.setColumns(10);
-		textField_5.setBounds(747, 37, 340, 43);
+		textField_5.setBounds(747, 37, 269, 43);
 		panel.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
+		txtpnFavouriteRecipes.setEditable(false);
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
 				MyFavourites f=new MyFavourites();
 				f.setVisible(true);
 				Dietican.this.dispose();
@@ -173,6 +183,7 @@ public class Dietican extends JFrame {
 		txtpnFavouriteRecipes.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnSearch_1 = new JTextPane();
+		txtpnSearch_1.setEditable(false);
 		txtpnSearch_1.setText("Search");
 		txtpnSearch_1.setForeground(Color.WHITE);
 		txtpnSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -181,9 +192,11 @@ public class Dietican extends JFrame {
 		panel.add(txtpnSearch_1);
 		
 		JTextPane txtpnMyRecipes = new JTextPane();
+		txtpnMyRecipes.setEditable(false);
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
 				MyRecipes f=new MyRecipes();
 				f.setVisible(true);
 				Dietican.this.dispose();
@@ -198,6 +211,7 @@ public class Dietican extends JFrame {
 		panel.add(txtpnMyRecipes);
 		
 		JTextPane txtpnTaimli = new JTextPane();
+		txtpnTaimli.setEditable(false);
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -220,31 +234,33 @@ public class Dietican extends JFrame {
 		contentPane_1.add(panel_1);
 		panel_1.setLayout(null);
 		
-		textField_8 = new JTextField();
+		textField_8 = new JTextField(/*myView.myDietitian.getDietitianId()*/);
+		textField_8.setEnabled(false);
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_8.setColumns(10);
 		textField_8.setBounds(1079, 236, 406, 49);
 		panel_1.add(textField_8);
 		
-		textField_7 = new JTextField();
+		textField_7 = new JTextField(/*myView.myDietitian.getPersonHashPass()*/);
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_7.setColumns(10);
 		textField_7.setBounds(553, 520, 456, 49);
 		panel_1.add(textField_7);
 		
-		textField_2 = new JTextField();
+		textField_2 = new JTextField(/*myView.myDietitian.getPersonHashPass()*/);
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_2.setColumns(10);
 		textField_2.setBounds(588, 461, 421, 49);
 		panel_1.add(textField_2);
 		
-		textField_3 = new JTextField();
+		textField_3 = new JTextField(/*myView.myDietitian.getPersonEmail()*/);
+		textField_3.setEnabled(false);
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_3.setColumns(10);
 		textField_3.setBounds(205, 337, 804, 49);
 		panel_1.add(textField_3);
 		
-		textField_6 = new JTextField();
+		textField_6 = new JTextField(/*myView.myDietitian.getPersonLastName()*/);
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_6.setColumns(10);
 		textField_6.setBounds(316, 254, 693, 49);
@@ -252,6 +268,7 @@ public class Dietican extends JFrame {
 		setVisible(true);
 		
 		JTextPane txtpnEnterDieticanNumber = new JTextPane();
+		txtpnEnterDieticanNumber.setEditable(false);
 		txtpnEnterDieticanNumber.setText("Enter Dietican Number:");
 		txtpnEnterDieticanNumber.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		txtpnEnterDieticanNumber.setBackground(new Color(240, 248, 255));
@@ -259,13 +276,14 @@ public class Dietican extends JFrame {
 		panel_1.add(txtpnEnterDieticanNumber);
 		
 		
-		textField_1 = new JTextField("rotem");//myView.myDietitian.getPersonFirstName()
+		textField_1 = new JTextField(/*myView.myDietitian.getPersonFirstName()*/);
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_1.setColumns(10);
 		textField_1.setBounds(316, 183, 693, 49);
 		panel_1.add(textField_1);
 		
 		JTextPane txtpnSearchFor = new JTextPane();
+		txtpnSearchFor.setEditable(false);
 		txtpnSearchFor.setText("First Name:");
 		txtpnSearchFor.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnSearchFor.setBackground(new Color(240, 248, 255));
@@ -273,6 +291,7 @@ public class Dietican extends JFrame {
 		panel_1.add(txtpnSearchFor);
 		
 		JTextPane txtpnRecipeId = new JTextPane();
+		txtpnRecipeId.setEditable(false);
 		txtpnRecipeId.setText("Last Name:");
 		txtpnRecipeId.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnRecipeId.setBackground(new Color(240, 248, 255));
@@ -280,6 +299,7 @@ public class Dietican extends JFrame {
 		panel_1.add(txtpnRecipeId);
 		
 		JTextPane txtpnAdvancedSearch = new JTextPane();
+		txtpnAdvancedSearch.setEditable(false);
 		txtpnAdvancedSearch.setText("Dietican Details");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
@@ -294,8 +314,7 @@ public class Dietican extends JFrame {
 				}
 						
 				else {
-					//public void userUpdate(String firstName, String lastName, String email, String pass, LocalDate dateOfBirth, boolean isDietitian, Integer dietitianNum, boolean isKosher, LocalDate dietitianStatDate, Integer[] allergies, boolean wantAllerg) {
-					//myView.statview.userUpdate(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_1.getText(), textField_1.getText(), false, 654321, true, textField_1.getText(),  allergies, false) 
+					myView.statview.dietitianUpdate(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(), myView.myDietitian.getPersonDateOfBirth().toString(),textField_8.getText(),myView.myDietitian.getDietitianStatDate().toString());
 					MainPage f=new MainPage();
 					f.setVisible(true);
 					Dietican.this.dispose();
@@ -309,12 +328,14 @@ public class Dietican extends JFrame {
 		panel_1.add(btnSearch);
 		
 		JTextPane txtpnEmail = new JTextPane();
+		txtpnEmail.setEditable(false);
 		txtpnEmail.setText("Email:");
 		txtpnEmail.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnEmail.setBackground(new Color(240, 248, 255));
 		txtpnEmail.setBounds(69, 337, 129, 69);
 		panel_1.add(txtpnEmail);
 		JTextPane txtpnEnterPasswordAgain = new JTextPane();
+		txtpnEnterPasswordAgain.setEditable(false);
 		txtpnEnterPasswordAgain.setText("Enter Password Again:");
 		txtpnEnterPasswordAgain.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		txtpnEnterPasswordAgain.setBackground(new Color(240, 248, 255));
@@ -322,13 +343,15 @@ public class Dietican extends JFrame {
 		panel_1.add(txtpnEnterPasswordAgain);
 		
 		JTextPane txtpnExpiryDate_1 = new JTextPane();
-		txtpnExpiryDate_1.setText("Expiry Date:");
+		txtpnExpiryDate_1.setEditable(false);
+		txtpnExpiryDate_1.setText("Date of Certification:");
 		txtpnExpiryDate_1.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		txtpnExpiryDate_1.setBackground(new Color(240, 248, 255));
 		txtpnExpiryDate_1.setBounds(1089, 286, 360, 55);
 		panel_1.add(txtpnExpiryDate_1);
 		
 		JTextPane txtpnEnterPassword = new JTextPane();
+		txtpnEnterPassword.setEditable(false);
 		txtpnEnterPassword.setText("Enter Password (6 digits):");
 		txtpnEnterPassword.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		txtpnEnterPassword.setBackground(new Color(240, 248, 255));
@@ -336,6 +359,7 @@ public class Dietican extends JFrame {
 		panel_1.add(txtpnEnterPassword);
 		
 		JTextPane txtpnDateOfBirth = new JTextPane();
+		txtpnDateOfBirth.setEditable(false);
 		txtpnDateOfBirth.setText("Date of Birth:");
 		txtpnDateOfBirth.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnDateOfBirth.setBackground(new Color(240, 248, 255));
@@ -344,17 +368,22 @@ public class Dietican extends JFrame {
 		
 		String[] months = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 		JComboBox comboBox = new JComboBox(months);
+		comboBox.setEnabled(false);
+		comboBox.setSelectedItem("11"); /*myView.myDietitian.getPersonDateOfBirth().getMonth()*/
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox.setBounds(463, 641, 105, 49);
 		panel_1.add(comboBox);
 		
 		String[] days = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		JComboBox comboBox_1 = new JComboBox(days);
+		comboBox_1.setEnabled(false);
+		comboBox_1.setSelectedItem("16"); /*myView.myDietitian.getPersonDateOfBirth().getDayOfMonth()*/
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox_1.setBounds(348, 641, 105, 49);
 		panel_1.add(comboBox_1);
 		
-		textField_9 = new JTextField();
+		textField_9 = new JTextField(/*myView.myDietitian.getPersonDateOfBirth().getYear()*/);
+		textField_9.setEnabled(false);
 		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_9.setColumns(10);
 		textField_9.setBounds(580, 641, 171, 49);
@@ -362,20 +391,43 @@ public class Dietican extends JFrame {
 		
 		String[] daysDietitian = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		JComboBox comboBox_2 = new JComboBox(daysDietitian);
+		comboBox_2.setEnabled(false);
+		comboBox_2.setSelectedItem("04"); /*myView.myDietitian.getDietitianStatDate().getDayOfMonth()*/
 		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox_2.setBounds(1082, 350, 105, 49);
 		panel_1.add(comboBox_2);
 		
 		String[] monthsDietitian = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 		JComboBox comboBox_3 = new JComboBox(monthsDietitian);
+		comboBox_3.setEnabled(false);
+		comboBox_3.setSelectedItem("03"); /*myView.myDietitian.getDietitianStatDate().getDayMonth()*/
 		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox_3.setBounds(1197, 350, 105, 49);
 		panel_1.add(comboBox_3);
 		
-		textField_4 = new JTextField();
+		textField_4 = new JTextField(/*myView.myDietitian.getDietitianStatDate().getYear()*/);
+		textField_4.setEnabled(false);
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_4.setColumns(10);
 		textField_4.setBounds(1314, 350, 171, 49);
 		panel_1.add(textField_4);
+		
+		JButton btnDeleteUser = new JButton("Delete User");
+		btnDeleteUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				myView.statview.deleteDietitian();
+			}
+		});
+		btnDeleteUser.setFont(new Font("Tahoma", Font.BOLD, 50));
+		btnDeleteUser.setBounds(1079, 487, 406, 69);
+		panel_1.add(btnDeleteUser);
+		
+		JTextPane txtpnDontDeleteUnless = new JTextPane();
+		txtpnDontDeleteUnless.setEditable(false);
+		txtpnDontDeleteUnless.setText("Don't delete unless you're sure!");
+		txtpnDontDeleteUnless.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		txtpnDontDeleteUnless.setBackground(new Color(240, 248, 255));
+		txtpnDontDeleteUnless.setBounds(1079, 560, 406, 55);
+		panel_1.add(txtpnDontDeleteUnless);
 	}
 }

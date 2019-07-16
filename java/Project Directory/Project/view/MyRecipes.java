@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -99,10 +100,16 @@ public class MyRecipes extends JFrame {
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SearchRes d=new SearchRes();
+				myView.statview.mainSearch(textField_5.getText());  
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+						SearchRes d=new SearchRes();
 				d.setVisible(true);
 				MyRecipes.this.dispose();
 				MyRecipes.this.setVisible(false);
+				}
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
@@ -143,6 +150,7 @@ public class MyRecipes extends JFrame {
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
 				MyFavourites f=new MyFavourites();
 				f.setVisible(true);
 				MyRecipes.this.dispose();
@@ -168,6 +176,7 @@ public class MyRecipes extends JFrame {
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
 				MyRecipes f=new MyRecipes();
 				f.setVisible(true);
 				MyRecipes.this.dispose();
@@ -214,24 +223,30 @@ public class MyRecipes extends JFrame {
 		panel_1.add(txtpnAdvancedSearch);
 		
 		String[] columnNames = {"Recipe Name",
-                "Description",
-                "Rate",
-                "Calories",
-                "Kosher"}; // name, description, rate, calories, kosher, 
-		Object[][] data = {
-			    {"Kathy", "Smith",
-			     "Snowboarding", new Integer(5), new Boolean(false)},
-			    {"John", "Doe",
-			     "Rowing", new Integer(3), new Boolean(true)},
-			    {"Sue", "Black",
-			     "Knitting", new Integer(2), new Boolean(false)},
-			    {"Jane", "White",
-			     "Speed reading", new Integer(20), new Boolean(true)},
-			    {"Joe", "Brown",
-			     "Pool", new Integer(10), new Boolean(false)}
-			};
-		
+				"Description",
+				"Rate",
+				"Calories",
+		"Kosher"}; 
+
+		Object[][] data = new Object[myView.recipeArray.size()][5];
+		for(int row=0;row<myView.recipeArray.size();row++) {
+			data[row][0]=myView.recipeArray.get(row).getRecipeName();
+			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
+			data[row][3]=myView.recipeArray.get(row).getRecipeTotalCalories();
+			data[row][4]=myView.recipeArray.get(row).getRecipeKashruth();
+		}
 		JTable table = new JTable(data, columnNames);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				RecipeView f=new RecipeView();
+				f.setVisible(true);
+				MyRecipes.this.dispose();
+				MyRecipes.this.setVisible(false);
+			}
+		});
 		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		table.setRowHeight(50);
 		JTableHeader th = table.getTableHeader();
