@@ -246,8 +246,7 @@ public class Component extends JFrame {
 		JButton btnSearch = new JButton("Add!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//public void addIngredient (String ingredientName, Integer catagory,  Integer isCup, Integer isSpoon, Integer isMililiter, Integer isGram, Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth);
-				//addIngredient (textField_7.getText(), kashruth,  isCup, isSpoon, isMililiter, isGram, Calories, Carbs, Fat, Protein );
+				//addIngredient (textField_7.getText(), kashruth, Calories, Carbs, Fat, Protein );
 				Component.this.dispose();
 				Component.this.setVisible(false);
 			}
@@ -343,77 +342,6 @@ public class Component extends JFrame {
 		textField_6.setColumns(10);
 		textField_6.setBounds(1229, 682, 237, 49);
 		panel_1.add(textField_6);
-		
-		JTextPane txtpnMes = new JTextPane();
-		txtpnMes.setText("Measuring Types:");
-		txtpnMes.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
-		txtpnMes.setBackground(new Color(240, 248, 255));
-		txtpnMes.setBounds(60, 404, 678, 88);
-		panel_1.add(txtpnMes);
-		
-		JCheckBox chckbxCup = new JCheckBox("Cup");
-		chckbxCup.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent e) {
-				 if(chckbxCup.isSelected()){  
-					  isCup=1;   } 
-				 else {
-					  isCup=0;
-				 }
-			}
-		});
-		chckbxCup.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxCup.setBackground(new Color(240, 248, 255));
-		chckbxCup.setBounds(58, 487, 697, 64);
-		panel_1.add(chckbxCup);
-		
-		JCheckBox chckbxSpoon_1 = new JCheckBox("Spoon");
-		chckbxSpoon_1.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent g) {
-				 if(chckbxSpoon_1.isSelected()){  
-					  isSpoon=1;   } 
-				 else {
-					  isSpoon=0;
-				 }
-			}
-		});
-		chckbxSpoon_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxSpoon_1.setBackground(new Color(240, 248, 255));
-		chckbxSpoon_1.setBounds(58, 547, 697, 64);
-		panel_1.add(chckbxSpoon_1);
-		
-		JCheckBox chckbxGrams_1 = new JCheckBox("Grams");
-		chckbxGrams_1.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent h) {
-				 if(chckbxGrams_1.isSelected()){  
-					  isGram=1;   } 
-				 else {
-					  isGram=0;
-				 }
-			}
-		});
-		chckbxGrams_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxGrams_1.setBackground(new Color(240, 248, 255));
-		chckbxGrams_1.setBounds(58, 607, 697, 64);
-		panel_1.add(chckbxGrams_1);
-		
-		JCheckBox chckbxMililiter = new JCheckBox("Mililiter");
-		chckbxMililiter.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent i) {
-				 if(chckbxMililiter.isSelected()){  
-					  isMililiter=1;   } 
-				 else {
-					 isMililiter=0;
-				 }
-			}
-		});
-		chckbxMililiter.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxMililiter.setBackground(new Color(240, 248, 255));
-		chckbxMililiter.setBounds(58, 667, 697, 64);
-		panel_1.add(chckbxMililiter);
 		
 		JTextPane txtpnComponentName = new JTextPane();
 		txtpnComponentName.setText("Component Name:");
