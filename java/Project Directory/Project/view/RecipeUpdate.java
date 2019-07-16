@@ -245,7 +245,7 @@ public class RecipeUpdate extends JFrame {
 		txtpnTaimli.setForeground(Color.WHITE);
 		txtpnTaimli.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnTaimli.setBackground(new Color(65, 105, 225));
-		txtpnTaimli.setBounds(0, -7, 343, 96);
+		txtpnTaimli.setBounds(0, 7, 343, 96);
 		panel.add(txtpnTaimli);
 
 		//panelkavuaa
@@ -505,6 +505,7 @@ public class RecipeUpdate extends JFrame {
 		panel_1.add(comboBox);
 
 		JTextPane txtpnCategory = new JTextPane();
+		txtpnCategory.setEditable(false);
 		txtpnCategory.setText("Name:");
 		txtpnCategory.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		txtpnCategory.setBackground(new Color(240, 248, 255));
@@ -541,6 +542,7 @@ public class RecipeUpdate extends JFrame {
 		panel_1.add(btnSearch);
 
 		JTextPane txtpnIngredients = new JTextPane();
+		txtpnIngredients.setEditable(false);
 		txtpnIngredients.setText("Add Ingredients:");
 		txtpnIngredients.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnIngredients.setBackground(new Color(240, 248, 255));
@@ -548,6 +550,7 @@ public class RecipeUpdate extends JFrame {
 		panel_1.add(txtpnIngredients);
 
 		JTextPane txtpnInstructions = new JTextPane();
+		txtpnInstructions.setEditable(false);
 		txtpnInstructions.setText("Instructions:");
 		txtpnInstructions.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnInstructions.setBackground(new Color(240, 248, 255));
@@ -555,6 +558,7 @@ public class RecipeUpdate extends JFrame {
 		panel_1.add(txtpnInstructions);
 
 		JTextPane txtpnAmount = new JTextPane();
+		txtpnAmount.setEditable(false);
 		txtpnAmount.setText("Amount:");
 		txtpnAmount.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		txtpnAmount.setBackground(new Color(240, 248, 255));
@@ -562,6 +566,7 @@ public class RecipeUpdate extends JFrame {
 		panel_1.add(txtpnAmount);
 
 		JTextPane txtpnMeauring = new JTextPane();
+		txtpnMeauring.setEditable(false);
 		txtpnMeauring.setText("Measuring:");
 		txtpnMeauring.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		txtpnMeauring.setBackground(new Color(240, 248, 255));
@@ -569,6 +574,7 @@ public class RecipeUpdate extends JFrame {
 		panel_1.add(txtpnMeauring);
 
 		JTextPane textPane_2 = new JTextPane();
+		textPane_2.setEditable(false);
 		textPane_2.setText("Name:");
 		textPane_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textPane_2.setBackground(new Color(240, 248, 255));
@@ -582,6 +588,7 @@ public class RecipeUpdate extends JFrame {
 		panel_1.add(textField_1);
 
 		JTextPane textPane_3 = new JTextPane();
+		textPane_3.setEditable(false);
 		textPane_3.setText("Description:");
 		textPane_3.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textPane_3.setBackground(new Color(240, 248, 255));
@@ -628,6 +635,7 @@ public class RecipeUpdate extends JFrame {
 		panel_1.add(btnAdd_1);
 
 		JTextPane textPane_5 = new JTextPane();
+		textPane_5.setEditable(false);
 		textPane_5.setText("Complexity:");
 		textPane_5.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textPane_5.setBackground(new Color(240, 248, 255));
@@ -648,6 +656,7 @@ public class RecipeUpdate extends JFrame {
 		panel_1.add(comboBox_4);
 
 		JTextPane textPane_6 = new JTextPane();
+		textPane_6.setEditable(false);
 		textPane_6.setText("Cooking Time Up To:");
 		textPane_6.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textPane_6.setBackground(new Color(240, 248, 255));

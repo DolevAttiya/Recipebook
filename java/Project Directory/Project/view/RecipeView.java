@@ -169,7 +169,7 @@ public class RecipeView extends JFrame {
 		txtpnAdvancedSearch_1.setForeground(Color.WHITE);
 		txtpnAdvancedSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
 		txtpnAdvancedSearch_1.setBackground(new Color(65, 105, 225));
-		txtpnAdvancedSearch_1.setBounds(1146, 7, 215, 80);
+		txtpnAdvancedSearch_1.setBounds(1139, 7, 215, 80);
 		panel.add(txtpnAdvancedSearch_1);
 
 

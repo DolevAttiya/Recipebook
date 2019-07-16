@@ -119,6 +119,7 @@ public class AdvancedSearch extends JFrame {
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		JTextPane txtpnUserDetails = new JTextPane();
+		txtpnUserDetails.setEditable(false);
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -143,6 +144,7 @@ public class AdvancedSearch extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
+		txtpnAdvancedSearch_1.setEditable(false);
 		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -166,6 +168,7 @@ public class AdvancedSearch extends JFrame {
 		panel.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
+		txtpnFavouriteRecipes.setEditable(false);
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -184,6 +187,7 @@ public class AdvancedSearch extends JFrame {
 		txtpnFavouriteRecipes.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnSearch_1 = new JTextPane();
+		txtpnSearch_1.setEditable(false);
 		txtpnSearch_1.setText("Search");
 		txtpnSearch_1.setForeground(Color.WHITE);
 		txtpnSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -192,6 +196,7 @@ public class AdvancedSearch extends JFrame {
 		panel.add(txtpnSearch_1);
 		
 		JTextPane txtpnMyRecipes = new JTextPane();
+		txtpnMyRecipes.setEditable(false);
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -210,6 +215,7 @@ public class AdvancedSearch extends JFrame {
 		panel.add(txtpnMyRecipes);
 		
 		JTextPane txtpnTaimli = new JTextPane();
+		txtpnTaimli.setEditable(false);
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -297,6 +303,7 @@ public class AdvancedSearch extends JFrame {
 		panel_1.add(comboBox);
 		
 		JTextPane txtpnCategory = new JTextPane();
+		txtpnCategory.setEditable(false);
 		txtpnCategory.setText("Kashruth");
 		txtpnCategory.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnCategory.setBackground(new Color(240, 248, 255));
@@ -304,6 +311,7 @@ public class AdvancedSearch extends JFrame {
 		panel_1.add(txtpnCategory);
 		
 		JTextPane txtpnRateAbove = new JTextPane();
+		txtpnRateAbove.setEditable(false);
 		txtpnRateAbove.setText("Rate Above:");
 		txtpnRateAbove.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnRateAbove.setBackground(new Color(240, 248, 255));
@@ -311,6 +319,7 @@ public class AdvancedSearch extends JFrame {
 		panel_1.add(txtpnRateAbove);
 		
 		JTextPane txtpnAdvancedSearch = new JTextPane();
+		txtpnAdvancedSearch.setEditable(false);
 		txtpnAdvancedSearch.setText("Advanced Search");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
@@ -338,6 +347,7 @@ public class AdvancedSearch extends JFrame {
 		panel_1.add(btnSearch);
 		// add open and close
 		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane.setText("Allergies:");
 		textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
 		textPane.setBackground(new Color(240, 248, 255));
@@ -345,13 +355,15 @@ public class AdvancedSearch extends JFrame {
 		panel_1.add(textPane);
 		
 		JTextPane txtpnSearchFor = new JTextPane();
+		txtpnSearchFor.setEditable(false);
 		txtpnSearchFor.setText("Search For:");
 		txtpnSearchFor.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnSearchFor.setBackground(new Color(240, 248, 255));
-		txtpnSearchFor.setBounds(50, 215, 332, 63);
+		txtpnSearchFor.setBounds(50, 215, 247, 63);
 		panel_1.add(txtpnSearchFor);
 		
 		JTextPane txtpnComplexity_1 = new JTextPane();
+		txtpnComplexity_1.setEditable(false);
 		txtpnComplexity_1.setText("Complexity:");
 		txtpnComplexity_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnComplexity_1.setBackground(new Color(240, 248, 255));
@@ -359,6 +371,7 @@ public class AdvancedSearch extends JFrame {
 		panel_1.add(txtpnComplexity_1);
 		
 		JTextPane txtpnCookingTime = new JTextPane();
+		txtpnCookingTime.setEditable(false);
 		txtpnCookingTime.setText("Cooking Time Up To:");
 		txtpnCookingTime.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnCookingTime.setBackground(new Color(240, 248, 255));
