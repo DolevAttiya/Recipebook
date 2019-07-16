@@ -116,6 +116,7 @@ public class MainPage extends JFrame {
 		panel_3.add(scrollPane);
 		
 		JTextPane txtpnTopTen = new JTextPane();
+		txtpnTopTen.setEditable(false);
 		txtpnTopTen.setText("Top Ten!!");
 		txtpnTopTen.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 70));
 		txtpnTopTen.setBackground(new Color(240, 248, 255));
@@ -155,6 +156,7 @@ public class MainPage extends JFrame {
 		textField.setColumns(10);
 		
 		JTextPane txtpnSearch = new JTextPane();
+		txtpnSearch.setEditable(false);
 		txtpnSearch.setBounds(68, 41, 593, 139);
 		panel_2.add(txtpnSearch);
 		txtpnSearch.setBackground(new Color(240, 248, 255));
@@ -182,6 +184,7 @@ public class MainPage extends JFrame {
 		panel.add(panel_6);
 		
 		JTextPane txtpnAllRecipies = new JTextPane();
+		txtpnAllRecipies.setEditable(false);
 		txtpnAllRecipies.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -206,6 +209,7 @@ public class MainPage extends JFrame {
 		panel.add(panel_7);
 		
 		JTextPane txtpnAddNewRecipe_1 = new JTextPane();
+		txtpnAddNewRecipe_1.setEditable(false);
 		txtpnAddNewRecipe_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -223,6 +227,7 @@ public class MainPage extends JFrame {
 		panel_7.add(txtpnAddNewRecipe_1);
 		
 		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane.setText("Welcome To Taimli !");
 		textPane.setForeground(new Color(0, 0, 0));
 		textPane.setFont(new Font("Tempus Sans ITC", Font.BOLD, 99));
@@ -237,6 +242,7 @@ public class MainPage extends JFrame {
 		panel_1.setLayout(null);
 		
 		JTextPane txtpnUserDetails = new JTextPane();
+		txtpnUserDetails.setEditable(false);
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -280,6 +286,7 @@ public class MainPage extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
+		txtpnAdvancedSearch_1.setEditable(false);
 		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -303,6 +310,7 @@ public class MainPage extends JFrame {
 		panel_1.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
+		txtpnFavouriteRecipes.setEditable(false);
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -322,6 +330,7 @@ public class MainPage extends JFrame {
 		txtpnFavouriteRecipes.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnSearch_1 = new JTextPane();
+		txtpnSearch_1.setEditable(false);
 		txtpnSearch_1.setText("Search");
 		txtpnSearch_1.setForeground(Color.WHITE);
 		txtpnSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -330,6 +339,7 @@ public class MainPage extends JFrame {
 		panel_1.add(txtpnSearch_1);
 		
 		JTextPane txtpnMyRecipes = new JTextPane();
+		txtpnMyRecipes.setEditable(false);
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -348,6 +358,7 @@ public class MainPage extends JFrame {
 		panel_1.add(txtpnMyRecipes);
 		
 		JTextPane txtpnTaimli = new JTextPane();
+		txtpnTaimli.setEditable(false);
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
