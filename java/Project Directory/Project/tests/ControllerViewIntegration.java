@@ -52,60 +52,16 @@ class ControllerViewIntegration {
 	@SuppressWarnings("static-access")
 	@Test
 	void testTrueUserRegister() {
-		String firstName="rotem";
-		String lastName="hayout";
-		String email="rotemhy@gmail.com";
-		String pass="asafiasafi";
-		String pass2="asafiasafi";
-		String dateOfBirth="1991-01-10";
-		boolean isDietitian=false;
-		String dietitianNum=null;
-		boolean isKosher=true;
-		String dietitianStatDate=null;
-		Integer isFish=0;
-		Integer isStrawberries=0;
-		Integer isCoffie=0;
-		Integer isGluten=0;
-		Integer isLactose=0;
-		Integer isMilk=0;
-		Integer isEggs=0;
-		Integer isSeeds=0;
-		Integer isTreeNuts=0;
-		Integer isPeanut=0;
-		Integer isAcidity=0; 
-		Integer isChocolate=0; 
-		boolean wantAllerg=true;
-		v.register(firstName, lastName, email, pass, pass2, dateOfBirth, isDietitian, dietitianNum, isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
+				"1991-01-10", false, null, true, null, 0,0,0,0,0,0,0,0,0,0,0,0,true);
 		assertTrue(myView.check);
-		((myView)v).myUser.Delete();
+		myView.myUser.Delete();
 	}
-
+	@SuppressWarnings("static-access")
 	@Test
 	void testTrueDietitianRegister() {
-		String firstName="rotem";
-		String lastName="hamalka";
-		String email="rotemhy@gmail.com";
-		String pass="asafiasafi";
-		String pass2="asafiasafi";
-		String dateOfBirth="1991-01-10";
-		boolean isDietitian=true;
-		String dietitianNum="1234";
-		boolean isKosher=true;
-		String dietitianStatDate="1991-01-10";
-		Integer isFish=0;
-		Integer isStrawberries=0;
-		Integer isCoffie=0;
-		Integer isGluten=0;
-		Integer isLactose=0;
-		Integer isMilk=0;
-		Integer isEggs=0;
-		Integer isSeeds=0;
-		Integer isTreeNuts=0;
-		Integer isPeanut=0;
-		Integer isAcidity=0; 
-		Integer isChocolate=0; 
-		boolean wantAllerg=true;
-		v.register(firstName, lastName, email, pass, pass2, dateOfBirth, isDietitian, dietitianNum, isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
+				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);
 		assertTrue(myView.check);
 		myView.myDietitian.Delete();
 	}
@@ -113,120 +69,31 @@ class ControllerViewIntegration {
 
 	@Test
 	void testPassLengthTrueCompareFalseRegister() {
-		String firstName="rotem";
-		String lastName="hayout";
-		String email="rotemhy@gmail.com";
-		String pass="assafi";
-		String pass2="assafj";
-		String dateOfBirth="1991-01-10";
-		boolean isDietitian=false;
-		String dietitianNum=null;
-		boolean isKosher=true;
-		String dietitianStatDate=null;
-		Integer isFish=0;
-		Integer isStrawberries=0;
-		Integer isCoffie=0;
-		Integer isGluten=0;
-		Integer isLactose=0;
-		Integer isMilk=0;
-		Integer isEggs=0;
-		Integer isSeeds=0;
-		Integer isTreeNuts=0;
-		Integer isPeanut=0;
-		Integer isAcidity=0; 
-		Integer isChocolate=0; 
-		boolean wantAllerg=true;
-		v.register(firstName, lastName, email, pass, pass2, dateOfBirth, isDietitian, dietitianNum, isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafj",
+				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);			
 		assertFalse(myView.check);
-
 	}
 
 	@Test
 	void testPassLengthFalseCompareTrueRegister() {
-		String firstName="rotem";
-		String lastName="hayout";
-		String email="rotemhy@gmail.com";
-		String pass="asafi";
-		String pass2="asafi";
-		String dateOfBirth=null;
-		boolean isDietitian=false;
-		String dietitianNum=null;
-		boolean isKosher=true;
-		String dietitianStatDate=null;
-		Integer isFish=0;
-		Integer isStrawberries=0;
-		Integer isCoffie=0;
-		Integer isGluten=0;
-		Integer isLactose=0;
-		Integer isMilk=0;
-		Integer isEggs=0;
-		Integer isSeeds=0;
-		Integer isTreeNuts=0;
-		Integer isPeanut=0;
-		Integer isAcidity=0; 
-		Integer isChocolate=0; 
-		boolean wantAllerg=true;
-		v.register(firstName, lastName, email, pass, pass2, dateOfBirth, isDietitian, dietitianNum, isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafi", "asafi",
+				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);		
 		assertFalse(myView.check);
 	}
 
 	@Test
 	void testFalseRegister() // <6 & !=
 	{
-		String firstName="rotem";
-		String lastName="hayout";
-		String email="rotemhy@gmail.com";
-		String pass="asafi";
-		String pass2="asafj";
-		String dateOfBirth="1991-01-10";
-		boolean isDietitian=false;
-		String dietitianNum=null;
-		boolean isKosher=true;
-		String dietitianStatDate=null;
-		Integer isFish=0;
-		Integer isStrawberries=0;
-		Integer isCoffie=0;
-		Integer isGluten=0;
-		Integer isLactose=0;
-		Integer isMilk=0;
-		Integer isEggs=0;
-		Integer isSeeds=0;
-		Integer isTreeNuts=0;
-		Integer isPeanut=0;
-		Integer isAcidity=0; 
-		Integer isChocolate=0; 
-		boolean wantAllerg=true;
-		v.register(firstName, lastName, email, pass, pass2, dateOfBirth, isDietitian, dietitianNum, isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafi", "asafj",
+				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);		
 		assertFalse(myView.check);
 	}
 
 	@Test
 	void testFalseRegisterExist()
 	{
-		String firstName="Daenerys";
-		String lastName="Targaryen";
-		String email="drakarisValyrian.com";
-		String pass="khaleesi";
-		String pass2="khaleesi";
-		String dateOfBirth="2019-06-17";
-		boolean isDietitian=false;
-		String dietitianNum=null;
-		boolean isKosher=true;
-		String dietitianStatDate=null;
-		Integer isFish=0;
-		Integer isStrawberries=0;
-		Integer isCoffie=0;
-		Integer isGluten=0;
-		Integer isLactose=0;
-		Integer isMilk=0;
-		Integer isEggs=0;
-		Integer isSeeds=0;
-		Integer isTreeNuts=0;
-		Integer isPeanut=0;
-		Integer isAcidity=0; 
-		Integer isChocolate=0; 
-		boolean wantAllerg=true;
-		v.register(firstName, lastName, email, pass, pass2, dateOfBirth, isDietitian, dietitianNum, isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+		v.register("Daenerys", "Targaryen", "drakarisValyrian.com", "khaleesi", "khaleesi",
+				"2019-06-17", false, null, true, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, true);
 		assertFalse(myView.check);
 	}
 
@@ -236,8 +103,10 @@ class ControllerViewIntegration {
 		assertNotNull(myView.recipeArray);
 	}
 
+	@SuppressWarnings("static-access")
 	@Test
 	void testTrueMainSearch() {
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.mainSearch("Ommlete");
 		assertNotNull(myView.recipeArray);
 	}
@@ -262,7 +131,8 @@ class ControllerViewIntegration {
 
 	@Test
 	void testAddIngredient() {
-		fail("Not yet implemented"); // TODO
+		v.addIngredient("cheese", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 2.0, 1.0, 1.0, 1.0, 1);
+		
 	}
 
 	@Test
