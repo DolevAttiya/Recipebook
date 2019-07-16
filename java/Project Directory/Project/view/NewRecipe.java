@@ -22,7 +22,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JToggleButton;
@@ -31,6 +30,9 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
+import model.Ingredient;
+
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
 import javax.swing.JList;
@@ -51,7 +53,7 @@ public class NewRecipe extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_1;
 	private JTextField textField_9;
-	
+
 	//allergies:
 	public int isFish=0;
 	public int isStrawberries=0;
@@ -65,6 +67,11 @@ public class NewRecipe extends JFrame {
 	public int isPeanut=0;
 	public int isAcidity=0;
 	public int isChocolate=0;
+	public Double amount=0.0;
+	Object[][] dataIngredients;
+	public int Complexity=0;
+	public int timeToMake=0;
+
 
 	/**
 	 * Launch the application.
@@ -106,7 +113,7 @@ public class NewRecipe extends JFrame {
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,7 +139,7 @@ public class NewRecipe extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (myView.myUser!=null) {
 					User f=new User();
-				f.setVisible(true);
+					f.setVisible(true);
 				}
 				else {
 					Dietican f=new Dietican();
@@ -234,16 +241,16 @@ public class NewRecipe extends JFrame {
 		panel_1.setBounds(11, 106, 1610, 1299);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		
+
 		String[] columnNames = {"Ingredient Name",
-                "Amount",
-                "Mesuring"}; 
-		Object[][] dataIngredients = new Object[myView.recipeArray.size()][3];
-		//for(int row=0;row<myView.myRecipe.getRecipeIngredient.size();row++) {
-			//data[row][0]=myView.myRecipe.getRecipeIngredient.get(row).getIngredientName();
-			//data[row][1]=myView.myRecipe.getRecipeIngredientAmount.get(row).toString();
-			//data[row][2]=myView.myRecipe.getRecipeIngredientType.get(row).getIngredientTypeName();
-	//	}
+				"Amount",
+		"Mesuring"}; 
+		 dataIngredients = new Object[myView.recipeArray.size()][3];
+		for(int row=0;row<myView.ingredientArrayForNewRecipe.size();row++) {
+			dataIngredients[row][0]=myView.ingredientArrayForNewRecipe.get(row).getIngredientName();
+			dataIngredients[row][1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();
+			dataIngredients[row][2]=myView.myMeasuringForNewRecipe.get(row).getIngredientTypeName();
+		}
 		JTable table = new JTable(dataIngredients, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		table.setRowHeight(80);
@@ -251,20 +258,26 @@ public class NewRecipe extends JFrame {
 		th.setPreferredSize(new Dimension(100, 100));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 32);
 		table.getTableHeader().setFont(bigFont);
-		
+
 		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
 		JComboBox comboBox_5 = new JComboBox(times);
+		comboBox_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox_5 = (JComboBox)e.getSource();
+		        timeToMake = (int)comboBox_5.getSelectedIndex();
+			}
+		});
 		comboBox_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox_5.setBounds(1076, 1018, 509, 49);
 		panel_1.add(comboBox_5);
-		
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
 		scrollPane.setSize(1018, 358);
 		scrollPane.setLocation(36, 413);
 		//TableColumn column = null;
 		panel_1.add(scrollPane);
-		
+
 		TextArea textArea = new TextArea();
 		textArea.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textArea.setBounds(32, 824, 1011, 282);
@@ -274,7 +287,7 @@ public class NewRecipe extends JFrame {
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_1 = (JComboBox)e.getSource();
-		        String mesuring = (String)comboBox_1.getSelectedItem();
+				String mesuring = (String)comboBox_1.getSelectedItem();
 			}
 		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -283,200 +296,205 @@ public class NewRecipe extends JFrame {
 
 
 		textField_3 = new JTextField();
+		textField_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				amount= Double.parseDouble(textField_3.getText());
+			}
+		});
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_3.setColumns(10);
 		textField_3.setBounds(627, 355, 105, 49);
 		panel_1.add(textField_3);
 
 		//ALLERGIES
-				JCheckBox checkBox_7 = new JCheckBox("Gluten");
-				checkBox_7.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_7.isSelected()){  
-							  isGluten=1;   } 
-						 else {
-							  isGluten=0;
-						 }
-					}
-				});
-				checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_7.setBackground(new Color(240, 248, 255));
-				checkBox_7.setBounds(1076, 515, 255, 41);
-				panel_1.add(checkBox_7);
-				
-				JCheckBox checkBox_4 = new JCheckBox("Eggs");
-				checkBox_4.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_4.isSelected()){  
-							  isEggs=1;   } 
-						 else {
-							  isEggs=0;
-						 }
-					}
-				});
-				checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_4.setBackground(new Color(240, 248, 255));
-				checkBox_4.setBounds(1342, 300, 243, 55);
-				panel_1.add(checkBox_4);
-				
-				JCheckBox checkBox_11 = new JCheckBox("Food Acidity");
-				checkBox_11.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_11.isSelected()){  
-							  isAcidity=1;   } 
-						 else {
-							  isAcidity=0;
-						 }
-					}
-				});
-				checkBox_11.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_11.setBackground(new Color(240, 248, 255));
-				checkBox_11.setBounds(1342, 588, 265, 41);
-				panel_1.add(checkBox_11);
-				
-				JCheckBox checkBox_1 = new JCheckBox("Seeds");
-				checkBox_1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_1.isSelected()){  
-							  isSeeds=1;   } 
-						 else {
-							  isSeeds=0;
-						 }
-					}
-				});
-				checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_1.setBackground(new Color(240, 248, 255));
-				checkBox_1.setBounds(1342, 375, 243, 41);
-				panel_1.add(checkBox_1);
-				
-				JCheckBox checkBox_9 = new JCheckBox("Lactose");
-				checkBox_9.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_9.isSelected()){  
-							  isLactose=1;   } 
-						 else {
-							  isLactose=0;
-						 }
-					}
-				});
-				checkBox_9.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_9.setBackground(new Color(240, 248, 255));
-				checkBox_9.setBounds(1076, 588, 226, 41);
-				panel_1.add(checkBox_9);
-				
-				JCheckBox checkBox = new JCheckBox("Peanut");
-				checkBox.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox.isSelected()){  
-							  isPeanut=1;   } 
-						 else {
-							  isPeanut=0;
-						 }
-					}
-				});
-				checkBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox.setBackground(new Color(240, 248, 255));
-				checkBox.setBounds(1342, 515, 192, 41);
-				panel_1.add(checkBox);
-				
-				JCheckBox checkBox_10 = new JCheckBox("Chocolate");
-				checkBox_10.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_10.isSelected()){  
-							  isChocolate=1;   } 
-						 else {
-							  isChocolate=0;
-						 }
-					}
-				});
-				checkBox_10.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_10.setBackground(new Color(240, 248, 255));
-				checkBox_10.setBounds(1342, 661, 243, 41);
-				panel_1.add(checkBox_10);
-				
-				JTextPane textPane = new JTextPane();
-				textPane.setText("Allergies:");
-				textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
-				textPane.setBackground(new Color(240, 248, 255));
-				textPane.setBounds(1154, 227, 340, 72);
-				panel_1.add(textPane);
-				
-				JCheckBox checkBox_3 = new JCheckBox("Tree Nuts");
-				checkBox_3.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_3.isSelected()){  
-							  isTreeNuts=1;   } 
-						 else {
-							  isTreeNuts=0;
-						 }
-					}
-				});
-				checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_3.setBackground(new Color(240, 248, 255));
-				checkBox_3.setBounds(1342, 442, 231, 41);
-				panel_1.add(checkBox_3);
-				
-				JCheckBox checkBox_2 = new JCheckBox("Strawberries");
-				checkBox_2.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_2.isSelected()){  
-							  isStrawberries=1;   } 
-						 else {
-							  isFish=0;
-						 }
-					}
-				});
-				checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_2.setBackground(new Color(240, 248, 255));
-				checkBox_2.setBounds(1076, 375, 269, 41);
-				panel_1.add(checkBox_2);
-				
-				JCheckBox checkBox_6 = new JCheckBox("Coffie");
-				checkBox_6.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_6.isSelected()){  
-							  isCoffie=1;   } 
-						 else {
-							  isCoffie=0;
-						 }
-					}
-				});
-				checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_6.setBackground(new Color(240, 248, 255));
-				checkBox_6.setBounds(1076, 442, 269, 41);
-				panel_1.add(checkBox_6);
-				
-				JCheckBox checkBox_8 = new JCheckBox("Dairy");
-				checkBox_8.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_8.isSelected()){  
-							  isMilk=1;   } 
-						 else {
-							  isMilk=0;
-						 }
-					}
-				});
-				checkBox_8.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_8.setBackground(new Color(240, 248, 255));
-				checkBox_8.setBounds(1076, 661, 226, 41);
-				panel_1.add(checkBox_8);
-				
-				JCheckBox checkBox_5 = new JCheckBox("Fish");
-				checkBox_5.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox_5.isSelected()){  
-							  isFish=1;   } 
-						 else {
-							  isFish=0;
-						 }
-					}
-				});
-				checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
-				checkBox_5.setBackground(new Color(240, 248, 255));
-				checkBox_5.setBounds(1076, 307, 269, 41);
-				panel_1.add(checkBox_5);
+		JCheckBox checkBox_7 = new JCheckBox("Gluten");
+		checkBox_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_7.isSelected()){  
+					isGluten=1;   } 
+				else {
+					isGluten=0;
+				}
+			}
+		});
+		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_7.setBackground(new Color(240, 248, 255));
+		checkBox_7.setBounds(1076, 515, 255, 41);
+		panel_1.add(checkBox_7);
 
-				
+		JCheckBox checkBox_4 = new JCheckBox("Eggs");
+		checkBox_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_4.isSelected()){  
+					isEggs=1;   } 
+				else {
+					isEggs=0;
+				}
+			}
+		});
+		checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_4.setBackground(new Color(240, 248, 255));
+		checkBox_4.setBounds(1342, 300, 243, 55);
+		panel_1.add(checkBox_4);
+
+		JCheckBox checkBox_11 = new JCheckBox("Food Acidity");
+		checkBox_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_11.isSelected()){  
+					isAcidity=1;   } 
+				else {
+					isAcidity=0;
+				}
+			}
+		});
+		checkBox_11.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_11.setBackground(new Color(240, 248, 255));
+		checkBox_11.setBounds(1342, 588, 265, 41);
+		panel_1.add(checkBox_11);
+
+		JCheckBox checkBox_1 = new JCheckBox("Seeds");
+		checkBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_1.isSelected()){  
+					isSeeds=1;   } 
+				else {
+					isSeeds=0;
+				}
+			}
+		});
+		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_1.setBackground(new Color(240, 248, 255));
+		checkBox_1.setBounds(1342, 375, 243, 41);
+		panel_1.add(checkBox_1);
+
+		JCheckBox checkBox_9 = new JCheckBox("Lactose");
+		checkBox_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_9.isSelected()){  
+					isLactose=1;   } 
+				else {
+					isLactose=0;
+				}
+			}
+		});
+		checkBox_9.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_9.setBackground(new Color(240, 248, 255));
+		checkBox_9.setBounds(1076, 588, 226, 41);
+		panel_1.add(checkBox_9);
+
+		JCheckBox checkBox = new JCheckBox("Peanut");
+		checkBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox.isSelected()){  
+					isPeanut=1;   } 
+				else {
+					isPeanut=0;
+				}
+			}
+		});
+		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox.setBackground(new Color(240, 248, 255));
+		checkBox.setBounds(1342, 515, 192, 41);
+		panel_1.add(checkBox);
+
+		JCheckBox checkBox_10 = new JCheckBox("Chocolate");
+		checkBox_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_10.isSelected()){  
+					isChocolate=1;   } 
+				else {
+					isChocolate=0;
+				}
+			}
+		});
+		checkBox_10.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_10.setBackground(new Color(240, 248, 255));
+		checkBox_10.setBounds(1342, 661, 243, 41);
+		panel_1.add(checkBox_10);
+
+		JTextPane textPane = new JTextPane();
+		textPane.setText("Allergies:");
+		textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
+		textPane.setBackground(new Color(240, 248, 255));
+		textPane.setBounds(1154, 227, 340, 72);
+		panel_1.add(textPane);
+
+		JCheckBox checkBox_3 = new JCheckBox("Tree Nuts");
+		checkBox_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_3.isSelected()){  
+					isTreeNuts=1;   } 
+				else {
+					isTreeNuts=0;
+				}
+			}
+		});
+		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_3.setBackground(new Color(240, 248, 255));
+		checkBox_3.setBounds(1342, 442, 231, 41);
+		panel_1.add(checkBox_3);
+
+		JCheckBox checkBox_2 = new JCheckBox("Strawberries");
+		checkBox_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_2.isSelected()){  
+					isStrawberries=1;   } 
+				else {
+					isFish=0;
+				}
+			}
+		});
+		checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_2.setBackground(new Color(240, 248, 255));
+		checkBox_2.setBounds(1076, 375, 269, 41);
+		panel_1.add(checkBox_2);
+
+		JCheckBox checkBox_6 = new JCheckBox("Coffie");
+		checkBox_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_6.isSelected()){  
+					isCoffie=1;   } 
+				else {
+					isCoffie=0;
+				}
+			}
+		});
+		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_6.setBackground(new Color(240, 248, 255));
+		checkBox_6.setBounds(1076, 442, 269, 41);
+		panel_1.add(checkBox_6);
+
+		JCheckBox checkBox_8 = new JCheckBox("Dairy");
+		checkBox_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_8.isSelected()){  
+					isMilk=1;   } 
+				else {
+					isMilk=0;
+				}
+			}
+		});
+		checkBox_8.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_8.setBackground(new Color(240, 248, 255));
+		checkBox_8.setBounds(1076, 661, 226, 41);
+		panel_1.add(checkBox_8);
+
+		JCheckBox checkBox_5 = new JCheckBox("Fish");
+		checkBox_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(checkBox_5.isSelected()){  
+					isFish=1;   } 
+				else {
+					isFish=0;
+				}
+			}
+		});
+		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		checkBox_5.setBackground(new Color(240, 248, 255));
+		checkBox_5.setBounds(1076, 307, 269, 41);
+		panel_1.add(checkBox_5);
+
+
 		JComboBox comboBox = new JComboBox(); //get
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox.setBounds(366, 355, 255, 49);
@@ -502,14 +520,14 @@ public class NewRecipe extends JFrame {
 				if((textField_1.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textArea.getText().trim().isEmpty())) {
 					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
 				}
-						
+
 				else {
-						//call function
-						MainPage f=new MainPage();
-						f.setVisible(true);
-						NewRecipe.this.dispose();
-						NewRecipe.this.setVisible(false);
-					}
+					//myView.addRecipe(textField_1.getText(), isFish,  isStrawberries,  isCoffie,  isGluten,  isLactose,  isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, textField_9.getText(), Complexity, timeToMake, textArea.getText())
+					RecipeView f=new RecipeView();
+					f.setVisible(true);
+					NewRecipe.this.dispose();
+					NewRecipe.this.setVisible(false);
+				}
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
@@ -543,81 +561,85 @@ public class NewRecipe extends JFrame {
 		txtpnMeauring.setBackground(new Color(240, 248, 255));
 		txtpnMeauring.setBounds(763, 321, 138, 38);
 		panel_1.add(txtpnMeauring);
-		
+
 		JTextPane textPane_2 = new JTextPane();
 		textPane_2.setText("Name:");
 		textPane_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textPane_2.setBackground(new Color(240, 248, 255));
 		textPane_2.setBounds(32, 182, 141, 61);
 		panel_1.add(textPane_2);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textField_1.setColumns(10);
 		textField_1.setBounds(177, 186, 632, 57);
 		panel_1.add(textField_1);
-		
+
 		JTextPane textPane_3 = new JTextPane();
 		textPane_3.setText("Description:");
 		textPane_3.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textPane_3.setBackground(new Color(240, 248, 255));
 		textPane_3.setBounds(32, 257, 243, 61);
 		panel_1.add(textPane_3);
-		
+
 		textField_9 = new JTextField();
 		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textField_9.setColumns(10);
 		textField_9.setBounds(288, 261, 775, 57);
 		panel_1.add(textField_9);
-		
-		
+
+
 		JButton btnAddNewIngredient = new JButton("Add New Ingredient");
-		btnAddNewIngredient.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			//	Component f=new Component();
-			//	f.setVisible(true);
+		btnAddNewIngredient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Component f=new Component();
+				f.setVisible(true);
 			}
 		});
 		btnAddNewIngredient.setFont(new Font("Tahoma", Font.BOLD, 30));
 		btnAddNewIngredient.setBounds(1137, 738, 397, 69);
 		panel_1.add(btnAddNewIngredient);
-		
+
 		String[] kashruthing = {"Parve", "Dairy", "Meat","Not Kosher"};
-		
+
 		JButton btnAdd_1 = new JButton("Add");
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Integer> ing=new ArrayList<Integer>();
-				//ing.add(btnAdd_1.getText());
-				//myView.statview.addIgredientToRecipe (arrayIng.get(comboBox.getSelectedIndex()),textField_3.getText,arrayIng.get(comboBox_1.getSelectedIndex())  )
-				//dataIngredients= new Object [myview.myRecipe.getRecipeIngredient.Size()][3];
-				//for(int row=0;i<myview.myRecipe.getRecipeIngredient.Size();row++)
-				//{
-					//data[row][0]=myView.myRecipe.getRecipeIngredient.get(row).getIngredientName();
-					//data[row][1]=myView.myRecipe.getRecipeIngredientAmount.get(row).toString();
-					//data[row][2]=myView.myRecipe.getRecipeIngredientType.get(row).getIngredientTypeName();
-			//	}
+				myView.statview.addIngredientToRecipe (myView.statview.ingredientArray.get(comboBox.getSelectedIndex()),myView.statview.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
+				dataIngredients= new Object [myView.myRecipe.getRecipeIngredientId().size()][3];
+				for(int row=0;row<myView.myRecipe.getRecipeIngredientId().size();row++)
+				{
+					dataIngredients[row][0]=myView.ingredientArrayForRecipe.get(row).getIngredientName();
+					dataIngredients[row][1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();
+					dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
+				}
 				;
 			}
 		});
 		btnAdd_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnAdd_1.setBounds(973, 355, 81, 49);
 		panel_1.add(btnAdd_1);
-		
+
 		JTextPane textPane_5 = new JTextPane();
 		textPane_5.setText("Complexity:");
 		textPane_5.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textPane_5.setBackground(new Color(240, 248, 255));
 		textPane_5.setBounds(1071, 828, 243, 64);
 		panel_1.add(textPane_5);
-		
+
 		String[] complexiting = {"Easy", "Medium", "Hard"};
 		JComboBox comboBox_4 = new JComboBox(complexiting);
+		comboBox_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox_4 = (JComboBox)e.getSource();
+		        Complexity = (int)comboBox_4.getSelectedIndex();
+			}
+		});
 		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox_4.setBounds(1076, 893, 508, 49);
 		panel_1.add(comboBox_4);
-		
+
 		JTextPane textPane_6 = new JTextPane();
 		textPane_6.setText("Cooking Time Up To:");
 		textPane_6.setFont(new Font("Tahoma", Font.PLAIN, 45));

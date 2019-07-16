@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import model.Dietitian;
 import model.Ingredient;
+import model.IngredientType;
 import model.Recipe;
 import model.User;
 import view.View;
@@ -176,15 +177,6 @@ public class ViewMock implements View {
 	}
 
 	@Override
-	public void addIngredient(String ingredientName, Integer catagory, Integer isFish, Integer isStrawberries,
-			Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds,
-			Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Integer[] measureType,
-			Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void myFavorite() {
 		// TODO Auto-generated method stub
 		
@@ -192,12 +184,6 @@ public class ViewMock implements View {
 
 	@Override
 	public void myRecipes() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getRecipes() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -250,6 +236,40 @@ public class ViewMock implements View {
 
 	@Override
 	public void ingredientUpdate(Ingredient ing) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getAllMeasuringTypesResponse(ArrayList<IngredientType> measuring) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addIngredient(String ingredientName, Integer catagory, Integer isFish, Integer isStrawberries,
+			Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds,
+			Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Double calories,
+			Double carbohydrate, Double fat, Double protein, Integer kashruth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getAllRecipes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getAllMeasuringTypes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addIngredientToRecipe(Ingredient newIngredient, IngredientType newingredientType,
+			Double IngredientAmount) {
 		// TODO Auto-generated method stub
 		
 	}

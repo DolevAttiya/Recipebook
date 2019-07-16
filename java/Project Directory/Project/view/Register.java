@@ -211,7 +211,10 @@ public class Register extends JFrame {
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null,"Declined, please sign in first");
+				Login f=new Login();
+				f.setVisible(true);
+				Register.this.dispose();
+				Register.this.setVisible(false);
 			}
 		});
 		txtpnTaimli.setText("Taimli");
@@ -495,9 +498,7 @@ public class Register extends JFrame {
 				else {
 						dateOfBirth=yearOfBirth+"-"+monthOfBirth+"-"+dayOfBirth;
 						dietitianStatDate=yearOfStat+"-"+monthOfStat+"-"+dayOfStat;
-						//	public void register(String firstName, String lastName, String email, String pass,String pass2, String dateOfBirth, boolean isDietitian, String dietitianNum, boolean isKosher, String dietitianStatDate,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, boolean wantAllerg) {
-
-						//myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+						// update boolean tp int:  myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
 						MainPage f=new MainPage();
 						f.setVisible(true);
 						Register.this.dispose();
@@ -701,7 +702,7 @@ public class Register extends JFrame {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox = (JComboBox)e.getSource();
-				String monthOfBirth = (String)comboBox.getSelectedItem();
+				monthOfBirth = (String)comboBox.getSelectedItem();
 			}
 		});
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -714,7 +715,7 @@ public class Register extends JFrame {
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_1 = (JComboBox)e.getSource();
-				String dayOfBirth = (String)comboBox_1.getSelectedItem();
+				dayOfBirth = (String)comboBox_1.getSelectedItem();
 			}
 		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -731,7 +732,7 @@ public class Register extends JFrame {
 		textField_9 = new JTextField();
 		textField_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String yearOfBirth=textField_9.getText();
+				yearOfBirth=textField_9.getText();
 			}
 		});
 		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 40));

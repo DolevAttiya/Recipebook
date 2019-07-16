@@ -188,7 +188,7 @@ public class MyController implements Controller{
 			break;
 
 		case "ingredient_type_getall_response":
-			view.addIngredientResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));//////.......................
+			view.getAllMeasuringTypesResponse((ArrayList<IngredientType>)((Event)arg).getArr().get(1));
 			break;
 			
 		case "ingredient_getall":
@@ -196,10 +196,9 @@ public class MyController implements Controller{
 			break;
 
 		case "ingredient_getall_response":
-			view.addIngredientResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));//////..................
+			view.getAllIngredientResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
 			break;
-
-			
+	
 		/*case "ingredient_update": //not in use in the meanwhile for future implementation (manager function)
 			model.updateIngredient((Ingredient)((Event)arg).getArr().get(1));
 			break;*/
