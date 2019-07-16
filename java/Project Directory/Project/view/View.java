@@ -51,7 +51,7 @@ public interface View {
 	public void deleteUser();
 	public void deleteDietitian();
 	public void deleteIngredient(Ingredient ing);
-	public void deleteRecipe(Recipe rec);
+	public void deleteRecipe();
 	public void recipeUpdate(Recipe rec);
 	public void ingredientUpdate(Ingredient ing);
 	public void getAllMeasuringTypes();
@@ -63,7 +63,7 @@ public interface View {
 	public void ingredientReport(Integer allergy);
 	public void likePressed();
 	public void userUpdateForFavorite(User usU);
-	public void dietitianUpdateForFavorite(User usD);
+	public void dietitianUpdateForFavorite(Dietitian usD);
 }
 //update ingredient, remove ingredient
 //update recipe

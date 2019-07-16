@@ -386,7 +386,7 @@ public class ControlerModelIntegration {
 	void addIngredientTrueTest() {
 		ev = new Event();
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		ingredient = new Ingredient(99,"\"test\"",al,99.9,99.9,99.9,99.9,0);
+		ingredient = new Ingredient(99,"test",al,99.9,99.9,99.9,99.9,0);
 		ev.getArr().add("ingredient_insert");
 		ev.getArr().add(ingredient);
 		((MyController)controllerTest).update(null, ev);
@@ -397,7 +397,7 @@ public class ControlerModelIntegration {
 	void addIngredientFalseTest() {
 		ev = new Event();
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		ingredient = new Ingredient(100,"\"Parmesan\"",al,99.9,99.9,99.9,99.9,0);
+		ingredient = new Ingredient(100,"Parmesan",al,99.9,99.9,99.9,99.9,0);
 		ev.getArr().add("ingredient_insert");
 		ev.getArr().add(ingredient);
 		((MyController)controllerTest).update(null, ev);
@@ -407,6 +407,7 @@ public class ControlerModelIntegration {
 	void RecipesReportTest() {
 		ev = new Event();
 		ev.getArr().add("recipe_report");
+		ev.getArr().add(1);
 		((MyController)controllerTest).update(null, ev);
 	}
 	
@@ -414,6 +415,7 @@ public class ControlerModelIntegration {
 	void IngredientReportTest() {
 		ev = new Event();
 		ev.getArr().add("ingredient_report");
+		ev.getArr().add(1);
 		((MyController)controllerTest).update(null, ev);
 	}
 }

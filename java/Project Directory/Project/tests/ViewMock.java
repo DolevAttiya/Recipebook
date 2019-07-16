@@ -199,15 +199,6 @@ public class ViewMock implements View {
 	}
 
 	@Override
-	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2,
-			String dateOfBirth, boolean isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie,
-			Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts,
-			Integer isPeanut, Integer isAcidity, Integer isChocolate, boolean wantAllerg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void dietitianUpdate(String firstName, String lastName, String email, String pass, String pass2,
 			String dateOfBirth, String dietitianNum, String dietitianStatDate) {
 		// TODO Auto-generated method stub
@@ -323,6 +314,33 @@ public class ViewMock implements View {
 
 	@Override
 	public void ingredientReport(Integer allergy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2,
+			String dateOfBirth, Integer isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie,
+			Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts,
+			Integer isPeanut, Integer isAcidity, Integer isChocolate, Integer wantAllerg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void likePressed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void userUpdateForFavorite(User usU) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dietitianUpdateForFavorite(Dietitian usD) {
 		// TODO Auto-generated method stub
 		
 	}

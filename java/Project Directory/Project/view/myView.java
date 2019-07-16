@@ -5,7 +5,6 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
@@ -169,6 +168,9 @@ public class myView extends Observable implements View {
 	}
 	public void searchResponse (ArrayList<Recipe> r) {
 		recipeArray=r;
+		if (r.size()!=0) // Found results in DB
+			check=true;
+		else check=false; // No results
 	}
 	public void advancedSearch(String s, Integer kashruth, Integer complexity, String timeToMake, String rateAbove,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate) {
 		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
@@ -210,9 +212,9 @@ public class myView extends Observable implements View {
 		ev=new Event();
 		ev.getArr().add("favorite_recipes");
 		if (myUser!=null) // Connected as User
-			ev.getArr().add(myUser);
+			ev.getArr().add(myUser.getPersonEmail());
 		else // Connected as Dietitian
-			ev.getArr().add(myDietitian);
+			ev.getArr().add(myDietitian.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
 	}
@@ -224,9 +226,9 @@ public class myView extends Observable implements View {
 		ev=new Event();
 		ev.getArr().add("my_recipes");
 		if (myUser!=null) // User
-			ev.getArr().add(myUser);
+			ev.getArr().add(myUser.getPersonEmail());
 		else // Dietitian
-			ev.getArr().add(myDietitian);
+			ev.getArr().add(myDietitian.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
 	}
@@ -326,72 +328,76 @@ public class myView extends Observable implements View {
 		myMeasuring=m;
 	}
 	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, Integer isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate , Integer wantAllerg) {
-		if ((pass.length()<6) || (pass.compareTo(pass2)==0))
+		if ((pass.length()<6) || (pass.compareTo(pass2)!=0))
 			check=false; // can't save > we will show an error ! 
-		String hashPass;
-		hashPass = ConvertPassToHash(pass);
-		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-mm-dd");
-		LocalDate dateBirth = LocalDate.parse(dateOfBirth, formatter);	
-		boolean isKosherBool=(isKosher==1);
-		boolean wantAllergBool=(wantAllerg==1);
-		ev=new Event();
-		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
-		ev.getArr().add("user_update");
-		myUser.setPersonFirstName(firstName);
-		myUser.setPersonLastName(lastName);
-		myUser.setPersonEmail(email);
-		myUser.setPersonDateOfBirth(dateBirth);
-		myUser.setPersonHashPass(hashPass);
-		myUser.setUserKashruth(isKosherBool);
-		myUser.setUserAllergen(allergies);
-		myUser.setUserAllergens(wantAllergBool);
-		ev.getArr().add(myUser);
-		setChanged();
-		notifyObservers(ev);
+		else
+		{
+			String hashPass;
+			hashPass = ConvertPassToHash(pass);
+			LocalDate dateBirth = LocalDate.parse(dateOfBirth);	
+			boolean isKosherBool=(isKosher==1);
+			boolean wantAllergBool=(wantAllerg==1);
+			ev=new Event();
+			Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
+			ev.getArr().add("user_update");
+			myUser.setPersonFirstName(firstName);
+			myUser.setPersonLastName(lastName);
+			myUser.setPersonEmail(email);
+			myUser.setPersonDateOfBirth(dateBirth);
+			myUser.setPersonHashPass(hashPass);
+			myUser.setUserKashruth(isKosherBool);
+			myUser.setUserAllergen(allergies);
+			myUser.setUserAllergens(wantAllergBool);
+			ev.getArr().add(myUser);
+			setChanged();
+			notifyObservers(ev);
+		}
 	}
 	public void userUpdateForFavorite(User usU) {
 		ev=new Event();
 		ev.getArr().add("user_update");
-		ev.getArr().add(usU);
+		ev.getArr().add(usU.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
 	}
 	public void dietitianUpdateForFavorite(Dietitian usD) {
 		ev=new Event();
 		ev.getArr().add("dietitian_update");
-		ev.getArr().add(usD);
+		ev.getArr().add(usD.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
 	}
 	public void userUpdateResponse(ArrayList<User> usU) {
 		if (usU!=null)
 			check=true; // everything was OK
-		check=false; // something went wrong (could'nt save / already exist)
+		else check=false; // something went wrong (could'nt save / already exist)
 	}
 	public void dietitianUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, String dietitianNum, String dietitianStatDate) {
-		if ((pass.length()<6) || (pass.compareTo(pass2)==0))
+		if ((pass.length()<6) || (pass.compareTo(pass2)!=0))
 			check=false; // can't save > we will show an error ! 
-		String hashPass;
-		hashPass = ConvertPassToHash(pass);
-		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-mm-dd");
-		LocalDate dateBirth = LocalDate.parse(dateOfBirth, formatter);	
-		LocalDate dietitianDate = LocalDate.parse(dateOfBirth, formatter);	
-		ev=new Event();
-		ev.getArr().add("dietitian_update");
-		myDietitian.setPersonFirstName(firstName);
-		myDietitian.setPersonLastName(lastName);
-		myDietitian.setPersonEmail(email);
-		myDietitian.setPersonDateOfBirth(dateBirth);
-		myDietitian.setPersonHashPass(hashPass);
-		myDietitian.setDietitianStatDate(dietitianDate);
-		ev.getArr().add(myDietitian);
-		setChanged();
-		notifyObservers(ev);
+		else
+		{
+			String hashPass;
+			hashPass = ConvertPassToHash(pass);
+			LocalDate dateBirth = LocalDate.parse(dateOfBirth);	
+			LocalDate dietitianDate = LocalDate.parse(dateOfBirth);	
+			ev=new Event();
+			ev.getArr().add("dietitian_update");
+			myDietitian.setPersonFirstName(firstName);
+			myDietitian.setPersonLastName(lastName);
+			myDietitian.setPersonEmail(email);
+			myDietitian.setPersonDateOfBirth(dateBirth);
+			myDietitian.setPersonHashPass(hashPass);
+			myDietitian.setDietitianStatDate(dietitianDate);
+			ev.getArr().add(myDietitian);
+			setChanged();
+			notifyObservers(ev);
+		}
 	}
 	public void dietitianUpdateResponse(ArrayList<Dietitian> usD) {
 		if (usD!=null)
 			check=true; // everything was OK
-		check=false; // something went wrong (could'nt save / already exist)
+		else check=false; // something went wrong (could'nt save / already exist)
 	}
 	public void deleteUser() {
 		ev=new Event();
@@ -438,12 +444,13 @@ public class myView extends Observable implements View {
 		}
 		else check=false; // error
 	}
-	public void deleteRecipe(Recipe rec) {
+	public void deleteRecipe() {
 		ev=new Event();
 		ev.getArr().add("recipe_delete");
-		ev.getArr().add(rec);
+		ev.getArr().add(myRecipe);
 		setChanged();
 		notifyObservers(ev);
+		myRecipe=null;
 	}
 	public void deleteRecipeResponse(ArrayList<Recipe> rec) {
 		if (rec==null)
@@ -463,7 +470,7 @@ public class myView extends Observable implements View {
 	public void recipeUpdateResponse(ArrayList<Recipe> r) {
 		if (r!=null)
 			check=true; // everything was OK
-		check=false; // something went wrong 
+		else check=false; // something went wrong 
 	}
 	public void ingredientUpdate(Ingredient ing) {
 		ev=new Event();
@@ -475,7 +482,7 @@ public class myView extends Observable implements View {
 	public void ingredientUpdateResponse(ArrayList<Ingredient> in) {
 		if (in!=null)
 			check=true; // everything was OK
-		check=false; // something went wrong 
+		else check=false; // something went wrong 
 	}
 	public void recipeReport(Integer allergy) {
 		ev=new Event();
