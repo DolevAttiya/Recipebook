@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
 import controller.Event;
 import model.Dietitian;
@@ -26,11 +27,10 @@ public class myView extends Observable implements View {
 	public static ArrayList<IngredientType> myMeasuring;
 	public static Recipe myRecipe=null;
 	public static Ingredient myIngredient;
-	public static ArrayList<Ingredient> ingredientArrayForNewRecipe=new ArrayList<Ingredient>();
-	public static ArrayList<IngredientType> myMeasuringForNewRecipe;
-	
+	public static ArrayList<Ingredient> ingredientArrayForRecipe=new ArrayList<Ingredient>();
+	public static ArrayList<IngredientType> myMeasuringForRecipe;
 	Event ev;
-	
+
 	private static String ConvertPassToHash(String input)  {
 		try { 
 			MessageDigest md = MessageDigest.getInstance("SHA-256"); 
@@ -73,7 +73,7 @@ public class myView extends Observable implements View {
 		}
 		else check=false; // show error
 	}
-	public void register(String firstName, String lastName, String email, String pass,String pass2, String dateOfBirth, boolean isDietitian, String dietitianNum, boolean isKosher, String dietitianStatDate,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, boolean wantAllerg) {
+	public void register(String firstName, String lastName, String email, String pass,String pass2, String dateOfBirth, Integer isDietitian, String dietitianNum, Integer isKosher, String dietitianStatDate,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Integer wantAllerg) {
 		if ((pass.length()<6) || (pass.compareTo(pass2)!=0))
 			check=false; // can't save > we will show an error ! 
 		else
@@ -83,19 +83,21 @@ public class myView extends Observable implements View {
 			String hashPass;
 			ev=new Event();
 			hashPass = ConvertPassToHash(pass);
-			LocalDate dateBirth = LocalDate.parse(dateOfBirth);				
-			if (isDietitian==true)
+			LocalDate dateBirth = LocalDate.parse(dateOfBirth);	
+			boolean isKosherBool=(isKosher==1);
+			boolean wantAllergBool=(wantAllerg==1);
+			if (isDietitian==1)
 			{
 				Integer dietNum=Integer.parseInt(dietitianNum);
 				LocalDate dietitianDate = LocalDate.parse(dietitianStatDate);
 				newDietitian = new Dietitian(email, firstName, lastName, dateBirth, hashPass, null, dietNum, dietitianDate);
-					ev.getArr().add("dietitian_register");
-					ev.getArr().add(newDietitian);
+				ev.getArr().add("dietitian_register");
+				ev.getArr().add(newDietitian);
 			}
 			else
 			{
 				Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
-				newUser=new model.User(email, firstName, lastName, dateBirth, hashPass, null,null, allergies, wantAllerg, isKosher);
+				newUser=new model.User(email, firstName, lastName, dateBirth, hashPass, null,null, allergies, wantAllergBool, isKosherBool);
 				ev.getArr().add("user_register");
 				ev.getArr().add(newUser);
 			}
@@ -231,15 +233,24 @@ public class myView extends Observable implements View {
 	public void myRecipesResponse(ArrayList<Recipe> r) {
 		recipeArray=r;
 	} 
-	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient> ing, Integer[] allergies) {
-		
+	public void addRecipe(String recipeName,Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, String description, Integer complexity, Integer timeToMake, String instructions) {
+		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
+		Recipe newRecipe=new Recipe(1,recipeName, allergies, myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myUser.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
+		Event ev=new Event();
+		ev.getArr().add("recipe_insert");
+		ev.getArr().add(newRecipe);
+		setChanged();
+		notifyObservers(ev);
 	} 
-	public void addIngredientToRecipe(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
-	{	
+	public void initializeRecipe() {
 		if (myRecipe==null) { 
 		Integer[] ar = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0};
 		myRecipe = new Recipe(null,"recipeName",ar,0.0,0.0,0.0,0.0,0,0,0,"personEmail",0,"recipeDescription","recipeProcess",new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Double>());
 		}
+	}
+	public void addIngredientToRecipe(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
+	{	
+		
 		myRecipe.getRecipeIngredientId().add(newIngredient.getIngredientId()); 
 		myRecipe.getRecipeIngredientsType().add(newingredientType.getIngredientTypeId());
 		myRecipe.getRecipeIngredientsAmount().add(IngredientAmount);
@@ -264,13 +275,28 @@ public class myView extends Observable implements View {
 			}
 		}	 
 	}
-	
+	public void fillIngredientIdToName() {
+		getAllIngredient();
+		getAllMeasuringTypes();
+		for(int i=0;i<myRecipe.getRecipeIngredientId().size();i++)
+		{
+			Iterator<Ingredient> iter = ingredientArray.iterator();
+			while(iter.hasNext()&&iter.next().getIngredientId()<myRecipe.getRecipeIngredientId().get(i));
+			ingredientArrayForRecipe.add(iter.next());
+		}
+		for(int i=0;i<myRecipe.getRecipeIngredientId().size();i++)
+		{
+			Iterator<IngredientType> iter = myMeasuring.iterator();
+			while(iter.hasNext()&&iter.next().getIngredientTypeId()<myRecipe.getRecipeIngredientsType().get(i));
+			myMeasuringForRecipe.add(iter.next());
+		}
+	}
 	public void addRecipeResponse(ArrayList<Recipe> r) {
 		if (r!=null)
 			check=true; // updated successfully
 		else check=false; // not successfully (couldn't save / already exist at the DB)
 	}
-	
+
 	public void getAllIngredient() {
 		ev=new Event();
 		ev.getArr().add("ingredient_getall");
@@ -280,7 +306,7 @@ public class myView extends Observable implements View {
 	public void getAllIngredientResponse(ArrayList<Ingredient> ing) {
 		ingredientArray=ing;
 	}
-	
+
 	public void getAllRecipes() {
 		ev=new Event();
 		ev.getArr().add("all_recipes");
@@ -475,8 +501,8 @@ case "ingredient_delete": // we need to discuss that !
  * 3 - 15 stars
  * 4 - 20 stars
  * catagory:
- * 0 - çìáé
- * 1 - áùøé
- * 2 - ôøååä
- * 3 - ìà ëùø éòðå áéé÷åï åëå?
+ * 0 - Ã§Ã¬Ã¡Ã©
+ * 1 - Ã¡Ã¹Ã¸Ã©
+ * 2 - Ã´Ã¸Ã¥Ã¥Ã¤
+ * 3 - Ã¬Ã  Ã«Ã¹Ã¸ Ã©Ã²Ã°Ã¥ Ã¡Ã©Ã©Ã·Ã¥Ã¯ Ã¥Ã«Ã¥?
  */
