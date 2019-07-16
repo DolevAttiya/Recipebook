@@ -53,7 +53,7 @@ class ControllerViewIntegration {
 	@Test
 	void testTrueUserRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
-				"1991-01-10", false, null, true, null, 0,0,0,0,0,0,0,0,0,0,0,0,true);
+				"1991-01-10", 0, null, 1, null, 0,0,0,0,0,0,0,0,0,0,0,0,1);
 		assertTrue(myView.check);
 		myView.myUser.Delete();
 	}
@@ -61,7 +61,7 @@ class ControllerViewIntegration {
 	@Test
 	void testTrueDietitianRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
-				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);
+				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);
 		assertTrue(myView.check);
 		myView.myDietitian.Delete();
 	}
@@ -70,14 +70,14 @@ class ControllerViewIntegration {
 	@Test
 	void testPassLengthTrueCompareFalseRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafj",
-				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);			
+				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);			
 		assertFalse(myView.check);
 	}
 
 	@Test
 	void testPassLengthFalseCompareTrueRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafi", "asafi",
-				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);		
+				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);		
 		assertFalse(myView.check);
 	}
 
@@ -85,7 +85,7 @@ class ControllerViewIntegration {
 	void testFalseRegister() // <6 & !=
 	{
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafi", "asafj",
-				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);		
+				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);		
 		assertFalse(myView.check);
 	}
 
@@ -93,7 +93,7 @@ class ControllerViewIntegration {
 	void testFalseRegisterExist()
 	{
 		v.register("Daenerys", "Targaryen", "drakarisValyrian.com", "khaleesi", "khaleesi",
-				"2019-06-17", false, null, true, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, true);
+				"2019-06-17", 0, null, 1, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 		assertFalse(myView.check);
 	}
 
