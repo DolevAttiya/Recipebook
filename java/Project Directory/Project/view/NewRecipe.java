@@ -246,10 +246,10 @@ public class NewRecipe extends JFrame {
 				"Amount",
 		"Mesuring"}; 
 		 dataIngredients = new Object[myView.recipeArray.size()][3];
-		for(int row=0;row<myView.ingredientArrayForNewRecipe.size();row++) {
-			dataIngredients[row][0]=myView.ingredientArrayForNewRecipe.get(row).getIngredientName();
+		for(int row=0;row<myView.ingredientArrayForRecipe.size();row++) {
+			dataIngredients[row][0]=myView.ingredientArrayForRecipe.get(row).getIngredientName();
 			dataIngredients[row][1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();
-			dataIngredients[row][2]=myView.myMeasuringForNewRecipe.get(row).getIngredientTypeName();
+			dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
 		}
 		JTable table = new JTable(dataIngredients, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -522,7 +522,8 @@ public class NewRecipe extends JFrame {
 				}
 
 				else {
-					//myView.addRecipe(textField_1.getText(), isFish,  isStrawberries,  isCoffie,  isGluten,  isLactose,  isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, textField_9.getText(), Complexity, timeToMake, textArea.getText())
+					
+					myView.statview.addRecipe(textField_1.getText(), isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, textField_9.getText(), Complexity, timeToMake, textArea.getText());
 					RecipeView f=new RecipeView();
 					f.setVisible(true);
 					NewRecipe.this.dispose();
@@ -592,7 +593,7 @@ public class NewRecipe extends JFrame {
 		JButton btnAddNewIngredient = new JButton("Add New Ingredient");
 		btnAddNewIngredient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Component f=new Component();
+				view.Ingredient f=new view.Ingredient();
 				f.setVisible(true);
 			}
 		});

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -314,12 +315,16 @@ public class AdvancedSearch extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			myView.statview.advancedSearch(textField_1.getText(), kashruth, complexity, timeToMake, rateAbove, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate);
+			if (myView.check==false) {
+				JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+			}
+			else {
 				SearchRes f=new SearchRes();
 				f.setVisible(true);
 				AdvancedSearch.this.dispose();
 				AdvancedSearch.this.setVisible(false);
 			}
-		});
+		}});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
 		btnSearch.setBounds(607, 1068, 326, 69);
 		panel_1.add(btnSearch);

@@ -225,6 +225,16 @@ public class MyFavourites extends JFrame {
 			data[row][4]=myView.recipeArray.get(row).getRecipeKashruth();
 		}
 		JTable table = new JTable(data, columnNames);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				RecipeView f=new RecipeView();
+				f.setVisible(true);
+				MyFavourites.this.dispose();
+				MyFavourites.this.setVisible(false);
+			}
+		});
 		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		table.setRowHeight(50);
 		JTableHeader th = table.getTableHeader();

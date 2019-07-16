@@ -29,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Component extends JFrame {
+public class Ingredient extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -66,7 +66,7 @@ public class Component extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Component frame = new Component();
+					Ingredient frame = new Ingredient();
 					frame.setVisible(true);
 					  frame.setTitle("Taimli!");
 				} catch (Exception e) {
@@ -82,7 +82,7 @@ public class Component extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Component() {
+	public Ingredient() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1664, 1493);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -105,8 +105,8 @@ public class Component extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				SearchRes d=new SearchRes();
 				d.setVisible(true);
-				Component.this.dispose();
-				Component.this.setVisible(false);
+				Ingredient.this.dispose();
+				Ingredient.this.setVisible(false);
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
@@ -125,8 +125,8 @@ public class Component extends JFrame {
 					Dietican f=new Dietican();
 					f.setVisible(true);
 				}
-				Component.this.dispose();
-				Component.this.setVisible(false);
+				Ingredient.this.dispose();
+				Ingredient.this.setVisible(false);
 			}
 		});
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
@@ -142,8 +142,8 @@ public class Component extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				AdvancedSearch f=new AdvancedSearch();
 				f.setVisible(true);
-				Component.this.dispose();
-				Component.this.setVisible(false);
+				Ingredient.this.dispose();
+				Ingredient.this.setVisible(false);
 			}
 		});
 		txtpnAdvancedSearch_1.setText("Advanced Search");
@@ -165,8 +165,8 @@ public class Component extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				MyFavourites f=new MyFavourites();
 				f.setVisible(true);
-				Component.this.dispose();
-				Component.this.setVisible(false);
+				Ingredient.this.dispose();
+				Ingredient.this.setVisible(false);
 			}
 		});
 		txtpnFavouriteRecipes.setBounds(524, 7, 210, 87);
@@ -190,8 +190,8 @@ public class Component extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				MyRecipes f=new MyRecipes();
 				f.setVisible(true);
-				Component.this.dispose();
-				Component.this.setVisible(false);
+				Ingredient.this.dispose();
+				Ingredient.this.setVisible(false);
 			}
 		});
 		txtpnMyRecipes.setText("My Recipes");
@@ -207,8 +207,8 @@ public class Component extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				MainPage f=new MainPage();
 				f.setVisible(true);
-				Component.this.dispose();
-				Component.this.setVisible(false);
+				Ingredient.this.dispose();
+				Ingredient.this.setVisible(false);
 			}
 		});
 		txtpnTaimli.setText("Taimli");
@@ -255,8 +255,8 @@ public class Component extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myView.statview.addIngredient (textField_7.getText(), kashruth, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, Calories, Carbs, Fat, Protein);
-							Component.this.dispose();
-				Component.this.setVisible(false);
+				Ingredient.this.dispose();
+				Ingredient.this.setVisible(false);
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
