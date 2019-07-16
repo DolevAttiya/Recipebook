@@ -77,6 +77,16 @@ public class ViewMock implements View {
 	public void getAllRecipesResponse(ArrayList<Recipe> r) { 
 		assertNotEquals(0,r.size());
 	}
+	
+	@Override
+	public void getAllMeasuringTypesResponse(ArrayList<IngredientType> measuring) {
+		assertNotEquals(0,measuring.size());
+	}
+	
+	@Override
+	public void getAllIngredientResponse(ArrayList<Ingredient> ing) {
+		assertNotEquals(0,ing.size());
+	}
 
 	@Override
 	public void getTop10Response(ArrayList<Recipe> r) {
@@ -132,6 +142,16 @@ public class ViewMock implements View {
 		else
 			assertNull(in);
 	}
+	
+	@Override
+	public void recipeReportResponse(ArrayList<Recipe> r) {
+		assertNotEquals(0,r.size());
+	}
+
+	@Override
+	public void ingredientReportResponse(ArrayList<Ingredient> ing) {
+		assertNotEquals(0,ing.size());
+	}
 
 	@Override
 	public void ingredientUpdateResponse(ArrayList<Ingredient> in) {
@@ -141,16 +161,6 @@ public class ViewMock implements View {
 
 	@Override
 	public void login(String email, String pass) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void register(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth,
-			boolean isDietitian, String dietitianNum, boolean isKosher, String dietitianStatDate, Integer isFish,
-			Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk,
-			Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity,
-			Integer isChocolate, boolean wantAllerg) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -241,21 +251,6 @@ public class ViewMock implements View {
 	}
 
 	@Override
-	public void getAllMeasuringTypesResponse(ArrayList<IngredientType> measuring) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addIngredient(String ingredientName, Integer catagory, Integer isFish, Integer isStrawberries,
-			Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds,
-			Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Double calories,
-			Double carbohydrate, Double fat, Double protein, Integer kashruth) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void getAllRecipes() {
 		// TODO Auto-generated method stub
 		
@@ -270,6 +265,64 @@ public class ViewMock implements View {
 	@Override
 	public void addIngredientToRecipe(Ingredient newIngredient, IngredientType newingredientType,
 			Double IngredientAmount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addIngredient(String ingredientName, Integer kashruth, Integer isFish, Integer isStrawberries,
+			Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds,
+			Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Double calories,
+			Double carbohydrate, Double fat, Double protein) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getAllIngredient() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void register(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth,
+			Integer isDietitian, String dietitianNum, Integer isKosher, String dietitianStatDate, Integer isFish,
+			Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk,
+			Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity,
+			Integer isChocolate, Integer wantAllerg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addRecipe(String recipeName, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten,
+			Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut,
+			Integer isAcidity, Integer isChocolate, String description, Integer complexity, Integer timeToMake,
+			String instructions) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void fillIngredientIdToName() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initializeRecipe() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void recipeReport(Integer allergy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ingredientReport(Integer allergy) {
 		// TODO Auto-generated method stub
 		
 	}
