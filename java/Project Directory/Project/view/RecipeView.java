@@ -541,7 +541,7 @@ public class RecipeView extends JFrame {
 		JButton btnILikeIt = new JButton("I Like It!");
 		btnILikeIt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//function +1/5
+				myView.statview.likePressed();
 				btnILikeIt.setEnabled(false);				
 			}
 		});

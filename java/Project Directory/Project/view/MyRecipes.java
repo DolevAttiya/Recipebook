@@ -214,24 +214,30 @@ public class MyRecipes extends JFrame {
 		panel_1.add(txtpnAdvancedSearch);
 		
 		String[] columnNames = {"Recipe Name",
-                "Description",
-                "Rate",
-                "Calories",
-                "Kosher"}; // name, description, rate, calories, kosher, 
-		Object[][] data = {
-			    {"Kathy", "Smith",
-			     "Snowboarding", new Integer(5), new Boolean(false)},
-			    {"John", "Doe",
-			     "Rowing", new Integer(3), new Boolean(true)},
-			    {"Sue", "Black",
-			     "Knitting", new Integer(2), new Boolean(false)},
-			    {"Jane", "White",
-			     "Speed reading", new Integer(20), new Boolean(true)},
-			    {"Joe", "Brown",
-			     "Pool", new Integer(10), new Boolean(false)}
-			};
-		
+				"Description",
+				"Rate",
+				"Calories",
+		"Kosher"}; 
+
+		Object[][] data = new Object[myView.recipeArray.size()][5];
+		for(int row=0;row<myView.recipeArray.size();row++) {
+			data[row][0]=myView.recipeArray.get(row).getRecipeName();
+			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
+			data[row][3]=myView.recipeArray.get(row).getRecipeTotalCalories();
+			data[row][4]=myView.recipeArray.get(row).getRecipeKashruth();
+		}
 		JTable table = new JTable(data, columnNames);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				RecipeView f=new RecipeView();
+				f.setVisible(true);
+				MyRecipes.this.dispose();
+				MyRecipes.this.setVisible(false);
+			}
+		});
 		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		table.setRowHeight(50);
 		JTableHeader th = table.getTableHeader();
