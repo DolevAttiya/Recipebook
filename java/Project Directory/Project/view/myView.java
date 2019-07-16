@@ -26,6 +26,9 @@ public class myView extends Observable implements View {
 	public static ArrayList<IngredientType> myMeasuring;
 	public static Recipe myRecipe=null;
 	public static Ingredient myIngredient;
+	public static ArrayList<Ingredient> ingredientArrayForNewRecipe=new ArrayList<Ingredient>();
+	public static ArrayList<IngredientType> myMeasuringForNewRecipe;
+	
 	Event ev;
 	
 	private static String ConvertPassToHash(String input)  {
@@ -228,7 +231,7 @@ public class myView extends Observable implements View {
 	public void myRecipesResponse(ArrayList<Recipe> r) {
 		recipeArray=r;
 	} 
-	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient> in, Integer[] allergies) {
+	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient> ing, Integer[] allergies) {
 		
 	} 
 	public void addIngredientToRecipe(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
@@ -268,7 +271,17 @@ public class myView extends Observable implements View {
 			check=true; // updated successfully
 		else check=false; // not successfully (couldn't save / already exist at the DB)
 	}
-	  
+	
+	public void getAllIngredient() {
+		ev=new Event();
+		ev.getArr().add("ingredient_getall");
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void getAllIngredientResponse(ArrayList<Ingredient> ing) {
+		ingredientArray=ing;
+	}
+	
 	public void getAllRecipes() {
 		ev=new Event();
 		ev.getArr().add("all_recipes");
