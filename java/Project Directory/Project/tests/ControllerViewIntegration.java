@@ -178,17 +178,11 @@ class ControllerViewIntegration {
 	@Test
 	void testTrueUserUpdate() {
 		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+		v.userUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 		assertTrue(myView.check);
 		v.deleteUser();
 	}
-	/*
-	@Test
-	void testFalseUserUpdate() // User doesn't exist in DB
-	{
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi", "1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
-		assertFalse(myView.check);
-	}
+	
 	@Test
 	void testTrueDietitianUpdate() {
 		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
@@ -196,15 +190,7 @@ class ControllerViewIntegration {
 		assertTrue(myView.check);
 		myView.myDietitian.Delete();
 	}
-
-	@Test
-	void testFalseDietitianUpdate() // Dietitian doesn't exist in DB
-	{
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
-		assertFalse(myView.check);
-	}
-
-
+	
 	@Test // good
 	void testTrueDeleteUser() {
 		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
@@ -212,7 +198,7 @@ class ControllerViewIntegration {
 		assertTrue(myView.check);
 	}
 
-
+	
 	@Test // good
 	void testFalseDeleteUser() {
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
@@ -222,7 +208,7 @@ class ControllerViewIntegration {
 		v.deleteUser();
 		assertFalse(myView.check);
 	}
-
+	
 	@Test
 	void testTrueDeleteDietitian() {
 		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
@@ -230,7 +216,7 @@ class ControllerViewIntegration {
 		assertTrue(myView.check);
 	}
 
-
+	
 	@Test
 	void testFalseDeleteDietitian() {
 		myView.myDietitian= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
@@ -238,13 +224,13 @@ class ControllerViewIntegration {
 		assertFalse(myView.check);
 	}
 
-
+	
 	@Test
 	void testTrueDeleteIngredient() {
 		fail("Not yet implemented"); // TODO
 	}
 
-
+	
 	@Test
 	void testFalseDeleteIngredient() {
 		fail("Not yet implemented"); // TODO
@@ -294,5 +280,5 @@ class ControllerViewIntegration {
 	void testLikePressed() {
 		fail("Not yet implemented"); // TODO
 	}
-	*/
+	
 }
