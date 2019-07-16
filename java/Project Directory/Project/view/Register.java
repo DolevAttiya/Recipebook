@@ -127,6 +127,7 @@ public class Register extends JFrame {
 
 		//
 		JTextPane txtpnUserDetails = new JTextPane();
+		txtpnUserDetails.setEditable(false);
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -151,6 +152,7 @@ public class Register extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
+		txtpnAdvancedSearch_1.setEditable(false);
 		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -168,10 +170,11 @@ public class Register extends JFrame {
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_5.setColumns(10);
-		textField_5.setBounds(747, 37, 340, 43);
+		textField_5.setBounds(747, 37, 269, 43);
 		panel.add(textField_5);
 
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
+		txtpnFavouriteRecipes.setEditable(false);
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -186,6 +189,7 @@ public class Register extends JFrame {
 		txtpnFavouriteRecipes.setBackground(new Color(65, 105, 225));
 
 		JTextPane txtpnSearch_1 = new JTextPane();
+		txtpnSearch_1.setEditable(false);
 		txtpnSearch_1.setText("Search");
 		txtpnSearch_1.setForeground(Color.WHITE);
 		txtpnSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -194,6 +198,7 @@ public class Register extends JFrame {
 		panel.add(txtpnSearch_1);
 
 		JTextPane txtpnMyRecipes = new JTextPane();
+		txtpnMyRecipes.setEditable(false);
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -208,6 +213,7 @@ public class Register extends JFrame {
 		panel.add(txtpnMyRecipes);
 
 		JTextPane txtpnTaimli = new JTextPane();
+		txtpnTaimli.setEditable(false);
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -242,7 +248,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_3.setBounds(721, 732, 105, 49);
+		comboBox_3.setBounds(796, 738, 105, 49);
 		panel_1.add(comboBox_3);
 
 		String[] daysDietitian = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
@@ -255,7 +261,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_2.setBounds(606, 732, 105, 49);
+		comboBox_2.setBounds(681, 738, 105, 49);
 		panel_1.add(comboBox_2);
 
 		textField_4 = new JTextField();
@@ -267,7 +273,7 @@ public class Register extends JFrame {
 		});
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_4.setColumns(10);
-		textField_4.setBounds(838, 732, 171, 49);
+		textField_4.setBounds(913, 738, 171, 49);
 		panel_1.add(textField_4);
 
 		//if (chckbxDietican.setSelected(true)) --> textField_8.setEnabled(false);
@@ -276,7 +282,7 @@ public class Register extends JFrame {
 		textField_8.setEnabled(false);
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_8.setColumns(10);
-		textField_8.setBounds(738, 669, 271, 49);
+		textField_8.setBounds(738, 669, 346, 49);
 		panel_1.add(textField_8);
 
 		textField_7 = new JTextField();
@@ -335,6 +341,7 @@ public class Register extends JFrame {
 		setVisible(true);
 
 		JTextPane txtpnEnterDieticanNumber = new JTextPane();
+		txtpnEnterDieticanNumber.setEditable(false);
 		txtpnEnterDieticanNumber.setText("Enter Dietican Number:");
 		txtpnEnterDieticanNumber.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		txtpnEnterDieticanNumber.setBackground(new Color(240, 248, 255));
@@ -393,6 +400,7 @@ public class Register extends JFrame {
 		panel_1.add(textField_1);
 
 		JTextPane txtpnSearchFor = new JTextPane();
+		txtpnSearchFor.setEditable(false);
 		txtpnSearchFor.setText("First Name:");
 		txtpnSearchFor.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnSearchFor.setBackground(new Color(240, 248, 255));
@@ -400,6 +408,7 @@ public class Register extends JFrame {
 		panel_1.add(txtpnSearchFor);
 
 		JTextPane txtpnRecipeId = new JTextPane();
+		txtpnRecipeId.setEditable(false);
 		txtpnRecipeId.setText("Last Name:");
 		txtpnRecipeId.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnRecipeId.setBackground(new Color(240, 248, 255));
@@ -424,6 +433,7 @@ public class Register extends JFrame {
 		panel_1.add(chckbxNewCheckBox);
 
 		JTextPane txtpnAdvancedSearch = new JTextPane();
+		txtpnAdvancedSearch.setEditable(false);
 		txtpnAdvancedSearch.setText("Register");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
@@ -448,6 +458,7 @@ public class Register extends JFrame {
 		panel_1.add(chckbxDairy);
 
 		JTextPane txtpnAllergies = new JTextPane();
+		txtpnAllergies.setEditable(false);
 		txtpnAllergies.setText("Allergies:");
 
 		txtpnAllergies.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
@@ -498,7 +509,7 @@ public class Register extends JFrame {
 				else {
 						dateOfBirth=yearOfBirth+"-"+monthOfBirth+"-"+dayOfBirth;
 						dietitianStatDate=yearOfStat+"-"+monthOfStat+"-"+dayOfStat;
-						// update boolean tp int:  myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+						myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
 						MainPage f=new MainPage();
 						f.setVisible(true);
 						Register.this.dispose();
@@ -511,6 +522,7 @@ public class Register extends JFrame {
 		panel_1.add(btnSearch);
 
 		JTextPane txtpnEmail = new JTextPane();
+		txtpnEmail.setEditable(false);
 		txtpnEmail.setText("Email:");
 		chckbxNon.addActionListener(new ActionListener() {
 			@Override
@@ -525,6 +537,7 @@ public class Register extends JFrame {
 		panel_1.add(txtpnEmail);
 
 		JTextPane txtpnEnterPassword = new JTextPane();
+		txtpnEnterPassword.setEditable(false);
 		txtpnEnterPassword.setText("Enter Password: (6 digits)");
 		txtpnEnterPassword.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		txtpnEnterPassword.setBackground(new Color(240, 248, 255));
@@ -532,6 +545,7 @@ public class Register extends JFrame {
 		panel_1.add(txtpnEnterPassword);
 
 		JTextPane txtpnEnterPasswordAgain = new JTextPane();
+		txtpnEnterPasswordAgain.setEditable(false);
 		txtpnEnterPasswordAgain.setText("Enter Password Again:");
 		txtpnEnterPasswordAgain.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		txtpnEnterPasswordAgain.setBackground(new Color(240, 248, 255));
@@ -691,10 +705,11 @@ public class Register extends JFrame {
 		
 
 		JTextPane txtpnExpiryDate_1 = new JTextPane();
-		txtpnExpiryDate_1.setText("Expiry Date:");
+		txtpnExpiryDate_1.setEditable(false);
+		txtpnExpiryDate_1.setText("Date of Certification:");
 		txtpnExpiryDate_1.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		txtpnExpiryDate_1.setBackground(new Color(240, 248, 255));
-		txtpnExpiryDate_1.setBounds(316, 732, 281, 55);
+		txtpnExpiryDate_1.setBounds(316, 732, 357, 55);
 		panel_1.add(txtpnExpiryDate_1);
 
 		String[] months = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
@@ -706,7 +721,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox.setBounds(463, 408, 105, 49);
+		comboBox.setBounds(358, 408, 105, 49);
 		panel_1.add(comboBox);
 
 		
@@ -719,10 +734,11 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_1.setBounds(348, 408, 105, 49);
+		comboBox_1.setBounds(468, 408, 105, 49);
 		panel_1.add(comboBox_1);
 
 		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane.setText("Date of Birth:");
 		textPane.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textPane.setBackground(new Color(240, 248, 255));
