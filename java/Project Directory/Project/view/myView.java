@@ -186,7 +186,7 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void addIngredient (String ingredientName, Integer catagory,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, /*Integer[] measureType,*/ Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth) { 
+	public void addIngredient (String ingredientName, Integer kashruth,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Double calories, Double carbohydrate, Double fat, Double protein) { 
 		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
 		Ingredient newIngredient=new Ingredient(null, ingredientName, allergies, calories, carbohydrate, protein, fat, kashruth);
 		Event ev=new Event();
