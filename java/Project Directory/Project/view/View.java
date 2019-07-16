@@ -51,7 +51,7 @@ public interface View {
 	public void deleteUser();
 	public void deleteDietitian();
 	public void deleteIngredient(Ingredient ing);
-	public void deleteRecipe(Recipe rec);
+	public void deleteRecipe();
 	public void recipeUpdate(Recipe rec);
 	public void ingredientUpdate(Ingredient ing);
 	public void getAllMeasuringTypes();
