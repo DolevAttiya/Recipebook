@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import model.Dietitian;
 import model.Ingredient;
+import model.IngredientType;
 import model.Recipe;
 import model.User;
 
@@ -26,9 +27,8 @@ public interface View {
 	public void deleteDietitianResponse(ArrayList<Dietitian> usD);
 	public void deleteRecipeResponse(ArrayList<Recipe> rec);
 	public void recipeUpdateResponse(ArrayList<Recipe> r);
-
 	public void ingredientUpdateResponse(ArrayList<Ingredient> in);
-
+	public void getAllMeasuringTypesResponse(ArrayList<IngredientType> measuring);
 
 	//From GUI to myView
 	public void login (String email, String pass);
@@ -36,11 +36,11 @@ public interface View {
 	public void getTop10();
 	public void mainSearch(String s); 
 	public void advancedSearch(String s, Integer kashruth, Integer complexity, String timeToMake, String rateAbove,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate);
-	public void addIngredient (String ingredientName, Integer catagory,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Integer[] measureType, Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth);
+	public void addIngredient (String ingredientName, Integer kashruth,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Double calories, Double carbohydrate, Double fat, Double protein);
 	public void myFavorite ();
 	public void myRecipes ();
 	//public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient>, Integer[] allergies) {} 
-	public void getRecipes();
+	public void getAllRecipes();
 	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, boolean isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate , boolean wantAllerg);
 	public void dietitianUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, String dietitianNum, String dietitianStatDate);
 	public void deleteUser();
@@ -48,7 +48,9 @@ public interface View {
 	public void deleteIngredient(Ingredient ing);
 	public void deleteRecipe(Recipe rec);
 	public void recipeUpdate(Recipe rec);
-	public void ingredientUpdate(Ingredient ing);	
+	public void ingredientUpdate(Ingredient ing);
+	public void getAllMeasuringTypes();
+	public void addIngredientToRecipe(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount); // small add button, adds to Recipe automatically
 }
 //update ingredient, remove ingredient
 //update recipe

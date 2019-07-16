@@ -106,6 +106,7 @@ public class MainPage extends JFrame {
 		th.setPreferredSize(new Dimension(100, 100));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 32);
 		table.getTableHeader().setFont(bigFont);
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
 		scrollPane.setSize(796, 900);

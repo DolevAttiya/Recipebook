@@ -50,6 +50,11 @@ public class AdvancedSearch extends JFrame {
 	public int isPeanut=0;
 	public int isAcidity=0;
 	public int isChocolate=0;
+	public String timeToMake="0000";
+	public String rateAbove="0000";
+	public int kashruth=0;
+	public int complexity=0;
+	
 	
 
 	/**
@@ -235,27 +240,30 @@ public class AdvancedSearch extends JFrame {
 		checkBox_2.setBounds(1279, 671, 281, 41);
 		panel_1.add(checkBox_2);
 		
-		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
+		String[] times = {"30", "60", "120", "180", "all"};
 		JComboBox comboBox_1 = new JComboBox(times);
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_1 = (JComboBox)e.getSource();
 		        String timeToMake = (String)comboBox_1.getSelectedItem();
+		        if (timeToMake=="all") {
+		        	timeToMake="99999";
+		        }
 			}
 		});
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox_1.setBounds(535, 504, 241, 49);
 		panel_1.add(comboBox_1);
 		
-		String[] complexity = {"Easy", "Medium", "Hard"};
-		JComboBox comboBox_4 = new JComboBox(complexity);
+		String[] complexiting = {"Easy", "Medium", "Hard"};
+		JComboBox comboBox_4 = new JComboBox(complexiting);
 		comboBox_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_4 = (JComboBox)e.getSource();
 		        int complexity = (int)comboBox_4.getSelectedIndex();
 			}
 		});
-		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox_4.setBounds(373, 427, 403, 49);
 		panel_1.add(comboBox_4);
 		
@@ -265,8 +273,8 @@ public class AdvancedSearch extends JFrame {
 		textField_1.setBounds(297, 220, 1246, 58);
 		panel_1.add(textField_1);
 		
-		String[] kashruth = {"Parve", "Dairy", "Meat","Not Kosher","Kosher"};
-		JComboBox comboBox = new JComboBox(kashruth);
+		String[] kashruthing = {"Parve", "Dairy", "Meat","Not Kosher","Kosher"};
+		JComboBox comboBox = new JComboBox(kashruthing);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JComboBox comboBox = (JComboBox)arg0.getSource();
@@ -305,7 +313,7 @@ public class AdvancedSearch extends JFrame {
 		JButton btnSearch = new JButton("Search!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//	myView.statview.advancedSearch(textField_1.getText(), kashruth, complexity, timeToMake, rateAbove, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate);
+			myView.statview.advancedSearch(textField_1.getText(), kashruth, complexity, timeToMake, rateAbove, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate);
 				SearchRes f=new SearchRes();
 				f.setVisible(true);
 				AdvancedSearch.this.dispose();
@@ -520,16 +528,19 @@ public class AdvancedSearch extends JFrame {
 		checkBox_12.setBounds(1279, 744, 281, 41);
 		panel_1.add(checkBox_12);
 		
-		String[] rating = {"0","50", "100", "150","200"};
-		JComboBox comboBox_2 = new JComboBox(rating);
+		String[] rateAbove = {"0","50", "100", "150","200", "more than 200"};
+		JComboBox comboBox_2 = new JComboBox(rateAbove);
 		comboBox_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_2 = (JComboBox)e.getSource();
-		        String rating = (String)comboBox.getSelectedItem();
+		        String rateAbove = (String)comboBox.getSelectedItem();
+		        if (rateAbove=="more than 200") {
+		        	rateAbove="99999";
+		        }
 			}
 		});
-		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		comboBox_2.setBounds(307, 615, 293, 49);
+		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		comboBox_2.setBounds(307, 615, 317, 49);
 		panel_1.add(comboBox_2);
 		
 	}

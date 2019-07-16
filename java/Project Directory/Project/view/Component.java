@@ -40,6 +40,16 @@ public class Component extends JFrame {
 	private JTextField textField_4;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	public int kashruth =0;
+	public int isCup=0;
+	public int isSpoon=0;
+	public int isMililiter=0;
+	public int isGram=0;
+	public int Calories=0;
+	public int Carbs=0;
+	public int Fat=0;
+	public int Protein=0;
+
 
 	/**
 	 * Launch the application.
@@ -208,8 +218,8 @@ public class Component extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		String[] kashruth = { "---","Meat", "Dairy", "Parve", "Not Kosher"};
-		JComboBox comboBox_1 = new JComboBox(kashruth);
+		String[] kashruthing = {"Parve", "Dairy", "Meat","Not Kosher","Kosher"};
+		JComboBox comboBox_1 = new JComboBox(kashruthing);
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JComboBox comboBox_1 = (JComboBox)arg0.getSource();
@@ -236,6 +246,7 @@ public class Component extends JFrame {
 		JButton btnSearch = new JButton("Add!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//addIngredient (textField_7.getText(), kashruth, Calories, Carbs, Fat, Protein );
 				Component.this.dispose();
 				Component.this.setVisible(false);
 			}
@@ -265,12 +276,12 @@ public class Component extends JFrame {
 		textPane_2.setBounds(1044, 615, 173, 61);
 		panel_1.add(textPane_2);
 		
-		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setText("Sugar:");
-		textPane_3.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		textPane_3.setBackground(new Color(240, 248, 255));
-		textPane_3.setBounds(1044, 552, 173, 61);
-		panel_1.add(textPane_3);
+		JTextPane txtpnCarbs = new JTextPane();
+		txtpnCarbs.setText("Carbs:");
+		txtpnCarbs.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		txtpnCarbs.setBackground(new Color(240, 248, 255));
+		txtpnCarbs.setBounds(1044, 552, 173, 61);
+		panel_1.add(txtpnCarbs);
 		
 		JTextPane textPane_4 = new JTextPane();
 		textPane_4.setText("Calories:");
@@ -287,87 +298,50 @@ public class Component extends JFrame {
 		panel_1.add(textPane_5);
 		
 		textField_2 = new JTextField();
+		textField_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double Calories= Double.parseDouble(textField_7.getText());
+			}
+		});
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_2.setColumns(10);
 		textField_2.setBounds(1229, 505, 237, 49);
 		panel_1.add(textField_2);
 		
 		textField_3 = new JTextField();
+		textField_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double Carbs= Double.parseDouble(textField_3.getText());
+
+			}
+		});
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_3.setColumns(10);
 		textField_3.setBounds(1229, 564, 237, 49);
 		panel_1.add(textField_3);
 		
 		textField_4 = new JTextField();
+		textField_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double Fat= Double.parseDouble(textField_4.getText());
+
+			}
+		});
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_4.setColumns(10);
 		textField_4.setBounds(1229, 623, 237, 49);
 		panel_1.add(textField_4);
 		
 		textField_6 = new JTextField();
+		textField_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double Protein= Double.parseDouble(textField_6.getText());
+			}
+		});
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_6.setColumns(10);
 		textField_6.setBounds(1229, 682, 237, 49);
 		panel_1.add(textField_6);
-		
-		JTextPane txtpnMes = new JTextPane();
-		txtpnMes.setText("Measuring Types:");
-		txtpnMes.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
-		txtpnMes.setBackground(new Color(240, 248, 255));
-		txtpnMes.setBounds(60, 404, 678, 88);
-		panel_1.add(txtpnMes);
-		
-		JCheckBox chckbxCup = new JCheckBox("Cup");
-		chckbxCup.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent e) {
-				 System.out.println(e.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : e.getID()); //add what happens
-			}
-		});
-		chckbxCup.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxCup.setBackground(new Color(240, 248, 255));
-		chckbxCup.setBounds(58, 487, 697, 64);
-		panel_1.add(chckbxCup);
-		
-		JCheckBox chckbxSpoon_1 = new JCheckBox("Spoon");
-		chckbxSpoon_1.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent g) {
-				 System.out.println(g.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : g.getID()); //add what happens
-			}
-		});
-		chckbxSpoon_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxSpoon_1.setBackground(new Color(240, 248, 255));
-		chckbxSpoon_1.setBounds(58, 547, 697, 64);
-		panel_1.add(chckbxSpoon_1);
-		
-		JCheckBox chckbxGrams_1 = new JCheckBox("Grams");
-		chckbxGrams_1.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent h) {
-				 System.out.println(h.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : h.getID()); //add what happens
-			}
-		});
-		chckbxGrams_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxGrams_1.setBackground(new Color(240, 248, 255));
-		chckbxGrams_1.setBounds(58, 607, 697, 64);
-		panel_1.add(chckbxGrams_1);
-		
-		JCheckBox chckbxMililiter = new JCheckBox("Mililiter");
-		chckbxMililiter.addActionListener(new ActionListener() {
-			 @Override
-			public void actionPerformed(ActionEvent i) {
-				 System.out.println(i.getID() == ActionEvent.ACTION_PERFORMED
-		                    ? "ACTION_PERFORMED" : i.getID()); //add what happens
-			}
-		});
-		chckbxMililiter.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		chckbxMililiter.setBackground(new Color(240, 248, 255));
-		chckbxMililiter.setBounds(58, 667, 697, 64);
-		panel_1.add(chckbxMililiter);
 		
 		JTextPane txtpnComponentName = new JTextPane();
 		txtpnComponentName.setText("Component Name:");
