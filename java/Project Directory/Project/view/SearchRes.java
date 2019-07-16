@@ -30,6 +30,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.ListSelectionModel;
 
 public class SearchRes extends JFrame {
 
@@ -224,7 +225,19 @@ public class SearchRes extends JFrame {
 			data[row][4]=myView.recipeArray.get(row).getRecipeKashruth();
 		}
 		
+		
 		JTable table = new JTable(data, columnNames);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				RecipeView f=new RecipeView();
+				f.setVisible(true);
+				SearchRes.this.dispose();
+				SearchRes.this.setVisible(false);
+			}
+		});
+		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		table.setRowHeight(50);
 		JTableHeader th = table.getTableHeader();
@@ -233,6 +246,9 @@ public class SearchRes extends JFrame {
 		table.getTableHeader().setFont(bigFont);
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
+		table.setRowSelectionAllowed(true);
+		table.setColumnSelectionAllowed(false);
+		table.setCellSelectionEnabled(false);
 		table.setRowHeight(1, 60);
 		scrollPane.setSize(1514, 1001);
 		scrollPane.setLocation(46, 154);

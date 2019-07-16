@@ -130,7 +130,7 @@
   </class>  
   <interface id="15" language="java" name="view.View" project="Project Directory" 
     file="/Project Directory/Project/view/View.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="4635" y="1490"/>    
+    <position height="-1" width="-1" x="4638" y="1668"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -139,7 +139,7 @@
   </interface>  
   <class id="16" language="java" name="view.SearchRes" project="Project Directory" 
     file="/Project Directory/Project/view/SearchRes.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5322" y="833"/>    
+    <position height="-1" width="-1" x="5296" y="435"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -148,7 +148,7 @@
   </class>  
   <class id="17" language="java" name="view.MainPage" project="Project Directory" 
     file="/Project Directory/Project/view/MainPage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5498" y="842"/>    
+    <position height="-1" width="-1" x="5296" y="722"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -166,7 +166,7 @@
   </class>  
   <class id="19" language="java" name="view.User" project="Project Directory" 
     file="/Project Directory/Project/view/User.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5682" y="860"/>    
+    <position height="-1" width="-1" x="5468" y="318"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -175,7 +175,7 @@
   </class>  
   <class id="20" language="java" name="view.Register" project="Project Directory" 
     file="/Project Directory/Project/view/Register.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5884" y="1058"/>    
+    <position height="-1" width="-1" x="5828" y="518"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -184,7 +184,7 @@
   </class>  
   <class id="21" language="java" name="view.Login" project="Project Directory" 
     file="/Project Directory/Project/view/Login.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5318" y="400"/>    
+    <position height="-1" width="-1" x="5296" y="300"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -193,7 +193,7 @@
   </class>  
   <class id="22" language="java" name="view.Component" project="Project Directory" 
     file="/Project Directory/Project/view/Component.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5494" y="400"/>    
+    <position height="-1" width="-1" x="5460" y="566"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -202,7 +202,7 @@
   </class>  
   <class id="23" language="java" name="view.MyFavourites" project="Project Directory" 
     file="/Project Directory/Project/view/MyFavourites.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5670" y="400"/>    
+    <position height="-1" width="-1" x="5296" y="574"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -211,7 +211,7 @@
   </class>  
   <class id="24" language="java" name="view.AdvancedSearch" project="Project Directory" 
     file="/Project Directory/Project/view/AdvancedSearch.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5851" y="508"/>    
+    <position height="-1" width="-1" x="5647" y="446"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -220,7 +220,7 @@
   </class>  
   <class id="25" language="java" name="view.RecipeView" project="Project Directory" 
     file="/Project Directory/Project/view/RecipeView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5312" y="1439"/>    
+    <position height="-1" width="-1" x="5460" y="893"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -229,7 +229,7 @@
   </class>  
   <class id="26" language="java" name="view.MyRecipes" project="Project Directory" 
     file="/Project Directory/Project/view/MyRecipes.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5488" y="1448"/>    
+    <position height="-1" width="-1" x="5294" y="1008"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -238,7 +238,7 @@
   </class>  
   <class id="27" language="java" name="view.Dietican" project="Project Directory" 
     file="/Project Directory/Project/view/Dietican.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5664" y="1448"/>    
+    <position height="-1" width="-1" x="5296" y="864"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
@@ -247,150 +247,186 @@
   </class>  
   <class id="28" language="java" name="view.NewRecipe" project="Project Directory" 
     file="/Project Directory/Project/view/NewRecipe.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="5840" y="1448"/>    
+    <position height="-1" width="-1" x="5640" y="834"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="true" private="false" static="true"/>      
       <operations public="true" package="false" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <association id="29">    
+  <generalization id="29">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <association id="31">    
+    <bendpoint x="3812" y="348"/>    
+    <bendpoint x="3814" y="1664"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="32" name="view">        
+        <position height="0" width="0" x="3" y="178"/>      
+      </attribute>      
+      <multiplicity id="33" minimum="0" maximum="1">        
+        <position height="0" width="0" x="3" y="178"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <association id="35">    
+    <bendpoint x="3284" y="712"/>    
+    <bendpoint x="3284" y="2524"/>    
+    <bendpoint x="640" y="2516"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="36" name="myUser">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="37" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="38">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="39">    
     <bendpoint x="3606" y="720"/>    
     <bendpoint x="3606" y="1020"/>    
     <bendpoint x="3608" y="1412"/>    
     <bendpoint x="3116" y="1414"/>    
     <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="30" name="recipeArray"/>      
-      <multiplicity id="31" minimum="0" maximum="2147483647"/>    
+      <attribute id="40" name="recipeArray">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="41" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="32">    
+  <association id="42">    
+    <bendpoint x="3492" y="717"/>    
+    <bendpoint x="3492" y="2020"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="43" name="myDietitian">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="45">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <association id="46">    
+    <bendpoint x="3672" y="716"/>    
+    <bendpoint x="3672" y="2172"/>    
+    <bendpoint x="2956" y="2172"/>    
+    <bendpoint x="1708" y="2176"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="47" name="ingredientArray">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="48" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <bendpoint x="3956" y="712"/>    
+    <bendpoint x="3956" y="204"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="50" name="ev">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="52">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="53">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="7"/>  
   </generalization>  
-  <association id="33">    
+  <realization id="54">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="55">    
     <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="34" name="statview"/>      
-      <multiplicity id="35" minimum="0" maximum="1"/>    
+      <attribute id="56" name="statview">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="18" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="36">    
-    <bendpoint x="3172" y="348"/>    
-    <bendpoint x="3188" y="2640"/>    
-    <bendpoint x="201" y="2640"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="37" name="model"/>      
-      <multiplicity id="38" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="39">    
-    <bendpoint x="3812" y="348"/>    
-    <bendpoint x="3812" y="1488"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="40" name="view"/>      
-      <multiplicity id="41" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="42">    
-    <end type="SOURCE" refId="14"/>    
+  <generalization id="58">    
+    <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="13"/>  
   </generalization>  
-  <association id="43">    
+  <association id="59">    
     <bendpoint x="660" y="458"/>    
     <bendpoint x="660" y="618"/>    
     <bendpoint x="1972" y="620"/>    
     <bendpoint x="2620" y="620"/>    
     <bendpoint x="2616" y="202"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="44" name="ev"/>      
-      <multiplicity id="45" minimum="0" maximum="1"/>    
+      <attribute id="60" name="ev">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="61" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="46">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
-  <generalization id="47">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <generalization id="48">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <association id="49">    
-    <bendpoint x="3492" y="717"/>    
-    <bendpoint x="3492" y="2020"/>    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="50" name="myDietitian"/>      
-      <multiplicity id="51" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="52">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <realization id="53">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="15"/>  
-  </realization>  
-  <generalization id="54">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <association id="55">    
-    <bendpoint x="3956" y="712"/>    
-    <bendpoint x="3956" y="204"/>    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="56" name="ev"/>      
-      <multiplicity id="57" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="58">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <association id="59">    
-    <bendpoint x="3672" y="716"/>    
-    <bendpoint x="3672" y="2172"/>    
-    <bendpoint x="2956" y="2172"/>    
-    <bendpoint x="1708" y="2176"/>    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="60" name="ingredientArray"/>      
-      <multiplicity id="61" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="62">    
-    <bendpoint x="3284" y="712"/>    
-    <bendpoint x="3284" y="2524"/>    
-    <bendpoint x="640" y="2516"/>    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="63" name="myUser"/>      
-      <multiplicity id="64" minimum="0" maximum="1"/>    
+    <bendpoint x="3172" y="348"/>    
+    <bendpoint x="3188" y="2640"/>    
+    <bendpoint x="201" y="2640"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="63" name="model">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="64" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="65">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
+  <generalization id="65">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="false" protected="true" private="false" static="true"/>    
