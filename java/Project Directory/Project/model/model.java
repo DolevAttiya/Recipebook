@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public interface model {
 	public void top10();
+	public void allIngredient();
+	public void allIngredientType();
 	public void CheckPasswordAndEmail(String Email, String Password);
 	public void Search(ArrayList<Object> search);
 	public void myFavoriteRecipes(String Email);
