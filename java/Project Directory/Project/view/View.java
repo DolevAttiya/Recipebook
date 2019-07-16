@@ -32,6 +32,8 @@ public interface View {
 	public void ingredientUpdateResponse(ArrayList<Ingredient> in);
 	public void getAllMeasuringTypesResponse(ArrayList<IngredientType> measuring);
 	public void getAllIngredientResponse(ArrayList<Ingredient> ing);
+	public void recipeReportResponse(ArrayList<Recipe> r);
+	public void ingredientReportResponse(ArrayList<Ingredient> ing);
 	
 	//From GUI to myView
 	public void login (String email, String pass);
@@ -57,6 +59,9 @@ public interface View {
 	public void getAllIngredient();
 	public void fillIngredientIdToName();
 	public void initializeRecipe();
+	public void recipeReport(Integer allergy);
+	public void ingredientReport(Integer allergy);
+	
 }
 //update ingredient, remove ingredient
 //update recipe
