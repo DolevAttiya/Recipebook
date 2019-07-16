@@ -168,7 +168,7 @@ public class Register extends JFrame {
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_5.setColumns(10);
-		textField_5.setBounds(747, 37, 340, 43);
+		textField_5.setBounds(747, 37, 269, 43);
 		panel.add(textField_5);
 
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
@@ -242,7 +242,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_3.setBounds(721, 732, 105, 49);
+		comboBox_3.setBounds(796, 738, 105, 49);
 		panel_1.add(comboBox_3);
 
 		String[] daysDietitian = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
@@ -255,7 +255,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_2.setBounds(606, 732, 105, 49);
+		comboBox_2.setBounds(681, 738, 105, 49);
 		panel_1.add(comboBox_2);
 
 		textField_4 = new JTextField();
@@ -267,7 +267,7 @@ public class Register extends JFrame {
 		});
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_4.setColumns(10);
-		textField_4.setBounds(838, 732, 171, 49);
+		textField_4.setBounds(913, 738, 171, 49);
 		panel_1.add(textField_4);
 
 		//if (chckbxDietican.setSelected(true)) --> textField_8.setEnabled(false);
@@ -276,7 +276,7 @@ public class Register extends JFrame {
 		textField_8.setEnabled(false);
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_8.setColumns(10);
-		textField_8.setBounds(738, 669, 271, 49);
+		textField_8.setBounds(738, 669, 346, 49);
 		panel_1.add(textField_8);
 
 		textField_7 = new JTextField();
@@ -498,7 +498,7 @@ public class Register extends JFrame {
 				else {
 						dateOfBirth=yearOfBirth+"-"+monthOfBirth+"-"+dayOfBirth;
 						dietitianStatDate=yearOfStat+"-"+monthOfStat+"-"+dayOfStat;
-						// update boolean tp int:  myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+						myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
 						MainPage f=new MainPage();
 						f.setVisible(true);
 						Register.this.dispose();
@@ -691,10 +691,10 @@ public class Register extends JFrame {
 		
 
 		JTextPane txtpnExpiryDate_1 = new JTextPane();
-		txtpnExpiryDate_1.setText("Expiry Date:");
+		txtpnExpiryDate_1.setText("Date of Certification:");
 		txtpnExpiryDate_1.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		txtpnExpiryDate_1.setBackground(new Color(240, 248, 255));
-		txtpnExpiryDate_1.setBounds(316, 732, 281, 55);
+		txtpnExpiryDate_1.setBounds(316, 732, 357, 55);
 		panel_1.add(txtpnExpiryDate_1);
 
 		String[] months = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
@@ -706,7 +706,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox.setBounds(463, 408, 105, 49);
+		comboBox.setBounds(358, 408, 105, 49);
 		panel_1.add(comboBox);
 
 		
@@ -719,7 +719,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_1.setBounds(348, 408, 105, 49);
+		comboBox_1.setBounds(468, 408, 105, 49);
 		panel_1.add(comboBox_1);
 
 		JTextPane textPane = new JTextPane();

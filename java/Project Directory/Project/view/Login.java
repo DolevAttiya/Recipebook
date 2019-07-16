@@ -74,6 +74,7 @@ public class Login extends JFrame {
 
 		//components:
 		JTextPane txtpnWelcomeToRecipebook = new JTextPane();
+		txtpnWelcomeToRecipebook.setEditable(false);
 		txtpnWelcomeToRecipebook.setForeground(new Color(255, 255, 255));
 		txtpnWelcomeToRecipebook.setBackground(new Color(65, 105, 225));
 		txtpnWelcomeToRecipebook.setFont(new Font("Tempus Sans ITC", Font.BOLD, 99));

@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -132,10 +133,15 @@ public class MainPage extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myView.statview.mainSearch(textField.getText());  
-				SearchRes d=new SearchRes();
-				d.setVisible(true);
-				MainPage.this.dispose();
-				MainPage.this.setVisible(false);
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+					SearchRes d=new SearchRes();
+					d.setVisible(true);
+					MainPage.this.dispose();
+					MainPage.this.setVisible(false);
+				}
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -144,7 +150,7 @@ public class MainPage extends JFrame {
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		textField.setBounds(40, 142, 632, 70);
+		textField.setBounds(40, 142, 561, 70);
 		panel_2.add(textField);
 		textField.setColumns(10);
 		
@@ -179,7 +185,7 @@ public class MainPage extends JFrame {
 		txtpnAllRecipies.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//call function
+				myView.statview.getAllRecipes();
 				SearchRes d=new SearchRes();
 				d.setVisible(true);
 				MainPage.this.dispose();
@@ -203,6 +209,7 @@ public class MainPage extends JFrame {
 		txtpnAddNewRecipe_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.initializeRecipe();
 				NewRecipe a=new NewRecipe();
 				a.setVisible(true);
 				MainPage.this.dispose();
@@ -250,10 +257,16 @@ public class MainPage extends JFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myView.statview.mainSearch(textField_5.getText());  
-				SearchRes d=new SearchRes();
-				d.setVisible(true);
-				MainPage.this.dispose();
-				MainPage.this.setVisible(false);
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+					SearchRes d=new SearchRes();
+					d.setVisible(true);
+					MainPage.this.dispose();
+					MainPage.this.setVisible(false);
+				}
+				
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
