@@ -179,7 +179,7 @@ public class Models extends Observable implements model  {
 
 	public void getRecipesReport(Integer x) {
 		ev=new Event();
-		String sql= "select recipe.* from recipe where recipe.recipeId in (select DISTINCT recipeid from RecipeAllergen as r1 where not exists (select allergenId from allergen where allergenid != \"+ x.toString() + \" and allergenId not in (select allergenid from RecipeAllergen as r2 where r1.recipeId= r2.recipeId))) order by recipeRate";
+		String sql= "select Recipe.* from Recipe join RecipeAllergen using (recipeId)  EXCEPT select Recipe.* from Recipe join RecipeAllergen using (recipeId) where allergenId = 3 order by recipeRate";
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=getFromWithDB(sql);
 		try {
@@ -310,11 +310,11 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<User> user= new ArrayList<User>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( userId ) as count", "User", "PersonEmail"," \"" +us.getPersonEmail()+"\" ");
+		ResultSet saftiePerson  =Models.SelectSpecificFrom("Count( PersonEmail ) as count", "Person", "PersonEmail", " \"" +us.getPersonEmail()+"\" ");
 		ResultSet rs =Models.SelectSpecificFrom("Max( userId ) as max", "User", null, null);
 		try {
 			us.setUserId(rs.getInt("max")+1);
-			if(saftie.getInt("count")==0&&us.Insert()) {
+			if(saftiePerson.getInt("count")==0&&us.Insert()) {
 				user.add(GetUserFromDB(us.getPersonEmail()));
 				ev.getArr().add("user_register_response");
 				ev.getArr().add(user);
@@ -451,9 +451,10 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Dietitian> dietitian= new ArrayList<Dietitian>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian", "PersonEmail", " \"" +dt.getPersonEmail()+"\" ");
+		ResultSet saftiePerson  =Models.SelectSpecificFrom("Count( PersonEmail ) as count", "Person", "PersonEmail", " \"" +dt.getPersonEmail()+"\" ");
+		ResultSet saftieDietitian = Models.SelectSpecificFrom("Count( dietitianId ) as count", "Dietitian" , "dietitianId", dt.getDietitianId().toString());
 		try {
-			if(saftie.getInt("count")==0&&dt.Insert())
+			if(saftieDietitian.getInt("count")==0&&saftiePerson.getInt("count")==0&&dt.Insert())
 			{
 				dietitian.add(GetDietitianFromDB(dt.getPersonEmail()));
 				ev.getArr().add("dietitian_register_response");

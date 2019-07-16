@@ -46,7 +46,7 @@ class Testentities {
 	@Test
 	void insertAndDeleteIngredient() {
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		pe= new Ingredient(99,"\"test\"",al,99.9,99.9,99.9,99.9,0);
+		pe= new Ingredient(99,"test",al,99.9,99.9,99.9,99.9,0);
 		pe.Insert();
 		pe1=Models.GetIngredientFromDB(99);
 		assertNotNull(pe1);
