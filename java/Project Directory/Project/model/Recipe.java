@@ -158,29 +158,6 @@ public class Recipe extends Entities{
 	public void setRecipeProcess(String recipeProcess) {
 		this.recipeProcess = recipeProcess;
 	}
-	public void addIngredient(Integer IngredientId,IngredientType ingredientType, Double IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
-	{
-		Ingredient newIngredient=Models.GetIngredientFromDB(IngredientId);//***//
-		this.recipeIngredientId.add(newIngredient.getIngredientId()); 
-		this.recipeIngredientsType.add(ingredientType.getIngredientTypeId());
-		this.recipeIngredientsAmount.add(IngredientAmount);
-		this.recipeTotalCalories+=(newIngredient.getIngredientCalories()*IngredientAmount*ingredientType.getIngredientTypeValue());
-		this.recipeTotalCarbohydrate+=newIngredient.getIngredientCarbohydrate()*IngredientAmount*ingredientType.getIngredientTypeValue();
-		this.recipeTotalFat+=newIngredient.getIngredientFat()*IngredientAmount*ingredientType.getIngredientTypeValue();
-		//*protein*//
-		{
-			if(newIngredient.getIngredientKashruth()!=0) //*Kosher check*//
-				if(this.getRecipeKashruth()!=3)
-					if(this.getRecipeKashruth()==0) {this.setRecipeKashruth(newIngredient.getIngredientKashruth());}
-					else if (this.getRecipeKashruth()!=newIngredient.getIngredientKashruth())
-						this.setRecipeKashruth(3);
-		}
-		for( int i=0;i<newIngredient.getAllergenArray().length;i++)
-		{
-			if(newIngredient.getIngredientAllergen(i)>0)
-				this.recipeAllergen[i]++;//***//
-		}	 
-	}
 	@Override
 	protected String getEntitieKey() {
 		return "recipeId";
