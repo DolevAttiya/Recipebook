@@ -16,6 +16,7 @@ public class Models extends Observable implements model  {
 	public Models() {
 	}
 	public void allIngredientType() {
+		ev=new Event();
 		String sql= " Select * From IngredientType";
 		ArrayList<IngredientType> ingredient= new ArrayList<IngredientType>();
 		ResultSet rs=getFromWithDB(sql);
@@ -34,7 +35,8 @@ public class Models extends Observable implements model  {
 		notifyObservers(ev);
 	}
 	public void allIngredient() {
-		String sql= " Select * From Ingredient";
+		ev=new Event();
+		String sql= " Select * From Ingredient order by ingredientId";
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
 		ResultSet rs=getFromWithDB(sql);
 		try {
@@ -52,6 +54,7 @@ public class Models extends Observable implements model  {
 		notifyObservers(ev);
 	}
 	public void allRecipes() {
+		ev=new Event();
 		String sql= " Select * From Recipe order by recipeRate";
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=getFromWithDB(sql);
@@ -655,8 +658,9 @@ public class Models extends Observable implements model  {
 				allergen[i]=0;
 			ingredientAllergens = Models.SelectSpecific("IngredientAllergen","ingredientId",ingredient.getIngredientId().toString());
 			while(ingredientAllergens.next())
-			{
-				allergen[ingredientAllergens.getInt("allergenId")]++;
+			{ 
+				int x =ingredientAllergens.getInt("allergenId");
+				allergen[x]++;
 			}
 			ingredient.setIngredientAllergen(allergen);
 			ingredient.setIngredientCalories(rs.getDouble("ingredientCalories"));
@@ -664,7 +668,6 @@ public class Models extends Observable implements model  {
 			ingredient.setIngredientProtein(rs.getDouble("ingredientProtein"));
 			ingredient.setIngredientFat(rs.getDouble("ingredientFat"));
 			ingredient.setIngredientKashruth(rs.getInt("ingredientKashruth"));
-			//ingredient.setIngredientImage(rs.getBlob("ingredientImage"));//TODO
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -794,12 +797,11 @@ public class Models extends Observable implements model  {
 		return ingredient;
 	}
 	private static IngredientType GetIngredientTypeParser(ResultSet rs) {
-		@SuppressWarnings("null")
-		IngredientType ingredient = new IngredientType( (Integer) null,null,null);
+		IngredientType ingredient = new IngredientType(0,null,null);
 		try {
 			ingredient.setIngredientTypeId(rs.getInt("ingredientId"));
-			ingredient.setIngredientTypeName(rs.getString("ingredientValue"));
 			ingredient.setIngredientTypeName(rs.getString("ingredientName"));
+			ingredient.setIngredientTypeValue(rs.getInt("ingredientValue"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
