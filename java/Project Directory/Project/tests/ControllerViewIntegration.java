@@ -191,7 +191,7 @@ class ControllerViewIntegration {
 		myView.myDietitian.Delete();
 	}
 	
-	@Test // good
+	@Test 
 	void testTrueDeleteUser() {
 		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
 		v.deleteUser();
@@ -199,7 +199,7 @@ class ControllerViewIntegration {
 	}
 
 	
-	@Test // good
+	@Test 
 	void testFalseDeleteUser() {
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
 		ArrayList<Integer> favres = new ArrayList<Integer>();
