@@ -32,6 +32,8 @@ public interface View {
 	public void ingredientUpdateResponse(ArrayList<Ingredient> in);
 	public void getAllMeasuringTypesResponse(ArrayList<IngredientType> measuring);
 	public void getAllIngredientResponse(ArrayList<Ingredient> ing);
+	public void recipeReportResponse(ArrayList<Recipe> r);
+	public void ingredientReportResponse(ArrayList<Ingredient> ing);
 	
 	//From GUI to myView
 	public void login (String email, String pass);
@@ -44,7 +46,7 @@ public interface View {
 	public void myRecipes ();
 	public void addRecipe(String recipeName,Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, String description, Integer complexity, Integer timeToMake, String instructions);
 	public void getAllRecipes();
-	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, boolean isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate , boolean wantAllerg);
+	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, Integer isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate , Integer wantAllerg);
 	public void dietitianUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, String dietitianNum, String dietitianStatDate);
 	public void deleteUser();
 	public void deleteDietitian();
@@ -57,6 +59,11 @@ public interface View {
 	public void getAllIngredient();
 	public void fillIngredientIdToName();
 	public void initializeRecipe();
+	public void recipeReport(Integer allergy);
+	public void ingredientReport(Integer allergy);
+	public void likePressed();
+	public void userUpdateForFavorite(User usU);
+	public void dietitianUpdateForFavorite(User usD);
 }
 //update ingredient, remove ingredient
 //update recipe
