@@ -117,7 +117,7 @@ class ControllerViewIntegration {
 	void testFalseMainSearch() {
 		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.mainSearch("rotem");
-		assertNull(myView.recipeArray);
+		assertEquals(0,myView.recipeArray.size());
 	}
 
 	@Test
@@ -129,18 +129,19 @@ class ControllerViewIntegration {
 	@Test
 	void testFalseAdvancedSearch() {
 		v.advancedSearch("lazania", 1, 0, "60", "100", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0);
-		assertNull(myView.recipeArray);
+		assertEquals(0,myView.recipeArray.size());
 	}
 
 	@Test
 	void testTrueAddIngredient()
 	{
+		Ingredient ing;
 		v.addIngredient("cheese", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 2.0, 1.0, 1.0, 1.0);
 		assertTrue(myView.check);
-		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "Ingredient", null, null);
 		try {
-			recipe = Models.GetRecipeFromDB(rs.getInt("max"));
-			recipe.Delete();
+			ing = Models.GetIngredientFromDB(rs.getInt("max"));
+			ing.Delete();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -155,18 +156,17 @@ class ControllerViewIntegration {
 
 	@Test
 	void testMyFavorite() {
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.myFavorite();
 		assertNotNull(myView.recipeArray);
 	}
 
-
-
 	@Test
 	void testMyRecipes() {
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.myRecipes();
 		assertNotNull(myView.recipeArray);
 	}
-
 
 	@Test
 	void testGetRecipes() {
@@ -174,15 +174,33 @@ class ControllerViewIntegration {
 		assertNotNull(myView.recipeArray);
 	}
 
-
 	@Test
-	void testUserUpdate() {
-		fail("Not yet implemented"); // TODO
+	void testTrueUserUpdate() {
+		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
+				"1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+		assertTrue(myView.check);
 	}
 
 	@Test
-	void testDietitianUpdate() {
-		fail("Not yet implemented"); // TODO
+	void testFalseUserUpdate() // User doesn't exist in DB
+	{
+		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
+				"1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+		assertFalse(myView.check);
+	}
+	@Test
+	void testTrueDietitianUpdate() {
+		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
+		v.dietitianUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi", "1991-01-10", "1234", "1991-08-10");
+		assertTrue(myView.check);
+	}
+
+	@Test
+	void testFalseDietitianUpdate() // Dietitian doesn't exist in DB
+	{
+		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
+				"1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+		assertFalse(myView.check);
 	}
 
 

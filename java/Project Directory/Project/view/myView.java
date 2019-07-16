@@ -169,6 +169,9 @@ public class myView extends Observable implements View {
 	}
 	public void searchResponse (ArrayList<Recipe> r) {
 		recipeArray=r;
+		if (r.size()!=0) // Found results in DB
+			check=true;
+		check=false; // No results
 	}
 	public void advancedSearch(String s, Integer kashruth, Integer complexity, String timeToMake, String rateAbove,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate) {
 		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
@@ -210,9 +213,9 @@ public class myView extends Observable implements View {
 		ev=new Event();
 		ev.getArr().add("favorite_recipes");
 		if (myUser!=null) // Connected as User
-			ev.getArr().add(myUser);
+			ev.getArr().add(myUser.getPersonEmail());
 		else // Connected as Dietitian
-			ev.getArr().add(myDietitian);
+			ev.getArr().add(myDietitian.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
 	}
@@ -224,9 +227,9 @@ public class myView extends Observable implements View {
 		ev=new Event();
 		ev.getArr().add("my_recipes");
 		if (myUser!=null) // User
-			ev.getArr().add(myUser);
+			ev.getArr().add(myUser.getPersonEmail());
 		else // Dietitian
-			ev.getArr().add(myDietitian);
+			ev.getArr().add(myDietitian.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
 	}
@@ -352,14 +355,14 @@ public class myView extends Observable implements View {
 	public void userUpdateForFavorite(User usU) {
 		ev=new Event();
 		ev.getArr().add("user_update");
-		ev.getArr().add(usU);
+		ev.getArr().add(usU.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
 	}
 	public void dietitianUpdateForFavorite(Dietitian usD) {
 		ev=new Event();
 		ev.getArr().add("dietitian_update");
-		ev.getArr().add(usD);
+		ev.getArr().add(usD.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
 	}

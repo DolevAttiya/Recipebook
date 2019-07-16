@@ -63,7 +63,7 @@ public interface View {
 	public void ingredientReport(Integer allergy);
 	public void likePressed();
 	public void userUpdateForFavorite(User usU);
-	public void dietitianUpdateForFavorite(User usD);
+	public void dietitianUpdateForFavorite(Dietitian usD);
 }
 //update ingredient, remove ingredient
 //update recipe

@@ -98,7 +98,7 @@ public class Ingredient extends Entities {
 	@Override
 	protected String getEntitieAttributesValues() {
 		return this.getIngredientId().toString() +" , " +
-				this.getIngredientName() +" , " +
+				"\""+this.getIngredientName() +"\" , " +
 				this.getIngredientCalories().toString() +" , " +
 				this.getIngredientCarbohydrate().toString() +" , " +
 				this.getIngredientProtein().toString() +" , " +
