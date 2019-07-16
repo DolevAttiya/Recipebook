@@ -77,6 +77,16 @@ public class ViewMock implements View {
 	public void getAllRecipesResponse(ArrayList<Recipe> r) { 
 		assertNotEquals(0,r.size());
 	}
+	
+	@Override
+	public void getAllMeasuringTypesResponse(ArrayList<IngredientType> measuring) {
+		assertNotEquals(0,measuring.size());
+	}
+	
+	@Override
+	public void getAllIngredientResponse(ArrayList<Ingredient> ing) {
+		assertNotEquals(0,ing.size());
+	}
 
 	@Override
 	public void getTop10Response(ArrayList<Recipe> r) {
@@ -241,21 +251,6 @@ public class ViewMock implements View {
 	}
 
 	@Override
-	public void getAllMeasuringTypesResponse(ArrayList<IngredientType> measuring) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addIngredient(String ingredientName, Integer catagory, Integer isFish, Integer isStrawberries,
-			Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds,
-			Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Double calories,
-			Double carbohydrate, Double fat, Double protein, Integer kashruth) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void getAllRecipes() {
 		// TODO Auto-generated method stub
 		
@@ -270,6 +265,28 @@ public class ViewMock implements View {
 	@Override
 	public void addIngredientToRecipe(Ingredient newIngredient, IngredientType newingredientType,
 			Double IngredientAmount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addIngredient(String ingredientName, Integer kashruth, Integer isFish, Integer isStrawberries,
+			Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds,
+			Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Double calories,
+			Double carbohydrate, Double fat, Double protein) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient> ing,
+			Integer[] allergies) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getAllIngredient() {
 		// TODO Auto-generated method stub
 		
 	}
