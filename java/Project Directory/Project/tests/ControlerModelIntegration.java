@@ -407,6 +407,7 @@ public class ControlerModelIntegration {
 	void RecipesReportTest() {
 		ev = new Event();
 		ev.getArr().add("recipe_report");
+		ev.getArr().add(1);
 		((MyController)controllerTest).update(null, ev);
 	}
 	
@@ -414,6 +415,7 @@ public class ControlerModelIntegration {
 	void IngredientReportTest() {
 		ev = new Event();
 		ev.getArr().add("ingredient_report");
+		ev.getArr().add(1);
 		((MyController)controllerTest).update(null, ev);
 	}
 }
