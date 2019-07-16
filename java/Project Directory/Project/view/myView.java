@@ -26,6 +26,9 @@ public class myView extends Observable implements View {
 	public static ArrayList<IngredientType> myMeasuring;
 	public static Recipe myRecipe=null;
 	public static Ingredient myIngredient;
+	public static ArrayList<Ingredient> ingredientArrayForNewRecipe=new ArrayList<Ingredient>();
+	public static ArrayList<IngredientType> myMeasuringForNewRecipe;
+	
 	Event ev;
 	
 	private static String ConvertPassToHash(String input)  {
@@ -186,7 +189,7 @@ public class myView extends Observable implements View {
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void addIngredient (String ingredientName, Integer catagory,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, /*Integer[] measureType,*/ Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth) { 
+	public void addIngredient (String ingredientName, Integer kashruth,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Double calories, Double carbohydrate, Double fat, Double protein) { 
 		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
 		Ingredient newIngredient=new Ingredient(null, ingredientName, allergies, calories, carbohydrate, protein, fat, kashruth);
 		Event ev=new Event();
@@ -228,7 +231,7 @@ public class myView extends Observable implements View {
 	public void myRecipesResponse(ArrayList<Recipe> r) {
 		recipeArray=r;
 	} 
-	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient> in, Integer[] allergies) {
+	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient> ing, Integer[] allergies) {
 		
 	} 
 	public void addIngredientToRecipe(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
@@ -268,7 +271,17 @@ public class myView extends Observable implements View {
 			check=true; // updated successfully
 		else check=false; // not successfully (couldn't save / already exist at the DB)
 	}
-	  
+	
+	public void getAllIngredient() {
+		ev=new Event();
+		ev.getArr().add("ingredient_getall");
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void getAllIngredientResponse(ArrayList<Ingredient> ing) {
+		ingredientArray=ing;
+	}
+	
 	public void getAllRecipes() {
 		ev=new Event();
 		ev.getArr().add("all_recipes");

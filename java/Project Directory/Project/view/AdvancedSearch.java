@@ -240,7 +240,7 @@ public class AdvancedSearch extends JFrame {
 		checkBox_2.setBounds(1279, 671, 281, 41);
 		panel_1.add(checkBox_2);
 		
-		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
+		String[] times = {"30", "60", "120", "180", "all"};
 		JComboBox comboBox_1 = new JComboBox(times);
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,6 +27,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
 import javax.swing.JList;
@@ -46,7 +48,22 @@ public class RecipeView extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_8;
 	private JTextField textField_9;
-
+	private JTextField textField_10;
+	private JTextField textField_11;
+	
+//allergies:
+	public int isFish=0;
+	public int isStrawberries=0;
+	public int isCoffie=0;
+	public int isGluten=0;
+	public int isLactose=0;
+	public int isMilk=0;
+	public int isEggs=0;
+	public int isSeeds=0;
+	public int isTreeNuts=0;
+	public int isPeanut=0;
+	public int isAcidity=0;
+	public int isChocolate=0;
 	/**
 	 * Launch the application.
 	 */
@@ -328,7 +345,7 @@ public class RecipeView extends JFrame {
 		txtpnCalories.setBounds(1115, 719, 173, 61);
 		panel_1.add(txtpnCalories);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JTextField(); //myView.myRecipe.getRecipeDescription()
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textField_1.setColumns(10);
 		textField_1.setBounds(282, 267, 775, 57);
@@ -345,7 +362,7 @@ public class RecipeView extends JFrame {
 		txtpnAdvancedSearch.setText("Recipe");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
-		txtpnAdvancedSearch.setBounds(507, 55, 886, 99);
+		txtpnAdvancedSearch.setBounds(507, 55, 424, 99);
 		panel_1.add(txtpnAdvancedSearch);
 		
 		JButton btnSearch = new JButton("Edit");
@@ -379,28 +396,28 @@ public class RecipeView extends JFrame {
 		txtpnInstructions.setText("Instructions");
 		txtpnInstructions.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnInstructions.setBackground(new Color(240, 248, 255));
-		txtpnInstructions.setBounds(26, 630, 326, 49);
+		txtpnInstructions.setBounds(26, 723, 326, 49);
 		panel_1.add(txtpnInstructions);
 		
-		textField_2 = new JTextField();
+		textField_2 = new JTextField(); //myView.myRecipe.getRecipeCalories()
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_2.setColumns(10);
 		textField_2.setBounds(1300, 731, 237, 49);
 		panel_1.add(textField_2);
 		
-		textField_4 = new JTextField();
+		textField_4 = new JTextField(); //myView.myRecipe.getRecipeCarbs()
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_4.setColumns(10);
 		textField_4.setBounds(1300, 790, 237, 49);
 		panel_1.add(textField_4);
 		
-		textField_6 = new JTextField();
+		textField_6 = new JTextField(); //myView.myRecipe.getRecipeFat()
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_6.setColumns(10);
 		textField_6.setBounds(1300, 849, 237, 49);
 		panel_1.add(textField_6);
 		
-		textField_7 = new JTextField();
+		textField_7 = new JTextField(); //myView.myRecipe.getRecipeProtein()
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_7.setColumns(10);
 		textField_7.setBounds(1300, 908, 237, 49);
@@ -410,13 +427,13 @@ public class RecipeView extends JFrame {
 		btnILikeIt.setIcon(new ImageIcon("C:\\Users\\Adi G\\Desktop\\like.png"));
 		btnILikeIt.setBackground(new Color(65, 105, 225));
 		btnILikeIt.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 20));
-		btnILikeIt.setBounds(1251, 985, 110, 108);
+		btnILikeIt.setBounds(947, 103, 110, 108);
 		panel_1.add(btnILikeIt);
 		
 		textField_3 = new JTextField();
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		textField_3.setColumns(10);
-		textField_3.setBounds(1251, 1093, 110, 49);
+		textField_3.setBounds(947, 211, 110, 49);
 		panel_1.add(textField_3);
 		
 		JTextPane txtpnName = new JTextPane();
@@ -426,7 +443,8 @@ public class RecipeView extends JFrame {
 		txtpnName.setBounds(26, 188, 141, 61);
 		panel_1.add(txtpnName);
 		
-		textField_8 = new JTextField();
+		//myView.myRecipe.getRecipeIngredient.getIngredientName()
+		textField_8 = new JTextField(); //myView.myRecipe.getRecipeName()
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textField_8.setColumns(10);
 		textField_8.setBounds(171, 192, 632, 57);
@@ -436,21 +454,68 @@ public class RecipeView extends JFrame {
 		txtpnKosherLevel.setText("Kashruth:");
 		txtpnKosherLevel.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnKosherLevel.setBackground(new Color(240, 248, 255));
-		txtpnKosherLevel.setBounds(26, 974, 198, 49);
+		txtpnKosherLevel.setBounds(26, 1055, 198, 49);
 		panel_1.add(txtpnKosherLevel);
 		
-		textField_9 = new JTextField();
+		textField_9 = new JTextField(); //myView.myRecipe.getRecipeKashruth()
 		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textField_9.setColumns(10);
-		textField_9.setBounds(233, 974, 300, 57);
+		textField_9.setBounds(233, 1055, 300, 57);
 		panel_1.add(textField_9);
 		
-		TextArea textArea_1 = new TextArea();
-		textArea_1.setBounds(26, 394, 1021, 240);
-		panel_1.add(textArea_1);
-		
 		TextArea textArea = new TextArea();
-		textArea.setBounds(26, 686, 1021, 271);
+		textArea.setBounds(26, 778, 1021, 271);
 		panel_1.add(textArea);
+		
+		String[] columnNames = {"Ingredient Name",
+                "Amount",
+                "Mesuring"}; 
+		Object[][] dataIngredients = new Object[myView.recipeArray.size()][3];
+		//for(int row=0;row<myView.myRecipe.getRecipeIngredient.size();row++) {
+			//data[row][0]=myView.myRecipe.getRecipeIngredient.get(row).getIngredientName();
+			//data[row][1]=myView.myRecipe.getRecipeIngredientAmount.get(row).toString();
+			//data[row][2]=myView.myRecipe.getRecipeIngredientType.get(row).getIngredientTypeName();
+	//	}
+		JTable table = new JTable(dataIngredients, columnNames);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		table.setRowHeight(80);
+		JTableHeader th = table.getTableHeader();
+		th.setPreferredSize(new Dimension(100, 100));
+		Font bigFont = new Font("Tahoma", Font.PLAIN, 32);
+		table.getTableHeader().setFont(bigFont);
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		scrollPane.setSize(1018, 327);
+		scrollPane.setLocation(26, 394);
+		//TableColumn column = null;
+		panel_1.add(scrollPane);
+		
+		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setText("Complexity:");
+		textPane_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textPane_1.setBackground(new Color(240, 248, 255));
+		textPane_1.setBounds(1079, 973, 243, 64);
+		panel_1.add(textPane_1);
+		
+		JTextPane textPane_2 = new JTextPane();
+		textPane_2.setText("Cooking Time Up To:");
+		textPane_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		textPane_2.setBackground(new Color(240, 248, 255));
+		textPane_2.setBounds(1079, 1040, 424, 64);
+		panel_1.add(textPane_2);
+		
+		textField_10 = new JTextField(); //myView.myRecipe.getRecipeComplexity()
+		textField_10.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		textField_10.setColumns(10);
+		textField_10.setBounds(1327, 985, 261, 49);
+		panel_1.add(textField_10);
+		
+		textField_11 = new JTextField(); //myView.myRecipe.getRecipeCookingTime()
+		textField_11.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		textField_11.setColumns(10);
+		textField_11.setBounds(1512, 1050, 76, 49);
+		panel_1.add(textField_11);
+		
 	}
 }
