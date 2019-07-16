@@ -237,8 +237,7 @@ public class myView extends Observable implements View {
 	public void addIngredientToRecipe(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
 	{	
 		if (myRecipe==null) { 
-		Integer[] ar=new Integer[1];
-		ar[0]=0;
+		Integer[] ar = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0};
 		myRecipe = new Recipe(null,"recipeName",ar,0.0,0.0,0.0,0.0,0,0,0,"personEmail",0,"recipeDescription","recipeProcess",new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Double>());
 		}
 		myRecipe.getRecipeIngredientId().add(newIngredient.getIngredientId()); 
