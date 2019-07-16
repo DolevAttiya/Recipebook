@@ -224,7 +224,7 @@ class ControllerViewIntegration {
 		assertFalse(myView.check);
 	}
 
-	
+	/*
 	@Test
 	void testTrueDeleteIngredient() {
 		fail("Not yet implemented"); // TODO
@@ -267,18 +267,42 @@ class ControllerViewIntegration {
 	void testFalseIngredientUpdate() {
 		fail("Not yet implemented"); // TODO
 	}
-
+*/
 	@Test
 	void testRecipeReport() {
-		fail("Not yet implemented"); // TODO
-	}
-	@Test
-	void testIngredientReport() {
-		fail("Not yet implemented"); // TODO
-	}
-	@Test
-	void testLikePressed() {
-		fail("Not yet implemented"); // TODO
+		v.recipeReport(1);
+		assertNotNull(myView.recipeArray);
 	}
 	
+	@Test
+	void testIngredientReport() {
+		v.ingredientReport(1);
+		assertNotNull(myView.ingredientArray);
+	}
+
+	@Test
+	void testTrueUserLikePressed() // changed the data
+	{
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		
+		v.likePressed();
+		assertTrue(myView.check);
+	}
+	
+/*
+	@Test
+	void testTrueDietitianLikePressed() // changed the data
+	{
+		
+		v.likePressed();
+		assertTrue(myView.check);
+	}
+
+	@Test
+	void testFalseLikePressed() // changed the data
+	{
+		v.likePressed();
+		assertFalse(myView.check);
+	}
+	*/
 }
