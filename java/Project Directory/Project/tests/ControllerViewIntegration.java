@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -53,7 +55,7 @@ class ControllerViewIntegration {
 	@Test
 	void testTrueUserRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
-				"1991-01-10", false, null, true, null, 0,0,0,0,0,0,0,0,0,0,0,0,true);
+				"1991-01-10", 0, null, 1, null, 0,0,0,0,0,0,0,0,0,0,0,0,1);
 		assertTrue(myView.check);
 		myView.myUser.Delete();
 	}
@@ -61,7 +63,7 @@ class ControllerViewIntegration {
 	@Test
 	void testTrueDietitianRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
-				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);
+				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);
 		assertTrue(myView.check);
 		myView.myDietitian.Delete();
 	}
@@ -70,14 +72,14 @@ class ControllerViewIntegration {
 	@Test
 	void testPassLengthTrueCompareFalseRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafj",
-				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);			
+				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);			
 		assertFalse(myView.check);
 	}
 
 	@Test
 	void testPassLengthFalseCompareTrueRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafi", "asafi",
-				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);		
+				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);		
 		assertFalse(myView.check);
 	}
 
@@ -85,7 +87,7 @@ class ControllerViewIntegration {
 	void testFalseRegister() // <6 & !=
 	{
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafi", "asafj",
-				"1991-01-10", true, "1234", true, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,true);		
+				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);		
 		assertFalse(myView.check);
 	}
 
@@ -93,7 +95,7 @@ class ControllerViewIntegration {
 	void testFalseRegisterExist()
 	{
 		v.register("Daenerys", "Targaryen", "drakarisValyrian.com", "khaleesi", "khaleesi",
-				"2019-06-17", false, null, true, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, true);
+				"2019-06-17", 0, null, 1, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 		assertFalse(myView.check);
 	}
 
@@ -113,6 +115,7 @@ class ControllerViewIntegration {
 
 	@Test
 	void testFalseMainSearch() {
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.mainSearch("rotem");
 		assertNull(myView.recipeArray);
 	}
@@ -130,9 +133,24 @@ class ControllerViewIntegration {
 	}
 
 	@Test
-	void testAddIngredient() {
+	void testTrueAddIngredient()
+	{
 		v.addIngredient("cheese", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 2.0, 1.0, 1.0, 1.0);
-		
+		assertTrue(myView.check);
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+			recipe = Models.GetRecipeFromDB(rs.getInt("max"));
+			recipe.Delete();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void testFalseAddIngredient() // already exist in DB
+	{
+		v.addIngredient("Wheat flour",0,0,0,1,0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0);
+		assertFalse(myView.check);
 	}
 
 	@Test
