@@ -149,7 +149,7 @@ class ControllerViewIntegration {
 	@Test
 	void testFalseAddIngredient() // already exist in DB
 	{
-		v.addIngredient();
+		v.addIngredient("Wheat flour",0,0,0,1,0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0);
 		assertFalse(myView.check);
 	}
 
