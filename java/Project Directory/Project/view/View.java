@@ -36,7 +36,7 @@ public interface View {
 	public void getTop10();
 	public void mainSearch(String s); 
 	public void advancedSearch(String s, Integer kashruth, Integer complexity, String timeToMake, String rateAbove,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate);
-	public void addIngredient (String ingredientName, Integer catagory,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Integer[] measureType, Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth);
+	public void addIngredient (String ingredientName, Integer catagory,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, /*Integer[] measureType,*/ Double calories, Double carbohydrate, Double fat, Double protein, Integer kashruth);
 	public void myFavorite ();
 	public void myRecipes ();
 	//public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient>, Integer[] allergies) {} 
