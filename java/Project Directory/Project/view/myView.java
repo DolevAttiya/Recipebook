@@ -5,7 +5,6 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
@@ -329,14 +328,13 @@ public class myView extends Observable implements View {
 		myMeasuring=m;
 	}
 	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, Integer isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate , Integer wantAllerg) {
-		if ((pass.length()<6) || (pass.compareTo(pass2)==0))
+		if ((pass.length()<6) || (pass.compareTo(pass2)!=0))
 			check=false; // can't save > we will show an error ! 
 		else
 		{
 			String hashPass;
 			hashPass = ConvertPassToHash(pass);
-			DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-mm-dd");
-			LocalDate dateBirth = LocalDate.parse(dateOfBirth, formatter);	
+			LocalDate dateBirth = LocalDate.parse(dateOfBirth);	
 			boolean isKosherBool=(isKosher==1);
 			boolean wantAllergBool=(wantAllerg==1);
 			ev=new Event();
@@ -375,7 +373,7 @@ public class myView extends Observable implements View {
 		else check=false; // something went wrong (could'nt save / already exist)
 	}
 	public void dietitianUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, String dietitianNum, String dietitianStatDate) {
-		if ((pass.length()<6) || (pass.compareTo(pass2)==0))
+		if ((pass.length()<6) || (pass.compareTo(pass2)!=0))
 			check=false; // can't save > we will show an error ! 
 		else
 		{
@@ -446,12 +444,13 @@ public class myView extends Observable implements View {
 		}
 		else check=false; // error
 	}
-	public void deleteRecipe(Recipe rec) {
+	public void deleteRecipe() {
 		ev=new Event();
 		ev.getArr().add("recipe_delete");
-		ev.getArr().add(rec);
+		ev.getArr().add(myRecipe);
 		setChanged();
 		notifyObservers(ev);
+		myRecipe=null;
 	}
 	public void deleteRecipeResponse(ArrayList<Recipe> rec) {
 		if (rec==null)
