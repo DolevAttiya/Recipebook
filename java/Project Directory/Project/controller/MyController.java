@@ -56,7 +56,7 @@ public class MyController implements Controller{
 			view.dRegisterResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
-			
+
 			//---------User Settings---------
 		case "user_update":
 			model.updateUser((User)((Event)arg).getArr().get(1));
@@ -90,16 +90,16 @@ public class MyController implements Controller{
 			view.deleteDietitianResponse((ArrayList<Dietitian>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
-			
+
 			//---------Menu Page-------------	
 		case "all_recipes":
 			model.allRecipes();
 			break;
 
 		case "all_recipes_response":
-			view. getAllRecipesResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
+			view.getAllRecipesResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
-			
+
 		case "top_10":
 			model.top10();
 			break;
@@ -147,7 +147,7 @@ public class MyController implements Controller{
 			view.searchResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
-			
+
 			//---------Recipe Page-----------
 		case "recipe_insert":
 			model.insertRecipe((Recipe)((Event)arg).getArr().get(1));
@@ -173,7 +173,7 @@ public class MyController implements Controller{
 			view.deleteRecipeResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
-			
+
 			//---------Ingredient Page-------
 		case "ingredient_insert":
 			model.insertIngredient((Ingredient)((Event)arg).getArr().get(1));
@@ -182,7 +182,7 @@ public class MyController implements Controller{
 		case "ingredient_insert_response":
 			view.addIngredientResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
 			break;
-			
+
 		case "ingredient_type_getall":
 			model.allIngredientType();
 			break;
@@ -190,7 +190,7 @@ public class MyController implements Controller{
 		case "ingredient_type_getall_response":
 			view.getAllMeasuringTypesResponse((ArrayList<IngredientType>)((Event)arg).getArr().get(1));
 			break;
-			
+
 		case "ingredient_getall":
 			model.allIngredient();
 			break;
@@ -198,27 +198,45 @@ public class MyController implements Controller{
 		case "ingredient_getall_response":
 			view.getAllIngredientResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
 			break;
-	
-		/*case "ingredient_update": //not in use in the meanwhile for future implementation (manager function)
+
+			/*case "ingredient_update": //not in use in the meanwhile for future implementation (manager function)
 			model.updateIngredient((Ingredient)((Event)arg).getArr().get(1));
 			break;*/
 
-		/*case "ingredient_update_response": //not in use in the meanwhile for future implementation (manager function)
+			/*case "ingredient_update_response": //not in use in the meanwhile for future implementation (manager function)
 			view.ingredientUpdateResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
 			break;*/
 
-		/*case "ingredient_delete": //not in use in the meanwhile for future implementation (manager function)
+			/*case "ingredient_delete": //not in use in the meanwhile for future implementation (manager function)
 			model.deleteIngredient((Ingredient)((Event)arg).getArr().get(1));
 			break;*/
 
-		/*case "ingredient_delete_response": //not in use in the meanwhile for future implementation (manager function)
+			/*case "ingredient_delete_response": //not in use in the meanwhile for future implementation (manager function)
 			view.deleteIngredientResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
 			break;*/
 			//-------------------------------
-			
+
+			//-----------Reports-------------
+		case "recipe_report":
+			model.getRecipesReport((Integer)((Event)arg).getArr().get(1));
+			break;
+
+		case "recipe_report_response":
+			view.recipeReportResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
+			break;
+
+		case "ingredient_report":
+			model.getIngredientReport((Integer)((Event)arg).getArr().get(1));
+			break;
+
+		case "ingredient_report_response":
+			view.ingredientReportResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
+			break;
+			//-------------------------------
+
 		default:
 			System.out.println("error");
-			
+
 		}	
 	}	
 }

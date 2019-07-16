@@ -142,6 +142,16 @@ public class ViewMock implements View {
 		else
 			assertNull(in);
 	}
+	
+	@Override
+	public void recipeReportResponse(ArrayList<Recipe> r) {
+		assertNotEquals(0,r.size());
+	}
+
+	@Override
+	public void ingredientReportResponse(ArrayList<Ingredient> ing) {
+		assertNotEquals(0,ing.size());
+	}
 
 	@Override
 	public void ingredientUpdateResponse(ArrayList<Ingredient> in) {
@@ -151,16 +161,6 @@ public class ViewMock implements View {
 
 	@Override
 	public void login(String email, String pass) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void register(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth,
-			boolean isDietitian, String dietitianNum, boolean isKosher, String dietitianStatDate, Integer isFish,
-			Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk,
-			Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity,
-			Integer isChocolate, boolean wantAllerg) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -279,14 +279,50 @@ public class ViewMock implements View {
 	}
 
 	@Override
-	public void addRecipe(String recipeName, Double totalCalories, Double totalCarbohydrate, ArrayList<Ingredient> ing,
-			Integer[] allergies) {
+	public void getAllIngredient() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void getAllIngredient() {
+	public void register(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth,
+			Integer isDietitian, String dietitianNum, Integer isKosher, String dietitianStatDate, Integer isFish,
+			Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk,
+			Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity,
+			Integer isChocolate, Integer wantAllerg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addRecipe(String recipeName, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten,
+			Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut,
+			Integer isAcidity, Integer isChocolate, String description, Integer complexity, Integer timeToMake,
+			String instructions) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void fillIngredientIdToName() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initializeRecipe() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void recipeReport(Integer allergy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ingredientReport(Integer allergy) {
 		// TODO Auto-generated method stub
 		
 	}
