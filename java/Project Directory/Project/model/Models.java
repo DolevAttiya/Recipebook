@@ -67,7 +67,7 @@ public class Models extends Observable implements model  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ev.getArr().add("all_recipe_response");
+		ev.getArr().add("all_recipes_response");
 		ev.getArr().add(recipe);
 		setChanged();
 		notifyObservers(ev);
@@ -156,6 +156,7 @@ public class Models extends Observable implements model  {
 		notifyObservers(ev);
 	}
 	public void top10(){
+		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=search("Top10Recipe",null);
@@ -176,6 +177,45 @@ public class Models extends Observable implements model  {
 
 	}
 
+	public void getRecipesReport() {
+		ev=new Event();
+		String sql= " Select * From Recipe order by recipeRate"; //dolev needs to edit this
+		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
+		ResultSet rs=getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				recipe.add(GetRecipeParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("recipe_report_response");
+		ev.getArr().add(recipe);
+		setChanged();
+		notifyObservers(ev);
+	}
+	public void getIngredientReport() {
+		ev=new Event();
+		String sql= " Select * From Recipe order by recipeRate"; //dolev needs to edit this
+		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
+		ResultSet rs=getFromWithDB(sql);
+		try {
+			while(rs.next())
+			{
+				ingredient.add(GetIngredientParser(rs));	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ev.getArr().add("ingredient_report_response");
+		ev.getArr().add(ingredient);
+		setChanged();
+		notifyObservers(ev);
+	}
+	
 	public void CheckPasswordAndEmail(String Email, String Password){
 		ev=new Event();
 		ArrayList<Object> args=new ArrayList<Object>();

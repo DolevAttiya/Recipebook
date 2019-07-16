@@ -402,4 +402,18 @@ public class ControlerModelIntegration {
 		ev.getArr().add(ingredient);
 		((MyController)controllerTest).update(null, ev);
 	}
+	
+	@Test
+	void RecipesReportTest() {
+		ev = new Event();
+		ev.getArr().add("recipe_report");
+		((MyController)controllerTest).update(null, ev);
+	}
+	
+	@Test
+	void IngredientReportTest() {
+		ev = new Event();
+		ev.getArr().add("ingredient_report");
+		((MyController)controllerTest).update(null, ev);
+	}
 }

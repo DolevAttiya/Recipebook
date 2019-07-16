@@ -12,6 +12,9 @@ public interface model {
 	public void myRecipes(String Email);
 	public void allRecipes();
 
+	public void getRecipesReport();
+	public void getIngredientReport();
+	
 	public void insertUser(User us);
 	public void updateUser(User us);
 	public void deleteUser(User us);
