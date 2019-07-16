@@ -131,6 +131,7 @@ public class RecipeView extends JFrame {
 		panel.add(textField_2);
 
 		JTextPane txtpnUserDetails = new JTextPane();
+		txtpnUserDetails.setEditable(false);
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -154,6 +155,7 @@ public class RecipeView extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
+		txtpnAdvancedSearch_1.setEditable(false);
 		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -173,6 +175,7 @@ public class RecipeView extends JFrame {
 
 
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
+		txtpnFavouriteRecipes.setEditable(false);
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -191,6 +194,7 @@ public class RecipeView extends JFrame {
 		txtpnFavouriteRecipes.setBackground(new Color(65, 105, 225));
 
 		JTextPane txtpnSearch_1 = new JTextPane();
+		txtpnSearch_1.setEditable(false);
 		txtpnSearch_1.setText("Search");
 		txtpnSearch_1.setForeground(Color.WHITE);
 		txtpnSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -199,6 +203,7 @@ public class RecipeView extends JFrame {
 		panel.add(txtpnSearch_1);
 
 		JTextPane txtpnMyRecipes = new JTextPane();
+		txtpnMyRecipes.setEditable(false);
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -217,6 +222,7 @@ public class RecipeView extends JFrame {
 		panel.add(txtpnMyRecipes);
 
 		JTextPane txtpnTaimli = new JTextPane();
+		txtpnTaimli.setEditable(false);
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -349,6 +355,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(checkBox_10);
 		
 		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane.setText("Allergies:");
 		textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
 		textPane.setBackground(new Color(240, 248, 255));
@@ -431,6 +438,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(checkBox_5);
 		
 		JTextPane txtpnPerGrams = new JTextPane();
+		txtpnPerGrams.setEditable(false);
 		txtpnPerGrams.setText("per 100 grams");
 		txtpnPerGrams.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnPerGrams.setBackground(new Color(240, 248, 255));
@@ -438,6 +446,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(txtpnPerGrams);
 		
 		JTextPane txtpnProtein = new JTextPane();
+		txtpnProtein.setEditable(false);
 		txtpnProtein.setText("Protein:");
 		txtpnProtein.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnProtein.setBackground(new Color(240, 248, 255));
@@ -445,6 +454,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(txtpnProtein);
 		
 		JTextPane txtpnFat = new JTextPane();
+		txtpnFat.setEditable(false);
 		txtpnFat.setText("Fat:");
 		txtpnFat.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnFat.setBackground(new Color(240, 248, 255));
@@ -452,6 +462,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(txtpnFat);
 		
 		JTextPane txtpnSugar = new JTextPane();
+		txtpnSugar.setEditable(false);
 		txtpnSugar.setText("Carbs:");
 		txtpnSugar.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnSugar.setBackground(new Color(240, 248, 255));
@@ -459,6 +470,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(txtpnSugar);
 		
 		JTextPane txtpnCalories = new JTextPane();
+		txtpnCalories.setEditable(false);
 		txtpnCalories.setText("Calories:");
 		txtpnCalories.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnCalories.setBackground(new Color(240, 248, 255));
@@ -473,6 +485,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(textField_1);
 		
 		JTextPane txtpnSearchFor = new JTextPane();
+		txtpnSearchFor.setEditable(false);
 		txtpnSearchFor.setText("Description:");
 		txtpnSearchFor.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnSearchFor.setBackground(new Color(240, 248, 255));
@@ -480,6 +493,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(txtpnSearchFor);
 		
 		JTextPane txtpnAdvancedSearch = new JTextPane();
+		txtpnAdvancedSearch.setEditable(false);
 		txtpnAdvancedSearch.setText("Recipe");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
@@ -500,6 +514,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(btnSearch);
 		
 		JTextPane txtpnNutritionValues = new JTextPane();
+		txtpnNutritionValues.setEditable(false);
 		txtpnNutritionValues.setText("Nutrition Values:");
 		txtpnNutritionValues.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 52));
 		txtpnNutritionValues.setBackground(new Color(240, 248, 255));
@@ -507,6 +522,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(txtpnNutritionValues);
 		
 		JTextPane txtpnIngredients = new JTextPane();
+		txtpnIngredients.setEditable(false);
 		txtpnIngredients.setText("Ingredients:");
 		txtpnIngredients.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnIngredients.setBackground(new Color(240, 248, 255));
@@ -514,6 +530,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(txtpnIngredients);
 		
 		JTextPane txtpnInstructions = new JTextPane();
+		txtpnInstructions.setEditable(false);
 		txtpnInstructions.setText("Instructions");
 		txtpnInstructions.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnInstructions.setBackground(new Color(240, 248, 255));
@@ -569,6 +586,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(textField_3);
 		
 		JTextPane txtpnName = new JTextPane();
+		txtpnName.setEditable(false);
 		txtpnName.setText("Name:");
 		txtpnName.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnName.setBackground(new Color(240, 248, 255));
@@ -583,6 +601,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(textField_8);
 		
 		JTextPane txtpnKosherLevel = new JTextPane();
+		txtpnKosherLevel.setEditable(false);
 		txtpnKosherLevel.setText("Kashruth:");
 		txtpnKosherLevel.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		txtpnKosherLevel.setBackground(new Color(240, 248, 255));
@@ -618,6 +637,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(scrollPane);
 		
 		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setEditable(false);
 		textPane_1.setText("Complexity:");
 		textPane_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textPane_1.setBackground(new Color(240, 248, 255));
@@ -634,6 +654,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(comboBox);
 		
 		JTextPane textPane_2 = new JTextPane();
+		textPane_2.setEditable(false);
 		textPane_2.setText("Cooking Time Up To:");
 		textPane_2.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textPane_2.setBackground(new Color(240, 248, 255));
@@ -672,6 +693,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(btnDeleteRecipe);
 		
 		JTextPane textPane_3 = new JTextPane();
+		textPane_3.setEditable(false);
 		textPane_3.setText("Don't delete unless you're sure!");
 		textPane_3.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		textPane_3.setBackground(new Color(240, 248, 255));
