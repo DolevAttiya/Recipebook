@@ -678,7 +678,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientName",ing.getIngredientName());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientName"," \""+ing.getIngredientName()+"\" ");
 		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "Ingredient", null, null);
 		try {
 			ing.setIngredientId(rs.getInt("max")+1);

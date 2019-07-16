@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -113,6 +115,7 @@ class ControllerViewIntegration {
 
 	@Test
 	void testFalseMainSearch() {
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.mainSearch("rotem");
 		assertNull(myView.recipeArray);
 	}
@@ -130,9 +133,24 @@ class ControllerViewIntegration {
 	}
 
 	@Test
-	void testAddIngredient() {
+	void testTrueAddIngredient()
+	{
 		v.addIngredient("cheese", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 2.0, 1.0, 1.0, 1.0);
-		
+		assertTrue(myView.check);
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+			recipe = Models.GetRecipeFromDB(rs.getInt("max"));
+			recipe.Delete();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	void testFalseAddIngredient() // already exist in DB
+	{
+		v.addIngredient();
+		assertFalse(myView.check);
 	}
 
 	@Test
