@@ -3,6 +3,7 @@ package controller;
 import java.util.Observable;
 import java.util.ArrayList;
 import model.*;
+import model.Ingredient;
 import model.User;
 import view.*;
 

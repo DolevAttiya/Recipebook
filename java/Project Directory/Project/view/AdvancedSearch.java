@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -101,10 +102,16 @@ public class AdvancedSearch extends JFrame {
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SearchRes d=new SearchRes();
+				myView.statview.mainSearch(textField_5.getText());  
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+					SearchRes d=new SearchRes();
 				d.setVisible(true);
 				AdvancedSearch.this.dispose();
 				AdvancedSearch.this.setVisible(false);
+				}
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
@@ -155,13 +162,14 @@ public class AdvancedSearch extends JFrame {
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_5.setColumns(10);
-		textField_5.setBounds(747, 37, 340, 43);
+		textField_5.setBounds(747, 37, 269, 43);
 		panel.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
 				MyFavourites f=new MyFavourites();
 				f.setVisible(true);
 				AdvancedSearch.this.dispose();
@@ -187,6 +195,7 @@ public class AdvancedSearch extends JFrame {
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
 				MyRecipes f=new MyRecipes();
 				f.setVisible(true);
 				AdvancedSearch.this.dispose();
@@ -314,12 +323,16 @@ public class AdvancedSearch extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			myView.statview.advancedSearch(textField_1.getText(), kashruth, complexity, timeToMake, rateAbove, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate);
+			if (myView.check==false) {
+				JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+			}
+			else {
 				SearchRes f=new SearchRes();
 				f.setVisible(true);
 				AdvancedSearch.this.dispose();
 				AdvancedSearch.this.setVisible(false);
 			}
-		});
+		}});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));
 		btnSearch.setBounds(607, 1068, 326, 69);
 		panel_1.add(btnSearch);
