@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -176,65 +177,123 @@ class ControllerViewIntegration {
 
 	@Test
 	void testTrueUserUpdate() {
+		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
 		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
 				"1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 		assertTrue(myView.check);
+		myView.myUser.Delete();
 	}
 
 	@Test
 	void testFalseUserUpdate() // User doesn't exist in DB
 	{
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
-				"1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi", "1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 		assertFalse(myView.check);
 	}
 	@Test
 	void testTrueDietitianUpdate() {
 		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
-		v.dietitianUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi", "1991-01-10", "1234", "1991-08-10");
+		v.dietitianUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi", "1991-01-10", "1234", "1991-08-10");
 		assertTrue(myView.check);
+		myView.myDietitian.Delete();
 	}
 
 	@Test
 	void testFalseDietitianUpdate() // Dietitian doesn't exist in DB
 	{
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
-				"1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 		assertFalse(myView.check);
 	}
 
 
 	@Test
-	void testDeleteUser() {
+	void testTrueDeleteUser() {
+		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
+		v.deleteUser();
+		assertTrue(myView.check);
+	}
+
+
+	@Test
+	void testFalseDeleteUser() {
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		ArrayList<Integer> favres = new ArrayList<Integer>();
+		favres.add(1);
+		myView.myUser=new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", favres, 99, al, true, false);
+		v.deleteUser();
+		assertFalse(myView.check);
+	}
+
+	@Test
+	void testTrueDeleteDietitian() {
+		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
+		v.deleteDietitian();
+		assertTrue(myView.check);
+	}
+
+
+	@Test
+	void testFalseDeleteDietitian() {
+		myView.myDietitian= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
+		v.deleteDietitian();
+		assertFalse(myView.check);
+	}
+
+
+	@Test
+	void testTrueDeleteIngredient() {
 		fail("Not yet implemented"); // TODO
 	}
 
 
 	@Test
-	void testDeleteDietitian() {
+	void testFalseDeleteIngredient() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	void testDeleteIngredient() {
-		fail("Not yet implemented"); // TODO
-	}
-
-
-	@Test
-	void testDeleteRecipe() {
+	void testTrueDeleteRecipe() {
 		fail("Not yet implemented"); // TODO
 	}
 
 
 	@Test
-	void testRecipeUpdate() {
+	void testFalseDeleteRecipe() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	void testIngredientUpdate() {
+	void testTrueRecipeUpdate() {
 		fail("Not yet implemented"); // TODO
 	}
 
+	@Test
+	void testFalseRecipeUpdate() {
+		fail("Not yet implemented"); // TODO
+	}
+
+
+	@Test
+	void testTrueIngredientUpdate() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	void testFalseIngredientUpdate() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	void testRecipeReport() {
+		fail("Not yet implemented"); // TODO
+	}
+	@Test
+	void testIngredientReport() {
+		fail("Not yet implemented"); // TODO
+	}
+	@Test
+	void testLikePressed() {
+		fail("Not yet implemented"); // TODO
+	}
+	
 }
