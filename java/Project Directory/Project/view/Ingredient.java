@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -101,34 +102,11 @@ public class Ingredient extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnAdd = new JButton("Go!");
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SearchRes d=new SearchRes();
-				d.setVisible(true);
-				Ingredient.this.dispose();
-				Ingredient.this.setVisible(false);
-			}
-		});
 		btnAdd.setBounds(1016, 37, 71, 42);
 		panel.add(btnAdd);
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		JTextPane txtpnUserDetails = new JTextPane();
-		txtpnUserDetails.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (myView.myUser!=null) {
-					User f=new User();
-				f.setVisible(true);
-				}
-				else {
-					Dietican f=new Dietican();
-					f.setVisible(true);
-				}
-				Ingredient.this.dispose();
-				Ingredient.this.setVisible(false);
-			}
-		});
 		txtpnUserDetails.setBounds(1371, 7, 175, 82);
 		panel.add(txtpnUserDetails);
 		txtpnUserDetails.setForeground(new Color(255, 255, 255));
@@ -137,15 +115,6 @@ public class Ingredient extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 		
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
-		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				AdvancedSearch f=new AdvancedSearch();
-				f.setVisible(true);
-				Ingredient.this.dispose();
-				Ingredient.this.setVisible(false);
-			}
-		});
 		txtpnAdvancedSearch_1.setText("Advanced Search");
 		txtpnAdvancedSearch_1.setForeground(Color.WHITE);
 		txtpnAdvancedSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -156,19 +125,10 @@ public class Ingredient extends JFrame {
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_5.setColumns(10);
-		textField_5.setBounds(747, 37, 340, 43);
+		textField_5.setBounds(747, 37, 269, 43);
 		panel.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
-		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				MyFavourites f=new MyFavourites();
-				f.setVisible(true);
-				Ingredient.this.dispose();
-				Ingredient.this.setVisible(false);
-			}
-		});
 		txtpnFavouriteRecipes.setBounds(524, 7, 210, 87);
 		panel.add(txtpnFavouriteRecipes);
 		txtpnFavouriteRecipes.setText("Favourite Recipes");
@@ -185,15 +145,6 @@ public class Ingredient extends JFrame {
 		panel.add(txtpnSearch_1);
 		
 		JTextPane txtpnMyRecipes = new JTextPane();
-		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				MyRecipes f=new MyRecipes();
-				f.setVisible(true);
-				Ingredient.this.dispose();
-				Ingredient.this.setVisible(false);
-			}
-		});
 		txtpnMyRecipes.setText("My Recipes");
 		txtpnMyRecipes.setForeground(Color.WHITE);
 		txtpnMyRecipes.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -202,15 +153,6 @@ public class Ingredient extends JFrame {
 		panel.add(txtpnMyRecipes);
 		
 		JTextPane txtpnTaimli = new JTextPane();
-		txtpnTaimli.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				MainPage f=new MainPage();
-				f.setVisible(true);
-				Ingredient.this.dispose();
-				Ingredient.this.setVisible(false);
-			}
-		});
 		txtpnTaimli.setText("Taimli");
 		txtpnTaimli.setForeground(Color.WHITE);
 		txtpnTaimli.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
@@ -254,9 +196,15 @@ public class Ingredient extends JFrame {
 		JButton btnSearch = new JButton("Add!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				myView.statview.addIngredient (textField_7.getText(), kashruth, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, Calories, Carbs, Fat, Protein);
+				if((textField_7.getText().trim().isEmpty())||(textField_2.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textField_4.getText().trim().isEmpty())||(textField_6.getText().trim().isEmpty())) {
+					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
+				}
+						
+				else {
+						myView.statview.addIngredient (textField_7.getText(), kashruth, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, Calories, Carbs, Fat, Protein);
 				Ingredient.this.dispose();
 				Ingredient.this.setVisible(false);
+				}
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 50));

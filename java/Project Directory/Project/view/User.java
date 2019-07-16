@@ -134,10 +134,17 @@ public class User extends JFrame {
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SearchRes d=new SearchRes();
+				myView.statview.mainSearch(textField_5.getText());  
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+						SearchRes d=new SearchRes();
 				d.setVisible(true);
 				User.this.dispose();
 				User.this.setVisible(false);
+				}
+		
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
@@ -171,13 +178,14 @@ public class User extends JFrame {
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_5.setColumns(10);
-		textField_5.setBounds(747, 37, 340, 43);
+		textField_5.setBounds(747, 37, 270, 43);
 		panel.add(textField_5);
 		
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
 				MyFavourites f=new MyFavourites();
 				f.setVisible(true);
 				User.this.dispose();
@@ -203,6 +211,7 @@ public class User extends JFrame {
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
 				MyRecipes f=new MyRecipes();
 				f.setVisible(true);
 				User.this.dispose();

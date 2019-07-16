@@ -23,6 +23,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JToggleButton;
+import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -31,6 +32,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.TextArea;
 
@@ -106,10 +108,16 @@ public class RecipeView extends JFrame {
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SearchRes d=new SearchRes();
+				myView.statview.mainSearch(textField_2.getText());  
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+					SearchRes d=new SearchRes();
 				d.setVisible(true);
 				RecipeView.this.dispose();
 				RecipeView.this.setVisible(false);
+				}
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
@@ -119,7 +127,7 @@ public class RecipeView extends JFrame {
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_2.setColumns(10);
-		textField_2.setBounds(747, 37, 340, 43);
+		textField_2.setBounds(747, 37, 269, 43);
 		panel.add(textField_2);
 
 		JTextPane txtpnUserDetails = new JTextPane();
@@ -168,6 +176,7 @@ public class RecipeView extends JFrame {
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
 				MyFavourites f=new MyFavourites();
 				f.setVisible(true);
 				RecipeView.this.dispose();
@@ -193,6 +202,7 @@ public class RecipeView extends JFrame {
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
 				MyRecipes f=new MyRecipes();
 				f.setVisible(true);
 				RecipeView.this.dispose();
@@ -645,6 +655,28 @@ public class RecipeView extends JFrame {
 		comboBox_2.setSelectedIndex(0); //myView.myRecipe.getRecipeKashruth()
 		comboBox_2.setBounds(229, 1065, 442, 49);
 		panel_1.add(comboBox_2);
+		
+		JButton btnDeleteRecipe = new JButton("Delete Recipe");
+		btnDeleteRecipe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (myView.myUser.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()||myView.myDietitian.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()) {
+					myView.statview.deleteRecipe();
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"You are not allowed to delete this recipe!");
+				}
+			}
+		});
+		btnDeleteRecipe.setFont(new Font("Tahoma", Font.BOLD, 50));
+		btnDeleteRecipe.setBounds(26, 1171, 406, 69);
+		panel_1.add(btnDeleteRecipe);
+		
+		JTextPane textPane_3 = new JTextPane();
+		textPane_3.setText("Don't delete unless you're sure!");
+		textPane_3.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		textPane_3.setBackground(new Color(240, 248, 255));
+		textPane_3.setBounds(26, 1244, 406, 55);
+		panel_1.add(textPane_3);
 		
 	}
 }

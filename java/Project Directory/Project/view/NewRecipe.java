@@ -117,10 +117,16 @@ public class NewRecipe extends JFrame {
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SearchRes d=new SearchRes();
+				myView.statview.mainSearch(textField_2.getText());  
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+					SearchRes d=new SearchRes();
 				d.setVisible(true);
 				NewRecipe.this.dispose();
 				NewRecipe.this.setVisible(false);
+				}	
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
@@ -130,7 +136,7 @@ public class NewRecipe extends JFrame {
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_2.setColumns(10);
-		textField_2.setBounds(747, 37, 340, 43);
+		textField_2.setBounds(747, 37, 269, 43);
 		panel.add(textField_2);
 
 		JTextPane txtpnUserDetails = new JTextPane();
@@ -179,6 +185,7 @@ public class NewRecipe extends JFrame {
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
 				MyFavourites f=new MyFavourites();
 				f.setVisible(true);
 				NewRecipe.this.dispose();
@@ -204,6 +211,7 @@ public class NewRecipe extends JFrame {
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
 				MyRecipes f=new MyRecipes();
 				f.setVisible(true);
 				NewRecipe.this.dispose();

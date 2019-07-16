@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -99,10 +100,16 @@ public class MyRecipes extends JFrame {
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SearchRes d=new SearchRes();
+				myView.statview.mainSearch(textField_5.getText());  
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+						SearchRes d=new SearchRes();
 				d.setVisible(true);
 				MyRecipes.this.dispose();
 				MyRecipes.this.setVisible(false);
+				}
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
@@ -143,6 +150,7 @@ public class MyRecipes extends JFrame {
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
 				MyFavourites f=new MyFavourites();
 				f.setVisible(true);
 				MyRecipes.this.dispose();
@@ -168,6 +176,7 @@ public class MyRecipes extends JFrame {
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
 				MyRecipes f=new MyRecipes();
 				f.setVisible(true);
 				MyRecipes.this.dispose();

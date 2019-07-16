@@ -168,7 +168,7 @@ public class Register extends JFrame {
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_5.setColumns(10);
-		textField_5.setBounds(747, 37, 340, 43);
+		textField_5.setBounds(747, 37, 269, 43);
 		panel.add(textField_5);
 
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
