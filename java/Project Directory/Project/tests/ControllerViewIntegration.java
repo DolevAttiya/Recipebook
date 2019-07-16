@@ -14,6 +14,7 @@ import controller.Controller;
 import controller.Event;
 import controller.MyController;
 import model.*;
+import model.Ingredient;
 import model.User;
 import view.*;
 
