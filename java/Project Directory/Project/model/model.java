@@ -12,8 +12,8 @@ public interface model {
 	public void myRecipes(String Email);
 	public void allRecipes();
 
-	public void getRecipesReport();
-	public void getIngredientReport();
+	public void getRecipesReport(Integer x);
+	public void getIngredientReport(Integer x);
 	
 	public void insertUser(User us);
 	public void updateUser(User us);

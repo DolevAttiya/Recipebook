@@ -218,19 +218,19 @@ public class MyController implements Controller{
 
 			//-----------Reports-------------
 		case "recipe_report":
-			model.getRecipesReport();
+			model.getRecipesReport((Integer)((Event)arg).getArr().get(1));
 			break;
 
 		case "recipe_report_response":
-			//view.///\\\((ArrayList<Recipe>)((Event)arg).getArr().get(1));
+			view.recipeReportResponse((ArrayList<Recipe>)((Event)arg).getArr().get(1));
 			break;
 
 		case "ingredient_report":
-			model.getIngredientReport();
+			model.getIngredientReport((Integer)((Event)arg).getArr().get(1));
 			break;
 
 		case "ingredient_report_response":
-			//view.///\\\((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
+			view.ingredientReportResponse((ArrayList<Ingredient>)((Event)arg).getArr().get(1));
 			break;
 			//-------------------------------
 

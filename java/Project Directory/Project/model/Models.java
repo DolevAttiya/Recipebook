@@ -177,9 +177,9 @@ public class Models extends Observable implements model  {
 
 	}
 
-	public void getRecipesReport() {
+	public void getRecipesReport(Integer x) {
 		ev=new Event();
-		String sql= " Select * From Recipe order by recipeRate"; //dolev needs to edit this
+		String sql= "select recipe.* from recipe where recipe.recipeId in (select DISTINCT recipeid from RecipeAllergen as r1 where not exists (select allergenId from allergen where allergenid != \"+ x.toString() + \" and allergenId not in (select allergenid from RecipeAllergen as r2 where r1.recipeId= r2.recipeId))) order by recipeRate";
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=getFromWithDB(sql);
 		try {
@@ -196,9 +196,9 @@ public class Models extends Observable implements model  {
 		setChanged();
 		notifyObservers(ev);
 	}
-	public void getIngredientReport() {
+	public void getIngredientReport(Integer x) {
 		ev=new Event();
-		String sql= " Select * From Recipe order by recipeRate"; //dolev needs to edit this
+		String sql= "select ingredient.* from Ingredient join (select count(ingredientId) as counter ,ingredientId from RecipeIngredient group by (ingredientId)) as counter using (ingredientId) order by counter.counter";
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
 		ResultSet rs=getFromWithDB(sql);
 		try {
@@ -718,7 +718,7 @@ public class Models extends Observable implements model  {
 		ev=new Event();
 		// select column_name from table_name order by column_name desc limit size.
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
-		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientName",ing.getIngredientName());
+		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientName"," \""+ing.getIngredientName()+"\" ");
 		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "Ingredient", null, null);
 		try {
 			ing.setIngredientId(rs.getInt("max")+1);
