@@ -40,7 +40,7 @@ public abstract class  Entities  {
 	private String getStringIngredientForDelete(int i) {
 		return " DELETE FROM "+ this.Class()+"Ingredient "+" WHERE "+this.getEntitieKey()+" = "+this.getEntitieKeyValue()+" and "+"ingredientId = "+getSubtbleDelete(i);}
 	private String getStringRecipeForInsert(int i) {
-		return " INSERT INTO PersonFavoriteRecipe ( " +this.getEntitieKey()+ " , ingredientId , ingredientAmount ,  ingredientTypeId ) VALUES ( "+this.getEntitieKeyValue()+" , "+this.getSubtbleInsert(i)+" ) ";}
+		return " INSERT INTO PersonFavoriteRecipe ( personEmail , recipeId) VALUES ( "+this.getPersonKeyValue()+" , "+this.getSubtbleInsert(i)+" ) ";}
 	private String getStringRecipeForDelete(int i) {
 		return " DELETE FROM PersonFavoriteRecipe WHERE personEmail = "+this.getPersonKeyValue()+" and "+"recipeId = "+getSubtbleDelete(i);}
 	

@@ -122,7 +122,7 @@ class ControllerViewIntegration {
 		v.getAllRecipes();
 		assertNotEquals(0, myView.recipeArray);
 	}
-	
+
 	// ADVANCED SEARCH //
 	@Test
 	void testTrueAdvancedSearch() // Found results in DB
@@ -177,6 +177,28 @@ class ControllerViewIntegration {
 		v.initializeRecipe();
 		v.addRecipe("Ommlete", 0,0,0,0,0,0,1,0,0,0,0,0, "best ommlete ever", 3, 30, "1. Break 3 eggs into a boal");
 		assertFalse(myView.check);		
+	}
+	@Test
+	void testAddIngredientToRecipe() {
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.initializeRecipe();
+		Recipe r;
+		int x;
+		v.getAllIngredient();
+		v.getAllMeasuringTypes();
+		v.addRecipe("Lazania", 0,0,0,0,0,0,1,0,0,0,0,0, "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		x=myView.myRecipe.getRecipeIngredientId().size();
+		v.addIngredientToRecipe(myView.ingredientArray.get(1),myView.myMeasuring.get(1) , 3.1);
+		assertEquals(x+1,myView.myRecipe.getRecipeIngredientId().size());
+		myView.myRecipe.Delete();
+		myView.myRecipe=null;
+		myView.myMeasuring=null;
+		myView.ingredientArray=null;
+	}
+	@Test
+	void testFillIngredientIdToName() {
+		myView.myRecipe=Models.GetRecipeFromDB(1);
+		v.fillIngredientIdToName();
 	}
 
 	// ADD INGREDIENT //
@@ -256,7 +278,7 @@ class ControllerViewIntegration {
 		assertFalse(myView.check);
 	}
 
-	// INGREDIENT //
+	// INGREDIENT // not implemented
 	/*
 	@Test
 	void testTrueDeleteIngredient() throws SQLException {
@@ -271,20 +293,28 @@ class ControllerViewIntegration {
 		v.deleteIngredient(ing);
 		assertTrue(myView.check);
 	}
-	*/
+	@Test
+	void testIngredientUpdate() {
+		fail("Not yet implemented"); // TODO
+	}
+	 */
 
 	// RECIPE //
 	@Test
-	void testTrueDeleteRecipe() {
-		
+	void testTrueUserDeleteRecipe() // was able to delete
+	{
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.initializeRecipe();
+		Recipe r=null;
+		v.addRecipe("Lazania", 0,0,0,0,0,0,1,0,0,0,0,0, "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+			r = Models.GetRecipeFromDB(rs.getInt("max"));
+			v.deleteRecipe();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
-
-
-	@Test
-	void testFalseDeleteRecipe() {
-		fail("Not yet implemented"); // TODO
-	}
-
 	@Test	
 	void testTrueUserLikePressed() // changed the data
 	{
@@ -303,80 +333,29 @@ class ControllerViewIntegration {
 		v.likePressed();
 		assertTrue(myView.check);
 	}
-	
-/*	
-	@Test
-	void testAddIngredientToRecipe() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testFillIngredientIdToName() {
-		fail("Not yet implemented"); // TODO
-	}
-
 	@Test
 	void testRecipeUpdate() {
-		fail("Not yet implemented"); // TODO
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.initializeRecipe();
+		Recipe r=null;
+		v.addRecipe("Lazania", 0,0,0,0,0,0,1,0,0,0,0,0, "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		myView.myRecipe.setRecipeKashruth(3);
+		v.recipeUpdate(myView.myRecipe);
+		assertTrue(myView.check);
+		myView.myRecipe.Delete();
+
 	}
-	@Test
-	void testIngredientUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
+
+	// REPORTS //
 	@Test
 	void testRecipeReport() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testIngredientReport() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/*
-	@Test
-	void testTrueRecipeUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testFalseRecipeUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-
-	@Test
-	void testTrueIngredientUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testFalseIngredientUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testRecipeReport() {
-		fail("Not yet implemented"); // TODO
+		v.recipeReport(1);
+		assertNotEquals(0, myView.recipeArray.size());
 	}
 	@Test
 	void testIngredientReport() {
-		fail("Not yet implemented"); // TODO
+		v.ingredientReport(1);
+		assertNotEquals(0, myView.ingredientArray.size());
 	}
-/*
-
-@Test
-void testRecipeReport() {
-	fail("Not yet implemented"); // TODO
-	v.recipeReport(1);
-	assertNotNull(myView.recipeArray);
-}
-
-@Test
-void testIngredientReport() {
-	fail("Not yet implemented"); // TODO
-	v.ingredientReport(1);
-	assertNotNull(myView.ingredientArray);
-}
-	 */
+		
 }

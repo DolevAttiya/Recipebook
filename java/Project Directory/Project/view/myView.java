@@ -47,15 +47,15 @@ public class myView extends Observable implements View {
 		} 
 	} 
 	public static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    // only got here if we didn't return false
-	    return true;
+		try { 
+			Integer.parseInt(s); 
+		} catch(NumberFormatException e) { 
+			return false; 
+		} catch(NullPointerException e) {
+			return false;
+		}
+		// only got here if we didn't return false
+		return true;
 	}
 	public void login (String email, String pass)
 	{
@@ -285,11 +285,15 @@ public class myView extends Observable implements View {
 					else if (myRecipe.getRecipeKashruth()!=newIngredient.getIngredientKashruth())
 						myRecipe.setRecipeKashruth(3);
 		}
+		Integer[] newarray= myRecipe.getRecipeAllergen();
+
 		for( int i=0;i<myRecipe.getRecipeAllergen().length;i++)
 		{
+			if(newarray[i]==null)
+				newarray[i]=0;
 			if(newIngredient.getIngredientAllergen(i)>0)
 			{
-				Integer[] newarray= myRecipe.getRecipeAllergen();
+
 				newarray[i]+=1;
 				myRecipe.setRecipeAllergen(newarray);
 			}
@@ -300,21 +304,29 @@ public class myView extends Observable implements View {
 		getAllMeasuringTypes();
 		for(int i=0;i<myRecipe.getRecipeIngredientId().size();i++)
 		{
-			Iterator<Ingredient> iter = ingredientArray.iterator();
-			while(iter.hasNext()&&iter.next().getIngredientId()<myRecipe.getRecipeIngredientId().get(i));
-			ingredientArrayForRecipe.add(iter.next());
+			for(int j=0;j<ingredientArray.size();j++)
+				if(ingredientArray.get(j).getIngredientId()==myRecipe.getRecipeIngredientId().get(i))
+					ingredientArrayForRecipe.add(ingredientArray.get(j));
 		}
 		for(int i=0;i<myRecipe.getRecipeIngredientId().size();i++)
 		{
-			Iterator<IngredientType> iter = myMeasuring.iterator();
-			while(iter.hasNext()&&iter.next().getIngredientTypeId()<myRecipe.getRecipeIngredientsType().get(i));
-			myMeasuringForRecipe.add(iter.next());
+			for(int j=0;j<myMeasuring.size();j++)
+				if(myMeasuring.get(j).getIngredientTypeId()==myRecipe.getRecipeIngredientsType().get(i))
+					myMeasuringForRecipe.add(myMeasuring.get(j));
 		}
 	}
+
 	public void addRecipeResponse(ArrayList<Recipe> r) {
 		if (r!=null)
+		{
 			check=true; // updated successfully
-		else check=false; // not successfully (couldn't save / already exist at the DB)
+			myRecipe=r.get(0);
+		}
+		else 
+		{
+			check=false; // not successfully (couldn't save / already exist at the DB)
+			myRecipe=null;
+		}
 	}
 
 	public void getAllIngredient() {
@@ -338,7 +350,7 @@ public class myView extends Observable implements View {
 	}
 	public void getAllMeasuringTypes() {
 		ev=new Event();
-		ev.getArr().add("ingredient_type_insert");
+		ev.getArr().add("ingredient_type_getall");
 		setChanged();
 		notifyObservers(ev);
 	}
@@ -487,8 +499,14 @@ public class myView extends Observable implements View {
 	}
 	public void recipeUpdateResponse(ArrayList<Recipe> r) {
 		if (r!=null)
+		{
 			check=true; // everything was OK
-		else check=false; // something went wrong 
+			myRecipe=r.get(0);
+		}
+		else
+		{
+			check=false; // something went wrong 
+		}
 	}
 	public void ingredientUpdate(Ingredient ing) {
 		ev=new Event();
@@ -521,6 +539,21 @@ public class myView extends Observable implements View {
 	}
 	public void ingredientReportResponse(ArrayList<Ingredient> ing) {
 		ingredientArray=ing;
+	}
+	public static boolean ifLiked(Integer recipeId) {
+		if (myUser!=null) // Connected as User
+		{
+			for( int i=0;i<myUser.getPersonsFavoriteRecipe().size();i++)
+				if(myUser.getPersonsFavoriteRecipe().get(i)==recipeId)
+					return true; // can't push the button
+		}
+		else // Connected as Dietitian
+		{
+			for( int i=0;i<myDietitian.getPersonsFavoriteRecipe().size();i++)
+				if(myDietitian.getPersonsFavoriteRecipe().get(i)==recipeId)
+					return true; // can't push the button
+		}
+		return false; // can push the button
 	}
 	public void likePressed() {
 		if(myUser!=null) // Connected as User
