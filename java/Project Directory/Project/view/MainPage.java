@@ -119,11 +119,11 @@ public class MainPage extends JFrame {
 		String[] columnNames = {"Recipe Name",
 				"Description",
 		"Rate"}; 
-		Object[][] data = new Object[myView.recipeArray.size()][3];
-		for(int row=0;row<myView.recipeArray.size();row++) {
-			data[row][0]=myView.recipeArray.get(row).getRecipeName();
-			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
-			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
+		Object[][] data = new Object[myView.recipeTop10Array.size()][3];
+		for(int row=0;row<myView.recipeTop10Array.size();row++) {
+			data[row][0]=myView.recipeTop10Array.get(row).getRecipeName();
+			data[row][1]=myView.recipeTop10Array.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeTop10Array.get(row).getRecipeRate();
 		}
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
