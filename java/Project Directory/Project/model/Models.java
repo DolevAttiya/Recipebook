@@ -994,9 +994,9 @@ public class Models extends Observable implements model  {
 
 			while(recipeIngredientVals.next())
 			{
-				IngredientsType.add(recipeIngredientVals.getInt("ingredientId"));
+				IngredientsType.add(recipeIngredientVals.getInt("ingredientTypeId"));
 				IngredientsAmount.add(recipeIngredientVals.getDouble("IngredientAmount"));
-				ingredients.add(recipeIngredientVals.getInt("IngredientId"));
+				ingredients.add(recipeIngredientVals.getInt("ingredientId"));
 
 			}
 			recipe.setRecipeIngredientId(ingredients);
