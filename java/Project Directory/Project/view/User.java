@@ -568,6 +568,7 @@ public class User extends JFrame {
 		txtpnDateOfBirth.setBackground(new Color(240, 248, 255));
 		txtpnDateOfBirth.setBounds(26, 212, 142, 39);
 		panel_1.add(txtpnDateOfBirth);
+		
 		Integer ZZZ =myView.myUser.getPersonDateOfBirth().getYear();
 		textField_4 = new JTextField(ZZZ.toString());
 		textField_4.setEditable(false);
@@ -580,6 +581,16 @@ public class User extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myView.statview.deleteUser();
+				if (myView.check==true) // was able to delete
+				{
+					Login b=new Login();
+					b.setVisible(true);
+					User.this.dispose();
+					User.this.setVisible(false);
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"You are not alowed to delete this user");
+				}
 			}
 		});
 

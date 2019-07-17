@@ -33,7 +33,7 @@ public class myView extends Observable implements View {
 	public static ArrayList<Ingredient> ingredientArrayForRecipe=new ArrayList<Ingredient>();
 	public static ArrayList<IngredientType> myMeasuringForRecipe=new ArrayList<IngredientType>();
 	public Event ev;
-	private Login login;
+	private Open Open;
 	public myView() {};
 	@Override
 	public void start() {
@@ -48,7 +48,7 @@ public class myView extends Observable implements View {
         JFrame frame = new JFrame("ButtonExample");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Create and set up the content pane.
-        login = new Login(this);               
+        Open = new Open(this);               
 
 		
 	}
