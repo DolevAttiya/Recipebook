@@ -117,12 +117,52 @@ class ControllerViewIntegration {
 		v.myFavorite();
 		assertNotNull(myView.recipeArray);
 	}
-	/*
 	@Test
-	void testAddRecipe() {
-		fail("Not yet implemented"); // TODO
+	void testGetAllRecipes() {
+		v.getAllRecipes();
+		assertNotEquals(0, myView.recipeArray);
 	}
-*/
+	@Test
+	void testTrueUserAddRecipe() // success
+	{
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.initializeRecipe();
+		Recipe r;
+		v.addRecipe("Lazania", 0,0,0,0,0,0,1,0,0,0,0,0, "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		assertTrue(myView.check);
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+			r = Models.GetRecipeFromDB(rs.getInt("max"));
+			r.Delete();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
+	@Test
+	void testTrueDietitianAddRecipe() // success
+	{
+		myView.myDietitian=Models.GetDietitianFromDB("midget@kingslanding.com");
+		v.initializeRecipe();
+		Recipe r;
+		v.addRecipe("Lazania", 0,0,0,0,0,0,1,0,0,0,0,0, "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		assertTrue(myView.check);
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+			r = Models.GetRecipeFromDB(rs.getInt("max"));
+			r.Delete();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
+	@Test
+	void testFalseAddRecipe() // Recipe exists
+	{
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.initializeRecipe();
+		v.addRecipe("Ommlete", 0,0,0,0,0,0,1,0,0,0,0,0, "best ommlete ever", 3, 30, "1. Break 3 eggs into a boal");
+		assertFalse(myView.check);		
+	}
+	
 	// ADVANCED SEARCH //
 	@Test
 	void testTrueAdvancedSearch() // Found results in DB
@@ -164,8 +204,25 @@ class ControllerViewIntegration {
 	void testMyRecipes() {
 		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.myRecipes();
-		assertNotNull(myView.recipeArray);
+		assertNotEquals(0, myView.recipeArray);
 	}
+
+	// UPDATE //
+	@Test
+	void testTrueUserUpdate() {
+		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
+		v.userUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+		assertTrue(myView.check);
+		v.deleteUser();
+	}
+	@Test
+	void testTrueDietitianUpdate() {
+		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
+		v.dietitianUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi", "1991-01-10", "1234", "1991-08-10");
+		assertTrue(myView.check);
+		myView.myDietitian.Delete();
+	}
+	
 /*	
 	@Test
 	void testInitializeRecipe() {
@@ -258,42 +315,7 @@ class ControllerViewIntegration {
 */
 /*
 
-	@Test
-	void testGetRecipes() {
-		v.getAllRecipes();
-		assertNotNull(myView.recipeArray);
-	}
-
-	@Test
-	void testTrueUserUpdate() {
-		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
-		v.userUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
-		assertTrue(myView.check);
-		v.deleteUser();
-	}
-
-
-	/*
-	@Test
-	void testFalseUserUpdate() // User doesn't exist in DB
-	{
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi", "1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
-		assertFalse(myView.check);
-	}
-	@Test
-	void testTrueDietitianUpdate() {
-		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
-		v.dietitianUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi", "1991-01-10", "1234", "1991-08-10");
-		assertTrue(myView.check);
-		myView.myDietitian.Delete();
-	}
-
-	@Test
-	void testFalseDietitianUpdate() // Dietitian doesn't exist in DB
-	{
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
-		assertFalse(myView.check);
-	}
+	
 
 
 	@Test // good

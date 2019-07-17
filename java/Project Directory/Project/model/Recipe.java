@@ -178,8 +178,8 @@ public class Recipe extends Entities{
 				this.getRecipeTotalCarbohydrate().toString() +" , " +
 				this.getRecipeTotalProtein().toString() +" , " +
 				this.getRecipeTotalFat().toString() +" , " +
-				this.getRecipeKashruth().toString()+" , time( '"+
-				this.getRecipeTimeToMake() +"' ) , " +
+				this.getRecipeKashruth().toString()+" , "+
+				this.getRecipeTimeToMake() +" , " +
 				this.getRecipeComplex().toString()+" , " +
 				this.getRecipeRate().toString()+" , \"" +
 				this.getRecipeDescription()+"\" , \"" +
@@ -194,7 +194,7 @@ public class Recipe extends Entities{
 				" recipeTotalProtein = "+	this.getRecipeTotalProtein().toString() +" , " +
 				" recipeTotalFat = "+	this.getRecipeTotalFat().toString() +" , " +
 				" recipeKashruth = "+	this.getRecipeKashruth().toString() +" , " +
-				" recipeTimeToMake =  time( '"+	this.getRecipeTimeToMake() +"' ) , " +
+				" recipeTimeToMake = "+	this.getRecipeTimeToMake() +" , " +
 				" recipeComplex = "+	this.getRecipeComplex().toString() +" , " +
 				" recipeRate = "+	this.getRecipeRate().toString() +" , " +
 				" recipeDescription = \""+	this.getRecipeDescription() +"\" , " +

@@ -46,6 +46,17 @@ public class myView extends Observable implements View {
 			return null; 
 		} 
 	} 
+	public static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
 	public void login (String email, String pass)
 	{
 		pass=ConvertPassToHash(pass);
@@ -237,7 +248,15 @@ public class myView extends Observable implements View {
 	} 
 	public void addRecipe(String recipeName,Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, String description, Integer complexity, Integer timeToMake, String instructions) {
 		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
-		Recipe newRecipe=new Recipe(1,recipeName, allergies, myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myUser.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
+		Recipe newRecipe;
+		if (myUser!=null) // Connected as User
+		{
+			newRecipe=new Recipe(1,recipeName, allergies, myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myUser.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
+		}
+		else // Connected as Dietitian
+		{
+			newRecipe=new Recipe(1,recipeName, allergies, myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myDietitian.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
+		}
 		Event ev=new Event();
 		ev.getArr().add("recipe_insert");
 		ev.getArr().add(newRecipe);
@@ -245,10 +264,9 @@ public class myView extends Observable implements View {
 		notifyObservers(ev);
 	} 
 	public void initializeRecipe() {
-		if (myRecipe==null) { 
-			Integer[] ar = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0};
-			myRecipe = new Recipe(null,"recipeName",ar,0.0,0.0,0.0,0.0,0,0,0,"personEmail",0,"recipeDescription","recipeProcess",new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Double>());
-		}
+		Integer[] ar = new Integer[]{0,0,0,0,0,0,0,0,0,0,0,0};
+		myRecipe = new Recipe(null,"recipeName",ar,0.0,0.0,0.0,0.0,0,0,0,"personEmail",0,"recipeDescription","recipeProcess",new ArrayList<Integer>(),new ArrayList<Integer>(),new ArrayList<Double>());
+
 	}
 	public void addIngredientToRecipe(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount)/*Kosher levels: 0 parve, 1 milk,2 meat, 3 pig*/
 	{	
@@ -440,7 +458,7 @@ public class myView extends Observable implements View {
 		if (in==null)
 		{
 			check=true; // move to menu
-			ingredientArray=in;
+			ingredientArray=null;
 		}
 		else check=false; // error
 	}
@@ -450,13 +468,13 @@ public class myView extends Observable implements View {
 		ev.getArr().add(myRecipe);
 		setChanged();
 		notifyObservers(ev);
-		myRecipe=null;
 	}
 	public void deleteRecipeResponse(ArrayList<Recipe> rec) {
 		if (rec==null)
 		{
 			check=true; // move to menu
-			recipeArray=rec;
+			recipeArray=null;
+			myRecipe=null;
 		}
 		else check=false; // error
 	}
