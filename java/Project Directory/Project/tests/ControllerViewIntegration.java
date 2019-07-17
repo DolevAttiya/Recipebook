@@ -98,16 +98,18 @@ class ControllerViewIntegration {
 		assertNotNull(myView.recipeArray);
 	}
 	@Test
-	void testTrueMainSearch() {
-		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+	void testTrueMainSearch()
+	{
+		myView.myUser=Models.GetUserFromDB("faceless@winterfall.com");
 		v.mainSearch("Ommlete");
-		assertNotNull(myView.recipeArray);
+		assertTrue(myView.check);
 	}
 	@Test
-	void testFalseMainSearch() {
+	void testFalseMainSearch() // No results
+	{
 		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.mainSearch("rotem");
-		assertEquals(0,myView.recipeArray.size());
+		assertFalse(myView.check);
 	}
 	@Test
 	void testMyFavorite() {
@@ -115,11 +117,12 @@ class ControllerViewIntegration {
 		v.myFavorite();
 		assertNotNull(myView.recipeArray);
 	}
+	/*
 	@Test
 	void testAddRecipe() {
 		fail("Not yet implemented"); // TODO
 	}
-
+*/
 	// ADVANCED SEARCH //
 	@Test
 	void testTrueAdvancedSearch() // Found results in DB
@@ -159,9 +162,10 @@ class ControllerViewIntegration {
 	// PANEL //
 	@Test
 	void testMyRecipes() {
-		fail("Not yet implemented"); // TODO
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.myRecipes();
+		assertNotNull(myView.recipeArray);
 	}
-
 /*	
 	@Test
 	void testInitializeRecipe() {
@@ -253,14 +257,6 @@ class ControllerViewIntegration {
 	}
 */
 /*
-	
-
-	@Test
-	void testMyRecipes() {
-		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
-		v.myRecipes();
-		assertNotNull(myView.recipeArray);
-	}
 
 	@Test
 	void testGetRecipes() {
