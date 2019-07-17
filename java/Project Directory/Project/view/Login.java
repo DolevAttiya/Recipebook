@@ -60,7 +60,7 @@ public class Login extends JFrame {
 	 */
 	
 	public Login() {
-		setSize(1664, 1493);
+		setSize(1000, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
 		this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
