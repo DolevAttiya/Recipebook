@@ -38,6 +38,8 @@ public class MyFavourites extends JFrame {
 	private JTextField textField;
 	private JTable table;
 	private JTextField txtRecipebook;
+	public String[] recipeComplexity= {"Parve","Milk","Meat","Not Kosher"};
+
 
 	/**
 	 * Launch the application.
@@ -100,7 +102,7 @@ public class MyFavourites extends JFrame {
 			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
 			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
 			data[row][3]=myView.recipeArray.get(row).getRecipeTotalCalories();
-			data[row][4]=myView.recipeArray.get(row).getRecipeKashruth();
+			data[row][4]=recipeComplexity[myView.recipeArray.get(row).getRecipeKashruth()];
 		}
 		JTable table = new JTable(data, columnNames);
 		table.addMouseListener(new MouseAdapter() {
