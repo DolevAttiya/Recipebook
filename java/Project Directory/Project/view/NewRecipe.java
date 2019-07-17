@@ -145,7 +145,10 @@ public class NewRecipe extends JFrame {
 		textArea.setBounds(10, 365, 611, 149);
 		panel_1.add(textArea);
 
-		JComboBox comboBox_1 = new JComboBox(); //get
+		String[] ingtypearr= new String[myView.myMeasuring.size()];
+		for (int i=0;i<myView.myMeasuring.size();i++ )
+			ingtypearr[i]=myView.myMeasuring.get(i).getIngredientTypeName();
+		JComboBox comboBox_1 = new JComboBox(ingtypearr); //get
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_1 = (JComboBox)e.getSource();
@@ -357,8 +360,10 @@ public class NewRecipe extends JFrame {
 		checkBox_5.setBounds(638, 102, 65, 41);
 		panel_1.add(checkBox_5);
 
-
-		JComboBox comboBox = new JComboBox(); //get
+		String[] ingarr= new String[myView.ingredientArray.size()];
+		for (int i=0;i<myView.ingredientArray.size();i++ )
+			ingarr[i]=myView.ingredientArray.get(i).getIngredientName();
+		JComboBox comboBox = new JComboBox(ingarr); //get
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		comboBox.setBounds(174, 164, 141, 32);
 		panel_1.add(comboBox);
@@ -458,6 +463,7 @@ public class NewRecipe extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Integer> ing=new ArrayList<Integer>();
 				myView.statview.addIngredientToRecipe (myView.statview.ingredientArray.get(comboBox.getSelectedIndex()),myView.statview.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
+				myView.statview.fillIngredientIdToName();
 				dataIngredients= new Object [myView.myRecipe.getRecipeIngredientId().size()][3];
 				for(int row=0;row<myView.myRecipe.getRecipeIngredientId().size();row++)
 				{
@@ -465,7 +471,6 @@ public class NewRecipe extends JFrame {
 					dataIngredients[row][1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();
 					dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
 				}
-				;
 			}
 		});
 		btnAdd_1.setFont(new Font("Tahoma", Font.BOLD, 15));

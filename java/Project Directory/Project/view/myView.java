@@ -215,14 +215,11 @@ public class myView extends Observable implements View {
 		ev.getArr().add(s); // what string we want to search
 		if (kashruth==4) // wants to see adapted results
 			ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
-		else ev.getArr().add(null); // null means wants all results
+		else ev.getArr().add(kashruth); // null means wants all results
 		ev.getArr().add(complexity);
 		ev.getArr().add(timeToMake); 
 		ev.getArr().add(rateAbove);
-		if (myUser!=null) // connected as User
 			ev.getArr().add(allergies); // sends the user's allergies
-		else // connected as Dietitian
-			ev.getArr().add(null); // Dietitian doesn't have allergies
 		if (kashruth==4) // wants to see adapted results
 			ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
 		else ev.getArr().add(null); // null means wants all results
