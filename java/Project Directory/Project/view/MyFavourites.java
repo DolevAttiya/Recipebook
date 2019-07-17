@@ -98,6 +98,7 @@ public class MyFavourites extends JFrame {
 		panel.add(btnAdd);
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
 		JTextPane txtpnUserDetails = new JTextPane();
+		txtpnUserDetails.setEditable(false);
 		txtpnUserDetails.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -121,6 +122,7 @@ public class MyFavourites extends JFrame {
 		txtpnUserDetails.setBackground(new Color(65, 105, 225));
 
 		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
+		txtpnAdvancedSearch_1.setEditable(false);
 		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -144,6 +146,7 @@ public class MyFavourites extends JFrame {
 		panel.add(textField_5);
 
 		JTextPane txtpnFavouriteRecipes = new JTextPane();
+		txtpnFavouriteRecipes.setEditable(false);
 		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -162,6 +165,7 @@ public class MyFavourites extends JFrame {
 		txtpnFavouriteRecipes.setBackground(new Color(65, 105, 225));
 
 		JTextPane txtpnSearch_1 = new JTextPane();
+		txtpnSearch_1.setEditable(false);
 		txtpnSearch_1.setText("Search");
 		txtpnSearch_1.setForeground(Color.WHITE);
 		txtpnSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
@@ -170,6 +174,7 @@ public class MyFavourites extends JFrame {
 		panel.add(txtpnSearch_1);
 
 		JTextPane txtpnMyRecipes = new JTextPane();
+		txtpnMyRecipes.setEditable(false);
 		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -188,6 +193,7 @@ public class MyFavourites extends JFrame {
 		panel.add(txtpnMyRecipes);
 
 		JTextPane txtpnTaimli = new JTextPane();
+		txtpnTaimli.setEditable(false);
 		txtpnTaimli.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -213,6 +219,7 @@ public class MyFavourites extends JFrame {
 		panel_1.setLayout(null);
 
 		JTextPane txtpnAdvancedSearch = new JTextPane();
+		txtpnAdvancedSearch.setEditable(false);
 		txtpnAdvancedSearch.setText("My Favourites");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
