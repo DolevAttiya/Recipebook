@@ -224,12 +224,6 @@ public class ViewMock implements View {
 	}
 
 	@Override
-	public void deleteRecipe(Recipe rec) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void recipeUpdate(Recipe rec) {
 		// TODO Auto-generated method stub
 		
@@ -341,6 +335,12 @@ public class ViewMock implements View {
 
 	@Override
 	public void dietitianUpdateForFavorite(Dietitian usD) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteRecipe() {
 		// TODO Auto-generated method stub
 		
 	}
