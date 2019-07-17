@@ -134,7 +134,8 @@ public class Ingredient extends JFrame {
 				if((textField_7.getText().trim().isEmpty())||(textField_2.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textField_4.getText().trim().isEmpty())||(textField_6.getText().trim().isEmpty())) {
 					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
 				}
-						
+				else if(myView.check==false)
+					JOptionPane.showMessageDialog(null,"Something went wrong, Please try again!");
 				else {
 						myView.statview.addIngredient (textField_7.getText(), kashruth, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, Calories, Carbs, Fat, Protein);
 				Ingredient.this.dispose();

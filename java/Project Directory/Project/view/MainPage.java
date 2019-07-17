@@ -293,7 +293,7 @@ public class MainPage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				myView.statview.mainSearch(textField.getText());  
 				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					JOptionPane.showMessageDialog(null,"There is no match to your search, Please try again");
 				}
 				else {
 					SearchRes d=new SearchRes();
