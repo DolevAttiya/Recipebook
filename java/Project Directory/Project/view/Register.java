@@ -131,7 +131,7 @@ public class Register extends JFrame {
 		comboBox_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_3 = (JComboBox)e.getSource();
-				String monthOfStat = (String)comboBox_3.getSelectedItem();
+				monthOfStat = (String)comboBox_3.getSelectedItem();
 			}
 		});
 		comboBox_3.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -144,7 +144,7 @@ public class Register extends JFrame {
 		comboBox_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_2 = (JComboBox)e.getSource();
-				String dayOfStat = (String)comboBox_2.getSelectedItem();
+				dayOfStat = (String)comboBox_2.getSelectedItem();
 			}
 		});
 		comboBox_2.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -155,15 +155,13 @@ public class Register extends JFrame {
 		textField_4.setEnabled(false);
 		textField_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String yearOfStat=textField_4.getText();
+				yearOfStat=textField_4.getText();
 			}
 		});
 		textField_4.setFont(new Font("Dialog", Font.PLAIN, 20));
 		textField_4.setColumns(10);
 		textField_4.setBounds(538, 409, 176, 34);
 		panel_1.add(textField_4);
-
-		//if (chckbxDietican.setSelected(true)) --> textField_8.setEnabled(false);
 
 		textField_8 = new JTextField();
 		textField_8.setEnabled(false);
@@ -396,6 +394,8 @@ public class Register extends JFrame {
 					JOptionPane.showMessageDialog(null,"Couldn't save, Something went wrong, Please try again!");
 				else
 				{
+					yearOfBirth=textField_9.getText();
+					yearOfStat=textField_4.getText();
 					dateOfBirth=yearOfBirth+"-"+monthOfBirth+"-"+dayOfBirth;
 					dietitianStatDate=yearOfStat+"-"+monthOfStat+"-"+dayOfStat;
 					myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
@@ -662,10 +662,10 @@ public class Register extends JFrame {
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				/*Login b=new Login();
-						b.setVisible(true);
-						Register.this.dispose();
-						Register.this.setVisible(false);*/
+				Login b=new Login();
+				b.setVisible(true);
+				Register.this.dispose();
+				Register.this.setVisible(false);
 			}
 		});
 		textPane_5.setBounds(10, 0, 204, 57);

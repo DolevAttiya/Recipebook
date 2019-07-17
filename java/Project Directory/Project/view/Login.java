@@ -26,7 +26,6 @@ import java.awt.event.InputMethodEvent;
 import java.awt.event.WindowEvent;
 
 public class Login extends JFrame {
-	protected myView gui;
 
 	private JTextField textField;
 	private JPanel contentPane;
@@ -60,10 +59,9 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 
-	public Login(myView gui) {
-		myView.statview = gui;
-		this.setVisible(true);
-		this.setTitle("Taimli!");
+	public Login() {
+		
+		
 		setSize(1000, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
