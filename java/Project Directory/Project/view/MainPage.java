@@ -90,6 +90,8 @@ public class MainPage extends JFrame {
 							@Override
 							public void mouseClicked(MouseEvent e) {
 								myView.statview.initializeRecipe();
+								myView.statview.getAllIngredient();
+								myView.statview.getAllMeasuringTypes();
 								NewRecipe a=new NewRecipe();
 								a.setVisible(true);
 								MainPage.this.dispose();
