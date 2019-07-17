@@ -46,6 +46,17 @@ public class myView extends Observable implements View {
 			return null; 
 		} 
 	} 
+	public static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
 	public void login (String email, String pass)
 	{
 		pass=ConvertPassToHash(pass);

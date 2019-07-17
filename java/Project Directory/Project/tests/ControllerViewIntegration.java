@@ -158,7 +158,8 @@ class ControllerViewIntegration {
 	void testFalseAddRecipe() // Recipe exists
 	{
 		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
-		v.addRecipe("Ommelete", 0,0,0,0,0,0,1,0,0,0,0,0, "best ommlete ever", 3, 30, "1. Break 3 eggs into a boal");
+		v.initializeRecipe();
+		v.addRecipe("Ommlete", 0,0,0,0,0,0,1,0,0,0,0,0, "best ommlete ever", 3, 30, "1. Break 3 eggs into a boal");
 		assertFalse(myView.check);		
 	}
 	
@@ -206,6 +207,21 @@ class ControllerViewIntegration {
 		assertNotEquals(0, myView.recipeArray);
 	}
 
+	// UPDATE //
+	@Test
+	void testTrueUserUpdate() {
+		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
+		v.userUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+		assertTrue(myView.check);
+		v.deleteUser();
+	}
+	@Test
+	void testTrueDietitianUpdate() {
+		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
+		v.dietitianUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi", "1991-01-10", "1234", "1991-08-10");
+		assertTrue(myView.check);
+		myView.myDietitian.Delete();
+	}
 	
 /*	
 	@Test
@@ -299,36 +315,7 @@ class ControllerViewIntegration {
 */
 /*
 
-	@Test
-	void testTrueUserUpdate() {
-		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
-		v.userUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
-		assertTrue(myView.check);
-		v.deleteUser();
-	}
-
-
-	/*
-	@Test
-	void testFalseUserUpdate() // User doesn't exist in DB
-	{
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi", "1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
-		assertFalse(myView.check);
-	}
-	@Test
-	void testTrueDietitianUpdate() {
-		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
-		v.dietitianUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi", "1991-01-10", "1234", "1991-08-10");
-		assertTrue(myView.check);
-		myView.myDietitian.Delete();
-	}
-
-	@Test
-	void testFalseDietitianUpdate() // Dietitian doesn't exist in DB
-	{
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
-		assertFalse(myView.check);
-	}
+	
 
 
 	@Test // good
