@@ -39,7 +39,6 @@ import javax.swing.JTable;
 public class MainPage extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 	private JTextField textField_5;
 
 	/**
@@ -130,51 +129,22 @@ public class MainPage extends JFrame {
 		panel_2.setBackground(new Color(240, 248, 255));
 		panel_2.setLayout(null);
 		
-		JButton button = new JButton("Go!");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
-				}
-				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					MainPage.this.dispose();
-					MainPage.this.setVisible(false);
-				}
-			}
-		});
-		button.setFont(new Font("Tahoma", Font.BOLD, 15));
-		button.setBounds(601, 142, 71, 70);
-		panel_2.add(button);
-		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		textField.setBounds(40, 142, 561, 70);
-		panel_2.add(textField);
-		textField.setColumns(10);
-		
 		JTextPane txtpnSearch = new JTextPane();
-		txtpnSearch.setEditable(false);
-		txtpnSearch.setBounds(68, 41, 593, 139);
-		panel_2.add(txtpnSearch);
-		txtpnSearch.setBackground(new Color(240, 248, 255));
-		txtpnSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 60));
-		txtpnSearch.setText("Search a Recipe");
-		
-		JButton btnNewButton = new JButton("Advanced Search");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent v) {
-				AdvancedSearch a=new AdvancedSearch();
-				a.setVisible(true);
+		txtpnSearch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Reports d=new Reports();
+				d.setVisible(true);
 				MainPage.this.dispose();
 				MainPage.this.setVisible(false);
 			}
 		});
-		btnNewButton.setBounds(202, 235, 310, 45);
-		panel_2.add(btnNewButton);
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		txtpnSearch.setEditable(false);
+		txtpnSearch.setBounds(193, 124, 320, 139);
+		panel_2.add(txtpnSearch);
+		txtpnSearch.setBackground(new Color(240, 248, 255));
+		txtpnSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 60));
+		txtpnSearch.setText("Reports");
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setLayout(null);
