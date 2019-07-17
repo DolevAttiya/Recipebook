@@ -374,14 +374,14 @@ public class myView extends Observable implements View {
 	public void userUpdateForFavorite(User usU) {
 		ev=new Event();
 		ev.getArr().add("user_update");
-		ev.getArr().add(usU.getPersonEmail());
+		ev.getArr().add(usU);
 		setChanged();
 		notifyObservers(ev);
 	}
 	public void dietitianUpdateForFavorite(Dietitian usD) {
 		ev=new Event();
 		ev.getArr().add("dietitian_update");
-		ev.getArr().add(usD.getPersonEmail());
+		ev.getArr().add(usD);
 		setChanged();
 		notifyObservers(ev);
 	}
