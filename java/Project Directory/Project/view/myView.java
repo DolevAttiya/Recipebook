@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
+
+import javax.swing.JFrame;
+
 import controller.Event;
 import model.Dietitian;
 import model.Ingredient;
@@ -16,7 +19,8 @@ import model.Recipe;
 import model.User;
 
 public class myView extends Observable implements View {
-	public myView() {};
+	
+	
 	public static myView statview = new myView();
 	public static boolean check=true;
 	public static User myUser;
@@ -28,8 +32,26 @@ public class myView extends Observable implements View {
 	public static Ingredient myIngredient;
 	public static ArrayList<Ingredient> ingredientArrayForRecipe=new ArrayList<Ingredient>();
 	public static ArrayList<IngredientType> myMeasuringForRecipe=new ArrayList<IngredientType>();
-	Event ev;
+	public Event ev;
+	private Login login;
+	public myView() {};
+	@Override
+	public void start() {
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				createAndShowGUI();
+			}
+		});
+	}
+	protected void createAndShowGUI() {
+        //Create and set up the window.
+        JFrame frame = new JFrame("ButtonExample");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Create and set up the content pane.
+        login = new Login(this);               
 
+		
+	}
 	private static String ConvertPassToHash(String input)  {
 		try { 
 			MessageDigest md = MessageDigest.getInstance("SHA-256"); 
@@ -570,6 +592,7 @@ public class myView extends Observable implements View {
 		}
 		recipeUpdate(myRecipe);
 	}
+	
 }
 /*
 //---------Login Page------------

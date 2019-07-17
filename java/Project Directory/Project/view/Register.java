@@ -660,10 +660,10 @@ public class Register extends JFrame {
 				textPane_5.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						Login b=new Login();
+						/*Login b=new Login();
 						b.setVisible(true);
 						Register.this.dispose();
-						Register.this.setVisible(false);
+						Register.this.setVisible(false);*/
 					}
 				});
 				textPane_5.setBounds(10, 0, 204, 57);
