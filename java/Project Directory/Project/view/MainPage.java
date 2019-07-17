@@ -129,8 +129,8 @@ public class MainPage extends JFrame {
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(80);
 		JTableHeader th = table.getTableHeader();
-		th.setPreferredSize(new Dimension(100, 100));
-		Font bigFont = new Font("Tahoma", Font.PLAIN, 32);
+		th.setPreferredSize(new Dimension(100, 30));
+		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
 		table.getTableHeader().setFont(bigFont);
 
 		JScrollPane scrollPane = new JScrollPane(table);

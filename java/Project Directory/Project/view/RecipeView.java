@@ -119,7 +119,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_7.setBackground(new Color(240, 248, 255));
-		checkBox_7.setBounds(638, 222, 88, 41);
+		checkBox_7.setBounds(637, 194, 88, 41);
 		panel_1.add(checkBox_7);
 		
 		JCheckBox checkBox_4 = new JCheckBox("Eggs");
@@ -134,7 +134,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_4.setBackground(new Color(240, 248, 255));
-		checkBox_4.setBounds(804, 102, 81, 41);
+		checkBox_4.setBounds(803, 74, 81, 41);
 		panel_1.add(checkBox_4);
 		
 		JCheckBox checkBox_11 = new JCheckBox("Food Acidity");
@@ -149,7 +149,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_11.setBackground(new Color(240, 248, 255));
-		checkBox_11.setBounds(804, 262, 141, 41);
+		checkBox_11.setBounds(803, 234, 141, 41);
 		panel_1.add(checkBox_11);
 		
 		JCheckBox checkBox_1 = new JCheckBox("Seeds");
@@ -164,7 +164,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_1.setBackground(new Color(240, 248, 255));
-		checkBox_1.setBounds(804, 142, 104, 41);
+		checkBox_1.setBounds(803, 114, 104, 41);
 		panel_1.add(checkBox_1);
 		
 		JCheckBox checkBox_9 = new JCheckBox("Lactose");
@@ -179,7 +179,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_9.setBackground(new Color(240, 248, 255));
-		checkBox_9.setBounds(638, 262, 104, 41);
+		checkBox_9.setBounds(637, 234, 104, 41);
 		panel_1.add(checkBox_9);
 		
 		JCheckBox checkBox = new JCheckBox("Peanut");
@@ -194,7 +194,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox.setBackground(new Color(240, 248, 255));
-		checkBox.setBounds(804, 222, 97, 41);
+		checkBox.setBounds(803, 194, 97, 41);
 		panel_1.add(checkBox);
 		
 		JCheckBox checkBox_10 = new JCheckBox("Chocolate");
@@ -209,7 +209,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_10.setBackground(new Color(240, 248, 255));
-		checkBox_10.setBounds(804, 302, 118, 41);
+		checkBox_10.setBounds(803, 274, 118, 41);
 		panel_1.add(checkBox_10);
 		
 		JTextPane textPane = new JTextPane();
@@ -217,7 +217,7 @@ public class RecipeView extends JFrame {
 		textPane.setText("Allergies:");
 		textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
 		textPane.setBackground(new Color(240, 248, 255));
-		textPane.setBounds(681, 60, 198, 41);
+		textPane.setBounds(680, 32, 198, 41);
 		panel_1.add(textPane);
 		
 		JCheckBox checkBox_3 = new JCheckBox("Tree Nuts");
@@ -232,7 +232,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_3.setBackground(new Color(240, 248, 255));
-		checkBox_3.setBounds(804, 182, 118, 41);
+		checkBox_3.setBounds(803, 154, 118, 41);
 		panel_1.add(checkBox_3);
 		
 		JCheckBox checkBox_2 = new JCheckBox("Strawberries");
@@ -247,7 +247,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_2.setBackground(new Color(240, 248, 255));
-		checkBox_2.setBounds(638, 142, 141, 41);
+		checkBox_2.setBounds(637, 114, 141, 41);
 		panel_1.add(checkBox_2);
 		
 		JCheckBox checkBox_6 = new JCheckBox("Coffie");
@@ -262,7 +262,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_6.setBackground(new Color(240, 248, 255));
-		checkBox_6.setBounds(638, 182, 81, 41);
+		checkBox_6.setBounds(637, 154, 81, 41);
 		panel_1.add(checkBox_6);
 		
 		JCheckBox checkBox_8 = new JCheckBox("Dairy");
@@ -277,7 +277,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_8.setBackground(new Color(240, 248, 255));
-		checkBox_8.setBounds(638, 302, 88, 41);
+		checkBox_8.setBounds(637, 274, 88, 41);
 		panel_1.add(checkBox_8);
 		
 		JCheckBox checkBox_5 = new JCheckBox("Fish");
@@ -292,7 +292,7 @@ public class RecipeView extends JFrame {
 		});
 		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_5.setBackground(new Color(240, 248, 255));
-		checkBox_5.setBounds(638, 102, 65, 41);
+		checkBox_5.setBounds(637, 74, 65, 41);
 		panel_1.add(checkBox_5);
 		
 		JTextPane txtpnPerGrams = new JTextPane();
@@ -300,7 +300,7 @@ public class RecipeView extends JFrame {
 		txtpnPerGrams.setText("per 100 grams");
 		txtpnPerGrams.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtpnPerGrams.setBackground(new Color(240, 248, 255));
-		txtpnPerGrams.setBounds(741, 375, 88, 21);
+		txtpnPerGrams.setBounds(745, 345, 88, 21);
 		panel_1.add(txtpnPerGrams);
 		
 		JTextPane txtpnProtein = new JTextPane();
@@ -308,7 +308,7 @@ public class RecipeView extends JFrame {
 		txtpnProtein.setText("Protein:");
 		txtpnProtein.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtpnProtein.setBackground(new Color(240, 248, 255));
-		txtpnProtein.setBounds(638, 518, 81, 31);
+		txtpnProtein.setBounds(642, 488, 81, 31);
 		panel_1.add(txtpnProtein);
 		
 		JTextPane txtpnFat = new JTextPane();
@@ -316,7 +316,7 @@ public class RecipeView extends JFrame {
 		txtpnFat.setText("Fat:");
 		txtpnFat.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtpnFat.setBackground(new Color(240, 248, 255));
-		txtpnFat.setBounds(638, 478, 41, 31);
+		txtpnFat.setBounds(642, 448, 41, 31);
 		panel_1.add(txtpnFat);
 		
 		JTextPane txtpnSugar = new JTextPane();
@@ -324,7 +324,7 @@ public class RecipeView extends JFrame {
 		txtpnSugar.setText("Carbs:");
 		txtpnSugar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtpnSugar.setBackground(new Color(240, 248, 255));
-		txtpnSugar.setBounds(638, 438, 65, 31);
+		txtpnSugar.setBounds(642, 408, 65, 31);
 		panel_1.add(txtpnSugar);
 		
 		JTextPane txtpnCalories = new JTextPane();
@@ -332,7 +332,7 @@ public class RecipeView extends JFrame {
 		txtpnCalories.setText("Calories:");
 		txtpnCalories.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtpnCalories.setBackground(new Color(240, 248, 255));
-		txtpnCalories.setBounds(638, 398, 88, 31);
+		txtpnCalories.setBounds(642, 368, 88, 31);
 		panel_1.add(txtpnCalories);
 		
 		textField_1 = new JTextField(/*myView.myRecipe.getRecipeDescription()*/);
@@ -361,10 +361,17 @@ public class RecipeView extends JFrame {
 		JButton btnSearch = new JButton("Edit");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RecipeUpdate f=new RecipeUpdate();
-				f.setVisible(true);
-				RecipeView.this.dispose();
-				RecipeView.this.setVisible(false);
+				if (myView.myUser.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()||myView.myDietitian.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()) {
+					RecipeUpdate f=new RecipeUpdate();
+					f.setVisible(true);
+					RecipeView.this.dispose();
+					RecipeView.this.setVisible(false);				}
+				else {
+					JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
+				}
+			
+				
+				
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -376,7 +383,7 @@ public class RecipeView extends JFrame {
 		txtpnNutritionValues.setText("Nutrition Values:");
 		txtpnNutritionValues.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
 		txtpnNutritionValues.setBackground(new Color(240, 248, 255));
-		txtpnNutritionValues.setBounds(633, 337, 347, 41);
+		txtpnNutritionValues.setBounds(637, 307, 347, 41);
 		panel_1.add(txtpnNutritionValues);
 		
 		JTextPane txtpnIngredients = new JTextPane();
@@ -399,28 +406,28 @@ public class RecipeView extends JFrame {
 		textField_2_1.setEditable(false);
 		textField_2_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_2_1.setColumns(10);
-		textField_2_1.setBounds(729, 398, 223, 31);
+		textField_2_1.setBounds(733, 368, 223, 31);
 		panel_1.add(textField_2_1);
 		
 		textField_4 = new JTextField(/*myView.myRecipe.getRecipeCarbohydrate()*/);
 		textField_4.setEditable(false);
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_4.setColumns(10);
-		textField_4.setBounds(729, 438, 221, 31);
+		textField_4.setBounds(733, 408, 221, 31);
 		panel_1.add(textField_4);
 		
 		textField_6 = new JTextField(/*myView.myRecipe.getRecipeFat()*/);
 		textField_6.setEditable(false);
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_6.setColumns(10);
-		textField_6.setBounds(729, 478, 221, 31);
+		textField_6.setBounds(733, 448, 221, 31);
 		panel_1.add(textField_6);
 		
 		textField_7 = new JTextField(/*myView.myRecipe.getRecipeTotalProtein().toString()*/);
 		textField_7.setEditable(false);
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_7.setColumns(10);
-		textField_7.setBounds(729, 518, 221, 31);
+		textField_7.setBounds(733, 488, 221, 31);
 		panel_1.add(textField_7);
 		
 		textField_3 = new JTextField(/*myView.myRecipe.getRecipeRate()*/);
@@ -533,16 +540,16 @@ public class RecipeView extends JFrame {
 				}
 			}
 		});
-		btnDeleteRecipe.setFont(new Font("Tahoma", Font.BOLD, 50));
-		btnDeleteRecipe.setBounds(26, 1171, 406, 69);
+		btnDeleteRecipe.setFont(new Font("Tahoma", Font.BOLD, 25));
+		btnDeleteRecipe.setBounds(693, 523, 226, 39);
 		panel_1.add(btnDeleteRecipe);
 		
 		JTextPane textPane_3 = new JTextPane();
 		textPane_3.setEditable(false);
 		textPane_3.setText("Don't delete unless you're sure!");
-		textPane_3.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		textPane_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textPane_3.setBackground(new Color(240, 248, 255));
-		textPane_3.setBounds(26, 1244, 406, 55);
+		textPane_3.setBounds(687, 563, 234, 21);
 		panel_1.add(textPane_3);
 		
 		JButton btnILikeIt = new JButton("");
@@ -550,13 +557,35 @@ public class RecipeView extends JFrame {
 		panel_1.add(btnILikeIt);
 		btnILikeIt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				myView.statview.likePressed();
-				btnILikeIt.setEnabled(false);				
+				if (btnILikeIt.isSelected()==true)
+				{
+					myView.statview.likePressed();
+					btnILikeIt.setEnabled(false);
+				}
+				if (myView.check==true) {
+					//myView.statview.ifLiked();
+				}				
 			}
 		});
-		btnILikeIt.setIcon(new ImageIcon("C:\\Users\\8lab309\\Desktop\\rsz_like.jpg"));
+		btnILikeIt.setIcon(new ImageIcon("C:\\Users\\8lab309\\git\\Recipebook\\java\\Project Directory\\Project\\view\\rsz_like.jpg"));
 		btnILikeIt.setBackground(new Color(65, 105, 225));
 		btnILikeIt.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 20));
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setVisible(false);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (myView.myRecipe.getRecipeRate()>50) {
+					btnNewButton.setVisible(true);
+				}
+				else {
+					btnNewButton.setVisible(false);
+				}
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\8lab309\\git\\Recipebook\\java\\Project Directory\\Project\\view\\rsz_picture1.png"));
+		btnNewButton.setBounds(10, 11, 55, 55);
+		panel_1.add(btnNewButton);
 		
 
 		//panel upper
