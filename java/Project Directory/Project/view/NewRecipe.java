@@ -67,7 +67,7 @@ public class NewRecipe extends JFrame {
 	public int isAcidity=0;
 	public int isChocolate=0;
 	public Double amount=0.0;
-	Object[][] dataIngredients;
+	Object[]dataIngredients;
 	public int Complexity=0;
 	public int timeToMake=0;
 	//
@@ -117,13 +117,10 @@ public class NewRecipe extends JFrame {
 		String[] columnNames = {"Ingredient Name",
 				"Amount",
 		"Mesuring"}; 
-		dataIngredients = new Object[myView.recipeArray.size()][3];
-		for(int row=0;row<myView.ingredientArrayForRecipe.size();row++) {
-			dataIngredients[row][0]=myView.ingredientArrayForRecipe.get(row).getIngredientName();
-			dataIngredients[row][1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();
-			dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
-		}
-		JTable table = new JTable(dataIngredients, columnNames);
+		Object[][] d= new Object[100][5];
+		
+	    DefaultTableModel tableModel =new DefaultTableModel(null, columnNames);
+	    JTable table = new JTable(tableModel);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(80);
 		JTableHeader th = table.getTableHeader();
@@ -461,16 +458,14 @@ public class NewRecipe extends JFrame {
 		JButton btnAdd_1 = new JButton("Add");
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<Integer> ing=new ArrayList<Integer>();
 				myView.statview.addIngredientToRecipe (myView.statview.ingredientArray.get(comboBox.getSelectedIndex()),myView.statview.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
 				myView.statview.fillIngredientIdToName();
-				dataIngredients= new Object [myView.myRecipe.getRecipeIngredientId().size()][3];
-				for(int row=0;row<myView.myRecipe.getRecipeIngredientId().size();row++)
-				{
-					dataIngredients[row][0]=myView.ingredientArrayForRecipe.get(row).getIngredientName();
-					dataIngredients[row][1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();
-					dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
-				}
+				dataIngredients = new Object[3];
+				dataIngredients[0]=myView.ingredientArrayForRecipe.get(myView.ingredientArrayForRecipe.size()-1).getIngredientName();
+				dataIngredients[1]=myView.myRecipe.getRecipeIngredientsAmount().get(myView.ingredientArrayForRecipe.size()-1).toString();
+				dataIngredients[2]=myView.myMeasuringForRecipe.get(myView.ingredientArrayForRecipe.size()-1).getIngredientTypeName();
+				
+				tableModel.addRow(dataIngredients);
 			}
 		});
 		btnAdd_1.setFont(new Font("Tahoma", Font.BOLD, 15));
