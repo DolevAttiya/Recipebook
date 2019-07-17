@@ -27,7 +27,7 @@ public class myView extends Observable implements View {
 	public static Recipe myRecipe=null;
 	public static Ingredient myIngredient;
 	public static ArrayList<Ingredient> ingredientArrayForRecipe=new ArrayList<Ingredient>();
-	public static ArrayList<IngredientType> myMeasuringForRecipe;
+	public static ArrayList<IngredientType> myMeasuringForRecipe=new ArrayList<IngredientType>();
 	Event ev;
 
 	private static String ConvertPassToHash(String input)  {
@@ -308,7 +308,7 @@ public class myView extends Observable implements View {
 				if(ingredientArray.get(j).getIngredientId()==myRecipe.getRecipeIngredientId().get(i))
 					ingredientArrayForRecipe.add(ingredientArray.get(j));
 		}
-		for(int i=0;i<myRecipe.getRecipeIngredientId().size();i++)
+		for(int i=0;i<myRecipe.getRecipeIngredientsType().size();i++)
 		{
 			for(int j=0;j<myMeasuring.size();j++)
 				if(myMeasuring.get(j).getIngredientTypeId()==myRecipe.getRecipeIngredientsType().get(i))
