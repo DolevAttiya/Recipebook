@@ -335,7 +335,7 @@ public class RecipeView extends JFrame {
 		txtpnCalories.setBounds(642, 368, 88, 31);
 		panel_1.add(txtpnCalories);
 		
-		textField_1 = new JTextField(/*myView.myRecipe.getRecipeDescription()*/);
+		textField_1 = new JTextField(myView.myRecipe.getRecipeDescription());
 		textField_1.setEditable(false);
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textField_1.setColumns(10);
@@ -402,35 +402,35 @@ public class RecipeView extends JFrame {
 		txtpnInstructions.setBounds(10, 338, 118, 32);
 		panel_1.add(txtpnInstructions);
 		
-		textField_2_1 = new JTextField(/*myView.myRecipe.getRecipeCalories()*/);
+		textField_2_1 = new JTextField(myView.myRecipe.getRecipeTotalCalories().toString());
 		textField_2_1.setEditable(false);
 		textField_2_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_2_1.setColumns(10);
 		textField_2_1.setBounds(733, 368, 223, 31);
 		panel_1.add(textField_2_1);
 		
-		textField_4 = new JTextField(/*myView.myRecipe.getRecipeCarbohydrate()*/);
+		textField_4 = new JTextField(myView.myRecipe.getRecipeTotalCarbohydrate().toString());
 		textField_4.setEditable(false);
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_4.setColumns(10);
 		textField_4.setBounds(733, 408, 221, 31);
 		panel_1.add(textField_4);
 		
-		textField_6 = new JTextField(/*myView.myRecipe.getRecipeFat()*/);
+		textField_6 = new JTextField(myView.myRecipe.getRecipeTotalFat().toString());
 		textField_6.setEditable(false);
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_6.setColumns(10);
 		textField_6.setBounds(733, 448, 221, 31);
 		panel_1.add(textField_6);
 		
-		textField_7 = new JTextField(/*myView.myRecipe.getRecipeTotalProtein().toString()*/);
+		textField_7 = new JTextField(myView.myRecipe.getRecipeTotalProtein().toString());
 		textField_7.setEditable(false);
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_7.setColumns(10);
 		textField_7.setBounds(733, 488, 221, 31);
 		panel_1.add(textField_7);
 		
-		textField_3 = new JTextField(/*myView.myRecipe.getRecipeRate()*/);
+		textField_3 = new JTextField(myView.myRecipe.getRecipeRate());
 		textField_3.setEditable(false);
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_3.setColumns(10);
@@ -445,7 +445,7 @@ public class RecipeView extends JFrame {
 		txtpnName.setBounds(10, 69, 65, 31);
 		panel_1.add(txtpnName);
 		
-		textField_8 = new JTextField(/*myView.myRecipe.getRecipeName()*/);
+		textField_8 = new JTextField(myView.myRecipe.getRecipeName());
 		textField_8.setEditable(false);
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		textField_8.setColumns(10);
@@ -460,7 +460,7 @@ public class RecipeView extends JFrame {
 		txtpnKosherLevel.setBounds(26, 1055, 198, 49);
 		panel_1.add(txtpnKosherLevel);
 		
-		TextArea textArea = new TextArea(/*myView.myRecipe.getRecipeInstructions()*/);
+		TextArea textArea = new TextArea(myView.myRecipe.getRecipeProcess());
 		textArea.setBounds(10, 365, 611, 149);
 		panel_1.add(textArea);
 		

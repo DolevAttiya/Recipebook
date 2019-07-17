@@ -26,6 +26,7 @@ import java.awt.event.InputMethodEvent;
 import java.awt.event.WindowEvent;
 
 public class Login extends JFrame {
+	protected myView gui;
 
 	private JTextField textField;
 	private JPanel contentPane;
@@ -35,7 +36,7 @@ public class Login extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,7 +49,7 @@ public class Login extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
@@ -59,7 +60,10 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	
-	public Login() {
+	public Login(myView gui) {
+		myView.statview = gui;
+		this.setVisible(true);
+		this.setTitle("Taimli!");
 		setSize(1000, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -120,6 +124,7 @@ public class Login extends JFrame {
 																{
 																	MainPage a=new MainPage();
 																	a.setVisible(true);
+																	myView.statview.getTop10();
 																	Login.this.dispose();
 																	Login.this.setVisible(false);
 																}

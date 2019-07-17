@@ -116,7 +116,7 @@ public class User extends JFrame {
 		String[] days = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		JComboBox comboBox = new JComboBox(days);
 		comboBox.setEnabled(false);
-		comboBox.setSelectedItem("16"); /*myView.myUser.getPersonDateOfBirth().getDayOfMonth()*/
+		comboBox.setSelectedItem(myView.myUser.getPersonDateOfBirth().getDayOfMonth()); 
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JComboBox comboBox = (JComboBox)arg0.getSource();
@@ -130,7 +130,7 @@ public class User extends JFrame {
 		String[] months = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 		JComboBox comboBox_3 = new JComboBox(months);
 		comboBox_3.setEnabled(false);
-		comboBox_3.setSelectedItem("11");/*myView.myUser.getPersonDateOfBirth().getMonth()*/
+		comboBox_3.setSelectedItem(myView.myUser.getPersonDateOfBirth().getMonth());
 		comboBox_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JComboBox comboBox_3 = (JComboBox)arg0.getSource();
@@ -141,27 +141,27 @@ public class User extends JFrame {
 		comboBox_3.setBounds(274, 212, 87, 36);
 		panel_1.add(comboBox_3);
 		
-		textField_7 = new JTextField(/*myView.myUser.getPersonHashPass()*/);
+		textField_7 = new JTextField(myView.myUser.getPersonHashPass());
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_7.setColumns(10);
 		textField_7.setBounds(256, 312, 282, 39);
 		panel_1.add(textField_7);
 		
 		
-		textField_2 = new JTextField(/*myView.myUser.getPersonHashPass()*/);
+		textField_2 = new JTextField(myView.myUser.getPersonHashPass());
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_2.setColumns(10);
 		textField_2.setBounds(256, 262, 282, 39);
 		panel_1.add(textField_2);
 		
-		textField_3 = new JTextField(/*myView.myUser.getPersonEmail()*/);
+		textField_3 = new JTextField(myView.myUser.getPersonEmail());
 		textField_3.setEditable(false);
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_3.setColumns(10);
 		textField_3.setBounds(101, 162, 441, 39);
 		panel_1.add(textField_3);
 		
-		textField_6 = new JTextField(/*myView.myUser.getPersonLastName()*/);
+		textField_6 = new JTextField(myView.myUser.getPersonLastName());
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_6.setColumns(10);
 		textField_6.setBounds(157, 112, 387, 39);
@@ -238,7 +238,7 @@ public class User extends JFrame {
 		chckbxEggs.setBounds(773, 112, 117, 40);
 		panel_1.add(chckbxEggs);
 		
-		textField_1 = new JTextField(/*myView.myUser.getPersonFirstName()*/);
+		textField_1 = new JTextField(myView.myUser.getPersonFirstName());
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_1.setColumns(10);
 		textField_1.setBounds(157, 62, 387, 39);
@@ -376,7 +376,6 @@ public class User extends JFrame {
 		panel_1.add(txtpnEnterPasswordAgain);
 		
 		JCheckBox chckbxShowOnlyRecipes = new JCheckBox("Show only Recipes adapted to Alergies");
-		//chckbxShowOnlyRecipes.setSelected(true);
 		chckbxShowOnlyRecipes.addActionListener(new ActionListener() {
 			 @Override
 			public void actionPerformed(ActionEvent d) {
@@ -472,7 +471,7 @@ public class User extends JFrame {
 		txtpnDateOfBirth.setBounds(26, 212, 142, 39);
 		panel_1.add(txtpnDateOfBirth);
 		
-		textField_4 = new JTextField(/*myView.myUser.getPersonDateOfBirth().getYear()*/);
+		textField_4 = new JTextField(myView.myUser.getPersonDateOfBirth().getYear());
 		textField_4.setEditable(false);
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_4.setColumns(10);

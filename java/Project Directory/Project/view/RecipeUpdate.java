@@ -133,7 +133,7 @@ public class RecipeUpdate extends JFrame {
 
 		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
 		JComboBox comboBox_5 = new JComboBox(times);
-		comboBox_5.setSelectedIndex(0);/*myView.myRecipe.getRecipeTimeToMake()*/
+		comboBox_5.setSelectedIndex(myView.myRecipe.getRecipeTimeToMake());
 		comboBox_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_5 = (JComboBox)e.getSource();
@@ -151,7 +151,7 @@ public class RecipeUpdate extends JFrame {
 		//TableColumn column = null;
 		panel_1.add(scrollPane);
 
-		TextArea textArea = new TextArea(/*myView.myRecipe.getRecipeInstructions()*/);
+		TextArea textArea = new TextArea(myView.myRecipe.getRecipeProcess());
 		textArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textArea.setBounds(10, 365, 611, 149);
 		panel_1.add(textArea);
@@ -438,7 +438,7 @@ public class RecipeUpdate extends JFrame {
 		textPane_2.setBounds(10, 69, 65, 31);
 		panel_1.add(textPane_2);
 
-		textField_1 = new JTextField(/*myView.myRecipe.getRecipeName()*/);
+		textField_1 = new JTextField(myView.myRecipe.getRecipeName());
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textField_1.setColumns(10);
 		textField_1.setBounds(85, 69, 533, 31);
@@ -500,7 +500,7 @@ public class RecipeUpdate extends JFrame {
 
 		String[] complexiting = {"Easy", "Medium", "Hard"};
 		JComboBox comboBox_4 = new JComboBox(complexiting);
-		comboBox_4.setSelectedIndex(0);/*myView.myRecipe.getRecipeComplex()*/
+		comboBox_4.setSelectedIndex(myView.myRecipe.getRecipeComplex());
 		comboBox_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_4 = (JComboBox)e.getSource();
