@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextPane;
@@ -11,6 +12,10 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class newTest extends JFrame {
 
@@ -54,13 +59,22 @@ public class newTest extends JFrame {
 		panel.setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(518, 36, 163, 21);
+		textField.setBounds(495, 36, 163, 21);
 		panel.add(textField);
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textField.setColumns(10);
 		
 		JTextPane textPane_5 = new JTextPane();
-		textPane_5.setBounds(0, 0, 204, 57);
+		textPane_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainPage b=new MainPage();
+				b.setVisible(true);
+				newTest.this.dispose();
+				newTest.this.setVisible(false);
+			}
+		});
+		textPane_5.setBounds(10, 0, 204, 57);
 		panel.add(textPane_5);
 		textPane_5.setText("Taimli");
 		textPane_5.setForeground(Color.WHITE);
@@ -69,7 +83,22 @@ public class newTest extends JFrame {
 		textPane_5.setBackground(new Color(65, 105, 225));
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setBounds(898, 8, 96, 49);
+		textPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (myView.myUser!=null) {
+					User f=new User();
+				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
+				newTest.this.dispose();
+				newTest.this.setVisible(false);
+			}
+		});
+		textPane.setBounds(882, 8, 102, 49);
 		panel.add(textPane);
 		textPane.setText("user details");
 		textPane.setForeground(Color.WHITE);
@@ -78,7 +107,16 @@ public class newTest extends JFrame {
 		textPane.setBackground(new Color(65, 105, 225));
 		
 		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(746, 8, 126, 50);
+		textPane_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AdvancedSearch d=new AdvancedSearch();
+				d.setVisible(true);
+				newTest.this.dispose();
+				newTest.this.setVisible(false);
+			}
+		});
+		textPane_1.setBounds(729, 7, 126, 50);
 		panel.add(textPane_1);
 		textPane_1.setText("Advanced Search");
 		textPane_1.setForeground(Color.WHITE);
@@ -87,7 +125,7 @@ public class newTest extends JFrame {
 		textPane_1.setBackground(new Color(65, 105, 225));
 		
 		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setBounds(582, 11, 92, 29);
+		textPane_3.setBounds(559, 11, 92, 29);
 		panel.add(textPane_3);
 		textPane_3.setText("Search");
 		textPane_3.setForeground(Color.WHITE);
@@ -96,12 +134,36 @@ public class newTest extends JFrame {
 		textPane_3.setBackground(new Color(65, 105, 225));
 		
 		JButton button = new JButton("Go!");
-		button.setBounds(682, 36, 47, 21);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				myView.statview.mainSearch(textField.getText());  
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+					SearchRes d=new SearchRes();
+				d.setVisible(true);
+				newTest.this.dispose();
+				newTest.this.setVisible(false);
+				}
+			}
+		});
+		button.setBounds(659, 36, 47, 21);
 		panel.add(button);
-		button.setFont(new Font("Tahoma", Font.BOLD, 8));
+		button.setFont(new Font("Tahoma", Font.BOLD, 5));
 		
 		JTextPane textPane_2 = new JTextPane();
-		textPane_2.setBounds(385, 8, 132, 49);
+		textPane_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
+				MyFavourites d=new MyFavourites();
+				d.setVisible(true);
+				newTest.this.dispose();
+				newTest.this.setVisible(false);
+			}
+		});
+		textPane_2.setBounds(341, 8, 132, 49);
 		panel.add(textPane_2);
 		textPane_2.setText("Favourite Recipes");
 		textPane_2.setForeground(Color.WHITE);
@@ -110,7 +172,17 @@ public class newTest extends JFrame {
 		textPane_2.setBackground(new Color(65, 105, 225));
 		
 		JTextPane textPane_4 = new JTextPane();
-		textPane_4.setBounds(242, 8, 107, 49);
+		textPane_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
+				MyRecipes c=new MyRecipes();
+				c.setVisible(true);
+				newTest.this.dispose();
+				newTest.this.setVisible(false);
+			}
+		});
+		textPane_4.setBounds(224, 8, 107, 49);
 		panel.add(textPane_4);
 		textPane_4.setText("My Recipes");
 		textPane_4.setForeground(Color.WHITE);
@@ -120,10 +192,17 @@ public class newTest extends JFrame {
 		
 		//panel center
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 60, 971, 570);
+		panel_1.setBounds(10, 60, 971, 586);
 		panel_1.setBackground(new Color(240, 248, 255));
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
+		
+		JTextPane textPane_6 = new JTextPane();
+		textPane_6.setText("Advanced Search");
+		textPane_6.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 40));
+		textPane_6.setEditable(false);
+		textPane_6.setBackground(new Color(240, 248, 255));
+		textPane_6.setBounds(302, 11, 449, 57);
+		panel_1.add(textPane_6);
 	}
-
 }
