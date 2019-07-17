@@ -244,13 +244,16 @@ public class MainPage extends JFrame {
 				if (myView.myUser!=null) {
 					User f=new User();
 					f.setVisible(true);
+					MainPage.this.dispose();
+					MainPage.this.setVisible(false);
 				}
 				else {
 					Dietican f=new Dietican();
 					f.setVisible(true);
+					MainPage.this.dispose();
+					MainPage.this.setVisible(false);
 				}
-				MainPage.this.dispose();
-				MainPage.this.setVisible(false);
+	
 			}
 		});
 		textPane1.setBounds(882, 8, 102, 49);
