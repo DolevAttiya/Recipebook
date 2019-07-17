@@ -67,7 +67,7 @@ public class NewRecipe extends JFrame {
 	public int isAcidity=0;
 	public int isChocolate=0;
 	public Double amount=0.0;
-	Object[][] dataIngredients;
+	Object[] dataIngredients;
 	public int Complexity=0;
 	public int timeToMake=0;
 	//
@@ -117,13 +117,16 @@ public class NewRecipe extends JFrame {
 		String[] columnNames = {"Ingredient Name",
 				"Amount",
 		"Mesuring"}; 
-		dataIngredients = new Object[myView.recipeArray.size()][3];
+		dataIngredients = new Object[3];
 		for(int row=0;row<myView.ingredientArrayForRecipe.size();row++) {
 			dataIngredients[row][0]=myView.ingredientArrayForRecipe.get(row).getIngredientName();
 			dataIngredients[row][1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();
 			dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
+			
+	        tableModel.addRow(dataIngredients);
 		}
 		JTable table = new JTable(dataIngredients, columnNames);
+	    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(80);
 		JTableHeader th = table.getTableHeader();
@@ -461,6 +464,7 @@ public class NewRecipe extends JFrame {
 		JButton btnAdd_1 = new JButton("Add");
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				amount=Double.parseDouble(textField_3.getText());
 				ArrayList<Integer> ing=new ArrayList<Integer>();
 				myView.statview.addIngredientToRecipe (myView.statview.ingredientArray.get(comboBox.getSelectedIndex()),myView.statview.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
 				myView.statview.fillIngredientIdToName();
@@ -471,7 +475,7 @@ public class NewRecipe extends JFrame {
 					dataIngredients[row][1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();
 					dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
 				}
-			}
+			} 		
 		});
 		btnAdd_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnAdd_1.setBounds(533, 164, 88, 32);
