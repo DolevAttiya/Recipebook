@@ -10,6 +10,7 @@ import model.Recipe;
 import model.User;
 
 public interface View {
+	void start();
 
 	//Responses
 	public void uloginResponse (ArrayList<model.User> usU);
