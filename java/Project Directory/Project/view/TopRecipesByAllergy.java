@@ -40,7 +40,8 @@ public class TopRecipesByAllergy extends JFrame {
 	private JTable table;
 	private Component txtRecipebook;
 	private JTextField textField_1;
-	private JTextField textField_2;
+	public String[] recipeComplexity= {"Parve","Milk","Meat","Not Kosher"};
+
 
 	/**
 	 * Launch the application.
@@ -63,7 +64,7 @@ public class TopRecipesByAllergy extends JFrame {
 	 * Create the frame.
 	 */
 	public TopRecipesByAllergy() {
-		setSize(1664, 1493);
+		setSize(1000, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
 		contentPane = new JPanel();
@@ -74,157 +75,19 @@ public class TopRecipesByAllergy extends JFrame {
 		contentPane.setLayout(null);
 
 		//panelkavuaa
-		JPanel panel = new JPanel();
-		panel.setBounds(26, 15, 1603, 87);
-		panel.setBackground(new Color(65, 105, 225));
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JButton btnAdd = new JButton("Go!");
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				myView.statview.mainSearch(textField_2.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
-				}
-				else {
-						SearchRes d=new SearchRes();
-				d.setVisible(true);
-				TopRecipesByAllergy.this.dispose();
-				TopRecipesByAllergy.this.setVisible(false);
-				}
-			}
-		});
-		btnAdd.setBounds(1016, 37, 71, 42);
-		panel.add(btnAdd);
-		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
-		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		textField_2.setColumns(10);
-		textField_2.setBounds(747, 37, 268, 43);
-		panel.add(textField_2);
-
-		JTextPane txtpnUserDetails = new JTextPane();
-		txtpnUserDetails.setEditable(false);
-		txtpnUserDetails.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (myView.myUser!=null) {
-					User f=new User();
-				f.setVisible(true);
-				}
-				else {
-					Dietican f=new Dietican();
-					f.setVisible(true);
-				}
-				TopRecipesByAllergy.this.dispose();
-				TopRecipesByAllergy.this.setVisible(false);
-			}
-		});
-		txtpnUserDetails.setBounds(1371, 7, 175, 82);
-		panel.add(txtpnUserDetails);
-		txtpnUserDetails.setForeground(new Color(255, 255, 255));
-		txtpnUserDetails.setText("user details");
-		txtpnUserDetails.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
-		txtpnUserDetails.setBackground(new Color(65, 105, 225));
-
-		JTextPane txtpnAdvancedSearch_1 = new JTextPane();
-		txtpnAdvancedSearch_1.setEditable(false);
-		txtpnAdvancedSearch_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				AdvancedSearch f=new AdvancedSearch();
-				f.setVisible(true);
-				TopRecipesByAllergy.this.dispose();
-				TopRecipesByAllergy.this.setVisible(false);
-			}
-		});
-		txtpnAdvancedSearch_1.setText("Advanced Search");
-		txtpnAdvancedSearch_1.setForeground(Color.WHITE);
-		txtpnAdvancedSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
-		txtpnAdvancedSearch_1.setBackground(new Color(65, 105, 225));
-		txtpnAdvancedSearch_1.setBounds(1146, 7, 215, 80);
-		panel.add(txtpnAdvancedSearch_1);
-		JTextPane txtpnFavouriteRecipes = new JTextPane();
-		txtpnFavouriteRecipes.setEditable(false);
-		txtpnFavouriteRecipes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				myView.statview.myFavorite();
-				MyFavourites f=new MyFavourites();
-				f.setVisible(true);
-				TopRecipesByAllergy.this.dispose();
-				TopRecipesByAllergy.this.setVisible(false);
-			}
-		});
-		txtpnFavouriteRecipes.setBounds(524, 7, 210, 87);
-		panel.add(txtpnFavouriteRecipes);
-		txtpnFavouriteRecipes.setText("Favourite Recipes");
-		txtpnFavouriteRecipes.setForeground(Color.WHITE);
-		txtpnFavouriteRecipes.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
-		txtpnFavouriteRecipes.setBackground(new Color(65, 105, 225));
-
-		JTextPane txtpnSearch_1 = new JTextPane();
-		txtpnSearch_1.setEditable(false);
-		txtpnSearch_1.setText("Search");
-		txtpnSearch_1.setForeground(Color.WHITE);
-		txtpnSearch_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
-		txtpnSearch_1.setBackground(new Color(65, 105, 225));
-		txtpnSearch_1.setBounds(844, 0, 146, 42);
-		panel.add(txtpnSearch_1);
-
-		JTextPane txtpnMyRecipes = new JTextPane();
-		txtpnMyRecipes.setEditable(false);
-		txtpnMyRecipes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				myView.statview.myRecipes();
-				MyRecipes f=new MyRecipes();
-				f.setVisible(true);
-				TopRecipesByAllergy.this.dispose();
-				TopRecipesByAllergy.this.setVisible(false);
-			}
-		});
-		txtpnMyRecipes.setText("My Recipes");
-		txtpnMyRecipes.setForeground(Color.WHITE);
-		txtpnMyRecipes.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 28));
-		txtpnMyRecipes.setBackground(new Color(65, 105, 225));
-		txtpnMyRecipes.setBounds(347, 7, 175, 80);
-		panel.add(txtpnMyRecipes);
-
-		JTextPane txtpnTaimli = new JTextPane();
-		txtpnTaimli.setEditable(false);
-		txtpnTaimli.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				MainPage f=new MainPage();
-				f.setVisible(true);
-				TopRecipesByAllergy.this.dispose();
-				TopRecipesByAllergy.this.setVisible(false);
-			}
-		});
-		txtpnTaimli.setText("Taimli");
-		txtpnTaimli.setForeground(Color.WHITE);
-		txtpnTaimli.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
-		txtpnTaimli.setBackground(new Color(65, 105, 225));
-		txtpnTaimli.setBounds(0, -7, 343, 96);
-		panel.add(txtpnTaimli);
-
-		//panelkavuaa
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(240, 248, 255));
-		panel_1.setBounds(0, 106, 1610, 1299);
+		panel_1.setBounds(10, 60, 971, 586);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
 		JTextPane txtpnAdvancedSearch = new JTextPane();
 		txtpnAdvancedSearch.setEditable(false);
 		txtpnAdvancedSearch.setText("Top Recipies By Allergy");
-		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
+		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 40));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
-		txtpnAdvancedSearch.setBounds(268, 54, 1153, 99);
+		txtpnAdvancedSearch.setBounds(275, 11, 411, 50);
 		panel_1.add(txtpnAdvancedSearch);
 
 		String[] columnNames = {"Recipe Name",
@@ -238,7 +101,7 @@ public class TopRecipesByAllergy extends JFrame {
 			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
 			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
 			data[row][3]=myView.recipeArray.get(row).getRecipeTotalCalories();
-			data[row][4]=myView.recipeArray.get(row).getRecipeKashruth();
+			data[row][4]=recipeComplexity[myView.recipeArray.get(row).getRecipeKashruth()];
 		}
 		
 		
@@ -254,11 +117,11 @@ public class TopRecipesByAllergy extends JFrame {
 			}
 		});
 		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(50);
 		JTableHeader th = table.getTableHeader();
-		th.setPreferredSize(new Dimension(100, 100));
-		Font bigFont = new Font("Tahoma", Font.PLAIN, 45);
+		th.setPreferredSize(new Dimension(100, 30));
+		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
 		table.getTableHeader().setFont(bigFont);
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
@@ -266,9 +129,148 @@ public class TopRecipesByAllergy extends JFrame {
 		table.setColumnSelectionAllowed(false);
 		table.setCellSelectionEnabled(false);
 		table.setRowHeight(1, 60);
-		scrollPane.setSize(1514, 1001);
-		scrollPane.setLocation(46, 154);
+		scrollPane.setSize(951, 511);
+		scrollPane.setLocation(10,64);
 		//TableColumn column = null;
 		panel_1.add(scrollPane);
+		
+		//panel upper
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 994, 59);
+		panel.setBackground(new Color(65, 105, 225));
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		textField = new JTextField();
+		textField.setBounds(495, 36, 163, 21);
+		panel.add(textField);
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textField.setColumns(10);
+		
+		JTextPane textPane_5 = new JTextPane();
+		textPane_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainPage b=new MainPage();
+				b.setVisible(true);
+				TopRecipesByAllergy.this.dispose();
+				TopRecipesByAllergy.this.setVisible(false);
+			}
+		});
+		textPane_5.setBounds(10, 0, 204, 57);
+		panel.add(textPane_5);
+		textPane_5.setText("Taimli");
+		textPane_5.setForeground(Color.WHITE);
+		textPane_5.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 50));
+		textPane_5.setEditable(false);
+		textPane_5.setBackground(new Color(65, 105, 225));
+		
+		JTextPane textPane = new JTextPane();
+		textPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (myView.myUser!=null) {
+					User f=new User();
+				f.setVisible(true);
+				}
+				else {
+					Dietican f=new Dietican();
+					f.setVisible(true);
+				}
+				TopRecipesByAllergy.this.dispose();
+				TopRecipesByAllergy.this.setVisible(false);
+			}
+		});
+		textPane.setBounds(882, 8, 102, 49);
+		panel.add(textPane);
+		textPane.setText("user details");
+		textPane.setForeground(Color.WHITE);
+		textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+		textPane.setEditable(false);
+		textPane.setBackground(new Color(65, 105, 225));
+		
+		JTextPane textPane_1 = new JTextPane();
+		textPane_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AdvancedSearch d=new AdvancedSearch();
+				d.setVisible(true);
+				TopRecipesByAllergy.this.dispose();
+				TopRecipesByAllergy.this.setVisible(false);
+			}
+		});
+		textPane_1.setBounds(729, 7, 126, 50);
+		panel.add(textPane_1);
+		textPane_1.setText("Advanced Search");
+		textPane_1.setForeground(Color.WHITE);
+		textPane_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+		textPane_1.setEditable(false);
+		textPane_1.setBackground(new Color(65, 105, 225));
+		
+		JTextPane textPane_3 = new JTextPane();
+		textPane_3.setBounds(559, 11, 92, 29);
+		panel.add(textPane_3);
+		textPane_3.setText("Search");
+		textPane_3.setForeground(Color.WHITE);
+		textPane_3.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+		textPane_3.setEditable(false);
+		textPane_3.setBackground(new Color(65, 105, 225));
+		
+		JButton button = new JButton("Go!");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				myView.statview.mainSearch(textField.getText());  
+				if (myView.check==false) {
+					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				}
+				else {
+					SearchRes d=new SearchRes();
+				d.setVisible(true);
+				TopRecipesByAllergy.this.dispose();
+				TopRecipesByAllergy.this.setVisible(false);
+				}
+			}
+		});
+		button.setBounds(659, 36, 47, 21);
+		panel.add(button);
+		button.setFont(new Font("Tahoma", Font.BOLD, 5));
+		
+		JTextPane textPane_2 = new JTextPane();
+		textPane_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myView.statview.myFavorite();
+				MyFavourites d=new MyFavourites();
+				d.setVisible(true);
+				TopRecipesByAllergy.this.dispose();
+				TopRecipesByAllergy.this.setVisible(false);
+			}
+		});
+		textPane_2.setBounds(341, 8, 132, 49);
+		panel.add(textPane_2);
+		textPane_2.setText("Favourite Recipes");
+		textPane_2.setForeground(Color.WHITE);
+		textPane_2.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+		textPane_2.setEditable(false);
+		textPane_2.setBackground(new Color(65, 105, 225));
+		
+		JTextPane textPane_4 = new JTextPane();
+		textPane_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myView.statview.myRecipes();
+				MyRecipes c=new MyRecipes();
+				c.setVisible(true);
+				TopRecipesByAllergy.this.dispose();
+				TopRecipesByAllergy.this.setVisible(false);
+			}
+		});
+		textPane_4.setBounds(224, 8, 107, 49);
+		panel.add(textPane_4);
+		textPane_4.setText("My Recipes");
+		textPane_4.setForeground(Color.WHITE);
+		textPane_4.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+		textPane_4.setEditable(false);
+		textPane_4.setBackground(new Color(65, 105, 225));
 	}
 }
