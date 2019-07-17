@@ -79,7 +79,7 @@ public class TopIngredient extends JFrame {
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JButton btnAdd = new JButton("Go!");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -88,17 +88,17 @@ public class TopIngredient extends JFrame {
 					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
 				}
 				else {
-						SearchRes d=new SearchRes();
-				d.setVisible(true);
-				TopIngredient.this.dispose();
-				TopIngredient.this.setVisible(false);
+					SearchRes d=new SearchRes();
+					d.setVisible(true);
+					TopIngredient.this.dispose();
+					TopIngredient.this.setVisible(false);
 				}
 			}
 		});
 		btnAdd.setBounds(1016, 37, 71, 42);
 		panel.add(btnAdd);
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 15));
-		
+
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		textField_2.setColumns(10);
@@ -112,7 +112,7 @@ public class TopIngredient extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (myView.myUser!=null) {
 					User f=new User();
-				f.setVisible(true);
+					f.setVisible(true);
 				}
 				else {
 					Dietican f=new Dietican();
@@ -228,10 +228,10 @@ public class TopIngredient extends JFrame {
 		panel_1.add(txtpnAdvancedSearch);
 
 		String[] columnNames = {"Ingredient",
-                "Callories",
-                "Carbohydrates",
-                "Fats",
-                "Proteins"}; 
+				"Callories",
+				"Carbohydrates",
+				"Fats",
+		"Proteins"}; 
 		Object[][] data = new Object[myView.ingredientArray.size()][5];
 		for(int row=0;row<myView.ingredientArray.size();row++) {
 			data[row][0]=myView.ingredientArray.get(row).getIngredientName();
@@ -240,8 +240,8 @@ public class TopIngredient extends JFrame {
 			data[row][3]=myView.ingredientArray.get(row).getIngredientFat();
 			data[row][4]=myView.ingredientArray.get(row).getIngredientProtein();
 		}
-		
-		
+
+
 		JTable table = new JTable(data, columnNames);
 		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
