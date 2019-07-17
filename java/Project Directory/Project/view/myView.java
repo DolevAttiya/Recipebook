@@ -88,6 +88,7 @@ public class myView extends Observable implements View {
 		ev.getArr().add(pass);
 		setChanged();
 		notifyObservers(ev);
+		getTop10();
 	}	
 	public void dloginResponse (ArrayList<Dietitian> usD) {
 		if(usD!=null) // if the user exists in the DB
@@ -562,20 +563,20 @@ public class myView extends Observable implements View {
 	public void ingredientReportResponse(ArrayList<Ingredient> ing) {
 		ingredientArray=ing;
 	}
-	public static boolean ifLiked(Integer recipeId) {
+	public void ifLiked(Integer recipeId) {
 		if (myUser!=null) // Connected as User
 		{
 			for( int i=0;i<myUser.getPersonsFavoriteRecipe().size();i++)
 				if(myUser.getPersonsFavoriteRecipe().get(i)==recipeId)
-					return true; // can't push the button
+					check=true; // can't push the button
 		}
 		else // Connected as Dietitian
 		{
 			for( int i=0;i<myDietitian.getPersonsFavoriteRecipe().size();i++)
 				if(myDietitian.getPersonsFavoriteRecipe().get(i)==recipeId)
-					return true; // can't push the button
+					check=true; // can't push the button
 		}
-		return false; // can push the button
+		check=false; // can push the button
 	}
 	public void likePressed() {
 		if(myUser!=null) // Connected as User
