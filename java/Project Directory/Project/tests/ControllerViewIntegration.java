@@ -48,7 +48,7 @@ class ControllerViewIntegration {
 		v.login("eld","valad");
 		assertFalse(myView.check);
 	}
-	
+
 	// REGISTER //
 	@Test
 	void testTrueUserRegister() {
@@ -90,7 +90,7 @@ class ControllerViewIntegration {
 				"2019-06-17", 0, null, 1, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 		assertFalse(myView.check);
 	}
-	
+
 	// MAIN PAGE //
 	@Test
 	void testTrueGetTop10() {
@@ -122,6 +122,22 @@ class ControllerViewIntegration {
 		v.getAllRecipes();
 		assertNotEquals(0, myView.recipeArray);
 	}
+	
+	// ADVANCED SEARCH //
+	@Test
+	void testTrueAdvancedSearch() // Found results in DB
+	{
+		v.advancedSearch("Ommelete", 0, 3, null, "50", 0,0,0,0,0,0,1,0,0,0,0,0);
+		assertNotNull(myView.recipeArray);
+	}
+	@Test
+	void testFalseAdvancedSearch() // No results
+	{
+		v.advancedSearch("lazania", 1, 0, "60", "100", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0);
+		assertEquals(0,myView.recipeArray.size());
+	}
+
+	// ADD RECIPE //
 	@Test
 	void testTrueUserAddRecipe() // success
 	{
@@ -161,20 +177,6 @@ class ControllerViewIntegration {
 		v.initializeRecipe();
 		v.addRecipe("Ommlete", 0,0,0,0,0,0,1,0,0,0,0,0, "best ommlete ever", 3, 30, "1. Break 3 eggs into a boal");
 		assertFalse(myView.check);		
-	}
-	
-	// ADVANCED SEARCH //
-	@Test
-	void testTrueAdvancedSearch() // Found results in DB
-	{
-		v.advancedSearch("Ommelete", 0, 3, null, "50", 0,0,0,0,0,0,1,0,0,0,0,0);
-		assertNotNull(myView.recipeArray);
-	}
-	@Test
-	void testFalseAdvancedSearch() // No results
-	{
-		v.advancedSearch("lazania", 1, 0, "60", "100", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0);
-		assertEquals(0,myView.recipeArray.size());
 	}
 
 	// ADD INGREDIENT //
@@ -222,13 +224,87 @@ class ControllerViewIntegration {
 		assertTrue(myView.check);
 		myView.myDietitian.Delete();
 	}
-	
-/*	
+
+	// USER //
 	@Test
-	void testInitializeRecipe() {
+	void testTrueDeleteUser() {
+		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
+		v.deleteUser();
+		assertTrue(myView.check);
+	}
+	@Test
+	void testFalseDeleteUser() {
+		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
+		ArrayList<Integer> favres = new ArrayList<Integer>();
+		favres.add(1);
+		myView.myUser=new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", favres, 99, al, true, false);
+		v.deleteUser();
+		assertFalse(myView.check);
+	}
+
+	// DIETITIAN //
+	@Test
+	void testTrueDeleteDietitian() {
+		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
+		v.deleteDietitian();
+		assertTrue(myView.check);
+	}
+	@Test
+	void testFalseDeleteDietitian() {
+		myView.myDietitian= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
+		v.deleteDietitian();
+		assertFalse(myView.check);
+	}
+
+	// INGREDIENT //
+	/*
+	@Test
+	void testTrueDeleteIngredient() throws SQLException {
+		Ingredient ing=null;
+		v.addIngredient("cheese", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 2.0, 1.0, 1.0, 1.0);
+		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "Ingredient", null, null);
+		try {
+			ing = Models.GetIngredientFromDB(rs.getInt("max"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		v.deleteIngredient(ing);
+		assertTrue(myView.check);
+	}
+	*/
+
+	// RECIPE //
+	@Test
+	void testTrueDeleteRecipe() {
+		
+	}
+
+
+	@Test
+	void testFalseDeleteRecipe() {
 		fail("Not yet implemented"); // TODO
 	}
 
+	@Test	
+	void testTrueUserLikePressed() // changed the data
+	{
+		myView.myDietitian=null;
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		myView.myRecipe=Models.GetRecipeFromDB(1);
+		v.likePressed();
+		assertTrue(myView.check);
+	}
+	@Test
+	void testTrueDietitianLikePressed() // changed the data
+	{
+		myView.myUser=null;
+		myView.myDietitian=Models.GetDietitianFromDB("midget@kingslanding.com");
+		myView.myRecipe=Models.GetRecipeFromDB(1);
+		v.likePressed();
+		assertTrue(myView.check);
+	}
+	
+/*	
 	@Test
 	void testAddIngredientToRecipe() {
 		fail("Not yet implemented"); // TODO
@@ -238,58 +314,7 @@ class ControllerViewIntegration {
 	void testFillIngredientIdToName() {
 		fail("Not yet implemented"); // TODO
 	}
-	@Test
-	void testGetAllIngredient() {
-		fail("Not yet implemented"); // TODO
-	}
-	@Test
-	void testGetAllRecipes() {
-		fail("Not yet implemented"); // TODO
-	}
 
-	@Test
-	void testGetAllMeasuringTypes() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testUserUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testUserUpdateForFavorite() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testDietitianUpdateForFavorite() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testDietitianUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testDeleteUser() {
-		fail("Not yet implemented"); // TODO
-	}
-	@Test
-	void testDeleteDietitian() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testDeleteIngredient() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testDeleteRecipe() {
-		fail("Not yet implemented"); // TODO
-	}
 	@Test
 	void testRecipeUpdate() {
 		fail("Not yet implemented"); // TODO
@@ -308,72 +333,7 @@ class ControllerViewIntegration {
 		fail("Not yet implemented"); // TODO
 	}
 
-	@Test
-	void testLikePressed() {
-		fail("Not yet implemented"); // TODO
-	}
-*/
-/*
-
-	
-
-
-	@Test // good
-	void testTrueDeleteUser() {
-		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
-		v.deleteUser();
-		assertTrue(myView.check);
-	}
-*/
-/*
-	@Test // good
-	void testFalseDeleteUser() {
-		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
-		ArrayList<Integer> favres = new ArrayList<Integer>();
-		favres.add(1);
-		myView.myUser=new User("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", favres, 99, al, true, false);
-		v.deleteUser();
-		assertFalse(myView.check);
-	}
-
-	@Test
-	void testTrueDeleteDietitian() {
-		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
-		v.deleteDietitian();
-		assertTrue(myView.check);
-	}
-
-
-	@Test
-	void testFalseDeleteDietitian() {
-		myView.myDietitian= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
-		v.deleteDietitian();
-		assertFalse(myView.check);
-	}
-
-
-	@Test
-	void testTrueDeleteIngredient() {
-		fail("Not yet implemented"); // TODO
-	}
-
-
-	@Test
-	void testFalseDeleteIngredient() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testTrueDeleteRecipe() {
-		fail("Not yet implemented"); // TODO
-	}
-
-
-	@Test
-	void testFalseDeleteRecipe() {
-		fail("Not yet implemented"); // TODO
-	}
-
+	/*
 	@Test
 	void testTrueRecipeUpdate() {
 		fail("Not yet implemented"); // TODO
@@ -403,43 +363,7 @@ class ControllerViewIntegration {
 	void testIngredientReport() {
 		fail("Not yet implemented"); // TODO
 	}
-	@Test
-
-	void testTrueUserLikePressed() // changed the data
-	{
-		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
-		myView.myRecipe=Models.GetRecipeFromDB(1);
-		v.likePressed();
-		assertTrue(myView.check);
-	}
-
 /*
-	@Test
-	void testTrueDietitianLikePressed() // changed the data
-	{
-
-		v.likePressed();
-		assertTrue(myView.check);
-	}
-
-	@Test
-	void testFalseLikePressed() // changed the data
-	{
-		v.likePressed();
-		assertFalse(myView.check);
-}
-
-	 */
-}
-/*
-@Test
-void testTrueDeleteIngredient() {
-	fail("Not yet implemented"); // TODO
-@@ -267,18 +267,42 @@ void testTrueIngredientUpdate() {
-void testFalseIngredientUpdate() {
-	fail("Not yet implemented"); // TODO
-}
-
 
 @Test
 void testRecipeReport() {
@@ -454,30 +378,5 @@ void testIngredientReport() {
 	v.ingredientReport(1);
 	assertNotNull(myView.ingredientArray);
 }
-
-@Test
-void testLikePressed() {
-	fail("Not yet implemented"); // TODO
-void testTrueUserLikePressed() // changed the data
-{
-	myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
-
-	v.likePressed();
-	assertTrue(myView.check);
+	 */
 }
-*/
-/*
-@Test
-void testTrueDietitianLikePressed() // changed the data
-{
-	
-	v.likePressed();
-	assertTrue(myView.check);
-}
-@Test
-void testFalseLikePressed() // changed the data
-{
-	v.likePressed();
-	assertFalse(myView.check);
-}
-*/
