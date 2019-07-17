@@ -90,6 +90,8 @@ public class MainPage extends JFrame {
 							@Override
 							public void mouseClicked(MouseEvent e) {
 								myView.statview.initializeRecipe();
+								myView.statview.getAllIngredient();
+								myView.statview.getAllMeasuringTypes();
 								NewRecipe a=new NewRecipe();
 								a.setVisible(true);
 								MainPage.this.dispose();
@@ -119,11 +121,11 @@ public class MainPage extends JFrame {
 		String[] columnNames = {"Recipe Name",
 				"Description",
 		"Rate"}; 
-		Object[][] data = new Object[myView.recipeArray.size()][3];
-		for(int row=0;row<myView.recipeArray.size();row++) {
-			data[row][0]=myView.recipeArray.get(row).getRecipeName();
-			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
-			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
+		Object[][] data = new Object[myView.recipeTop10Array.size()][3];
+		for(int row=0;row<myView.recipeTop10Array.size();row++) {
+			data[row][0]=myView.recipeTop10Array.get(row).getRecipeName();
+			data[row][1]=myView.recipeTop10Array.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeTop10Array.get(row).getRecipeRate();
 		}
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -244,13 +246,16 @@ public class MainPage extends JFrame {
 				if (myView.myUser!=null) {
 					User f=new User();
 					f.setVisible(true);
+					MainPage.this.dispose();
+					MainPage.this.setVisible(false);
 				}
 				else {
 					Dietican f=new Dietican();
 					f.setVisible(true);
+					MainPage.this.dispose();
+					MainPage.this.setVisible(false);
 				}
-				MainPage.this.dispose();
-				MainPage.this.setVisible(false);
+	
 			}
 		});
 		textPane1.setBounds(882, 8, 102, 49);
@@ -293,7 +298,7 @@ public class MainPage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				myView.statview.mainSearch(textField.getText());  
 				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					JOptionPane.showMessageDialog(null,"There is no match to your search, Please try again");
 				}
 				else {
 					SearchRes d=new SearchRes();

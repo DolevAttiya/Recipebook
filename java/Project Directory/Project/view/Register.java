@@ -131,7 +131,7 @@ public class Register extends JFrame {
 		comboBox_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_3 = (JComboBox)e.getSource();
-				String monthOfStat = (String)comboBox_3.getSelectedItem();
+				monthOfStat = (String)comboBox_3.getSelectedItem();
 			}
 		});
 		comboBox_3.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -144,7 +144,7 @@ public class Register extends JFrame {
 		comboBox_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_2 = (JComboBox)e.getSource();
-				String dayOfStat = (String)comboBox_2.getSelectedItem();
+				dayOfStat = (String)comboBox_2.getSelectedItem();
 			}
 		});
 		comboBox_2.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -155,15 +155,13 @@ public class Register extends JFrame {
 		textField_4.setEnabled(false);
 		textField_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String yearOfStat=textField_4.getText();
+				yearOfStat=textField_4.getText();
 			}
 		});
 		textField_4.setFont(new Font("Dialog", Font.PLAIN, 20));
 		textField_4.setColumns(10);
 		textField_4.setBounds(538, 409, 176, 34);
 		panel_1.add(textField_4);
-
-		//if (chckbxDietican.setSelected(true)) --> textField_8.setEnabled(false);
 
 		textField_8 = new JTextField();
 		textField_8.setEnabled(false);
@@ -199,11 +197,11 @@ public class Register extends JFrame {
 		JCheckBox chckbxSeeds = new JCheckBox("Seeds");
 		chckbxSeeds.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 if(chckbxSeeds.isSelected()){  
-					  isSeeds=1;   } 
-				 else {
-					 isSeeds=0;
-				 }
+				if(chckbxSeeds.isSelected()){  
+					isSeeds=1;   } 
+				else {
+					isSeeds=0;
+				}
 			}
 		});
 		chckbxSeeds.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -214,11 +212,11 @@ public class Register extends JFrame {
 		JCheckBox chckbxFish = new JCheckBox("Strawberries");
 		chckbxFish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 if(chckbxFish.isSelected()){  
-					  isStrawberries=1;   } 
-				 else {
-					 isStrawberries=0;
-				 }
+				if(chckbxFish.isSelected()){  
+					isStrawberries=1;   } 
+				else {
+					isStrawberries=0;
+				}
 			}
 		});
 		chckbxFish.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -238,11 +236,11 @@ public class Register extends JFrame {
 		JCheckBox chckbxPeanut = new JCheckBox("Peanut");
 		chckbxPeanut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 if(chckbxPeanut.isSelected()){  
-					  isPeanut=1;   } 
-				 else {
-					 isPeanut=0;
-				 }
+				if(chckbxPeanut.isSelected()){  
+					isPeanut=1;   } 
+				else {
+					isPeanut=0;
+				}
 			}
 		});
 		chckbxPeanut.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -253,11 +251,11 @@ public class Register extends JFrame {
 		JCheckBox chckbxTreeNuts = new JCheckBox("Tree Nuts");
 		chckbxTreeNuts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 if(chckbxTreeNuts.isSelected()){  
-					  isTreeNuts=1;   } 
-				 else {
-					 isTreeNuts=0;
-				 }
+				if(chckbxTreeNuts.isSelected()){  
+					isTreeNuts=1;   } 
+				else {
+					isTreeNuts=0;
+				}
 			}
 		});
 		chckbxTreeNuts.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -268,11 +266,11 @@ public class Register extends JFrame {
 		JCheckBox chckbxEggs = new JCheckBox("Eggs");
 		chckbxEggs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 if(chckbxEggs.isSelected()){  
-					  isEggs=1;   } 
-				 else {
-					 isEggs=0;
-				 }
+				if(chckbxEggs.isSelected()){  
+					isEggs=1;   } 
+				else {
+					isEggs=0;
+				}
 			}
 		});
 		chckbxEggs.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -331,11 +329,11 @@ public class Register extends JFrame {
 		chckbxDairy.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent d) {
-				 if(chckbxDairy.isSelected()){  
-					  isFish=1;   } 
-				 else {
-					  isFish=0;
-				 }
+				if(chckbxDairy.isSelected()){  
+					isFish=1;   } 
+				else {
+					isFish=0;
+				}
 			}
 		});
 		chckbxDairy.setSelected(false);
@@ -357,11 +355,11 @@ public class Register extends JFrame {
 		chckbxG.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 if(chckbxG.isSelected()){  
-					  isCoffie=1;   } 
-				 else {
-					  isCoffie=0;
-				 }
+				if(chckbxG.isSelected()){  
+					isCoffie=1;   } 
+				else {
+					isCoffie=0;
+				}
 			}
 		});
 		chckbxG.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -373,11 +371,11 @@ public class Register extends JFrame {
 		chckbxNon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent f) {
-				 if(chckbxNon.isSelected()){  
-					  isGluten=1;   } 
-				 else {
-					  isGluten=0;
-				 }
+				if(chckbxNon.isSelected()){  
+					isGluten=1;   } 
+				else {
+					isGluten=0;
+				}
 			}
 		});
 		chckbxNon.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -392,18 +390,22 @@ public class Register extends JFrame {
 				if((textField_1.getText().trim().isEmpty())||(textField_6.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textField_2.getText().trim().isEmpty())||(textField_7.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())) {
 					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
 				}
-						
-				else {
-						dateOfBirth=yearOfBirth+"-"+monthOfBirth+"-"+dayOfBirth;
-						dietitianStatDate=yearOfStat+"-"+monthOfStat+"-"+dayOfStat;
-						myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
-						MainPage f=new MainPage();
-						f.setVisible(true);
-						Register.this.dispose();
-						Register.this.setVisible(false);
-					}
+				else if (myView.check==false)
+					JOptionPane.showMessageDialog(null,"Couldn't save, Something went wrong, Please try again!");
+				else
+				{
+					yearOfBirth=textField_9.getText();
+					yearOfStat=textField_4.getText();
+					dateOfBirth=yearOfBirth+"-"+monthOfBirth+"-"+dayOfBirth;
+					dietitianStatDate=yearOfStat+"-"+monthOfStat+"-"+dayOfStat;
+					myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+					MainPage f=new MainPage();
+					f.setVisible(true);
+					Register.this.dispose();
+					Register.this.setVisible(false);
 				}
-			});
+			}
+		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 25));
 		btnSearch.setBounds(391, 534, 179, 41);
 		panel_1.add(btnSearch);
@@ -455,17 +457,17 @@ public class Register extends JFrame {
 		chckbxShowOnlyRecipes.setBackground(new Color(240, 248, 255));
 		chckbxShowOnlyRecipes.setBounds(26, 492, 489, 41);
 		panel_1.add(chckbxShowOnlyRecipes);
-		
+
 
 		JCheckBox chckbxDairy_1 = new JCheckBox("Dairy");
 		chckbxDairy_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent h) {
-				 if(chckbxDairy_1.isSelected()){  
-					  isMilk=1;   } 
-				 else {
-					 isMilk=0;
-				 }
+				if(chckbxDairy_1.isSelected()){  
+					isMilk=1;   } 
+				else {
+					isMilk=0;
+				}
 			}
 		});
 		chckbxDairy_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -477,11 +479,11 @@ public class Register extends JFrame {
 		chckbxLactose.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent i) {
-				 if(chckbxLactose.isSelected()){  
-					  isLactose=1;   } 
-				 else {
-					 isLactose=0;
-				 }
+				if(chckbxLactose.isSelected()){  
+					isLactose=1;   } 
+				else {
+					isLactose=0;
+				}
 			}
 		});
 		chckbxLactose.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -493,11 +495,11 @@ public class Register extends JFrame {
 		chckbxChocolate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent i) {
-				 if(chckbxChocolate.isSelected()){  
-					  isChocolate=1;   } 
-				 else {
-					 isChocolate=0;
-				 }
+				if(chckbxChocolate.isSelected()){  
+					isChocolate=1;   } 
+				else {
+					isChocolate=0;
+				}
 			}
 		});
 		chckbxChocolate.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -509,18 +511,18 @@ public class Register extends JFrame {
 		chckbxFoodAcidity.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent j) {
-				 if(chckbxFoodAcidity.isSelected()){  
-					  isAcidity=1;   } 
-				 else {
-					 isAcidity=0;
-				 }
+				if(chckbxFoodAcidity.isSelected()){  
+					isAcidity=1;   } 
+				else {
+					isAcidity=0;
+				}
 			}
 		});
 		chckbxFoodAcidity.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxFoodAcidity.setBackground(new Color(240, 248, 255));
 		chckbxFoodAcidity.setBounds(773, 272, 142, 41);
 		panel_1.add(chckbxFoodAcidity);
-		
+
 		JCheckBox chckbxDietican = new JCheckBox("Dietican");
 		chckbxDietican.addActionListener(new ActionListener() {
 			@Override
@@ -589,7 +591,7 @@ public class Register extends JFrame {
 		chckbxDietican.setBounds(26, 363, 237, 41);
 		panel_1.add(chckbxDietican);
 
-		
+
 
 		JTextPane txtpnExpiryDate_1 = new JTextPane();
 		txtpnExpiryDate_1.setEditable(false);
@@ -611,7 +613,7 @@ public class Register extends JFrame {
 		comboBox.setBounds(178, 212, 87, 36);
 		panel_1.add(comboBox);
 
-		
+
 		String[] days = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		JComboBox comboBox_1 = new JComboBox(days);
 		comboBox_1.addActionListener(new ActionListener() {
@@ -642,88 +644,88 @@ public class Register extends JFrame {
 		textField_9.setColumns(10);
 		textField_9.setBounds(368, 212, 171, 36);
 		panel_1.add(textField_9);
-		
+
 		//panel upper
-				JPanel panel = new JPanel();
-				panel.setBounds(0, 0, 994, 59);
-				panel.setBackground(new Color(65, 105, 225));
-				contentPane.add(panel);
-				panel.setLayout(null);
-				
-				textField = new JTextField();
-				textField.setBounds(495, 36, 163, 21);
-				panel.add(textField);
-				textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				textField.setColumns(10);
-				
-				JTextPane textPane_5 = new JTextPane();
-				textPane_5.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						/*Login b=new Login();
-						b.setVisible(true);
-						Register.this.dispose();
-						Register.this.setVisible(false);*/
-					}
-				});
-				textPane_5.setBounds(10, 0, 204, 57);
-				panel.add(textPane_5);
-				textPane_5.setText("Taimli");
-				textPane_5.setForeground(Color.WHITE);
-				textPane_5.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 50));
-				textPane_5.setEditable(false);
-				textPane_5.setBackground(new Color(65, 105, 225));
-				
-				JTextPane textPane1 = new JTextPane();
-				textPane1.setBounds(882, 8, 102, 49);
-				panel.add(textPane1);
-				textPane1.setText("user details");
-				textPane1.setForeground(Color.WHITE);
-				textPane1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-				textPane1.setEditable(false);
-				textPane1.setBackground(new Color(65, 105, 225));
-				
-				JTextPane textPane_1 = new JTextPane();
-				textPane_1.setBounds(729, 7, 126, 50);
-				panel.add(textPane_1);
-				textPane_1.setText("Advanced Search");
-				textPane_1.setForeground(Color.WHITE);
-				textPane_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-				textPane_1.setEditable(false);
-				textPane_1.setBackground(new Color(65, 105, 225));
-				
-				JTextPane textPane_3 = new JTextPane();
-				textPane_3.setBounds(559, 11, 92, 29);
-				panel.add(textPane_3);
-				textPane_3.setText("Search");
-				textPane_3.setForeground(Color.WHITE);
-				textPane_3.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-				textPane_3.setEditable(false);
-				textPane_3.setBackground(new Color(65, 105, 225));
-				
-				JButton button = new JButton("Go!");
-				button.setBounds(659, 36, 47, 21);
-				panel.add(button);
-				button.setFont(new Font("Tahoma", Font.BOLD, 5));
-				
-				JTextPane textPane_2 = new JTextPane();
-				textPane_2.setBounds(341, 8, 132, 49);
-				panel.add(textPane_2);
-				textPane_2.setText("Favourite Recipes");
-				textPane_2.setForeground(Color.WHITE);
-				textPane_2.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-				textPane_2.setEditable(false);
-				textPane_2.setBackground(new Color(65, 105, 225));
-				
-				JTextPane textPane_4 = new JTextPane();
-				textPane_4.setBounds(224, 8, 107, 49);
-				panel.add(textPane_4);
-				textPane_4.setText("My Recipes");
-				textPane_4.setForeground(Color.WHITE);
-				textPane_4.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-				textPane_4.setEditable(false);
-				textPane_4.setBackground(new Color(65, 105, 225));
-				
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 994, 59);
+		panel.setBackground(new Color(65, 105, 225));
+		contentPane.add(panel);
+		panel.setLayout(null);
+
+		textField = new JTextField();
+		textField.setBounds(495, 36, 163, 21);
+		panel.add(textField);
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		textField.setColumns(10);
+
+		JTextPane textPane_5 = new JTextPane();
+		textPane_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Login b=new Login();
+				b.setVisible(true);
+				Register.this.dispose();
+				Register.this.setVisible(false);
+			}
+		});
+		textPane_5.setBounds(10, 0, 204, 57);
+		panel.add(textPane_5);
+		textPane_5.setText("Taimli");
+		textPane_5.setForeground(Color.WHITE);
+		textPane_5.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 50));
+		textPane_5.setEditable(false);
+		textPane_5.setBackground(new Color(65, 105, 225));
+
+		JTextPane textPane1 = new JTextPane();
+		textPane1.setBounds(882, 8, 102, 49);
+		panel.add(textPane1);
+		textPane1.setText("user details");
+		textPane1.setForeground(Color.WHITE);
+		textPane1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+		textPane1.setEditable(false);
+		textPane1.setBackground(new Color(65, 105, 225));
+
+		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setBounds(729, 7, 126, 50);
+		panel.add(textPane_1);
+		textPane_1.setText("Advanced Search");
+		textPane_1.setForeground(Color.WHITE);
+		textPane_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+		textPane_1.setEditable(false);
+		textPane_1.setBackground(new Color(65, 105, 225));
+
+		JTextPane textPane_3 = new JTextPane();
+		textPane_3.setBounds(559, 11, 92, 29);
+		panel.add(textPane_3);
+		textPane_3.setText("Search");
+		textPane_3.setForeground(Color.WHITE);
+		textPane_3.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+		textPane_3.setEditable(false);
+		textPane_3.setBackground(new Color(65, 105, 225));
+
+		JButton button = new JButton("Go!");
+		button.setBounds(659, 36, 47, 21);
+		panel.add(button);
+		button.setFont(new Font("Tahoma", Font.BOLD, 5));
+
+		JTextPane textPane_2 = new JTextPane();
+		textPane_2.setBounds(341, 8, 132, 49);
+		panel.add(textPane_2);
+		textPane_2.setText("Favourite Recipes");
+		textPane_2.setForeground(Color.WHITE);
+		textPane_2.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+		textPane_2.setEditable(false);
+		textPane_2.setBackground(new Color(65, 105, 225));
+
+		JTextPane textPane_4 = new JTextPane();
+		textPane_4.setBounds(224, 8, 107, 49);
+		panel.add(textPane_4);
+		textPane_4.setText("My Recipes");
+		textPane_4.setForeground(Color.WHITE);
+		textPane_4.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+		textPane_4.setEditable(false);
+		textPane_4.setBackground(new Color(65, 105, 225));
+
 
 
 	}

@@ -114,9 +114,10 @@ public class Models extends Observable implements model  {
 			sql+=" AND recipeRate >= "+(String)search.get(5);
 		if(search.get(6)!=null)
 			for(int i=0;i<((Integer[])search.get(6)).length;i++)
-			{ int x =((Integer[])search.get(6))[i];
-				if(x!=0)
-				sql+=" AND AllergenId is not "+i;
+			{
+				if(((Integer[])search.get(6))[i]!=null)
+					if(((Integer[])search.get(6))[i]>0)
+						sql+=" AND AllergenId is not "+i;
 			}
 		sql+=" order by recipeRate ";
 
@@ -215,7 +216,7 @@ public class Models extends Observable implements model  {
 		setChanged();
 		notifyObservers(ev);
 	}
-	
+
 	public void CheckPasswordAndEmail(String Email, String Password){
 		ev=new Event();
 		ArrayList<Object> args=new ArrayList<Object>();
@@ -263,7 +264,7 @@ public class Models extends Observable implements model  {
 		if(typeSearch.compareTo("CheckPasswordAndEmail")==0)
 			if (((String)args.get(0)).compareTo("User")==0)
 				sql="  select * from UserPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\" And userId is not null ";			else
-				sql="  select * from DietitianPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\" And dietitianId is not null ";
+					sql="  select * from DietitianPerson where personEmail = \""+(String)args.get(1)+"\" And PersonHashPass = \""+(String)args.get(2)+"\" And dietitianId is not null ";
 		ResultSet rs =getFromWithDB(sql) ;
 		return rs;
 
@@ -379,7 +380,7 @@ public class Models extends Observable implements model  {
 				notifyObservers(ev);
 			}
 			else {if
-			(!us.Delete())
+				(!us.Delete())
 			{
 				user.add(GetUserFromDB(us.getPersonEmail()));
 				ev.getArr().add("user_delete_response");
@@ -638,37 +639,37 @@ public class Models extends Observable implements model  {
 		ResultSet saftie  =Models.SelectSpecificFrom("Count( allergenId ) as count", "Dietitian", "allergenId", al.getAllergenId().toString());
 
 		try {
-		if(saftie.getInt("count")==0)
-		{
-			allergen.add(al);
-			ev.getArr().add("allergen_delete_response");
-			ev.getArr().add(al);
-			setChanged();
-			notifyObservers(ev);
-		}
-		else if
-		(!al.Delete())
-		{
-			allergen.add(GetAllergenFromDB(al.getAllergenId()));
-			ev.getArr().add("allergen_delete_response");
-			ev.getArr().add(allergen);
-			setChanged();
-			notifyObservers(ev);
-		}
-		else
-		{
+			if(saftie.getInt("count")==0)
+			{
+				allergen.add(al);
+				ev.getArr().add("allergen_delete_response");
+				ev.getArr().add(al);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else if
+			(!al.Delete())
+			{
+				allergen.add(GetAllergenFromDB(al.getAllergenId()));
+				ev.getArr().add("allergen_delete_response");
+				ev.getArr().add(allergen);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("allergen_delete_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 			ev.getArr().add("allergen_delete_response");
 			ev.getArr().add(null);
 			setChanged();
 			notifyObservers(ev);
 		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-		ev.getArr().add("allergen_delete_response");
-		ev.getArr().add(null);
-		setChanged();
-		notifyObservers(ev);
-	}
 	}
 	public void selectAllergen(Integer id) {
 		ev=new Event();
@@ -789,37 +790,37 @@ public class Models extends Observable implements model  {
 		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "Ingredient", "ingredientId",ing.getIngredientId().toString());
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
 		try {
-		if(saftie.getInt("count")==0)
-		{
-			ingredient.add(ing);
-			ev.getArr().add("ingredient_delete_response");
-			ev.getArr().add(ing);
-			setChanged();
-			notifyObservers(ev);
-		}
-		else if
-		(!ing.Delete())
-		{
-			ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
-			ev.getArr().add("ingredient_delete_response");
-			ev.getArr().add(ingredient);
-			setChanged();
-			notifyObservers(ev);
-		}
-		else
-		{
+			if(saftie.getInt("count")==0)
+			{
+				ingredient.add(ing);
+				ev.getArr().add("ingredient_delete_response");
+				ev.getArr().add(ing);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else if
+			(!ing.Delete())
+			{
+				ingredient.add(GetIngredientFromDB(ing.getIngredientId()));
+				ev.getArr().add("ingredient_delete_response");
+				ev.getArr().add(ingredient);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("ingredient_delete_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 			ev.getArr().add("ingredient_delete_response");
 			ev.getArr().add(null);
 			setChanged();
 			notifyObservers(ev);
 		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-		ev.getArr().add("ingredient_delete_response");
-		ev.getArr().add(null);
-		setChanged();
-		notifyObservers(ev);
-	}
 	}
 	public void selectIngredient(Integer id) {
 		ev=new Event();
@@ -922,37 +923,37 @@ public class Models extends Observable implements model  {
 		ResultSet saftie  =Models.SelectSpecificFrom("Count( ingredientId ) as count", "IngredientType", "ingredientId",ing.getIngredientTypeId().toString());
 		ArrayList<IngredientType> ingredient= new ArrayList<IngredientType>();
 		try {
-		if(saftie.getInt("count")==0)
-		{
-			ingredient.add(ing);
-			ev.getArr().add("ingredient_delete_response");
-			ev.getArr().add(ing);
-			setChanged();
-			notifyObservers(ev);
-		}
-		else if
-		(!ing.Delete())
-		{
-			ingredient.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
-			ev.getArr().add("ingredient_delete_response");
-			ev.getArr().add(ingredient);
-			setChanged();
-			notifyObservers(ev);
-		}
-		else
-		{
+			if(saftie.getInt("count")==0)
+			{
+				ingredient.add(ing);
+				ev.getArr().add("ingredient_delete_response");
+				ev.getArr().add(ing);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else if
+			(!ing.Delete())
+			{
+				ingredient.add(GetIngredientTypeFromDB(ing.getIngredientTypeId()));
+				ev.getArr().add("ingredient_delete_response");
+				ev.getArr().add(ingredient);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("ingredient_delete_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 			ev.getArr().add("ingredient_delete_response");
 			ev.getArr().add(null);
 			setChanged();
 			notifyObservers(ev);
 		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-		ev.getArr().add("ingredient_delete_response");
-		ev.getArr().add(null);
-		setChanged();
-		notifyObservers(ev);
-	}
 	}
 	public void selectIngredientType(Integer id) {
 		ev=new Event();
@@ -1093,37 +1094,37 @@ public class Models extends Observable implements model  {
 		ResultSet saftie  =Models.SelectSpecificFrom("Count( recipeId ) as count", "Recipe", "recipeId",res.getRecipeId().toString());
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		try {
-		if(saftie.getInt("count")==0)
-		{
-			recipe.add(res);
-			ev.getArr().add("recipe_delete_response");
-			ev.getArr().add(recipe);
-			setChanged();
-			notifyObservers(ev);
-		}
-		else if
-		(!res.Delete())
-		{
-			recipe.add(GetRecipeFromDB(res.getRecipeId()));
-			ev.getArr().add("recipe_delete_response");
-			ev.getArr().add(recipe);
-			setChanged();
-			notifyObservers(ev);
-		}
-		else
-		{
+			if(saftie.getInt("count")==0)
+			{
+				recipe.add(res);
+				ev.getArr().add("recipe_delete_response");
+				ev.getArr().add(recipe);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else if
+			(!res.Delete())
+			{
+				recipe.add(GetRecipeFromDB(res.getRecipeId()));
+				ev.getArr().add("recipe_delete_response");
+				ev.getArr().add(recipe);
+				setChanged();
+				notifyObservers(ev);
+			}
+			else
+			{
+				ev.getArr().add("recipe_delete_response");
+				ev.getArr().add(null);
+				setChanged();
+				notifyObservers(ev);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 			ev.getArr().add("recipe_delete_response");
 			ev.getArr().add(null);
 			setChanged();
 			notifyObservers(ev);
 		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-		ev.getArr().add("recipe_delete_response");
-		ev.getArr().add(null);
-		setChanged();
-		notifyObservers(ev);
-	}
 	}
 	public void selectRecipe(Integer id) {
 		ev=new Event();

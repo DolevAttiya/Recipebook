@@ -27,13 +27,14 @@ public class myView extends Observable implements View {
 	public static Dietitian myDietitian;
 	public static ArrayList<Ingredient> ingredientArray=new ArrayList<Ingredient>();
 	public static ArrayList<Recipe> recipeArray=new ArrayList<Recipe>();
+	public static ArrayList<Recipe> recipeTop10Array=new ArrayList<Recipe>();
 	public static ArrayList<IngredientType> myMeasuring;
 	public static Recipe myRecipe=null;
 	public static Ingredient myIngredient;
 	public static ArrayList<Ingredient> ingredientArrayForRecipe=new ArrayList<Ingredient>();
 	public static ArrayList<IngredientType> myMeasuringForRecipe=new ArrayList<IngredientType>();
 	public Event ev;
-	private Login login;
+	private Open Open;
 	public myView() {};
 	@Override
 	public void start() {
@@ -48,7 +49,7 @@ public class myView extends Observable implements View {
         JFrame frame = new JFrame("ButtonExample");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Create and set up the content pane.
-        login = new Login(this);               
+        Open = new Open(this);               
 
 		
 	}
@@ -88,6 +89,7 @@ public class myView extends Observable implements View {
 		ev.getArr().add(pass);
 		setChanged();
 		notifyObservers(ev);
+		getTop10();
 	}	
 	public void dloginResponse (ArrayList<Dietitian> usD) {
 		if(usD!=null) // if the user exists in the DB
@@ -134,7 +136,8 @@ public class myView extends Observable implements View {
 				ev.getArr().add(newUser);
 			}
 			setChanged();
-			notifyObservers(ev);		
+			notifyObservers(ev);	
+			getTop10();
 		}
 	}
 	public void dRegisterResponse(ArrayList<Dietitian> usD) {
@@ -166,7 +169,7 @@ public class myView extends Observable implements View {
 		notifyObservers(ev);
 	}
 	public void getTop10Response (ArrayList<Recipe> r) {
-		recipeArray=r;
+		recipeTop10Array=r;
 	}
 	public void mainSearch(String s) {
 		ev=new Event();
@@ -212,14 +215,11 @@ public class myView extends Observable implements View {
 		ev.getArr().add(s); // what string we want to search
 		if (kashruth==4) // wants to see adapted results
 			ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
-		else ev.getArr().add(null); // null means wants all results
+		else ev.getArr().add(kashruth); // null means wants all results
 		ev.getArr().add(complexity);
 		ev.getArr().add(timeToMake); 
 		ev.getArr().add(rateAbove);
-		if (myUser!=null) // connected as User
 			ev.getArr().add(allergies); // sends the user's allergies
-		else // connected as Dietitian
-			ev.getArr().add(null); // Dietitian doesn't have allergies
 		if (kashruth==4) // wants to see adapted results
 			ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
 		else ev.getArr().add(null); // null means wants all results
@@ -250,6 +250,7 @@ public class myView extends Observable implements View {
 			ev.getArr().add(myDietitian.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
+		getTop10();
 	}
 	public void myFavoriteResponse(ArrayList<Recipe> r) {
 		recipeArray=r;
@@ -562,20 +563,20 @@ public class myView extends Observable implements View {
 	public void ingredientReportResponse(ArrayList<Ingredient> ing) {
 		ingredientArray=ing;
 	}
-	public static boolean ifLiked(Integer recipeId) {
+	public void ifLiked(Integer recipeId) {
 		if (myUser!=null) // Connected as User
 		{
 			for( int i=0;i<myUser.getPersonsFavoriteRecipe().size();i++)
 				if(myUser.getPersonsFavoriteRecipe().get(i)==recipeId)
-					return true; // can't push the button
+					check=true; // can't push the button
 		}
 		else // Connected as Dietitian
 		{
 			for( int i=0;i<myDietitian.getPersonsFavoriteRecipe().size();i++)
 				if(myDietitian.getPersonsFavoriteRecipe().get(i)==recipeId)
-					return true; // can't push the button
+					check=true; // can't push the button
 		}
-		return false; // can push the button
+		check=false; // can push the button
 	}
 	public void likePressed() {
 		if(myUser!=null) // Connected as User

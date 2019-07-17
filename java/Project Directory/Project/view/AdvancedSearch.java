@@ -51,8 +51,8 @@ public class AdvancedSearch extends JFrame {
 	public int isPeanut=0;
 	public int isAcidity=0;
 	public int isChocolate=0;
-	public String timeToMake="0000";
-	public String rateAbove="0000";
+	public String timeToMake="30";
+	public String rateAbove="0";
 	public int kashruth=0;
 	public int complexity=0;
 
