@@ -1,0 +1,100 @@
+package model;
+
+import java.util.ArrayList;
+
+public class Allergen extends  Entities{
+
+	/*Attributes*/
+	private Integer allergenId;
+	private String  allergenName;
+
+	/*Contractor*/
+	public Allergen(Integer allergenId,String  allergenName)
+	{
+		this.setAllergenId(allergenId);
+		this.setAllergenName(allergenName);
+	}
+	@Override
+	protected String Class() {
+		return "Allergen";
+	}
+	public Integer getAllergenId() {
+		return this.allergenId; 
+	}
+	public String getAllergenName() {
+		return this.allergenName; 
+	}
+	void setAllergenName(String allergenName ) {
+		this.allergenName=allergenName; 
+	}
+	void setAllergenId(Integer AllergenId ) {
+		this.allergenId=AllergenId; 
+	}
+	@Override
+	protected String getEntitieKey() {
+		return "allergenId";
+	}
+	@Override
+	protected String getEntitieKeyValue() {
+		return this.getAllergenId().toString();
+	}
+	@Override
+	protected String getEntitieAttributesNames() {		
+		return "allergenId, allergenName";
+	}
+	@Override
+
+	protected String getEntitieAttributesValues() {
+		return " "+this.getAllergenId().toString()+", "+this.getAllergenName();
+	}
+	@Override
+	protected String getEntitieAttributesNamesValues() {
+		return " allergenName"+this.getAllergenName();
+	}
+	@Override
+	protected String getAllergenInsert(int place) {
+		return null;
+	}
+	@Override
+	protected String getSubtbleInsert(int place) {
+		return null;
+	}
+	@Override
+	protected Integer[] getAllergenArray() {		
+		return null;
+	}
+	@Override
+	protected ArrayList<Integer> getSubtbleArray() {
+		return null;
+	}
+	@Override
+	protected int getmaxSubtbleCount() {
+		return 0;
+	}
+	@Override
+	protected String getSubtbleDelete(int place) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesNamesValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonAttributesNames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	protected String getPersonKeyValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
