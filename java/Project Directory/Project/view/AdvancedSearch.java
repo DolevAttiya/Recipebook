@@ -227,9 +227,10 @@ public class AdvancedSearch extends JFrame {
 		});
 		txtpnTaimli.setText("Taimli");
 		txtpnTaimli.setForeground(Color.WHITE);
-		txtpnTaimli.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 80));
+		txtpnTaimli.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 50));
+		txtpnTaimli.setEditable(false);
 		txtpnTaimli.setBackground(new Color(65, 105, 225));
-		txtpnTaimli.setBounds(0, -7, 343, 96);
+		txtpnTaimli.setBounds(0, -7, 204, 57);
 		panel.add(txtpnTaimli);
 		
 		//panelkavuaa
