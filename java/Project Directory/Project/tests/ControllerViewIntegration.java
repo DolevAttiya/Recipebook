@@ -14,6 +14,7 @@ import controller.Controller;
 import controller.Event;
 import controller.MyController;
 import model.*;
+import model.Ingredient;
 import model.User;
 import view.*;
 
@@ -36,23 +37,19 @@ class ControllerViewIntegration {
 		((Models)m).addObserver(controllerTest);
 	}
 
+	// LOGIN //
 	@Test
 	void testTrueLogin() {
-		String email = "drakarisValyrian.com";
-		String pass = "khaleesi";
-		v.login(email,pass);
+		v.login("drakarisValyrian.com","khaleesi");
 		assertTrue(myView.check);
 	}
-
 	@Test
 	void testFalseLogin() {
-		String email = "eld";
-		String pass = "valad";
-		v.login(email,pass);
+		v.login("eld","valad");
 		assertFalse(myView.check);
 	}
-	
-	@SuppressWarnings("static-access")
+
+	// REGISTER //
 	@Test
 	void testTrueUserRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
@@ -60,8 +57,6 @@ class ControllerViewIntegration {
 		assertTrue(myView.check);
 		myView.myUser.Delete();
 	}
-	
-	@SuppressWarnings("static-access")
 	@Test
 	void testTrueDietitianRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi",
@@ -69,21 +64,18 @@ class ControllerViewIntegration {
 		assertTrue(myView.check);
 		myView.myDietitian.Delete();
 	}
-
 	@Test
 	void testPassLengthTrueCompareFalseRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafj",
 				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);			
 		assertFalse(myView.check);
 	}
-
 	@Test
 	void testPassLengthFalseCompareTrueRegister() {
 		v.register("rotem", "hayout", "rotemhy@gmail.com", "asafi", "asafi",
 				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);		
 		assertFalse(myView.check);
 	}
-	
 	@Test
 	void testFalseRegister() // <6 & !=
 	{
@@ -91,48 +83,125 @@ class ControllerViewIntegration {
 				"1991-01-10", 1, "1234", 1, "1991-01-10", 0,0,0,0,0,0,0,0,0,0,0,0,1);		
 		assertFalse(myView.check);
 	}
-	
 	@Test
-	void testFalseRegisterExist()
+	void testFalseRegisterExist() // If the user exists
 	{
 		v.register("Daenerys", "Targaryen", "drakarisValyrian.com", "khaleesi", "khaleesi",
 				"2019-06-17", 0, null, 1, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 		assertFalse(myView.check);
 	}
-	
+
+	// MAIN PAGE //
 	@Test
 	void testTrueGetTop10() {
 		v.getTop10();
 		assertNotNull(myView.recipeArray);
 	}
-	
-	@SuppressWarnings("static-access")
 	@Test
-	void testTrueMainSearch() {
-		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+	void testTrueMainSearch()
+	{
+		myView.myUser=Models.GetUserFromDB("faceless@winterfall.com");
 		v.mainSearch("Ommlete");
-		assertNotNull(myView.recipeArray);
+		assertTrue(myView.check);
 	}
-	
 	@Test
-	void testFalseMainSearch() {
+	void testFalseMainSearch() // No results
+	{
 		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.mainSearch("rotem");
-		assertEquals(0,myView.recipeArray.size());
+		assertFalse(myView.check);
 	}
-	
 	@Test
-	void testTrueAdvancedSearch() {
+	void testMyFavorite() {
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.myFavorite();
+		assertNotNull(myView.recipeArray);
+	}
+	@Test
+	void testGetAllRecipes() {
+		v.getAllRecipes();
+		assertNotEquals(0, myView.recipeArray);
+	}
+
+	// ADVANCED SEARCH //
+	@Test
+	void testTrueAdvancedSearch() // Found results in DB
+	{
 		v.advancedSearch("Ommelete", 0, 3, null, "50", 0,0,0,0,0,0,1,0,0,0,0,0);
 		assertNotNull(myView.recipeArray);
 	}
-	
 	@Test
-	void testFalseAdvancedSearch() {
+	void testFalseAdvancedSearch() // No results
+	{
 		v.advancedSearch("lazania", 1, 0, "60", "100", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0);
 		assertEquals(0,myView.recipeArray.size());
 	}
-	
+
+	// ADD RECIPE //
+	@Test
+	void testTrueUserAddRecipe() // success
+	{
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.initializeRecipe();
+		Recipe r;
+		v.addRecipe("Lazania", 0,0,0,0,0,0,1,0,0,0,0,0, "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		assertTrue(myView.check);
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+			r = Models.GetRecipeFromDB(rs.getInt("max"));
+			r.Delete();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
+	@Test
+	void testTrueDietitianAddRecipe() // success
+	{
+		myView.myDietitian=Models.GetDietitianFromDB("midget@kingslanding.com");
+		v.initializeRecipe();
+		Recipe r;
+		v.addRecipe("Lazania", 0,0,0,0,0,0,1,0,0,0,0,0, "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		assertTrue(myView.check);
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+			r = Models.GetRecipeFromDB(rs.getInt("max"));
+			r.Delete();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
+	@Test
+	void testFalseAddRecipe() // Recipe exists
+	{
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.initializeRecipe();
+		v.addRecipe("Ommlete", 0,0,0,0,0,0,1,0,0,0,0,0, "best ommlete ever", 3, 30, "1. Break 3 eggs into a boal");
+		assertFalse(myView.check);		
+	}
+	@Test
+	void testAddIngredientToRecipe() {
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.initializeRecipe();
+		Recipe r;
+		int x;
+		v.getAllIngredient();
+		v.getAllMeasuringTypes();
+		v.addRecipe("Lazania", 0,0,0,0,0,0,1,0,0,0,0,0, "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		x=myView.myRecipe.getRecipeIngredientId().size();
+		v.addIngredientToRecipe(myView.ingredientArray.get(1),myView.myMeasuring.get(1) , 3.1);
+		assertEquals(x+1,myView.myRecipe.getRecipeIngredientId().size());
+		myView.myRecipe.Delete();
+		myView.myRecipe=null;
+		myView.myMeasuring=null;
+		myView.ingredientArray=null;
+	}
+	@Test
+	void testFillIngredientIdToName() {
+		myView.myRecipe=Models.GetRecipeFromDB(1);
+		v.fillIngredientIdToName();
+	}
+
+	// ADD INGREDIENT //
 	@Test
 	void testTrueAddIngredient()
 	{
@@ -147,47 +216,28 @@ class ControllerViewIntegration {
 			e.printStackTrace();
 		}
 	}
-	
 	@Test
 	void testFalseAddIngredient() // already exist in DB
 	{
 		v.addIngredient("Wheat flour",0,0,0,1,0,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0.0);
 		assertFalse(myView.check);
 	}
-	
-	@Test
-	void testMyFavorite() {
-		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
-		v.myFavorite();
-		assertNotNull(myView.recipeArray);
-	}
 
+	// PANEL //
 	@Test
 	void testMyRecipes() {
 		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.myRecipes();
-		assertNotNull(myView.recipeArray);
+		assertNotEquals(0, myView.recipeArray);
 	}
 
-	@Test
-	void testGetRecipes() {
-		v.getAllRecipes();
-		assertNotNull(myView.recipeArray);
-	}
-	
+	// UPDATE //
 	@Test
 	void testTrueUserUpdate() {
 		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+		v.userUpdate("rotem", "hayout", "yuvali", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 		assertTrue(myView.check);
 		v.deleteUser();
-	}
-	/*
-	@Test
-	void testFalseUserUpdate() // User doesn't exist in DB
-	{
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi", "1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
-		assertFalse(myView.check);
 	}
 	@Test
 	void testTrueDietitianUpdate() {
@@ -197,23 +247,14 @@ class ControllerViewIntegration {
 		myView.myDietitian.Delete();
 	}
 
+	// USER //
 	@Test
-	void testFalseDietitianUpdate() // Dietitian doesn't exist in DB
-	{
-		v.userUpdate("rotem", "hayout", "rotemhy@gmail.com", "asafiasafi", "asafiasafi","1991-01-10", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
-		assertFalse(myView.check);
-	}
-
-
-	@Test // good
 	void testTrueDeleteUser() {
 		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 0, null, 1, null, 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
 		v.deleteUser();
 		assertTrue(myView.check);
 	}
-
-
-	@Test // good
+	@Test
 	void testFalseDeleteUser() {
 		Integer[] al = new Integer[]{0,0,0,0,1,0,0,1,0,0,1,0};
 		ArrayList<Integer> favres = new ArrayList<Integer>();
@@ -223,14 +264,13 @@ class ControllerViewIntegration {
 		assertFalse(myView.check);
 	}
 
+	// DIETITIAN //
 	@Test
 	void testTrueDeleteDietitian() {
 		v.register("yuvali", "yuvali", "yuvali", "yuvali", "yuvali", "1993-04-04", 1, "12", 1, "1993-04-05", 0, 0, 0,0,0,0,0,0,0,0,0,0,0);
 		v.deleteDietitian();
 		assertTrue(myView.check);
 	}
-
-
 	@Test
 	void testFalseDeleteDietitian() {
 		myView.myDietitian= new Dietitian("idontknowhatemailis", "elad", "valad",LocalDate.parse("2019-06-17"), "eladvald", null, 99, LocalDate.parse("2010-06-17"));
@@ -238,61 +278,84 @@ class ControllerViewIntegration {
 		assertFalse(myView.check);
 	}
 
-
+	// INGREDIENT // not implemented
+	/*
 	@Test
-	void testTrueDeleteIngredient() {
+	void testTrueDeleteIngredient() throws SQLException {
+		Ingredient ing=null;
+		v.addIngredient("cheese", 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 2.0, 1.0, 1.0, 1.0);
+		ResultSet rs =Models.SelectSpecificFrom("Max( ingredientId ) as max", "Ingredient", null, null);
+		try {
+			ing = Models.GetIngredientFromDB(rs.getInt("max"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		v.deleteIngredient(ing);
+		assertTrue(myView.check);
+	}
+	@Test
+	void testIngredientUpdate() {
 		fail("Not yet implemented"); // TODO
 	}
+	 */
 
-
+	// RECIPE //
 	@Test
-	void testFalseDeleteIngredient() {
-		fail("Not yet implemented"); // TODO
+	void testTrueUserDeleteRecipe() // was able to delete
+	{
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.initializeRecipe();
+		Recipe r=null;
+		v.addRecipe("Lazania", 0,0,0,0,0,0,1,0,0,0,0,0, "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
+		try {
+			r = Models.GetRecipeFromDB(rs.getInt("max"));
+			v.deleteRecipe();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+	@Test	
+	void testTrueUserLikePressed() // changed the data
+	{
+		myView.myDietitian=null;
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		myView.myRecipe=Models.GetRecipeFromDB(1);
+		v.likePressed();
+		assertTrue(myView.check);
+	}
+	@Test
+	void testTrueDietitianLikePressed() // changed the data
+	{
+		myView.myUser=null;
+		myView.myDietitian=Models.GetDietitianFromDB("midget@kingslanding.com");
+		myView.myRecipe=Models.GetRecipeFromDB(1);
+		v.likePressed();
+		assertTrue(myView.check);
+	}
+	@Test
+	void testRecipeUpdate() {
+		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
+		v.initializeRecipe();
+		Recipe r=null;
+		v.addRecipe("Lazania", 0,0,0,0,0,0,1,0,0,0,0,0, "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		myView.myRecipe.setRecipeKashruth(3);
+		v.recipeUpdate(myView.myRecipe);
+		assertTrue(myView.check);
+		myView.myRecipe.Delete();
+
 	}
 
-	@Test
-	void testTrueDeleteRecipe() {
-		fail("Not yet implemented"); // TODO
-	}
-
-
-	@Test
-	void testFalseDeleteRecipe() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testTrueRecipeUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testFalseRecipeUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-
-	@Test
-	void testTrueIngredientUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testFalseIngredientUpdate() {
-		fail("Not yet implemented"); // TODO
-	}
-
+	// REPORTS //
 	@Test
 	void testRecipeReport() {
-		fail("Not yet implemented"); // TODO
+		v.recipeReport(1);
+		assertNotEquals(0, myView.recipeArray.size());
 	}
 	@Test
 	void testIngredientReport() {
-		fail("Not yet implemented"); // TODO
+		v.ingredientReport(1);
+		assertNotEquals(0, myView.ingredientArray.size());
 	}
-	@Test
-	void testLikePressed() {
-		fail("Not yet implemented"); // TODO
-	}
-	*/
+		
 }

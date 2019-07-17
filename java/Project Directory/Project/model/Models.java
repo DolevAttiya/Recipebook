@@ -990,12 +990,13 @@ public class Models extends Observable implements model  {
 			ArrayList<Integer> IngredientsType= new ArrayList<Integer>();
 			ArrayList<Double> IngredientsAmount= new ArrayList<Double>();
 			ArrayList<Integer> ingredients= new ArrayList<Integer>();
+			recipe.setRecipeTimeToMake(rs.getInt("recipeTimeToMake"));
 
 			while(recipeIngredientVals.next())
 			{
-				IngredientsType.add(recipeIngredientVals.getInt("ingredientId"));
+				IngredientsType.add(recipeIngredientVals.getInt("ingredientTypeId"));
 				IngredientsAmount.add(recipeIngredientVals.getDouble("IngredientAmount"));
-				ingredients.add(recipeIngredientVals.getInt("IngredientId"));
+				ingredients.add(recipeIngredientVals.getInt("ingredientId"));
 
 			}
 			recipe.setRecipeIngredientId(ingredients);

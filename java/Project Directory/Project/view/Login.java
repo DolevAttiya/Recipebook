@@ -60,7 +60,7 @@ public class Login extends JFrame {
 	 */
 	
 	public Login() {
-		setSize(1664, 1493);
+		setSize(1000, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
 		this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
@@ -70,68 +70,68 @@ public class Login extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-
-		//components:
-		JTextPane txtpnWelcomeToRecipebook = new JTextPane();
-		txtpnWelcomeToRecipebook.setEditable(false);
-		txtpnWelcomeToRecipebook.setForeground(new Color(255, 255, 255));
-		txtpnWelcomeToRecipebook.setBackground(new Color(65, 105, 225));
-		txtpnWelcomeToRecipebook.setFont(new Font("Tempus Sans ITC", Font.BOLD, 99));
-		txtpnWelcomeToRecipebook.setText("Welcome To Taimli !");
-		txtpnWelcomeToRecipebook.setBounds(302, 234, 1028, 160);
-		contentPane.add(txtpnWelcomeToRecipebook);
-
-		JLabel lblUserName = new JLabel("Email:");
-		lblUserName.setFont(new Font("Dialog", Font.PLAIN, 70));
-		lblUserName.setForeground(new Color(255, 255, 255));
-		lblUserName.setBounds(302, 504, 350, 72);
-		contentPane.add(lblUserName);
-
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Dialog", Font.PLAIN, 70));
-		lblPassword.setForeground(new Color(255, 255, 255));
-		lblPassword.setBounds(302, 604, 536, 72);
-		contentPane.add(lblPassword);
-		JButton btnLogin = new JButton("Login");
-		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 70));
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent f) {
-				myView.statview.login(textField.getText(), String.copyValueOf(passwordField.getPassword()));
-				if (myView.check)
-				{
-					MainPage a=new MainPage();
-					a.setVisible(true);
-					Login.this.dispose();
-					Login.this.setVisible(false);
-				}
-				else JOptionPane.showMessageDialog(null,"One of the parameters is wrong, Please try again");
-			}
-		});
-		btnLogin.setBounds(589, 867, 421, 93);
-		contentPane.add(btnLogin);
-
-		passwordField = new JPasswordField(50);
-		passwordField.setFont(new Font("Dialog", Font.PLAIN, 50));
-		passwordField.setBounds(662, 615, 641, 65);
-		contentPane.add(passwordField);
-
-		JButton btnRegister = new JButton("Sign up!");
-		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 70));
-		btnRegister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Register a=new Register();
-				a.setVisible(true);
-				close();
-			}
-		});
-		btnRegister.setBounds(589, 976, 421, 93);
-		contentPane.add(btnRegister);
-
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		textField.setColumns(10);
-		textField.setBounds(662, 522, 641, 65);
-		contentPane.add(textField);
+		
+		
+				//components:
+				JTextPane txtpnWelcomeToRecipebook = new JTextPane();
+				txtpnWelcomeToRecipebook.setBounds(36, 100, 916, 160);
+				contentPane.add(txtpnWelcomeToRecipebook);
+				txtpnWelcomeToRecipebook.setEditable(false);
+				txtpnWelcomeToRecipebook.setForeground(new Color(255, 255, 255));
+				txtpnWelcomeToRecipebook.setBackground(new Color(65, 105, 225));
+				txtpnWelcomeToRecipebook.setFont(new Font("Tempus Sans ITC", Font.BOLD, 90));
+				txtpnWelcomeToRecipebook.setText("Welcome To Taimli !");
+				
+						JLabel lblUserName = new JLabel("Email:");
+						lblUserName.setBounds(53, 271, 207, 72);
+						contentPane.add(lblUserName);
+						lblUserName.setFont(new Font("Dialog", Font.PLAIN, 50));
+						lblUserName.setForeground(new Color(255, 255, 255));
+						
+								textField = new JTextField();
+								textField.setBounds(278, 280, 641, 65);
+								contentPane.add(textField);
+								textField.setFont(new Font("Tahoma", Font.PLAIN, 40));
+								textField.setColumns(10);
+								
+										JLabel lblPassword = new JLabel("Password:");
+										lblPassword.setBounds(39, 354, 238, 72);
+										contentPane.add(lblPassword);
+										lblPassword.setFont(new Font("Dialog", Font.PLAIN, 50));
+										lblPassword.setForeground(new Color(255, 255, 255));
+										
+												passwordField = new JPasswordField(50);
+												passwordField.setBounds(278, 364, 641, 65);
+												contentPane.add(passwordField);
+												passwordField.setFont(new Font("Dialog", Font.PLAIN, 40));
+												
+														JButton btnRegister = new JButton("Sign up!");
+														btnRegister.setBounds(365, 546, 238, 63);
+														contentPane.add(btnRegister);
+														btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 45));
+														JButton btnLogin = new JButton("Login");
+														btnLogin.setBounds(365, 472, 238, 63);
+														contentPane.add(btnLogin);
+														btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 45));
+														btnLogin.addActionListener(new ActionListener() {
+															public void actionPerformed(ActionEvent f) {
+																myView.statview.login(textField.getText(), String.copyValueOf(passwordField.getPassword()));
+																if (myView.check)
+																{
+																	MainPage a=new MainPage();
+																	a.setVisible(true);
+																	Login.this.dispose();
+																	Login.this.setVisible(false);
+																}
+																else JOptionPane.showMessageDialog(null,"One of the parameters is wrong, Please try again");
+															}
+														});
+														btnRegister.addActionListener(new ActionListener() {
+															public void actionPerformed(ActionEvent e) {
+																Register a=new Register();
+																a.setVisible(true);
+																close();
+															}
+														});
 	}
 }

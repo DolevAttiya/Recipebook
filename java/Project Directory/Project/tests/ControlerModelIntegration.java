@@ -341,7 +341,7 @@ public class ControlerModelIntegration {
 		recipe.setRecipeKashruth(0);
 		recipe.Update();
 	}
-
+	
 	@Test
 	void updateRecipeFalseTest() {
 		ev = new Event();
@@ -352,7 +352,7 @@ public class ControlerModelIntegration {
 		ev.getArr().add(recipe);
 		((MyController)controllerTest).update(null, ev);
 	}
-
+	
 	@Test
 	void deleteRecipeTrueTest() {
 		ev = new Event();
@@ -418,4 +418,5 @@ public class ControlerModelIntegration {
 		ev.getArr().add(1);
 		((MyController)controllerTest).update(null, ev);
 	}
+	
 }
