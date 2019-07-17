@@ -70,7 +70,7 @@ public class NewRecipe extends JFrame {
 	Object[][] dataIngredients;
 	public int Complexity=0;
 	public int timeToMake=0;
-
+//
 
 	/**
 	 * Launch the application.
