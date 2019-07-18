@@ -571,7 +571,7 @@ public class RecipeView extends JFrame {
 		textPane_2.setBackground(new Color(240, 248, 255));
 		textPane_2.setBounds(1071, 1090, 444, 64);
 		panel_1.add(textPane_2);
-
+		/*
 		String[] times = {"30", "60", "120", "180", "all"};
 		JComboBox comboBox_1 = new JComboBox(times);
 		comboBox_1.setEnabled(false);
@@ -587,7 +587,7 @@ public class RecipeView extends JFrame {
 		comboBox_2.setSelectedIndex(myView.myRecipe.getRecipeKashruth()); 
 		comboBox_2.setBounds(229, 1065, 442, 49);
 		panel_1.add(comboBox_2);
-
+		 */
 		JButton btnDeleteRecipe = new JButton("Delete Recipe");
 		btnDeleteRecipe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -759,15 +759,21 @@ public class RecipeView extends JFrame {
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
 				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					RecipeView.this.dispose();
-					RecipeView.this.setVisible(false);
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						RecipeView.this.dispose();
+						RecipeView.this.setVisible(false);
+					}
 				}
 			}
 		});

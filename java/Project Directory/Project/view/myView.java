@@ -324,7 +324,6 @@ public class myView extends Observable implements View
 		for(int j=0;j<ingredientArray.size();j++)
 			if(ingredientArray.get(j).getIngredientId()==myRecipe.getRecipeIngredientId().get(myRecipe.getRecipeIngredientId().size()-1))
 				ingredientArrayForRecipe.add(ingredientArray.get(j));
-
 		for(int j=0;j<myMeasuring.size();j++)
 			if(myMeasuring.get(j).getIngredientTypeId()==myRecipe.getRecipeIngredientsType().get(myRecipe.getRecipeIngredientsType().size()-1))
 				myMeasuringForRecipe.add(myMeasuring.get(j));
@@ -332,9 +331,9 @@ public class myView extends Observable implements View
 	public void fillIngredientIdToName() {
 		getAllIngredient();
 		getAllMeasuringTypes();
+		ingredientArrayForRecipe=new ArrayList<Ingredient>();
+		myMeasuringForRecipe= new ArrayList<IngredientType>();
 		for (int i = 0; i < myRecipe.getRecipeIngredientId().size(); i++) {
-
-
 			for(int j=0;j<ingredientArray.size();j++)
 				if(ingredientArray.get(j).getIngredientId()==myRecipe.getRecipeIngredientId().get(i))
 					ingredientArrayForRecipe.add(ingredientArray.get(j));
@@ -520,10 +519,15 @@ public class myView extends Observable implements View
 		}
 		else check=false; // error
 	}
-	public void recipeUpdate(Recipe rec) {
+	public void recipeUpdate(String recipeName, String description, Integer complexity,Integer timeToMake, String instructions) {
 		ev=new Event();
 		ev.getArr().add("recipe_update");
-		ev.getArr().add(rec);
+		myRecipe.setRecipeName(recipeName);
+		myRecipe.setRecipeDescription(description);
+		myRecipe.setRecipeComplex(complexity);
+		myRecipe.setRecipeTimeToMake(timeToMake);
+		myRecipe.setRecipeProcess(instructions);
+		ev.getArr().add(myRecipe);
 		setChanged();
 		notifyObservers(ev);
 	}
@@ -595,7 +599,7 @@ public class myView extends Observable implements View
 				myDietitian.getPersonsFavoriteRecipe().add(myRecipe.getRecipeId());
 				dietitianUpdateForFavorite(myDietitian);
 			}
-			recipeUpdate(myRecipe);
+			recipeUpdate(myRecipe.getRecipeName(), myRecipe.getRecipeDescription(), myRecipe.getRecipeComplex(), myRecipe.getRecipeTimeToMake(), myRecipe.getRecipeProcess());
 	}
 
 }
