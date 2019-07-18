@@ -29,8 +29,6 @@ public class MyRecipes extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTable table;
-	private JTextField txtRecipebook;
 	public String[] recipeComplexity= {"Parve","Milk","Meat","Not Kosher"};
 
 	/**

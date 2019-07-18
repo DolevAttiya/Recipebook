@@ -1,86 +1,47 @@
 
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
-import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
-import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
 import model.Ingredient;
 import model.IngredientType;
-
-import javax.swing.JTextArea;
-import javax.swing.DropMode;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollBar;
-import java.awt.ScrollPane;
 import java.awt.TextArea;
 import javax.swing.JScrollPane;
-import java.awt.Component;
 
 public class RecipeUpdate extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_5;
 	private JTextField textField_3;
-	private JTextField txtRecipebook;
 	private JTextField textField_1;
 	private JTextField textField_9;
-
-
 	public Double amount=0.0;
 	Object[] dataIngredients;
 	public int Complexity=0;
 	public int timeToMake=0;
 
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RecipeUpdate frame = new RecipeUpdate();
-					frame.setVisible(true);
-					frame.setTitle("Taimli!");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	public void close() {
-		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-	 */
 	/**
 	 * Create the frame.
 	 */
@@ -107,6 +68,11 @@ public class RecipeUpdate extends JFrame {
 				"Amount",
 		"Mesuring"};
 		DefaultTableModel tableModel = new DefaultTableModel(null, columnNames) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -163,7 +129,6 @@ public class RecipeUpdate extends JFrame {
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_1 = (JComboBox)e.getSource();
-				String mesuring = (String)comboBox_1.getSelectedItem();
 			}
 		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -304,7 +269,7 @@ public class RecipeUpdate extends JFrame {
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				amount= Double.parseDouble(textField_3.getText());
-				myView.statview.addIngredientToRecipe (myView.statview.ingredientArray.get(comboBox.getSelectedIndex()),myView.statview.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
+				myView.statview.addIngredientToRecipe (myView.ingredientArray.get(comboBox.getSelectedIndex()),myView.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
 				myView.statview.fillIngredientIdToNameForInsert();
 				dataIngredients = new Object[3];
 				dataIngredients[0]=myView.ingredientArrayForRecipe.get(myView.ingredientArrayForRecipe.size()-1).getIngredientName();

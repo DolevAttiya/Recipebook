@@ -6,9 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -25,11 +23,12 @@ import javax.swing.ListSelectionModel;
 
 public class SearchRes extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTable table;
-	private Component txtRecipebook;
-	private JTextField textField_1;
 	public String[] recipeComplexity= {"Parve","Milk","Meat","Not Kosher"};
 
 	/**
@@ -79,6 +78,11 @@ public class SearchRes extends JFrame {
 
 		JTable table = new JTable(data, columnNames);
 		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
