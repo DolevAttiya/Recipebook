@@ -362,15 +362,33 @@ public class RecipeView extends JFrame {
 		JButton btnSearch = new JButton("Edit");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (myView.myUser.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()||myView.myDietitian.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()) {
-					//
-					RecipeUpdate f=new RecipeUpdate();
-					f.setVisible(true);
-					RecipeView.this.dispose();
-					RecipeView.this.setVisible(false);				}
-				else {
-					JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
+				if(myView.myUser!=null)
+				{
+					if (myView.myUser.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0) 
+					{
+						RecipeUpdate f=new RecipeUpdate();
+						f.setVisible(true);
+						RecipeView.this.dispose();
+						RecipeView.this.setVisible(false);	
+					}
+
 				}
+				else
+					if(myView.myDietitian!=null)
+					{
+						if(myView.myDietitian.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0)
+						{
+							RecipeUpdate f=new RecipeUpdate();
+							f.setVisible(true);
+							RecipeView.this.dispose();
+							RecipeView.this.setVisible(false);
+						}
+					}
+
+					else
+					{
+						JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
+					}
 
 
 
@@ -478,6 +496,15 @@ public class RecipeView extends JFrame {
 			dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
 		}
 		JTable table = new JTable(dataIngredients, columnNames);
+		DefaultTableModel tableModel = new DefaultTableModel(dataIngredients, columnNames) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
+		table.setModel(tableModel);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
