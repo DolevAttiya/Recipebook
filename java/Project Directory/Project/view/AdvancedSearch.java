@@ -259,7 +259,7 @@ public class AdvancedSearch extends JFrame {
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_1 = (JComboBox)e.getSource();
-				String timeToMake = (String)comboBox_1.getSelectedItem();
+				timeToMake = (String)comboBox_1.getSelectedItem();
 				if (timeToMake=="all") {
 					timeToMake="99999";
 				}
@@ -274,7 +274,7 @@ public class AdvancedSearch extends JFrame {
 		comboBox_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_4 = (JComboBox)e.getSource();
-				int complexity = (int)comboBox_4.getSelectedIndex();
+				complexity = (int)comboBox_4.getSelectedIndex();
 			}
 		});
 		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -292,7 +292,7 @@ public class AdvancedSearch extends JFrame {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JComboBox comboBox = (JComboBox)arg0.getSource();
-				int kashruth = (int)comboBox.getSelectedIndex();
+				kashruth = (int)comboBox.getSelectedIndex();
 
 				//send kashruth level to DB
 			}
@@ -530,7 +530,7 @@ public class AdvancedSearch extends JFrame {
 		comboBox_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_2 = (JComboBox)e.getSource();
-				String rateAbove = (String)comboBox.getSelectedItem();
+				rateAbove = (String)comboBox.getSelectedItem();
 				if (rateAbove=="more than 200") {
 					rateAbove="99999";
 				}
