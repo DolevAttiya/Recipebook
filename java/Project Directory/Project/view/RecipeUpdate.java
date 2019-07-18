@@ -98,13 +98,14 @@ public class RecipeUpdate extends JFrame {
 		table.getTableHeader().setFont(bigFont);
 		
 		
-		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
+		String[] times = {"30", "60", "90","120","150", "180"}; //if string=all -->>99999
 		JComboBox comboBox_5 = new JComboBox(times);
-		comboBox_5.setSelectedItem(myView.myRecipe.getRecipeTimeToMake());
+		Integer x= (myView.myRecipe.getRecipeTimeToMake()/30)-1;
+		comboBox_5.setSelectedIndex(x);
 		comboBox_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_5 = (JComboBox)e.getSource();
-				timeToMake = (int)comboBox_5.getSelectedItem();
+				timeToMake = Integer.parseInt( comboBox_5.getSelectedItem().toString());
 			}
 		});
 		comboBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
