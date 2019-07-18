@@ -30,6 +30,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.JTextArea;
+import javax.swing.Box.Filler;
 import javax.swing.DropMode;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -468,7 +469,8 @@ public class RecipeView extends JFrame {
 		String[] columnNames = {"Ingredient Name",
 				"Amount",
 		"Mesuring"}; 
-		dataIngredients = new Object[myView.recipeArray.size()][3];
+		myView.statview.fillIngredientIdToName();
+		dataIngredients = new Object[myView.myRecipe.getRecipeIngredientsAmount().size()][3];
 		for(int row=0;row<myView.ingredientArrayForRecipe.size();row++) {
 			dataIngredients[row][0]=myView.ingredientArrayForRecipe.get(row).getIngredientName();
 			dataIngredients[row][1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();

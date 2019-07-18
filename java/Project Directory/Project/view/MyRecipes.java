@@ -123,7 +123,6 @@ public class MyRecipes extends JFrame {
 		table.getTableHeader().setFont(bigFont);
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
-		table.setRowHeight(1, 60);
 		scrollPane.setSize(951, 506);
 		scrollPane.setLocation(10, 69);
 		//TableColumn column = null;

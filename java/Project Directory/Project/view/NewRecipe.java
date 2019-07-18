@@ -463,7 +463,7 @@ public class NewRecipe extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				amount= Double.parseDouble(textField_3.getText());
 				myView.statview.addIngredientToRecipe (myView.statview.ingredientArray.get(comboBox.getSelectedIndex()),myView.statview.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
-				myView.statview.fillIngredientIdToName();
+				myView.statview.fillIngredientIdToNameForInsert();
 				dataIngredients = new Object[3];
 				dataIngredients[0]=myView.ingredientArrayForRecipe.get(myView.ingredientArrayForRecipe.size()-1).getIngredientName();
 				dataIngredients[1]=myView.myRecipe.getRecipeIngredientsAmount().get(myView.ingredientArrayForRecipe.size()-1).toString();

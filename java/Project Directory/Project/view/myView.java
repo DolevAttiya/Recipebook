@@ -322,7 +322,7 @@ public class myView extends Observable implements View {
 			}
 		}	 
 	}
-	public void fillIngredientIdToName() {
+	public void fillIngredientIdToNameForInsert() {
 		getAllIngredient();
 		getAllMeasuringTypes();
 		for(int j=0;j<ingredientArray.size();j++)
@@ -333,6 +333,22 @@ public class myView extends Observable implements View {
 			if(myMeasuring.get(j).getIngredientTypeId()==myRecipe.getRecipeIngredientsType().get(myRecipe.getRecipeIngredientsType().size()-1))
 				myMeasuringForRecipe.add(myMeasuring.get(j));
 	}
+	public void fillIngredientIdToName() {
+		getAllIngredient();
+		getAllMeasuringTypes();
+		for (int i = 0; i < myRecipe.getRecipeIngredientId().size(); i++) {
+
+
+			for(int j=0;j<ingredientArray.size();j++)
+				if(ingredientArray.get(j).getIngredientId()==myRecipe.getRecipeIngredientId().get(i))
+					ingredientArrayForRecipe.add(ingredientArray.get(j));
+
+			for(int j=0;j<myMeasuring.size();j++)
+				if(myMeasuring.get(j).getIngredientTypeId()==myRecipe.getRecipeIngredientsType().get(i))
+					myMeasuringForRecipe.add(myMeasuring.get(j));
+		}
+	}
+
 
 	public void addRecipeResponse(ArrayList<Recipe> r) {
 		if (r!=null)
