@@ -573,7 +573,7 @@ public class RecipeView extends JFrame {
 		String[] times = {"30", "60", "120", "180", "all"};
 		JComboBox comboBox_1 = new JComboBox(times);
 		comboBox_1.setEnabled(false);
-		comboBox_1.setSelectedIndex(0); //myView.myRecipe.getRecipeKashruth()
+		comboBox_1.setSelectedIndex(myView.myRecipe.getRecipeTimeToMake()); 
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		comboBox_1.setBounds(1075, 1158, 509, 49);
 		panel_1.add(comboBox_1);
@@ -582,7 +582,7 @@ public class RecipeView extends JFrame {
 		JComboBox comboBox_2 = new JComboBox(kashruthing);
 		comboBox_2.setEnabled(false);
 		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_2.setSelectedIndex(0); //myView.myRecipe.getRecipeKashruth()
+		comboBox_2.setSelectedIndex(myView.myRecipe.getRecipeKashruth()); 
 		comboBox_2.setBounds(229, 1065, 442, 49);
 		panel_1.add(comboBox_2);
 
