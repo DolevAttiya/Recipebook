@@ -75,7 +75,7 @@ public class User extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -92,7 +92,7 @@ public class User extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -146,14 +146,14 @@ public class User extends JFrame {
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_7.setColumns(10);
-		textField_7.setBounds(256, 312, 282, 39);
+		textField_7.setBounds(284, 312, 254, 39);
 		panel_1.add(textField_7);
 
 
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_2.setColumns(10);
-		textField_2.setBounds(256, 262, 282, 39);
+		textField_2.setBounds(284, 262, 254, 39);
 		panel_1.add(textField_2);
 
 		textField_3 = new JTextField(myView.myUser.getPersonEmail());
@@ -180,13 +180,20 @@ public class User extends JFrame {
 				}
 			}
 		});
+
+		
 		if (myView.myUser.getUserAllergen()[7]!=null) {
-			isSeeds=1;
-			chckbxSeeds.setSelected(true);
+			if(myView.myUser.getUserAllergen()[7]>0)
+			{
+				isSeeds=1;
+				chckbxSeeds.setSelected(true);
+			}
+			else
+				isSeeds=0;
 		}
 		else
 			isSeeds=0;
-		
+
 		chckbxSeeds.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxSeeds.setBackground(new Color(240, 248, 255));
 		chckbxSeeds.setBounds(773, 152, 142, 41);
@@ -203,12 +210,19 @@ public class User extends JFrame {
 				}
 			}
 		});
+		
 		if (myView.myUser.getUserAllergen()[1]!=null) {
-			isFish=1;
-			chckbxFish.setSelected(true);
+			if(myView.myUser.getUserAllergen()[1]>0)
+			{
+				isStrawberries=1;
+				chckbxFish.setSelected(true);
+			}
+			else
+				isStrawberries=0;
 		}
 		else
-			isFish=0;
+			isStrawberries=0;
+		
 		chckbxFish.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxFish.setBackground(new Color(240, 248, 255));
 		chckbxFish.setBounds(600, 152, 171, 41);
@@ -226,12 +240,20 @@ public class User extends JFrame {
 				}
 			}
 		});
+	
+		
 		if (myView.myUser.getUserAllergen()[9]!=null) {
-			isPeanut=1;
-			chckbxPeanut.setSelected(true);
+			if(myView.myUser.getUserAllergen()[9]>0)
+			{
+				isPeanut=1;
+				chckbxPeanut.setSelected(true);
+			}
+			else
+				isPeanut=0;
 		}
 		else
 			isPeanut=0;
+		
 		chckbxPeanut.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxPeanut.setBackground(new Color(240, 248, 255));
 		chckbxPeanut.setBounds(773, 232, 142, 41);
@@ -248,13 +270,19 @@ public class User extends JFrame {
 				}
 			}
 		});
+
 		if (myView.myUser.getUserAllergen()[8]!=null) {
-			isTreeNuts=1;
-			chckbxTreeNuts.setSelected(true);
+			if(myView.myUser.getUserAllergen()[8]>0)
+			{
+				isTreeNuts=1;
+				chckbxTreeNuts.setSelected(true);
+			}
+			else
+				isTreeNuts=0;
 		}
 		else
 			isTreeNuts=0;
-		
+
 		chckbxTreeNuts.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxTreeNuts.setBackground(new Color(240, 248, 255));
 		chckbxTreeNuts.setBounds(773, 192, 129, 41);
@@ -271,13 +299,20 @@ public class User extends JFrame {
 				}
 			}
 		});
+
+		
 		if (myView.myUser.getUserAllergen()[6]!=null) {
-			isEggs=1;
-			chckbxEggs.setSelected(true);
+			if(myView.myUser.getUserAllergen()[6]>0)
+			{
+				isEggs=1;
+				chckbxEggs.setSelected(true);
+			}
+			else
+				isEggs=0;
 		}
 		else
 			isEggs=0;
-		
+
 		chckbxEggs.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxEggs.setBackground(new Color(240, 248, 255));
 		chckbxEggs.setBounds(773, 112, 117, 40);
@@ -314,8 +349,21 @@ public class User extends JFrame {
 		else {
 			chckbxNewCheckBox.setSelected(false);
 			isKosher=0;
-
 		}
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxNewCheckBox.isSelected()) {
+					isKosher=1;
+				}
+				else {
+					isKosher=0;
+				}		
+
+
+			}
+		});
+
+
 		chckbxNewCheckBox.setBackground(new Color(240, 248, 255));
 		chckbxNewCheckBox.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxNewCheckBox.setBounds(26, 358, 697, 41);
@@ -342,8 +390,13 @@ public class User extends JFrame {
 			}
 		});
 		if (myView.myUser.getUserAllergen()[0]!=null) {
-			isFish=1;
-			chckbxDairy.setSelected(true);
+			if(myView.myUser.getUserAllergen()[0]>0)
+			{
+				isFish=1;
+				chckbxDairy.setSelected(true);
+			}
+			else
+				isFish=0;
 		}
 		else
 			isFish=0;
@@ -374,12 +427,17 @@ public class User extends JFrame {
 			}
 		});
 		if (myView.myUser.getUserAllergen()[2]!=null) {
-			isCoffie=1;
-			chckbxG.setSelected(true);
+			if(myView.myUser.getUserAllergen()[2]>0)
+			{
+				isCoffie=1;
+				chckbxG.setSelected(true);
+			}
+			else
+				isCoffie=0;
 		}
 		else
 			isCoffie=0;
-		
+
 		chckbxG.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxG.setBackground(new Color(240, 248, 255));
 		chckbxG.setBounds(600, 192, 155, 41);
@@ -398,12 +456,17 @@ public class User extends JFrame {
 			}
 		});
 		if (myView.myUser.getUserAllergen()[3]!=null) {
-			isGluten=1;
-			chckbxNon.setSelected(true);
+			if(myView.myUser.getUserAllergen()[3]>0)
+			{
+				isGluten=1;
+				chckbxNon.setSelected(true);
+			}
+			else
+				isGluten=0;
 		}
 		else
 			isGluten=0;
-		
+
 		chckbxNon.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxNon.setBackground(new Color(240, 248, 255));
 		chckbxNon.setBounds(600, 232, 105, 41);
@@ -454,6 +517,17 @@ public class User extends JFrame {
 			chckbxShowOnlyRecipes.setSelected(false);
 			isAller=0;
 		}
+		chckbxShowOnlyRecipes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxShowOnlyRecipes.isSelected()) {
+					isAller=1;
+				}
+				else {
+					isAller=0;
+				}		
+			}
+		});
+
 
 
 		chckbxShowOnlyRecipes.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -473,12 +547,20 @@ public class User extends JFrame {
 				}
 			}
 		});
+
 		if (myView.myUser.getUserAllergen()[5]!=null) {
-			isMilk=1;
-			chckbxDairy_1.setSelected(true);
+			if(myView.myUser.getUserAllergen()[5]>0)
+			{
+				isMilk=1;
+				chckbxDairy_1.setSelected(true);
+			}
+			else
+				isMilk=0;
 		}
 		else
 			isMilk=0;
+		
+		
 		chckbxDairy_1.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxDairy_1.setBackground(new Color(240, 248, 255));
 		chckbxDairy_1.setBounds(600, 312, 92, 41);
@@ -495,12 +577,19 @@ public class User extends JFrame {
 				}
 			}
 		});
+	
 		if (myView.myUser.getUserAllergen()[4]!=null) {
-			isLactose=1;
-			chckbxLactose.setSelected(true);
+			if(myView.myUser.getUserAllergen()[4]>0)
+			{
+				isLactose=1;
+				chckbxLactose.setSelected(true);
+			}
+			else
+				isLactose=0;
 		}
 		else
 			isLactose=0;
+		
 
 		chckbxLactose.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxLactose.setBackground(new Color(240, 248, 255));
@@ -519,12 +608,19 @@ public class User extends JFrame {
 				}
 			}
 		});
-		if (myView.myUser.getUserAllergen()[10]!=null) {
-			isChocolate=1;
-			chckbxChocolate.setSelected(true);
+
+		if (myView.myUser.getUserAllergen()[11]!=null) {
+			if(myView.myUser.getUserAllergen()[11]>0)
+			{
+				isChocolate=1;
+				chckbxChocolate.setSelected(true);
+			}
+			else
+				isChocolate=0;
 		}
 		else
 			isChocolate=0;
+		
 		chckbxChocolate.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxChocolate.setBackground(new Color(240, 248, 255));
 		chckbxChocolate.setBounds(773, 312, 155, 41);
@@ -542,12 +638,19 @@ public class User extends JFrame {
 				}
 			}
 		});
+
 		if (myView.myUser.getUserAllergen()[10]!=null) {
-			isAcidity=1;
-			chckbxFoodAcidity.setSelected(true);
+			if(myView.myUser.getUserAllergen()[10]>0)
+			{
+				isAcidity=1;
+				chckbxFoodAcidity.setSelected(true);
+			}
+			else
+				isAcidity=0;
 		}
 		else
 			isAcidity=0;
+		
 		chckbxFoodAcidity.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxFoodAcidity.setBackground(new Color(240, 248, 255));
 		chckbxFoodAcidity.setBounds(773, 272, 176, 41);
@@ -558,7 +661,7 @@ public class User extends JFrame {
 		txtpnEnterPassword.setText("Enter Password (6 digits):");
 		txtpnEnterPassword.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtpnEnterPassword.setBackground(new Color(240, 248, 255));
-		txtpnEnterPassword.setBounds(26, 262, 226, 39);
+		txtpnEnterPassword.setBounds(26, 262, 254, 39);
 		panel_1.add(txtpnEnterPassword);
 
 		JTextPane txtpnDateOfBirth = new JTextPane();
@@ -568,7 +671,7 @@ public class User extends JFrame {
 		txtpnDateOfBirth.setBackground(new Color(240, 248, 255));
 		txtpnDateOfBirth.setBounds(26, 212, 142, 39);
 		panel_1.add(txtpnDateOfBirth);
-		
+
 		Integer ZZZ =myView.myUser.getPersonDateOfBirth().getYear();
 		textField_4 = new JTextField(ZZZ.toString());
 		textField_4.setEditable(false);

@@ -76,7 +76,7 @@ public class NewRecipe extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -92,7 +92,7 @@ public class NewRecipe extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -120,7 +120,14 @@ public class NewRecipe extends JFrame {
 		"Mesuring"}; 
 
 		Object[][] d= new Object[100][5];		
-	    DefaultTableModel tableModel =new DefaultTableModel(null, columnNames);
+	    DefaultTableModel tableModel =new DefaultTableModel(null, columnNames){
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
 	    JTable table = new JTable(tableModel);
 
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -267,14 +274,12 @@ public class NewRecipe extends JFrame {
 		btnAddNewIngredient.setBounds(671, 221, 251, 23);
 		panel_1.add(btnAddNewIngredient);
 
-		String[] kashruthing = {"Parve", "Dairy", "Meat","Not Kosher"};
-
 		JButton btnAdd_1 = new JButton("Add");
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				amount= Double.parseDouble(textField_3.getText());
 				myView.statview.addIngredientToRecipe (myView.statview.ingredientArray.get(comboBox.getSelectedIndex()),myView.statview.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
-				myView.statview.fillIngredientIdToName();
+				myView.statview.fillIngredientIdToNameForInsert();
 				dataIngredients = new Object[3];
 				dataIngredients[0]=myView.ingredientArrayForRecipe.get(myView.ingredientArrayForRecipe.size()-1).getIngredientName();
 				dataIngredients[1]=myView.myRecipe.getRecipeIngredientsAmount().get(myView.ingredientArrayForRecipe.size()-1).toString();
@@ -326,7 +331,7 @@ public class NewRecipe extends JFrame {
 				{
 					Complexity = comboBox_4_1.getSelectedIndex();
 					timeToMake = Integer.parseInt(comboBox_5_1.getSelectedItem().toString());
-					myView.statview.addRecipe(textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
+				//	myView.statview.addRecipe(textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
 					RecipeView f=new RecipeView();
 					f.setVisible(true);
 					NewRecipe.this.dispose();
