@@ -16,6 +16,5 @@ public class MVCDriver {
 		((Models)model).addObserver(controller);
 		((myView)view).addObserver(controller);
 		view.start();
-
 	}
 }
