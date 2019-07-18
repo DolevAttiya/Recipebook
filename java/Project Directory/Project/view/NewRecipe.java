@@ -456,8 +456,6 @@ public class NewRecipe extends JFrame {
 		btnAddNewIngredient.setBounds(671, 491, 251, 23);
 		panel_1.add(btnAddNewIngredient);
 
-		String[] kashruthing = {"Parve", "Dairy", "Meat","Not Kosher"};
-
 		JButton btnAdd_1 = new JButton("Add");
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
