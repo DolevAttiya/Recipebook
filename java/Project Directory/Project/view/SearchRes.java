@@ -116,8 +116,8 @@ public class SearchRes extends JFrame {
 			}
 		});
 		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		table.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		table.setRowHeight(50);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);

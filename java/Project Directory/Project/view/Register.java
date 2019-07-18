@@ -221,7 +221,7 @@ public class Register extends JFrame {
 		});
 		chckbxFish.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxFish.setBackground(new Color(240, 248, 255));
-		chckbxFish.setBounds(613, 152, 142, 41);
+		chckbxFish.setBounds(613, 152, 165, 41);
 		panel_1.add(chckbxFish);
 		setVisible(true);
 
@@ -245,7 +245,7 @@ public class Register extends JFrame {
 		});
 		chckbxPeanut.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxPeanut.setBackground(new Color(240, 248, 255));
-		chckbxPeanut.setBounds(773, 232, 98, 41);
+		chckbxPeanut.setBounds(773, 232, 165, 41);
 		panel_1.add(chckbxPeanut);
 
 		JCheckBox chckbxTreeNuts = new JCheckBox("Tree Nuts");
@@ -260,7 +260,7 @@ public class Register extends JFrame {
 		});
 		chckbxTreeNuts.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxTreeNuts.setBackground(new Color(240, 248, 255));
-		chckbxTreeNuts.setBounds(773, 192, 129, 41);
+		chckbxTreeNuts.setBounds(773, 192, 176, 41);
 		panel_1.add(chckbxTreeNuts);
 
 		JCheckBox chckbxEggs = new JCheckBox("Eggs");
@@ -314,7 +314,7 @@ public class Register extends JFrame {
 		});
 		chckbxNewCheckBox.setBackground(new Color(240, 248, 255));
 		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		chckbxNewCheckBox.setBounds(26, 450, 697, 39);
+		chckbxNewCheckBox.setBounds(26, 450, 319, 39);
 		panel_1.add(chckbxNewCheckBox);
 
 		JTextPane txtpnAdvancedSearch = new JTextPane();
@@ -339,7 +339,7 @@ public class Register extends JFrame {
 		chckbxDairy.setSelected(false);
 		chckbxDairy.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxDairy.setBackground(new Color(240, 248, 255));
-		chckbxDairy.setBounds(613, 112, 65, 41);
+		chckbxDairy.setBounds(613, 112, 152, 41);
 		panel_1.add(chckbxDairy);
 
 		JTextPane txtpnAllergies = new JTextPane();
@@ -364,7 +364,7 @@ public class Register extends JFrame {
 		});
 		chckbxG.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxG.setBackground(new Color(240, 248, 255));
-		chckbxG.setBounds(613, 192, 92, 41);
+		chckbxG.setBounds(613, 192, 152, 41);
 		panel_1.add(chckbxG);
 
 		JCheckBox chckbxNon = new JCheckBox("Gluten");
@@ -455,7 +455,7 @@ public class Register extends JFrame {
 		});
 		chckbxShowOnlyRecipes.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxShowOnlyRecipes.setBackground(new Color(240, 248, 255));
-		chckbxShowOnlyRecipes.setBounds(26, 492, 489, 41);
+		chckbxShowOnlyRecipes.setBounds(26, 492, 401, 41);
 		panel_1.add(chckbxShowOnlyRecipes);
 
 
@@ -504,7 +504,7 @@ public class Register extends JFrame {
 		});
 		chckbxChocolate.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxChocolate.setBackground(new Color(240, 248, 255));
-		chckbxChocolate.setBounds(773, 312, 117, 41);
+		chckbxChocolate.setBounds(773, 312, 165, 41);
 		panel_1.add(chckbxChocolate);
 
 		JCheckBox chckbxFoodAcidity = new JCheckBox("Food Acidity");
@@ -520,7 +520,7 @@ public class Register extends JFrame {
 		});
 		chckbxFoodAcidity.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxFoodAcidity.setBackground(new Color(240, 248, 255));
-		chckbxFoodAcidity.setBounds(773, 272, 142, 41);
+		chckbxFoodAcidity.setBounds(773, 272, 165, 41);
 		panel_1.add(chckbxFoodAcidity);
 
 		JCheckBox chckbxDietican = new JCheckBox("Dietican");
@@ -588,7 +588,7 @@ public class Register extends JFrame {
 		});
 		chckbxDietican.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxDietican.setBackground(new Color(240, 248, 255));
-		chckbxDietican.setBounds(26, 363, 237, 41);
+		chckbxDietican.setBounds(26, 363, 117, 41);
 		panel_1.add(chckbxDietican);
 
 
