@@ -1,38 +1,49 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JComboBox;
+import javax.swing.JSpinner;
+import javax.swing.JToggleButton;
+import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.JTextArea;
+import javax.swing.Box.Filler;
+import javax.swing.DropMode;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.TextArea;
 
 public class RecipeView extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField_5;
+	private JTextField txtRecipebook;
 	private JTextField textField_2_1;
 	private JTextField textField_4;
 	private JTextField textField_6;
@@ -122,17 +133,10 @@ public class RecipeView extends JFrame {
 		txtpnCookingTime.setBounds(777, 386, 75, 41);
 		panel_1.add(txtpnCookingTime);
 
-
 		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
 		JComboBox comboBox_3 = new JComboBox(times);
 		comboBox_3.setEnabled(false);
-		comboBox_3.setSelectedIndex(myView.myRecipe.getRecipeTimeToMake());
-		comboBox_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JComboBox comboBox_3 = (JComboBox)e.getSource();
-				timeToMake = (int)comboBox_3.getSelectedIndex();
-			}
-		});
+		comboBox_3.setSelectedItem(myView.myRecipe.getRecipeTimeToMake());
 		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox_3.setBounds(857, 396, 104, 31);
 		panel_1.add(comboBox_3);
@@ -158,12 +162,6 @@ public class RecipeView extends JFrame {
 		JComboBox comboBox_2 = new JComboBox(complexiting);
 		comboBox_2.setEnabled(false);
 		comboBox_2.setSelectedIndex(myView.myRecipe.getRecipeComplex());
-		comboBox_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JComboBox comboBox_2 = (JComboBox)e.getSource();
-				Complexity = (int)comboBox_2.getSelectedIndex();
-			}
-		});
 		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox_2.setBounds(857, 351, 104, 31);
 		panel_1.add(comboBox_2);
@@ -173,12 +171,6 @@ public class RecipeView extends JFrame {
 		JComboBox comboBox_1 = new JComboBox(kashruthing);
 		comboBox_1.setEnabled(false);
 		comboBox_1.setSelectedIndex(myView.myRecipe.getRecipeKashruth());
-		comboBox_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JComboBox comboBox_1 = (JComboBox)e.getSource();
-				Kashruth = (int)comboBox_1.getSelectedIndex();
-			}
-		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox_1.setBounds(857, 315, 104, 31);
 		panel_1.add(comboBox_1);
@@ -459,9 +451,12 @@ public class RecipeView extends JFrame {
 						RecipeView.this.dispose();
 						RecipeView.this.setVisible(false);	
 					}
-
+					else
+					{
+						JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
+					}
 				}
-				else
+				else {
 					if(myView.myDietitian!=null)
 					{
 						if(myView.myDietitian.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0)
@@ -472,14 +467,11 @@ public class RecipeView extends JFrame {
 							RecipeView.this.setVisible(false);
 						}
 					}
-
 					else
 					{
 						JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
 					}
-
-
-
+				}
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -581,11 +573,6 @@ public class RecipeView extends JFrame {
 		JTable table = new JTable(null, columnNames);
 		DefaultTableModel tableModel = new DefaultTableModel(null, columnNames) {
 
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				//all cells false
@@ -640,11 +627,11 @@ public class RecipeView extends JFrame {
 		textPane_2.setBackground(new Color(240, 248, 255));
 		textPane_2.setBounds(1071, 1090, 444, 64);
 		panel_1.add(textPane_2);
-		
+
+
 		JButton btnDeleteRecipe = new JButton("Delete Recipe");
 		btnDeleteRecipe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				if(myView.myUser!=null)
 				{
 					if (myView.myUser.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0)
@@ -693,6 +680,7 @@ public class RecipeView extends JFrame {
 		panel_1.add(btnILikeIt);
 		btnILikeIt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Integer x;
 				myView.statview.ifLiked(myView.myRecipe.getRecipeId());
 				if (myView.check==true)
 				{
@@ -703,7 +691,13 @@ public class RecipeView extends JFrame {
 				{
 					myView.statview.likePressed();
 					btnILikeIt.setEnabled(false);
-					Integer x=Integer.parseInt(textField_3.getText())+1;
+					if (myView.myUser!=null)
+					{
+						x=Integer.parseInt(textField_3.getText())+1;	
+					}
+					else {
+						x=Integer.parseInt(textField_3.getText())+5;
+					}
 					textField_3.setText(x.toString());
 				}
 			}
@@ -871,5 +865,6 @@ public class RecipeView extends JFrame {
 		textPane_4.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
 		textPane_4.setEditable(false);
 		textPane_4.setBackground(new Color(65, 105, 225));
+
 	}
 }
