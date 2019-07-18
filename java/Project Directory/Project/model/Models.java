@@ -180,7 +180,7 @@ public class Models extends Observable implements model  {
 
 	public void getRecipesReport(Integer x) {
 		ev=new Event();
-		String sql= "select Recipe.* from Recipe join RecipeAllergen using (recipeId) except select Recipe.* from Recipe join RecipeAllergen using (recipeId) where allergenid = "+ x.toString() + "";
+		String sql= "select Recipe.* from Recipe left join RecipeAllergen using (recipeId) except select Recipe.* from Recipe join RecipeAllergen using (recipeId) where allergenid = "+ x.toString() + "";
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=getFromWithDB(sql);
 		try {
