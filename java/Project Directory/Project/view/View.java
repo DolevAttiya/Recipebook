@@ -53,7 +53,7 @@ public interface View {
 	public void deleteDietitian();
 	public void deleteIngredient(Ingredient ing);
 	public void deleteRecipe();
-	public void recipeUpdate(Recipe rec);
+	public void recipeUpdate(String recipeName, String description, Integer complexity,Integer timeToMake, String instructions);
 	public void ingredientUpdate(Ingredient ing);
 	public void getAllMeasuringTypes();
 	public void addIngredientToRecipe(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount); // small add button, adds to Recipe automatically
