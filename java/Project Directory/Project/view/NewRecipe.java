@@ -54,19 +54,6 @@ public class NewRecipe extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_9;
 
-	//allergies:
-	public int isFish=0;
-	public int isStrawberries=0;
-	public int isCoffie=0;
-	public int isGluten=0;
-	public int isLactose=0;
-	public int isMilk=0;
-	public int isEggs=0;
-	public int isSeeds=0;
-	public int isTreeNuts=0;
-	public int isPeanut=0;
-	public int isAcidity=0;
-	public int isChocolate=0;
 	public Double amount=0.0;
 	Object[] dataIngredients;
 
@@ -279,7 +266,7 @@ public class NewRecipe extends JFrame {
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				amount= Double.parseDouble(textField_3.getText());
-				myView.statview.addIngredientToRecipe (myView.statview.ingredientArray.get(comboBox.getSelectedIndex()),myView.statview.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
+				myView.statview.addIngredientToRecipe (myView.ingredientArray.get(comboBox.getSelectedIndex()),myView.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
 				myView.statview.fillIngredientIdToNameForInsert();
 				dataIngredients = new Object[3];
 				dataIngredients[0]=myView.ingredientArrayForRecipe.get(myView.ingredientArrayForRecipe.size()-1).getIngredientName();
