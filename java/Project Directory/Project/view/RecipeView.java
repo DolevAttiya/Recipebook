@@ -616,6 +616,7 @@ public class RecipeView extends JFrame {
 							JOptionPane.showMessageDialog(null,"You are not allowed to delete this recipe!");
 						}
 					}
+				
 				MainPage a=new MainPage();
 				a.setVisible(true);
 				RecipeView.this.dispose();
