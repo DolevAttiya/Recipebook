@@ -43,7 +43,7 @@ public class MyRecipes extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -59,7 +59,7 @@ public class MyRecipes extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -105,6 +105,16 @@ public class MyRecipes extends JFrame {
 			data[row][4]=recipeComplexity[myView.recipeArray.get(row).getRecipeKashruth()];
 		}
 		JTable table = new JTable(data, columnNames);
+		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
+		table.setModel(tableModel);
+
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

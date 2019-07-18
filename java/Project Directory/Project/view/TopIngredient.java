@@ -44,7 +44,7 @@ public class TopIngredient extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,7 +57,7 @@ public class TopIngredient extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -104,6 +104,25 @@ public class TopIngredient extends JFrame {
 
 
 		JTable table = new JTable(data, columnNames);
+		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
+		table.setModel(tableModel);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				RecipeView f=new RecipeView();
+				f.setVisible(true);
+				TopIngredient.this.dispose();
+				TopIngredient.this.setVisible(false);
+			}
+		});
 		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(32);

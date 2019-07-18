@@ -46,7 +46,7 @@ public class TopRecipesByAllergy extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -59,7 +59,7 @@ public class TopRecipesByAllergy extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -106,6 +106,15 @@ public class TopRecipesByAllergy extends JFrame {
 		
 		
 		JTable table = new JTable(data, columnNames);
+		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
+		table.setModel(tableModel);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {

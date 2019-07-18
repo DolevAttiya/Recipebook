@@ -362,15 +362,33 @@ public class RecipeView extends JFrame {
 		JButton btnSearch = new JButton("Edit");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (myView.myUser.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()||myView.myDietitian.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()) {
-					//
-					RecipeUpdate f=new RecipeUpdate();
-					f.setVisible(true);
-					RecipeView.this.dispose();
-					RecipeView.this.setVisible(false);				}
-				else {
-					JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
+				if(myView.myUser!=null)
+				{
+					if (myView.myUser.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0) 
+					{
+						RecipeUpdate f=new RecipeUpdate();
+						f.setVisible(true);
+						RecipeView.this.dispose();
+						RecipeView.this.setVisible(false);	
+					}
+
 				}
+				else
+					if(myView.myDietitian!=null)
+					{
+						if(myView.myDietitian.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0)
+						{
+							RecipeUpdate f=new RecipeUpdate();
+							f.setVisible(true);
+							RecipeView.this.dispose();
+							RecipeView.this.setVisible(false);
+						}
+					}
+
+					else
+					{
+						JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
+					}
 
 
 
@@ -478,6 +496,15 @@ public class RecipeView extends JFrame {
 			dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
 		}
 		JTable table = new JTable(dataIngredients, columnNames);
+		DefaultTableModel tableModel = new DefaultTableModel(dataIngredients, columnNames) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
+		table.setModel(tableModel);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
@@ -562,29 +589,33 @@ public class RecipeView extends JFrame {
 		btnILikeIt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myView.statview.ifLiked(myView.myRecipe.getRecipeId());
-				if (myView.check==false) // can press the button
-				{		
-					if (btnILikeIt.isSelected()==true)
-					{
-						myView.statview.likePressed();
-						btnILikeIt.setEnabled(false);
-					}
+				if (myView.check==true)
+				{
+					JOptionPane.showMessageDialog(null,"Can't Press Like more than one time!");
+					btnILikeIt.setEnabled(false);
 				}
-				else JOptionPane.showMessageDialog(null,"Can't Press Like more than one time!");
+				else
+				{
+					myView.statview.likePressed();
+					btnILikeIt.setEnabled(false);
+					Integer x=Integer.parseInt(textField_3.getText())+1;
+					textField_3.setText(x.toString());
+				}
 			}
-		});
+		}
+				);
 		btnILikeIt.setIcon(new ImageIcon(RecipeView.class.getResource("/view/rsz_like.jpg")));
 		btnILikeIt.setBackground(new Color(65, 105, 225));
 		btnILikeIt.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 20));
 
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setVisible(false);
-			if (myView.myRecipe.getRecipeRate()>50) {
-				btnNewButton.setVisible(true);
-			}
-			else {
-				btnNewButton.setVisible(false);
-			};
+		if (myView.myRecipe.getRecipeRate()>50) {
+			btnNewButton.setVisible(true);
+		}
+		else {
+			btnNewButton.setVisible(false);
+		};
 		btnNewButton.setIcon(new ImageIcon(RecipeView.class.getResource("/view/rsz_picture1.png")));
 		btnNewButton.setBounds(10, 11, 55, 55);
 		panel_1.add(btnNewButton);
@@ -609,6 +640,7 @@ public class RecipeView extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				MainPage b=new MainPage();
 				b.setVisible(true);
+				myView.statview.getTop10();
 				RecipeView.this.dispose();
 				RecipeView.this.setVisible(false);
 			}
