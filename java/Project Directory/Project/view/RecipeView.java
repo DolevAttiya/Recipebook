@@ -627,23 +627,8 @@ public class RecipeView extends JFrame {
 		textPane_2.setBackground(new Color(240, 248, 255));
 		textPane_2.setBounds(1071, 1090, 444, 64);
 		panel_1.add(textPane_2);
-		/*
-		String[] times = {"30", "60", "120", "180", "all"};
-		JComboBox comboBox_1 = new JComboBox(times);
-		comboBox_1.setEnabled(false);
-		comboBox_1.setSelectedIndex(myView.myRecipe.getRecipeTimeToMake()); 
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_1.setBounds(1075, 1158, 509, 49);
-		panel_1.add(comboBox_1);
 
-		String[] kashruthing = {"Parve", "Dairy", "Meat","Not Kosher"};
-		JComboBox comboBox_2 = new JComboBox(kashruthing);
-		comboBox_2.setEnabled(false);
-		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		comboBox_2.setSelectedIndex(myView.myRecipe.getRecipeKashruth()); 
-		comboBox_2.setBounds(229, 1065, 442, 49);
-		panel_1.add(comboBox_2);
-		 */
+
 		JButton btnDeleteRecipe = new JButton("Delete Recipe");
 		btnDeleteRecipe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
