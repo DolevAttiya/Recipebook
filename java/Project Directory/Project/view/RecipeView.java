@@ -362,14 +362,32 @@ public class RecipeView extends JFrame {
 		JButton btnSearch = new JButton("Edit");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (myView.myUser.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()||myView.myDietitian.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()) {
-					RecipeUpdate f=new RecipeUpdate();
-					f.setVisible(true);
-					RecipeView.this.dispose();
-					RecipeView.this.setVisible(false);				}
-				else {
-					JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
+				if(myView.myUser!=null)
+				{
+					if (myView.myUser.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0) 
+					{
+						RecipeUpdate f=new RecipeUpdate();
+						f.setVisible(true);
+						RecipeView.this.dispose();
+						RecipeView.this.setVisible(false);	
+					}
 				}
+				else
+					if(myView.myDietitian!=null)
+					{
+						if(myView.myDietitian.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0)
+						{
+							RecipeUpdate f=new RecipeUpdate();
+							f.setVisible(true);
+							RecipeView.this.dispose();
+							RecipeView.this.setVisible(false);
+						}
+					}
+
+					else
+					{
+						JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
+					}
 
 
 
@@ -568,7 +586,7 @@ public class RecipeView extends JFrame {
 						myView.statview.likePressed();
 						btnILikeIt.setEnabled(false);
 					}
-			}
+				}
 				else JOptionPane.showMessageDialog(null,"Can't Press Like more than one time!");
 			}
 		});
