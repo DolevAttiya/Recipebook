@@ -105,6 +105,7 @@ public class MyFavourites extends JFrame {
 			data[row][4]=recipeComplexity[myView.recipeArray.get(row).getRecipeKashruth()];
 		}
 		JTable table = new JTable(data, columnNames);
+		table.setEnabled(false);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
