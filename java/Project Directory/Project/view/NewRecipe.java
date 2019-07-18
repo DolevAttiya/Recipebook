@@ -103,7 +103,6 @@ public class NewRecipe extends JFrame {
 		panel_1.add(scrollPane);
 
 		TextArea textArea = new TextArea();
-		textArea.setEditable(false);
 		textArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textArea.setBounds(10, 365, 611, 149);
 		panel_1.add(textArea);
