@@ -463,34 +463,27 @@ public class RecipeView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(myView.myUser!=null)
 				{
-					if (myView.myUser.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0) 
+					if (myView.myUser.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0)
 					{
-						RecipeUpdate f=new RecipeUpdate();
-						f.setVisible(true);
-						RecipeView.this.dispose();
-						RecipeView.this.setVisible(false);	
+						myView.statview.deleteRecipe();
 					}
-
-				}
-				else
-					if(myView.myDietitian!=null)
-					{
-						if(myView.myDietitian.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0)
-						{
-							RecipeUpdate f=new RecipeUpdate();
-							f.setVisible(true);
-							RecipeView.this.dispose();
-							RecipeView.this.setVisible(false);
-						}
-					}
-
 					else
 					{
 						JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
 					}
-
-
-
+				}
+				else
+					if(myView.myDietitian!=null)
+					{
+						if(myView.myDietitian.getPersonEmail().compareTo(myView.myRecipe.getRecipePersonEmail())==0) 
+						{
+							myView.statview.deleteRecipe();
+						}
+						else 
+						{
+							JOptionPane.showMessageDialog(null,"You are not allowed to edit this recipe!");
+						}
+					}
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 20));
