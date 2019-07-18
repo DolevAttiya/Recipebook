@@ -129,7 +129,7 @@ public class MainPage extends JFrame {
 		}
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table.setRowHeight(80);
+		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
@@ -205,7 +205,7 @@ public class MainPage extends JFrame {
 		textPane.setForeground(new Color(0, 0, 0));
 		textPane.setFont(new Font("Tempus Sans ITC", Font.BOLD, 50));
 		textPane.setBackground(new Color(240, 248, 255));
-		textPane.setBounds(226, 0, 745, 66);
+		textPane.setBounds(226, 0, 745, 60);
 		panel.add(textPane);
 
 		//panel upper

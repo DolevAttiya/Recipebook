@@ -124,8 +124,8 @@ public class RecipeUpdate extends JFrame {
 			dataIngredients[row][2]=myView.myMeasuringForRecipe.get(row).getIngredientTypeName();
 		}
 		JTable table = new JTable(dataIngredients, columnNames);
-		table.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		table.setRowHeight(80);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
@@ -152,8 +152,8 @@ public class RecipeUpdate extends JFrame {
 		panel_1.add(scrollPane);
 
 		TextArea textArea = new TextArea(myView.myRecipe.getRecipeProcess());
-		textArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textArea.setBounds(10, 365, 611, 149);
+		textArea.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textArea.setBounds(10, 379, 611, 149);
 		panel_1.add(textArea);
 
 		JComboBox comboBox_1 = new JComboBox(); //get
@@ -191,7 +191,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_7.setBackground(new Color(240, 248, 255));
-				checkBox_7.setBounds(638, 222, 88, 41);
+				checkBox_7.setBounds(627, 222, 154, 41);
 				panel_1.add(checkBox_7);
 				
 				JCheckBox checkBox_4 = new JCheckBox("Eggs");
@@ -205,7 +205,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_4.setBackground(new Color(240, 248, 255));
-				checkBox_4.setBounds(804, 102, 81, 41);
+				checkBox_4.setBounds(804, 102, 118, 41);
 				panel_1.add(checkBox_4);
 				
 				JCheckBox checkBox_11 = new JCheckBox("Food Acidity");
@@ -219,7 +219,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_11.setBackground(new Color(240, 248, 255));
-				checkBox_11.setBounds(804, 262, 141, 41);
+				checkBox_11.setBounds(804, 262, 154, 41);
 				panel_1.add(checkBox_11);
 				
 				JCheckBox checkBox_1 = new JCheckBox("Seeds");
@@ -233,7 +233,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_1.setBackground(new Color(240, 248, 255));
-				checkBox_1.setBounds(804, 142, 104, 41);
+				checkBox_1.setBounds(804, 142, 118, 41);
 				panel_1.add(checkBox_1);
 				
 				JCheckBox checkBox_9 = new JCheckBox("Lactose");
@@ -247,7 +247,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_9.setBackground(new Color(240, 248, 255));
-				checkBox_9.setBounds(638, 262, 104, 41);
+				checkBox_9.setBounds(627, 262, 154, 41);
 				panel_1.add(checkBox_9);
 				
 				JCheckBox checkBox = new JCheckBox("Peanut");
@@ -261,7 +261,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox.setBackground(new Color(240, 248, 255));
-				checkBox.setBounds(804, 222, 97, 41);
+				checkBox.setBounds(804, 222, 154, 41);
 				panel_1.add(checkBox);
 				
 				JCheckBox checkBox_10 = new JCheckBox("Chocolate");
@@ -275,7 +275,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_10.setBackground(new Color(240, 248, 255));
-				checkBox_10.setBounds(804, 302, 118, 41);
+				checkBox_10.setBounds(804, 302, 154, 41);
 				panel_1.add(checkBox_10);
 				
 				JTextPane textPane = new JTextPane();
@@ -297,7 +297,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_3.setBackground(new Color(240, 248, 255));
-				checkBox_3.setBounds(804, 182, 118, 41);
+				checkBox_3.setBounds(804, 182, 154, 41);
 				panel_1.add(checkBox_3);
 				
 				JCheckBox checkBox_2 = new JCheckBox("Strawberries");
@@ -311,7 +311,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_2.setBackground(new Color(240, 248, 255));
-				checkBox_2.setBounds(638, 142, 141, 41);
+				checkBox_2.setBounds(627, 142, 171, 41);
 				panel_1.add(checkBox_2);
 				
 				JCheckBox checkBox_6 = new JCheckBox("Coffie");
@@ -325,7 +325,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_6.setBackground(new Color(240, 248, 255));
-				checkBox_6.setBounds(638, 182, 81, 41);
+				checkBox_6.setBounds(627, 182, 141, 41);
 				panel_1.add(checkBox_6);
 				
 				JCheckBox checkBox_8 = new JCheckBox("Dairy");
@@ -339,7 +339,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_8.setBackground(new Color(240, 248, 255));
-				checkBox_8.setBounds(638, 302, 88, 41);
+				checkBox_8.setBounds(627, 302, 154, 41);
 				panel_1.add(checkBox_8);
 				
 				JCheckBox checkBox_5 = new JCheckBox("Fish");
@@ -353,7 +353,7 @@ public class RecipeUpdate extends JFrame {
 				});
 				checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 				checkBox_5.setBackground(new Color(240, 248, 255));
-				checkBox_5.setBounds(638, 102, 65, 41);
+				checkBox_5.setBounds(627, 102, 154, 41);
 				panel_1.add(checkBox_5);
 
 		JComboBox comboBox = new JComboBox(); //get
@@ -411,7 +411,7 @@ public class RecipeUpdate extends JFrame {
 		txtpnInstructions.setText("Instructions:");
 		txtpnInstructions.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtpnInstructions.setBackground(new Color(240, 248, 255));
-		txtpnInstructions.setBounds(10, 338, 118, 32);
+		txtpnInstructions.setBounds(10, 347, 118, 23);
 		panel_1.add(txtpnInstructions);
 
 		JTextPane txtpnAmount = new JTextPane();
@@ -452,7 +452,7 @@ public class RecipeUpdate extends JFrame {
 		textPane_3.setBounds(10, 109, 113, 31);
 		panel_1.add(textPane_3);
 
-		textField_9 = new JTextField();
+		textField_9 = new JTextField(myView.myRecipe.getRecipeProcess());
 		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textField_9.setColumns(10);
 		textField_9.setBounds(126, 109, 492, 31);

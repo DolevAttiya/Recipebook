@@ -211,7 +211,7 @@ public class User extends JFrame {
 			isFish=0;
 		chckbxFish.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxFish.setBackground(new Color(240, 248, 255));
-		chckbxFish.setBounds(613, 152, 142, 41);
+		chckbxFish.setBounds(600, 152, 171, 41);
 		panel_1.add(chckbxFish);
 		setVisible(true);
 
@@ -234,7 +234,7 @@ public class User extends JFrame {
 			isPeanut=0;
 		chckbxPeanut.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxPeanut.setBackground(new Color(240, 248, 255));
-		chckbxPeanut.setBounds(773, 232, 98, 41);
+		chckbxPeanut.setBounds(773, 232, 142, 41);
 		panel_1.add(chckbxPeanut);
 
 		JCheckBox chckbxTreeNuts = new JCheckBox("Tree Nuts");
@@ -350,7 +350,7 @@ public class User extends JFrame {
 
 		chckbxDairy.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxDairy.setBackground(new Color(240, 248, 255));
-		chckbxDairy.setBounds(613, 112, 65, 41);
+		chckbxDairy.setBounds(600, 112, 155, 41);
 		panel_1.add(chckbxDairy);
 
 		JTextPane txtpnAllergies = new JTextPane();
@@ -382,7 +382,7 @@ public class User extends JFrame {
 		
 		chckbxG.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxG.setBackground(new Color(240, 248, 255));
-		chckbxG.setBounds(613, 192, 92, 41);
+		chckbxG.setBounds(600, 192, 155, 41);
 		panel_1.add(chckbxG);
 
 		JCheckBox chckbxNon = new JCheckBox("Gluten");
@@ -406,7 +406,7 @@ public class User extends JFrame {
 		
 		chckbxNon.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxNon.setBackground(new Color(240, 248, 255));
-		chckbxNon.setBounds(613, 232, 105, 41);
+		chckbxNon.setBounds(600, 232, 105, 41);
 		panel_1.add(chckbxNon);
 
 		JButton btnSearch = new JButton("Update!");
@@ -434,7 +434,7 @@ public class User extends JFrame {
 		txtpnEmail.setText("Email:");
 		txtpnEmail.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtpnEmail.setBackground(new Color(240, 248, 255));
-		txtpnEmail.setBounds(26, 162, 129, 33);
+		txtpnEmail.setBounds(26, 162, 65, 33);
 		panel_1.add(txtpnEmail);
 		JTextPane txtpnEnterPasswordAgain = new JTextPane();
 		txtpnEnterPasswordAgain.setEditable(false);
@@ -481,7 +481,7 @@ public class User extends JFrame {
 			isMilk=0;
 		chckbxDairy_1.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxDairy_1.setBackground(new Color(240, 248, 255));
-		chckbxDairy_1.setBounds(613, 312, 92, 41);
+		chckbxDairy_1.setBounds(600, 312, 92, 41);
 		panel_1.add(chckbxDairy_1);
 
 		JCheckBox chckbxLactose = new JCheckBox("Lactose");
@@ -504,7 +504,7 @@ public class User extends JFrame {
 
 		chckbxLactose.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxLactose.setBackground(new Color(240, 248, 255));
-		chckbxLactose.setBounds(613, 272, 117, 41);
+		chckbxLactose.setBounds(600, 272, 117, 41);
 		panel_1.add(chckbxLactose);
 
 		JCheckBox chckbxChocolate = new JCheckBox("Chocolate");
@@ -527,7 +527,7 @@ public class User extends JFrame {
 			isChocolate=0;
 		chckbxChocolate.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxChocolate.setBackground(new Color(240, 248, 255));
-		chckbxChocolate.setBounds(773, 312, 117, 41);
+		chckbxChocolate.setBounds(773, 312, 155, 41);
 		panel_1.add(chckbxChocolate);
 
 		JCheckBox chckbxFoodAcidity = new JCheckBox("Food Acidity");
@@ -550,7 +550,7 @@ public class User extends JFrame {
 			isAcidity=0;
 		chckbxFoodAcidity.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxFoodAcidity.setBackground(new Color(240, 248, 255));
-		chckbxFoodAcidity.setBounds(773, 272, 142, 41);
+		chckbxFoodAcidity.setBounds(773, 272, 176, 41);
 		panel_1.add(chckbxFoodAcidity);
 
 		JTextPane txtpnEnterPassword = new JTextPane();

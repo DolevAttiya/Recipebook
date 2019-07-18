@@ -116,7 +116,7 @@ public class MyRecipes extends JFrame {
 			}
 		});
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table.setRowHeight(50);
+		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
