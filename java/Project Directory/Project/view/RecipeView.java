@@ -58,6 +58,7 @@ public class RecipeView extends JFrame {
 	public int isGluten=0;
 	public int isLactose=0;
 	public int isMilk=0;
+	public int isDairy=0;
 	public int isEggs=0;
 	public int isSeeds=0;
 	public int isTreeNuts=0;
@@ -258,7 +259,7 @@ public class RecipeView extends JFrame {
 		{
 			isStrawberries=myView.myRecipe.getRecipeAllergen()[1];
 			if (isStrawberries>0) {
-				checkBox_2.isSelected();
+				checkBox_2.setSelected(true);
 			}
 		}
 		else
@@ -290,8 +291,8 @@ public class RecipeView extends JFrame {
 		checkBox_8.setEnabled(false);
 		if(myView.myRecipe.getRecipeAllergen()[5]!=null)
 		{
-			isStrawberries=myView.myRecipe.getRecipeAllergen()[5];
-			if (isStrawberries>0) {
+			isDairy=myView.myRecipe.getRecipeAllergen()[5];
+			if (isDairy>0) {
 				checkBox_8.setSelected(true);
 			}
 		}
@@ -314,6 +315,7 @@ public class RecipeView extends JFrame {
 		}
 		else
 			myView.myRecipe.getRecipeAllergen()[0]=0;
+		
 		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_5.setBackground(new Color(240, 248, 255));
 		checkBox_5.setBounds(637, 74, 118, 41);
