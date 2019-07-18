@@ -26,7 +26,6 @@ public class Ingredient extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField txtRecipebook;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;

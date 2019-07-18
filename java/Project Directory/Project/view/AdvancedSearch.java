@@ -26,8 +26,6 @@ public class AdvancedSearch extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField txtRecipebook;
-	private JTextField textField_5;
 	private JTextField textField_1;
 	public int isFish=0;
 	public int isStrawberries=0;

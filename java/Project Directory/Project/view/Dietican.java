@@ -23,7 +23,6 @@ public class Dietican extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	private JPanel contentPane_1;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -42,7 +41,6 @@ public class Dietican extends JFrame {
 		setSize(1000, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
-		contentPane = new JPanel();
 		contentPane_1 = new JPanel();
 		contentPane_1.setBackground(new Color(65, 105, 225));
 		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -28,15 +28,15 @@ import javax.swing.JScrollPane;
 
 public class RecipeUpdate extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_5;
 	private JTextField textField_3;
-	private JTextField txtRecipebook;
 	private JTextField textField_1;
 	private JTextField textField_9;
-
-
 	public Double amount=0.0;
 	Object[] dataIngredients;
 	public int Complexity=0;

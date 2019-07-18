@@ -28,8 +28,6 @@ public class MyFavourites extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTable table;
-	private JTextField txtRecipebook;
 	public String[] recipeComplexity= {"Parve","Milk","Meat","Not Kosher"};
 
 	/**
@@ -77,6 +75,11 @@ public class MyFavourites extends JFrame {
 		}
 		JTable table = new JTable(data, columnNames);
 		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
