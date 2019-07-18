@@ -597,7 +597,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		comboBox.setBounds(178, 212, 87, 36);
+		comboBox.setBounds(274, 212, 87, 36);
 		panel_1.add(comboBox);
 
 
@@ -610,7 +610,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		comboBox_1.setBounds(274, 212, 87, 36);
+		comboBox_1.setBounds(178, 212, 87, 36);
 		panel_1.add(comboBox_1);
 
 		JTextPane textPane = new JTextPane();

@@ -113,6 +113,9 @@ public class Ingredient extends JFrame {
 					if(myView.check==false)
 						JOptionPane.showMessageDialog(null,"Something went wrong, Please try again!");
 					else {				
+						myView.statview.getTop10();
+						MainPage a=new MainPage();
+						a.setVisible(true);
 						Ingredient.this.dispose();
 						Ingredient.this.setVisible(false);
 					}

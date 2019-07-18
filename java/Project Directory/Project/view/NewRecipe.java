@@ -265,7 +265,7 @@ public class NewRecipe extends JFrame {
 		panel_1.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((textField_1.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textArea.getText().trim().isEmpty())) {
+				if((textField_1.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())||(textArea.getText().trim().isEmpty())) {
 					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
 				}
 				else if(myView.check==false)
