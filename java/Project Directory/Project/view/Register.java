@@ -49,18 +49,18 @@ public class Register extends JFrame {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
-	public String dateOfBirth="0000-00-00";
+	public String dateOfBirth="0000-01-01";
 	public String yearOfBirth="0000";
-	public String monthOfBirth="00";
-	public String dayOfBirth="00";
+	public String monthOfBirth="01";
+	public String dayOfBirth="01";
 	public int isDietitian=0;
 	public String dietitianNum;
 	public int isKosher=0;
 	private JTextField textField_4;
-	public String dietitianStatDate="0000-00-00";
+	public String dietitianStatDate="0000-01-01";
 	public String yearOfStat="0000";
-	public String monthOfStat="00";
-	public String dayOfStat="00";
+	public String monthOfStat="01";
+	public String dayOfStat="01";
 	public int wantAllerg=0;
 
 	//allergies

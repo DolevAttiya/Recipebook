@@ -96,7 +96,7 @@ public class Models extends Observable implements model  {
 	public void Search(ArrayList<Object> search) {
 		ev=new Event();
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
-		String sql= " Select  distinct Recipe.* From Recipe Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
+		String sql= " Select  distinct Recipe.* From Recipe left Join RecipeAllergen using (RecipeId) Where recipeName like '%" +(String)search.get(1)+"%' ";
 		if(search.get(2)!=null)
 			if(search.get(7)!= null) {
 				Integer x= 4;
@@ -180,7 +180,7 @@ public class Models extends Observable implements model  {
 
 	public void getRecipesReport(Integer x) {
 		ev=new Event();
-		String sql= "select Recipe.* from Recipe join RecipeAllergen using (recipeId) except select Recipe.* from Recipe join RecipeAllergen using (recipeId) where allergenid = "+ x.toString() + "";
+		String sql= "select Recipe.* from Recipe left join RecipeAllergen using (recipeId) except select Recipe.* from Recipe join RecipeAllergen using (recipeId) where allergenid = "+ x.toString() + "";
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=getFromWithDB(sql);
 		try {

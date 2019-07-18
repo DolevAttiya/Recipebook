@@ -1,15 +1,12 @@
 package view;
 
-
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Observable;
-
 import javax.swing.JFrame;
-
 import controller.Event;
 import model.Dietitian;
 import model.Ingredient;
@@ -264,15 +261,14 @@ public class myView extends Observable implements View
 		recipeArray=r;
 	} 
 	public void addRecipe(String recipeName, String description, Integer complexity, Integer timeToMake, String instructions) {
-		Integer[] allergies= {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		Recipe newRecipe;
 		if (myUser!=null) // Connected as User
 		{
-			newRecipe=new Recipe(1,recipeName, allergies, myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myUser.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
+			newRecipe=new Recipe(1,recipeName, myRecipe.getRecipeAllergen(), myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myUser.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
 		}
 		else // Connected as Dietitian
 		{
-			newRecipe=new Recipe(1,recipeName, allergies, myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myDietitian.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
+			newRecipe=new Recipe(1,recipeName, myRecipe.getRecipeAllergen(), myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myDietitian.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
 		}
 		Event ev=new Event();
 		ev.getArr().add("recipe_insert");
