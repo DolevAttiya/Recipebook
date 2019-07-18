@@ -131,6 +131,10 @@ public class Ingredient extends JFrame {
 		JButton btnSearch = new JButton("Add!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Fat= Double.parseDouble(textField_4.getText());
+				Protein= Double.parseDouble(textField_6.getText());
+				Carbs= Double.parseDouble(textField_3.getText());
+				Calories= Double.parseDouble(textField_2.getText());
 				if((textField_7.getText().trim().isEmpty())||(textField_2.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textField_4.getText().trim().isEmpty())||(textField_6.getText().trim().isEmpty())) {
 					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
 				}
@@ -200,7 +204,7 @@ public class Ingredient extends JFrame {
 		textField_2 = new JTextField();
 		textField_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Calories= Double.parseDouble(textField_7.getText());
+				Calories= Double.parseDouble(textField_2.getText());
 			}
 		});
 		textField_2.setFont(new Font("Dialog", Font.PLAIN, 18));
