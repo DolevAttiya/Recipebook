@@ -169,7 +169,7 @@ public class Reports extends JFrame {
 		JButton btnGetIngredientReport = new JButton("Get Ingredient\r\n Report");
 		btnGetIngredientReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//function ingredients
+				myView.statview.ingredientReport(allergyIndex);
 				TopIngredient f=new TopIngredient();
 				f.setVisible(true);
 				Reports.this.dispose();

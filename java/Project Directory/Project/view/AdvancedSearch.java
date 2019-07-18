@@ -51,8 +51,8 @@ public class AdvancedSearch extends JFrame {
 	public int isPeanut=0;
 	public int isAcidity=0;
 	public int isChocolate=0;
-	public String timeToMake="0000";
-	public String rateAbove="0000";
+	public String timeToMake="30";
+	public String rateAbove="0";
 	public int kashruth=0;
 	public int complexity=0;
 
@@ -555,8 +555,6 @@ public class AdvancedSearch extends JFrame {
 				panel_1.add(btnSearch);
 				btnSearch.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//	public void advancedSearch(String s, Integer kashruth, Integer complexity, String timeToMake, String rateAbove,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate) {
-
 						myView.statview.advancedSearch(textField_1.getText(), kashruth, complexity, timeToMake, rateAbove, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate);
 						if (myView.check==false) {
 							JOptionPane.showMessageDialog(null,"There is no match to your search, try again");

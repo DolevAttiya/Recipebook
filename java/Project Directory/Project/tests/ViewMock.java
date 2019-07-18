@@ -344,4 +344,10 @@ public class ViewMock implements View {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void start() {
+		// TODO Auto-generated method stub
+		
+	}
 }
