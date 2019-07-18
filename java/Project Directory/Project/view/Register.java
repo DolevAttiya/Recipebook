@@ -390,19 +390,22 @@ public class Register extends JFrame {
 				if((textField_1.getText().trim().isEmpty())||(textField_6.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textField_2.getText().trim().isEmpty())||(textField_7.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())) {
 					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
 				}
-				else if (myView.check==false)
-					JOptionPane.showMessageDialog(null,"Couldn't save, Something went wrong, Please try again!");
 				else
 				{
-					yearOfBirth=textField_9.getText();
-					yearOfStat=textField_4.getText();
-					dateOfBirth=yearOfBirth+"-"+monthOfBirth+"-"+dayOfBirth;
-					dietitianStatDate=yearOfStat+"-"+monthOfStat+"-"+dayOfStat;
-					myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
-					MainPage f=new MainPage();
-					f.setVisible(true);
-					Register.this.dispose();
-					Register.this.setVisible(false);
+					if (myView.check==false)
+						JOptionPane.showMessageDialog(null,"Couldn't save, Something went wrong, Please try again!");
+					else
+					{
+						yearOfBirth=textField_9.getText();
+						yearOfStat=textField_4.getText();
+						dateOfBirth=yearOfBirth+"-"+monthOfBirth+"-"+dayOfBirth;
+						dietitianStatDate=yearOfStat+"-"+monthOfStat+"-"+dayOfStat;
+						myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+						MainPage f=new MainPage();
+						f.setVisible(true);
+						Register.this.dispose();
+						Register.this.setVisible(false);
+					}
 				}
 			}
 		});

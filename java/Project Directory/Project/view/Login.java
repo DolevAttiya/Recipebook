@@ -118,7 +118,7 @@ public class Login extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent f) {
 				myView.statview.login(textField.getText(), String.copyValueOf(passwordField.getPassword()));
-				if (myView.check==true) // Connected as User
+				if (myView.check==true) // Connected as User or as Dietitian
 				{
 					myView.statview.myRecipes();
 
@@ -127,7 +127,7 @@ public class Login extends JFrame {
 					Login.this.dispose();
 					Login.this.setVisible(false);
 				}
-				else // Connected as Dietitian
+				else // not exist
 					JOptionPane.showMessageDialog(null,"One of the parameters is wrong, Please try again");
 			}
 		});
