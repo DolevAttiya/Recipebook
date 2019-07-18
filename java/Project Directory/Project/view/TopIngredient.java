@@ -104,6 +104,17 @@ public class TopIngredient extends JFrame {
 
 
 		JTable table = new JTable(data, columnNames);
+		table.setEnabled(false);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				RecipeView f=new RecipeView();
+				f.setVisible(true);
+				TopIngredient.this.dispose();
+				TopIngredient.this.setVisible(false);
+			}
+		});
 		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(32);

@@ -105,6 +105,7 @@ public class SearchRes extends JFrame {
 
 
 		JTable table = new JTable(data, columnNames);
+		table.setEnabled(false);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
