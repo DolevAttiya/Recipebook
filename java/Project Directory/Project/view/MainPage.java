@@ -128,13 +128,14 @@ public class MainPage extends JFrame {
 			data[row][2]=myView.recipeTop10Array.get(row).getRecipeRate();
 		}
 		JTable table = new JTable(data, columnNames);
+		table.setEnabled(false);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table.setRowHeight(80);
+		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
 		table.getTableHeader().setFont(bigFont);
-
+//
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
 		scrollPane.setSize(432, 450);
@@ -205,7 +206,7 @@ public class MainPage extends JFrame {
 		textPane.setForeground(new Color(0, 0, 0));
 		textPane.setFont(new Font("Tempus Sans ITC", Font.BOLD, 50));
 		textPane.setBackground(new Color(240, 248, 255));
-		textPane.setBounds(226, 0, 745, 66);
+		textPane.setBounds(226, 0, 745, 60);
 		panel.add(textPane);
 
 		//panel upper

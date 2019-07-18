@@ -67,7 +67,8 @@ public class NewRecipe extends JFrame {
 	public int isAcidity=0;
 	public int isChocolate=0;
 	public Double amount=0.0;
-	Object[]dataIngredients;
+	Object[] dataIngredients;
+
 	public int Complexity=0;
 	public int timeToMake=0;
 	//
@@ -117,12 +118,13 @@ public class NewRecipe extends JFrame {
 		String[] columnNames = {"Ingredient Name",
 				"Amount",
 		"Mesuring"}; 
-		Object[][] d= new Object[100][5];
-		
+
+		Object[][] d= new Object[100][5];		
 	    DefaultTableModel tableModel =new DefaultTableModel(null, columnNames);
 	    JTable table = new JTable(tableModel);
+
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table.setRowHeight(80);
+		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
@@ -158,9 +160,10 @@ public class NewRecipe extends JFrame {
 
 
 		textField_3 = new JTextField();
+		
 		textField_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				amount= Double.parseDouble(textField_3.getText());
+				
 			}
 		});
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -458,13 +461,13 @@ public class NewRecipe extends JFrame {
 		JButton btnAdd_1 = new JButton("Add");
 		btnAdd_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				amount= Double.parseDouble(textField_3.getText());
 				myView.statview.addIngredientToRecipe (myView.statview.ingredientArray.get(comboBox.getSelectedIndex()),myView.statview.myMeasuring.get(comboBox_1.getSelectedIndex()),amount);
-				myView.statview.fillIngredientIdToName();
+				myView.statview.fillIngredientIdToNameForInsert();
 				dataIngredients = new Object[3];
 				dataIngredients[0]=myView.ingredientArrayForRecipe.get(myView.ingredientArrayForRecipe.size()-1).getIngredientName();
 				dataIngredients[1]=myView.myRecipe.getRecipeIngredientsAmount().get(myView.ingredientArrayForRecipe.size()-1).toString();
 				dataIngredients[2]=myView.myMeasuringForRecipe.get(myView.ingredientArrayForRecipe.size()-1).getIngredientTypeName();
-				
 				tableModel.addRow(dataIngredients);
 			}
 		});

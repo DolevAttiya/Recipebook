@@ -311,7 +311,7 @@ public class Dietican extends JFrame {
 		txtpnEmail.setText("Email:");
 		txtpnEmail.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtpnEmail.setBackground(new Color(240, 248, 255));
-		txtpnEmail.setBounds(31, 212, 75, 39);
+		txtpnEmail.setBounds(31, 212, 62, 39);
 		panel_1.add(txtpnEmail);
 		JTextPane txtpnEnterPasswordAgain = new JTextPane();
 		txtpnEnterPasswordAgain.setEditable(false);

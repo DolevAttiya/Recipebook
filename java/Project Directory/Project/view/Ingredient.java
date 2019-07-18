@@ -154,7 +154,7 @@ public class Ingredient extends JFrame {
 		textPane.setText("per 100 grams");
 		textPane.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textPane.setBackground(new Color(240, 248, 255));
-		textPane.setBounds(660, 207, 85, 21);
+		textPane.setBounds(660, 210, 85, 21);
 		panel_1.add(textPane);
 
 		JTextPane textPane_1 = new JTextPane();
@@ -194,7 +194,7 @@ public class Ingredient extends JFrame {
 		textPane_5.setText("Nutrition Values:");
 		textPane_5.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
 		textPane_5.setBackground(new Color(240, 248, 255));
-		textPane_5.setBounds(536, 170, 340, 58);
+		textPane_5.setBounds(536, 170, 340, 38);
 		panel_1.add(textPane_5);
 
 		textField_2 = new JTextField();
@@ -286,7 +286,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_1.setBackground(new Color(240, 248, 255));
-		checkBox_1.setBounds(187, 225, 121, 41);
+		checkBox_1.setBounds(210, 225, 121, 41);
 		panel_1.add(checkBox_1);
 
 		JCheckBox checkBox_2 = new JCheckBox("Food Acidity");
@@ -301,7 +301,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_2.setBackground(new Color(240, 248, 255));
-		checkBox_2.setBounds(187, 385, 133, 41);
+		checkBox_2.setBounds(210, 385, 209, 41);
 		panel_1.add(checkBox_2);
 
 		JCheckBox checkBox_3 = new JCheckBox("Seeds");
@@ -316,7 +316,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_3.setBackground(new Color(240, 248, 255));
-		checkBox_3.setBounds(187, 265, 92, 41);
+		checkBox_3.setBounds(210, 265, 167, 41);
 		panel_1.add(checkBox_3);
 
 		JCheckBox checkBox_4 = new JCheckBox("Lactose");
@@ -346,7 +346,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_5.setBackground(new Color(240, 248, 255));
-		checkBox_5.setBounds(187, 345, 105, 41);
+		checkBox_5.setBounds(210, 345, 153, 41);
 		panel_1.add(checkBox_5);
 
 		JCheckBox checkBox_6 = new JCheckBox("Chocolate");
@@ -361,7 +361,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_6.setBackground(new Color(240, 248, 255));
-		checkBox_6.setBounds(187, 425, 121, 41);
+		checkBox_6.setBounds(210, 425, 167, 41);
 		panel_1.add(checkBox_6);
 
 		JTextPane textPane_3 = new JTextPane();
@@ -369,7 +369,7 @@ public class Ingredient extends JFrame {
 		textPane_3.setText("Allergies:");
 		textPane_3.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
 		textPane_3.setBackground(new Color(240, 248, 255));
-		textPane_3.setBounds(67, 190, 192, 41);
+		textPane_3.setBounds(67, 180, 192, 41);
 		panel_1.add(textPane_3);
 
 		JCheckBox checkBox_7 = new JCheckBox("Tree Nuts");
@@ -384,7 +384,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_7.setBackground(new Color(240, 248, 255));
-		checkBox_7.setBounds(187, 305, 121, 41);
+		checkBox_7.setBounds(210, 305, 153, 41);
 		panel_1.add(checkBox_7);
 
 		JCheckBox checkBox_8 = new JCheckBox("Strawberries");
@@ -399,7 +399,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_8.setBackground(new Color(240, 248, 255));
-		checkBox_8.setBounds(32, 265, 153, 41);
+		checkBox_8.setBounds(32, 265, 173, 41);
 		panel_1.add(checkBox_8);
 
 		JCheckBox checkBox_9 = new JCheckBox("Coffie");
