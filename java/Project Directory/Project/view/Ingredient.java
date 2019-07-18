@@ -1,37 +1,27 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
-import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Ingredient extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField txtRecipebook;
@@ -58,27 +48,6 @@ public class Ingredient extends JFrame {
 	public int isAcidity=0;
 	public int isChocolate=0;
 
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Ingredient frame = new Ingredient();
-					frame.setVisible(true);
-					frame.setTitle("Taimli!");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	public void close() {
-		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-	 */
 	/**
 	 * Create the frame.
 	 */

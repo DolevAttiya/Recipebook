@@ -1,37 +1,21 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
-import java.awt.Component;
 import java.awt.Dimension;
-
-import javax.swing.Box;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
-import javax.swing.UIManager;
-import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
@@ -39,31 +23,13 @@ import javax.swing.JTable;
 
 public class MainPage extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainPage frame = new MainPage();
-					frame.setVisible(true);
-					frame.setTitle("Taimli!");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-	}
-	public void close() {
-		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-*/
 	/**
 	 * Create the frame.
 	 */
@@ -130,6 +96,11 @@ public class MainPage extends JFrame {
 		}
 		JTable table = new JTable(data, columnNames);
 		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
