@@ -75,7 +75,7 @@ public class User extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -92,7 +92,7 @@ public class User extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-
+*/
 	/**
 	 * Create the frame.
 	 */
