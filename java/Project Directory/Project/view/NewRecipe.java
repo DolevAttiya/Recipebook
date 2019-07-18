@@ -67,7 +67,8 @@ public class NewRecipe extends JFrame {
 	public int isAcidity=0;
 	public int isChocolate=0;
 	public Double amount=0.0;
-	Object[]dataIngredients;
+	Object[] dataIngredients;
+
 	public int Complexity=0;
 	public int timeToMake=0;
 	//
@@ -117,10 +118,11 @@ public class NewRecipe extends JFrame {
 		String[] columnNames = {"Ingredient Name",
 				"Amount",
 		"Mesuring"}; 
-		Object[][] d= new Object[100][5];
-		
+
+		Object[][] d= new Object[100][5];		
 	    DefaultTableModel tableModel =new DefaultTableModel(null, columnNames);
 	    JTable table = new JTable(tableModel);
+
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(80);
 		JTableHeader th = table.getTableHeader();

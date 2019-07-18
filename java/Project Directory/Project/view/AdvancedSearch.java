@@ -251,7 +251,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_2.setBackground(new Color(240, 248, 255));
-		checkBox_2.setBounds(737, 316, 96, 41);
+		checkBox_2.setBounds(737, 316, 140, 41);
 		panel_1.add(checkBox_2);
 
 		String[] times = {"30", "60", "120", "180", "all"};
@@ -362,7 +362,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox.setBackground(new Color(240, 248, 255));
-		checkBox.setBounds(737, 216, 87, 41);
+		checkBox.setBounds(737, 216, 120, 41);
 		panel_1.add(checkBox);
 
 		JCheckBox checkBox_1 = new JCheckBox("Strawberries");
@@ -378,7 +378,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_1.setBackground(new Color(240, 248, 255));
-		checkBox_1.setBounds(567, 216, 140, 41);
+		checkBox_1.setBounds(567, 216, 163, 41);
 		panel_1.add(checkBox_1);
 
 		JCheckBox checkBox_3 = new JCheckBox("Tree Nuts");
@@ -394,7 +394,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_3.setBackground(new Color(240, 248, 255));
-		checkBox_3.setBounds(737, 266, 120, 41);
+		checkBox_3.setBounds(737, 266, 163, 41);
 		panel_1.add(checkBox_3);
 
 		JCheckBox checkBox_4 = new JCheckBox("Eggs");
@@ -410,7 +410,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_4.setBackground(new Color(240, 248, 255));
-		checkBox_4.setBounds(737, 166, 74, 55);
+		checkBox_4.setBounds(737, 166, 120, 55);
 		panel_1.add(checkBox_4);
 
 		JCheckBox checkBox_5 = new JCheckBox("Fish");
@@ -426,7 +426,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_5.setBackground(new Color(240, 248, 255));
-		checkBox_5.setBounds(567, 166, 74, 41);
+		checkBox_5.setBounds(567, 166, 152, 41);
 		panel_1.add(checkBox_5);
 
 		JCheckBox checkBox_6 = new JCheckBox("Coffie");
@@ -442,7 +442,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_6.setBackground(new Color(240, 248, 255));
-		checkBox_6.setBounds(567, 266, 77, 41);
+		checkBox_6.setBounds(567, 266, 152, 41);
 		panel_1.add(checkBox_6);
 
 		JCheckBox checkBox_7 = new JCheckBox("Gluten");
@@ -458,7 +458,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_7.setBackground(new Color(240, 248, 255));
-		checkBox_7.setBounds(567, 316, 87, 41);
+		checkBox_7.setBounds(567, 316, 140, 41);
 		panel_1.add(checkBox_7);
 
 		JCheckBox checkBox_9 = new JCheckBox("Dairy");
@@ -474,7 +474,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_9.setBackground(new Color(240, 248, 255));
-		checkBox_9.setBounds(567, 416, 74, 41);
+		checkBox_9.setBounds(567, 416, 130, 41);
 		panel_1.add(checkBox_9);
 
 		JCheckBox checkBox_10 = new JCheckBox("Lactose");
@@ -490,7 +490,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_10.setBackground(new Color(240, 248, 255));
-		checkBox_10.setBounds(567, 366, 96, 41);
+		checkBox_10.setBounds(567, 366, 140, 41);
 		panel_1.add(checkBox_10);
 
 		JCheckBox checkBox_11 = new JCheckBox("Chocolate");
@@ -506,7 +506,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_11.setBackground(new Color(240, 248, 255));
-		checkBox_11.setBounds(737, 416, 120, 41);
+		checkBox_11.setBounds(737, 416, 163, 41);
 		panel_1.add(checkBox_11);
 
 		JCheckBox checkBox_12 = new JCheckBox("Food Acidity");
@@ -522,7 +522,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_12.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_12.setBackground(new Color(240, 248, 255));
-		checkBox_12.setBounds(737, 366, 140, 41);
+		checkBox_12.setBounds(737, 366, 163, 41);
 		panel_1.add(checkBox_12);
 
 		String[] rate = {"0","50", "100", "150","200", "more than 200"};
