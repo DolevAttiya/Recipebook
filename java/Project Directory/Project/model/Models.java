@@ -180,7 +180,7 @@ public class Models extends Observable implements model  {
 
 	public void getRecipesReport(Integer x) {
 		ev=new Event();
-		String sql= "select Recipe.* from Recipe join RecipeAllergen using (recipeId)  EXCEPT select Recipe.* from Recipe join RecipeAllergen using (recipeId) where allergenId = 3 order by recipeRate";
+		String sql= "select Recipe.* from Recipe join RecipeAllergen using (recipeId)  EXCEPT select Recipe.* from Recipe join RecipeAllergen using (recipeId) where allergenId = 3 order by recipeRate desc";
 		ArrayList<Recipe> recipe= new ArrayList<Recipe>();
 		ResultSet rs=getFromWithDB(sql);
 		try {
@@ -199,7 +199,7 @@ public class Models extends Observable implements model  {
 	}
 	public void getIngredientReport(Integer x) {
 		ev=new Event();
-		String sql= "select ingredient.* from Ingredient join (select count(ingredientId) as counter ,ingredientId from RecipeIngredient group by (ingredientId)) as counter using (ingredientId) order by counter.counter";
+		String sql= "select ingredient.* from Ingredient join (select count(ingredientId) as counter ,ingredientId from RecipeIngredient group by (ingredientId)) as counter using (ingredientId) order by counter.counter desc";
 		ArrayList<Ingredient> ingredient= new ArrayList<Ingredient>();
 		ResultSet rs=getFromWithDB(sql);
 		try {

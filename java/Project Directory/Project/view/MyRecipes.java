@@ -116,14 +116,13 @@ public class MyRecipes extends JFrame {
 			}
 		});
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table.setRowHeight(50);
+		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
 		table.getTableHeader().setFont(bigFont);
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
-		table.setRowHeight(1, 60);
 		scrollPane.setSize(951, 506);
 		scrollPane.setLocation(10, 69);
 		//TableColumn column = null;
