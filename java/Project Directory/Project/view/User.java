@@ -680,7 +680,7 @@ public class User extends JFrame {
 		textPane_1.setBackground(new Color(65, 105, 225));
 
 		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setBounds(559, 11, 92, 29);
+		textPane_3.setBounds(560, 5, 92, 29);
 		panel.add(textPane_3);
 		textPane_3.setText("Search");
 		textPane_3.setForeground(Color.WHITE);

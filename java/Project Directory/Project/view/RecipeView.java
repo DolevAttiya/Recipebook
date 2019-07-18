@@ -362,6 +362,7 @@ public class RecipeView extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (myView.myUser.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()||myView.myDietitian.getPersonEmail()==myView.myRecipe.getRecipePersonEmail()) {
+					//
 					RecipeUpdate f=new RecipeUpdate();
 					f.setVisible(true);
 					RecipeView.this.dispose();
@@ -430,7 +431,7 @@ public class RecipeView extends JFrame {
 		textField_7.setBounds(733, 488, 221, 31);
 		panel_1.add(textField_7);
 
-		textField_3 = new JTextField(myView.myRecipe.getRecipeRate());
+		textField_3 = new JTextField(myView.myRecipe.getRecipeRate().toString());
 		textField_3.setEditable(false);
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textField_3.setColumns(10);
@@ -445,7 +446,7 @@ public class RecipeView extends JFrame {
 		txtpnName.setBounds(10, 69, 65, 31);
 		panel_1.add(txtpnName);
 
-		textField_8 = new JTextField(myView.myRecipe.getRecipeName());
+		textField_8 = new JTextField(myView.myRecipe.getRecipeName().toString());
 		textField_8.setEditable(false);
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textField_8.setColumns(10);
@@ -500,7 +501,7 @@ public class RecipeView extends JFrame {
 		String[] complexiting = {"Easy", "Medium", "Hard"};  
 		JComboBox comboBox = new JComboBox(complexiting);
 		comboBox.setEnabled(false);
-		comboBox.setSelectedIndex(0); //myView.myRecipe.getRecipeKashruth()
+		comboBox.setSelectedIndex(0);
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 40));
 
 		comboBox.setBounds(1075, 1033, 508, 49);
@@ -566,7 +567,7 @@ public class RecipeView extends JFrame {
 						myView.statview.likePressed();
 						btnILikeIt.setEnabled(false);
 					}
-			}
+				}
 				else JOptionPane.showMessageDialog(null,"Can't Press Like more than one time!");
 			}
 		});
@@ -576,16 +577,12 @@ public class RecipeView extends JFrame {
 
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setVisible(false);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (myView.myRecipe.getRecipeRate()>50) {
-					btnNewButton.setVisible(true);
-				}
-				else {
-					btnNewButton.setVisible(false);
-				}
+			if (myView.myRecipe.getRecipeRate()>50) {
+				btnNewButton.setVisible(true);
 			}
-		});
+			else {
+				btnNewButton.setVisible(false);
+			};
 		btnNewButton.setIcon(new ImageIcon(RecipeView.class.getResource("/view/rsz_picture1.png")));
 		btnNewButton.setBounds(10, 11, 55, 55);
 		panel_1.add(btnNewButton);
