@@ -103,6 +103,7 @@ public class NewRecipe extends JFrame {
 		panel_1.add(scrollPane);
 
 		TextArea textArea = new TextArea();
+		textArea.setEditable(false);
 		textArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textArea.setBounds(10, 365, 611, 149);
 		panel_1.add(textArea);
@@ -216,18 +217,6 @@ public class NewRecipe extends JFrame {
 		textField_9.setColumns(10);
 		textField_9.setBounds(126, 109, 492, 31);
 		panel_1.add(textField_9);
-
-
-		JButton btnAddNewIngredient = new JButton("Add New Ingredient");
-		btnAddNewIngredient.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				view.Ingredient f=new view.Ingredient();
-				f.setVisible(true);
-			}
-		});
-		btnAddNewIngredient.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnAddNewIngredient.setBounds(671, 221, 251, 23);
-		panel_1.add(btnAddNewIngredient);
 
 		JButton btnAdd_1 = new JButton("Add");
 		btnAdd_1.addActionListener(new ActionListener() {
