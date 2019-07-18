@@ -306,15 +306,13 @@ public class myView extends Observable implements View
 
 		for( int i=0;i<myRecipe.getRecipeAllergen().length;i++)
 		{
-			if(newarray[i]==null)
-				newarray[i]=0;
 			if(newIngredient.getIngredientAllergen(i)>0)
 			{
 
 				newarray[i]+=1;
-				myRecipe.setRecipeAllergen(newarray);
 			}
-		}	 
+		}
+		myRecipe.setRecipeAllergen(newarray);
 	}
 	public void fillIngredientIdToNameForInsert() {
 		getAllIngredient();
@@ -341,8 +339,6 @@ public class myView extends Observable implements View
 					myMeasuringForRecipe.add(myMeasuring.get(j));
 		}
 	}
-
-
 	public void addRecipeResponse(ArrayList<Recipe> r) {
 		if (r!=null)
 		{
@@ -355,7 +351,6 @@ public class myView extends Observable implements View
 			myRecipe=null;
 		}
 	}
-
 	public void getAllIngredient() {
 		ev=new Event();
 		ev.getArr().add("ingredient_getall");
@@ -365,7 +360,6 @@ public class myView extends Observable implements View
 	public void getAllIngredientResponse(ArrayList<Ingredient> ing) {
 		ingredientArray=ing;
 	}
-
 	public void getAllRecipes() {
 		ev=new Event();
 		ev.getArr().add("all_recipes");
