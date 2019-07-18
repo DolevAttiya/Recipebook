@@ -133,7 +133,7 @@ public class RecipeUpdate extends JFrame {
 
 		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
 		JComboBox comboBox_5 = new JComboBox(times);
-		comboBox_5.setSelectedIndex(myView.myRecipe.getRecipeTimeToMake());
+		comboBox_5.setSelectedItem(myView.myRecipe.getRecipeTimeToMake());
 		comboBox_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_5 = (JComboBox)e.getSource();
