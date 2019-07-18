@@ -506,7 +506,6 @@ public class RecipeView extends JFrame {
 		panel_1.add(txtpnKosherLevel);
 
 		TextArea textArea = new TextArea(myView.myRecipe.getRecipeProcess());
-		textArea.setEditable(false);
 		textArea.setFont(new Font("Dialog", Font.PLAIN, 16));
 		textArea.setBounds(10, 365, 611, 149);
 		panel_1.add(textArea);
