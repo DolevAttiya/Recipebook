@@ -45,7 +45,7 @@ public interface View {
 	public void addIngredient (String ingredientName, Integer kashruth,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Double calories, Double carbohydrate, Double fat, Double protein);
 	public void myFavorite ();
 	public void myRecipes ();
-	public void addRecipe(String recipeName,Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, String description, Integer complexity, Integer timeToMake, String instructions);
+	public void addRecipe(String recipeName, String description, Integer complexity, Integer timeToMake, String instructions);
 	public void getAllRecipes();
 	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, Integer isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate , Integer wantAllerg);
 	public void dietitianUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, String dietitianNum, String dietitianStatDate);
