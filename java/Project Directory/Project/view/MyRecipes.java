@@ -118,7 +118,7 @@ public class MyRecipes extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				myView.myRecipe=myView.recipeArray.get(table.getSelectedRow());
 				RecipeView f=new RecipeView();
 				f.setVisible(true);
 				MyRecipes.this.dispose();

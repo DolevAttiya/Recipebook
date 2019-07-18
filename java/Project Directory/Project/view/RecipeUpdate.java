@@ -32,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import model.Ingredient;
+import model.IngredientType;
 
 import javax.swing.JTextArea;
 import javax.swing.DropMode;
@@ -214,12 +215,14 @@ public class RecipeUpdate extends JFrame {
 
 				else {
 
-					//	myView.statview.recipeUpdate((textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
+					myView.statview.recipeUpdate(textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
 					RecipeView f=new RecipeView();
 					f.setVisible(true);
 					RecipeUpdate.this.dispose();
 					RecipeUpdate.this.setVisible(false);
 				}
+				myView.ingredientArrayForRecipe=new ArrayList<Ingredient>();
+				myView.myMeasuringForRecipe= new ArrayList<IngredientType>();
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 20));

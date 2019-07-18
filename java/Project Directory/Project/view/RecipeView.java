@@ -119,7 +119,7 @@ public class RecipeView extends JFrame {
 		}
 		else
 			myView.myRecipe.getRecipeAllergen()[3]=0;
-		
+
 		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_7.setBackground(new Color(240, 248, 255));
 		checkBox_7.setBounds(637, 194, 148, 41);
@@ -136,7 +136,7 @@ public class RecipeView extends JFrame {
 		}
 		else
 			myView.myRecipe.getRecipeAllergen()[6]=0;
-		
+
 		checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_4.setBackground(new Color(240, 248, 255));
 		checkBox_4.setBounds(803, 74, 118, 41);
@@ -153,7 +153,7 @@ public class RecipeView extends JFrame {
 		}
 		else
 			myView.myRecipe.getRecipeAllergen()[10]=0;
-		
+
 		checkBox_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_11.setBackground(new Color(240, 248, 255));
 		checkBox_11.setBounds(803, 234, 153, 41);
@@ -170,7 +170,7 @@ public class RecipeView extends JFrame {
 		}
 		else
 			myView.myRecipe.getRecipeAllergen()[7]=0;
-		
+
 		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_1.setBackground(new Color(240, 248, 255));
 		checkBox_1.setBounds(803, 114, 104, 41);
@@ -204,7 +204,7 @@ public class RecipeView extends JFrame {
 		}
 		else
 			myView.myRecipe.getRecipeAllergen()[9]=0;
-		
+
 		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox.setBackground(new Color(240, 248, 255));
 		checkBox.setBounds(803, 194, 129, 41);
@@ -221,7 +221,7 @@ public class RecipeView extends JFrame {
 		}
 		else
 			myView.myRecipe.getRecipeAllergen()[11]=0;
-		
+
 		checkBox_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_10.setBackground(new Color(240, 248, 255));
 		checkBox_10.setBounds(803, 274, 153, 41);
@@ -246,7 +246,7 @@ public class RecipeView extends JFrame {
 		}
 		else
 			myView.myRecipe.getRecipeAllergen()[8]=0;
-		
+
 		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_3.setBackground(new Color(240, 248, 255));
 		checkBox_3.setBounds(803, 154, 141, 41);
@@ -297,7 +297,7 @@ public class RecipeView extends JFrame {
 		}
 		else
 			myView.myRecipe.getRecipeAllergen()[5]=0;
-		
+
 		checkBox_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_8.setBackground(new Color(240, 248, 255));
 		checkBox_8.setBounds(637, 274, 148, 41);
@@ -569,7 +569,7 @@ public class RecipeView extends JFrame {
 		textPane_2.setBackground(new Color(240, 248, 255));
 		textPane_2.setBounds(1071, 1090, 444, 64);
 		panel_1.add(textPane_2);
-
+		/*
 		String[] times = {"30", "60", "120", "180", "all"};
 		JComboBox comboBox_1 = new JComboBox(times);
 		comboBox_1.setEnabled(false);
@@ -585,7 +585,7 @@ public class RecipeView extends JFrame {
 		comboBox_2.setSelectedIndex(myView.myRecipe.getRecipeKashruth()); 
 		comboBox_2.setBounds(229, 1065, 442, 49);
 		panel_1.add(comboBox_2);
-
+		 */
 		JButton btnDeleteRecipe = new JButton("Delete Recipe");
 		btnDeleteRecipe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -733,15 +733,21 @@ public class RecipeView extends JFrame {
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
 				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					RecipeView.this.dispose();
-					RecipeView.this.setVisible(false);
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						RecipeView.this.dispose();
+						RecipeView.this.setVisible(false);
+					}
 				}
 			}
 		});
