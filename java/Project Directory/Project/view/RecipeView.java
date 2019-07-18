@@ -664,9 +664,9 @@ public class RecipeView extends JFrame {
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
-				myView.statview.getTop10();
 				RecipeView.this.dispose();
 				RecipeView.this.setVisible(false);
 			}

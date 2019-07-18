@@ -58,7 +58,7 @@ public class SearchRes extends JFrame {
 			}
 		});
 	}
-*/
+	 */
 	/**
 	 * Create the frame.
 	 */
@@ -158,6 +158,7 @@ public class SearchRes extends JFrame {
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				SearchRes.this.dispose();
@@ -226,15 +227,21 @@ public class SearchRes extends JFrame {
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
 				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					SearchRes.this.dispose();
-					SearchRes.this.setVisible(false);
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						SearchRes.this.dispose();
+						SearchRes.this.setVisible(false);
+					}
 				}
 			}
 		});

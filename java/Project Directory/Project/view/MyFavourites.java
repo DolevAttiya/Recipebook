@@ -60,7 +60,7 @@ public class MyFavourites extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-*/
+	 */
 	/**
 	 * Create the frame.
 	 */
@@ -117,7 +117,7 @@ public class MyFavourites extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				myView.myRecipe=myView.recipeArray.get(table.getSelectedRow());
 				RecipeView f=new RecipeView();
 				f.setVisible(true);
 				MyFavourites.this.dispose();
@@ -155,6 +155,7 @@ public class MyFavourites extends JFrame {
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				MyFavourites.this.dispose();
@@ -223,15 +224,22 @@ public class MyFavourites extends JFrame {
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
-				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					MyFavourites.this.dispose();
-					MyFavourites.this.setVisible(false);
+				else
+				{
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						MyFavourites.this.dispose();
+						MyFavourites.this.setVisible(false);
+					}
 				}
 			}
 		});

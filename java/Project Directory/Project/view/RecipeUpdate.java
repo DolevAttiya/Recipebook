@@ -79,7 +79,7 @@ public class RecipeUpdate extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-*/
+	 */
 	/**
 	 * Create the frame.
 	 */
@@ -113,8 +113,8 @@ public class RecipeUpdate extends JFrame {
 				return false;
 			}
 		};
-	    JTable table = new JTable(tableModel);
-	    dataIngredients = new Object[3];
+		JTable table = new JTable(tableModel);
+		dataIngredients = new Object[3];
 		for(int row=0;row<myView.ingredientArrayForRecipe.size();row++) {
 			dataIngredients[0]=myView.ingredientArrayForRecipe.get(row).getIngredientName();
 			dataIngredients[1]=myView.myRecipe.getRecipeIngredientsAmount().get(row).toString();
@@ -214,7 +214,7 @@ public class RecipeUpdate extends JFrame {
 
 				else {
 
-				//	myView.statview.recipeUpdate((textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
+					//	myView.statview.recipeUpdate((textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
 					RecipeView f=new RecipeView();
 					f.setVisible(true);
 					RecipeUpdate.this.dispose();
@@ -360,6 +360,7 @@ public class RecipeUpdate extends JFrame {
 		textPane_51.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				RecipeUpdate.this.dispose();
@@ -428,15 +429,21 @@ public class RecipeUpdate extends JFrame {
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
 				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					RecipeUpdate.this.dispose();
-					RecipeUpdate.this.setVisible(false);
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						RecipeUpdate.this.dispose();
+						RecipeUpdate.this.setVisible(false);
+					}
 				}
 			}
 		});

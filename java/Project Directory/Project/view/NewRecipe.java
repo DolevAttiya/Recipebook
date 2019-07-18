@@ -92,7 +92,7 @@ public class NewRecipe extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-*/
+	 */
 	/**
 	 * Create the frame.
 	 */
@@ -120,7 +120,7 @@ public class NewRecipe extends JFrame {
 		"Mesuring"}; 
 
 		Object[][] d= new Object[100][5];		
-	    DefaultTableModel tableModel =new DefaultTableModel(null, columnNames){
+		DefaultTableModel tableModel =new DefaultTableModel(null, columnNames){
 
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -128,7 +128,7 @@ public class NewRecipe extends JFrame {
 				return false;
 			}
 		};
-	    JTable table = new JTable(tableModel);
+		JTable table = new JTable(tableModel);
 
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(32);
@@ -167,10 +167,10 @@ public class NewRecipe extends JFrame {
 
 
 		textField_3 = new JTextField();
-		
+
 		textField_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 			}
 		});
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -331,7 +331,7 @@ public class NewRecipe extends JFrame {
 				{
 					Complexity = comboBox_4_1.getSelectedIndex();
 					timeToMake = Integer.parseInt(comboBox_5_1.getSelectedItem().toString());
-				//	myView.statview.addRecipe(textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
+					//	myView.statview.addRecipe(textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
 					RecipeView f=new RecipeView();
 					f.setVisible(true);
 					NewRecipe.this.dispose();
@@ -361,6 +361,7 @@ public class NewRecipe extends JFrame {
 		textPane_51.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				NewRecipe.this.dispose();
@@ -429,15 +430,22 @@ public class NewRecipe extends JFrame {
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
-				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					NewRecipe.this.dispose();
-					NewRecipe.this.setVisible(false);
+				else
+				{
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						NewRecipe.this.dispose();
+						NewRecipe.this.setVisible(false);
+					}
 				}
 			}
 		});
