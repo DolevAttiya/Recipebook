@@ -158,13 +158,13 @@ public class Register extends JFrame {
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Dialog", Font.PLAIN, 20));
 		textField_7.setColumns(10);
-		textField_7.setBounds(256, 312, 282, 39);
+		textField_7.setBounds(284, 312, 254, 39);
 		panel_1.add(textField_7);
 
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Dialog", Font.PLAIN, 20));
 		textField_2.setColumns(10);
-		textField_2.setBounds(256, 262, 282, 39);
+		textField_2.setBounds(284, 262, 254, 39);
 		panel_1.add(textField_2);
 
 		textField_3 = new JTextField();
@@ -418,7 +418,7 @@ public class Register extends JFrame {
 		txtpnEnterPassword.setText("Enter Password: (6 digits)");
 		txtpnEnterPassword.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtpnEnterPassword.setBackground(new Color(240, 248, 255));
-		txtpnEnterPassword.setBounds(26, 262, 226, 39);
+		txtpnEnterPassword.setBounds(26, 262, 243, 39);
 		panel_1.add(txtpnEnterPassword);
 
 		JTextPane txtpnEnterPasswordAgain = new JTextPane();
@@ -683,7 +683,7 @@ public class Register extends JFrame {
 		textPane_1.setBackground(new Color(65, 105, 225));
 
 		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setBounds(559, 11, 92, 29);
+		textPane_3.setBounds(559, 11, 92, 21);
 		panel.add(textPane_3);
 		textPane_3.setText("Search");
 		textPane_3.setForeground(Color.WHITE);

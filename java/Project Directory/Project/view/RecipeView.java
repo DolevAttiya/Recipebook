@@ -99,7 +99,7 @@ public class RecipeView extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(240, 248, 255));
-		panel_1.setBounds(10, 70, 971, 586);
+		panel_1.setBounds(10, 60, 971, 586);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
