@@ -19,8 +19,8 @@ import model.Recipe;
 import model.User;
 
 public class myView extends Observable implements View {
-	
-	
+
+
 	public static myView statview = new myView();
 	public static boolean check=true;
 	public static User myUser;
@@ -45,13 +45,13 @@ public class myView extends Observable implements View {
 		});
 	}
 	protected void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("ButtonExample");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //Create and set up the content pane.
-        Open = new Open(this);               
+		//Create and set up the window.
+		JFrame frame = new JFrame("ButtonExample");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//Create and set up the content pane.
+		Open = new Open(this);               
 
-		
+
 	}
 	private static String ConvertPassToHash(String input)  {
 		try { 
@@ -219,7 +219,7 @@ public class myView extends Observable implements View {
 		ev.getArr().add(complexity);
 		ev.getArr().add(timeToMake); 
 		ev.getArr().add(rateAbove);
-			ev.getArr().add(allergies); // sends the user's allergies
+		ev.getArr().add(allergies); // sends the user's allergies
 		if (kashruth==4) // wants to see adapted results
 			ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
 		else ev.getArr().add(null); // null means wants all results
@@ -325,18 +325,13 @@ public class myView extends Observable implements View {
 	public void fillIngredientIdToName() {
 		getAllIngredient();
 		getAllMeasuringTypes();
-		for(int i=0;i<myRecipe.getRecipeIngredientId().size();i++)
-		{
-			for(int j=0;j<ingredientArray.size();j++)
-				if(ingredientArray.get(j).getIngredientId()==myRecipe.getRecipeIngredientId().get(i))
-					ingredientArrayForRecipe.add(ingredientArray.get(j));
-		}
-		for(int i=0;i<myRecipe.getRecipeIngredientsType().size();i++)
-		{
-			for(int j=0;j<myMeasuring.size();j++)
-				if(myMeasuring.get(j).getIngredientTypeId()==myRecipe.getRecipeIngredientsType().get(i))
-					myMeasuringForRecipe.add(myMeasuring.get(j));
-		}
+		for(int j=0;j<ingredientArray.size();j++)
+			if(ingredientArray.get(j).getIngredientId()==myRecipe.getRecipeIngredientId().get(myRecipe.getRecipeIngredientId().size()-1))
+				ingredientArrayForRecipe.add(ingredientArray.get(j));
+
+		for(int j=0;j<myMeasuring.size();j++)
+			if(myMeasuring.get(j).getIngredientTypeId()==myRecipe.getRecipeIngredientsType().get(myRecipe.getRecipeIngredientsType().size()-1))
+				myMeasuringForRecipe.add(myMeasuring.get(j));
 	}
 
 	public void addRecipeResponse(ArrayList<Recipe> r) {
@@ -593,7 +588,7 @@ public class myView extends Observable implements View {
 		}
 		recipeUpdate(myRecipe);
 	}
-	
+
 }
 /*
 //---------Login Page------------
