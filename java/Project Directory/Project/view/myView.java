@@ -47,8 +47,6 @@ public class myView extends Observable implements View
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Create and set up the content pane.
 		Open = new Open(this);               
-
-
 	}
 	private static String ConvertPassToHash(String input)  {
 		try { 
