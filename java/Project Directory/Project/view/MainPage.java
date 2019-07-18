@@ -128,13 +128,14 @@ public class MainPage extends JFrame {
 			data[row][2]=myView.recipeTop10Array.get(row).getRecipeRate();
 		}
 		JTable table = new JTable(data, columnNames);
+		table.setEnabled(false);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
 		table.getTableHeader().setFont(bigFont);
-
+//
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
 		scrollPane.setSize(432, 450);
