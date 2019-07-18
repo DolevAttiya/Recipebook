@@ -33,8 +33,6 @@ public class RecipeView extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_5;
-	private JTextField txtRecipebook;
 	private JTextField textField_2_1;
 	private JTextField textField_4;
 	private JTextField textField_6;

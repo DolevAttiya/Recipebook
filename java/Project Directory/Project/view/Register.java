@@ -27,7 +27,6 @@ public class Register extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField txtRecipebook;
 	private JTextField textField_6;
 	private JTextField textField_3;
 	private JTextField textField_2;
