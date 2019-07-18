@@ -1,8 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -15,18 +12,11 @@ import java.awt.Dimension;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
-import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
-import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -42,23 +32,6 @@ public class SearchRes extends JFrame {
 	private JTextField textField_1;
 	public String[] recipeComplexity= {"Parve","Milk","Meat","Not Kosher"};
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SearchRes frame = new SearchRes();
-					frame.setVisible(true);
-					frame.setTitle("Taimli!");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	 */
 	/**
 	 * Create the frame.
 	 */
@@ -117,7 +90,7 @@ public class SearchRes extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				myView.myRecipe=myView.recipeArray.get(table.getSelectedRow());
 				RecipeView f=new RecipeView();
 				f.setVisible(true);
 				SearchRes.this.dispose();
