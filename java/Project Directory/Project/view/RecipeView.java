@@ -71,7 +71,7 @@ public class RecipeView extends JFrame {
 	public int Kashruth=0;
 
 
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -108,7 +108,7 @@ public class RecipeView extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(240, 248, 255));
-		panel_1.setBounds(10, 70, 971, 586);
+		panel_1.setBounds(10, 60, 971, 586);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -124,7 +124,7 @@ public class RecipeView extends JFrame {
 		}
 		else
 			myView.myRecipe.getRecipeAllergen()[3]=0;
-		
+
 		JTextPane txtpnCookingTime = new JTextPane();
 		txtpnCookingTime.setText("Cooking Time");
 		txtpnCookingTime.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -132,8 +132,8 @@ public class RecipeView extends JFrame {
 		txtpnCookingTime.setBackground(new Color(240, 248, 255));
 		txtpnCookingTime.setBounds(777, 386, 75, 41);
 		panel_1.add(txtpnCookingTime);
-		
-		
+
+
 		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
 		JComboBox comboBox_3 = new JComboBox(times);
 		comboBox_3.setEnabled(false);
@@ -147,7 +147,7 @@ public class RecipeView extends JFrame {
 		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox_3.setBounds(857, 396, 104, 31);
 		panel_1.add(comboBox_3);
-		
+
 		JTextPane textPane_6 = new JTextPane();
 		textPane_6.setText("Kashruth");
 		textPane_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -155,7 +155,7 @@ public class RecipeView extends JFrame {
 		textPane_6.setBackground(new Color(240, 248, 255));
 		textPane_6.setBounds(775, 315, 75, 29);
 		panel_1.add(textPane_6);
-		
+
 		JTextPane textPane_7 = new JTextPane();
 		textPane_7.setText("Complexity:");
 		textPane_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -163,8 +163,8 @@ public class RecipeView extends JFrame {
 		textPane_7.setBackground(new Color(240, 248, 255));
 		textPane_7.setBounds(767, 352, 88, 29);
 		panel_1.add(textPane_7);
-	
-		
+
+
 		String[] complexiting = {"Easy", "Medium", "Hard"};
 		JComboBox comboBox_2 = new JComboBox(complexiting);
 		comboBox_2.setEnabled(false);
@@ -178,8 +178,8 @@ public class RecipeView extends JFrame {
 		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox_2.setBounds(857, 351, 104, 31);
 		panel_1.add(comboBox_2);
-		
-		
+
+
 		String[] kashruthing = {"Parve", "Dairy", "Meat","Not Kosher"};
 		JComboBox comboBox_1 = new JComboBox(kashruthing);
 		comboBox_1.setEnabled(false);
@@ -193,8 +193,8 @@ public class RecipeView extends JFrame {
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox_1.setBounds(857, 315, 104, 31);
 		panel_1.add(comboBox_1);
-		
-		
+
+
 		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		checkBox_7.setBackground(new Color(240, 248, 255));
 		checkBox_7.setBounds(561, 158, 141, 41);
@@ -696,7 +696,7 @@ public class RecipeView extends JFrame {
 				a.setVisible(true);
 				RecipeView.this.dispose();
 				RecipeView.this.setVisible(false);
-				
+
 			}
 		});
 		btnDeleteRecipe.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -895,5 +895,5 @@ public class RecipeView extends JFrame {
 		textPane_4.setEditable(false);
 		textPane_4.setBackground(new Color(65, 105, 225));
 
-
 	}
+}
