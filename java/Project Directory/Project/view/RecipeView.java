@@ -562,29 +562,33 @@ public class RecipeView extends JFrame {
 		btnILikeIt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myView.statview.ifLiked(myView.myRecipe.getRecipeId());
-				if (myView.check==false) // can press the button
-				{		
-					if (btnILikeIt.isSelected()==true)
-					{
-						myView.statview.likePressed();
-						btnILikeIt.setEnabled(false);
-					}
+				if (myView.check==true)
+				{
+					JOptionPane.showMessageDialog(null,"Can't Press Like more than one time!");
+					btnILikeIt.setEnabled(false);
 				}
-				else JOptionPane.showMessageDialog(null,"Can't Press Like more than one time!");
+				else
+				{
+					myView.statview.likePressed();
+					btnILikeIt.setEnabled(false);
+					Integer x=Integer.parseInt(textField_3.getText())+1;
+					textField_3.setText(x.toString());
+				}
 			}
-		});
+		}
+				);
 		btnILikeIt.setIcon(new ImageIcon(RecipeView.class.getResource("/view/rsz_like.jpg")));
 		btnILikeIt.setBackground(new Color(65, 105, 225));
 		btnILikeIt.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 20));
 
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setVisible(false);
-			if (myView.myRecipe.getRecipeRate()>50) {
-				btnNewButton.setVisible(true);
-			}
-			else {
-				btnNewButton.setVisible(false);
-			};
+		if (myView.myRecipe.getRecipeRate()>50) {
+			btnNewButton.setVisible(true);
+		}
+		else {
+			btnNewButton.setVisible(false);
+		};
 		btnNewButton.setIcon(new ImageIcon(RecipeView.class.getResource("/view/rsz_picture1.png")));
 		btnNewButton.setBounds(10, 11, 55, 55);
 		panel_1.add(btnNewButton);
@@ -609,6 +613,7 @@ public class RecipeView extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				MainPage b=new MainPage();
 				b.setVisible(true);
+				myView.statview.getTop10();
 				RecipeView.this.dispose();
 				RecipeView.this.setVisible(false);
 			}

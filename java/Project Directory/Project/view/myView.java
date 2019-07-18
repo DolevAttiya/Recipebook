@@ -6,7 +6,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Observable;
 
 import javax.swing.JFrame;
@@ -18,9 +17,8 @@ import model.IngredientType;
 import model.Recipe;
 import model.User;
 
-public class myView extends Observable implements View {
-
-
+public class myView extends Observable implements View
+{
 	public static myView statview = new myView();
 	public static boolean check=true;
 	public static User myUser;
@@ -250,7 +248,7 @@ public class myView extends Observable implements View {
 			ev.getArr().add(myDietitian.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
-		getTop10();
+
 	}
 	public void myFavoriteResponse(ArrayList<Recipe> r) {
 		recipeArray=r;
@@ -269,8 +267,8 @@ public class myView extends Observable implements View {
 	public void myRecipesResponse(ArrayList<Recipe> r) {
 		recipeArray=r;
 	} 
-	public void addRecipe(String recipeName,Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, String description, Integer complexity, Integer timeToMake, String instructions) {
-		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
+	public void addRecipe(String recipeName, String description, Integer complexity, Integer timeToMake, String instructions) {
+		Integer[] allergies= {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		Recipe newRecipe;
 		if (myUser!=null) // Connected as User
 		{
@@ -574,35 +572,32 @@ public class myView extends Observable implements View {
 	public void ingredientReportResponse(ArrayList<Ingredient> ing) {
 		ingredientArray=ing;
 	}
-	public void ifLiked(Integer recipeId) {
-		if (myUser!=null) // Connected as User
+	public void ifLiked(Integer recipeId)
+	{
+		myView.statview.myFavorite();
+		check=false;
+		for (int i=0;i<myView.recipeArray.size();i++)
 		{
-			for( int i=0;i<myUser.getPersonsFavoriteRecipe().size();i++)
-				if(myUser.getPersonsFavoriteRecipe().get(i)==recipeId)
-					check=true; // can't push the button
+			if (myView.myRecipe.getRecipeId()==myView.recipeArray.get(i).getRecipeId())
+			{
+				check=true; // can't press anymore
+			}
 		}
-		else // Connected as Dietitian
-		{
-			for( int i=0;i<myDietitian.getPersonsFavoriteRecipe().size();i++)
-				if(myDietitian.getPersonsFavoriteRecipe().get(i)==recipeId)
-					check=true; // can't push the button
-		}
-		check=false; // can push the button
 	}
 	public void likePressed() {
-		if(myUser!=null) // Connected as User
-		{
-			myRecipe.setRecipeRate(myRecipe.getRecipeRate()+1);
-			myUser.getPersonsFavoriteRecipe().add(myRecipe.getRecipeId());
-			userUpdateForFavorite(myUser);
-		}
-		else // Connected as Dietitian
-		{
-			myRecipe.setRecipeRate(myRecipe.getRecipeRate()+5);
-			myDietitian.getPersonsFavoriteRecipe().add(myRecipe.getRecipeId());
-			dietitianUpdateForFavorite(myDietitian);
-		}
-		recipeUpdate(myRecipe);
+			if(myUser!=null) // Connected as User
+			{
+				myRecipe.setRecipeRate(myRecipe.getRecipeRate()+1);
+				myUser.getPersonsFavoriteRecipe().add(myRecipe.getRecipeId());
+				userUpdateForFavorite(myUser);
+			}
+			else // Connected as Dietitian
+			{
+				myRecipe.setRecipeRate(myRecipe.getRecipeRate()+5);
+				myDietitian.getPersonsFavoriteRecipe().add(myRecipe.getRecipeId());
+				dietitianUpdateForFavorite(myDietitian);
+			}
+			recipeUpdate(myRecipe);
 	}
 
 }
