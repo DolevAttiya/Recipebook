@@ -104,7 +104,15 @@ public class TopIngredient extends JFrame {
 
 
 		JTable table = new JTable(data, columnNames);
-		table.setEnabled(false);
+		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
+		table.setModel(tableModel);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {

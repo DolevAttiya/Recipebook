@@ -29,6 +29,7 @@ import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import java.awt.event.MouseAdapter;
@@ -76,33 +77,33 @@ public class MainPage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-				JPanel panel_7 = new JPanel();
-				panel_7.setBounds(475, 461, 495, 173);
-				contentPane.add(panel_7);
-				panel_7.setLayout(null);
-				panel_7.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-				panel_7.setBackground(new Color(240, 248, 255));
-				
-						JTextPane txtpnAddNewRecipe_1 = new JTextPane();
-						txtpnAddNewRecipe_1.setEditable(false);
-						txtpnAddNewRecipe_1.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent e) {
-								myView.statview.initializeRecipe();
-								myView.statview.getAllIngredient();
-								myView.statview.getAllMeasuringTypes();
-								NewRecipe a=new NewRecipe();
-								a.setVisible(true);
-								MainPage.this.dispose();
-								MainPage.this.setVisible(false);
-							}
-						});
-						txtpnAddNewRecipe_1.setText("Add New Recipe");
-						txtpnAddNewRecipe_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
-						txtpnAddNewRecipe_1.setBackground(new Color(240, 248, 255));
-						txtpnAddNewRecipe_1.setBounds(93, 66, 316, 45);
-						panel_7.add(txtpnAddNewRecipe_1);
+
+		JPanel panel_7 = new JPanel();
+		panel_7.setBounds(475, 461, 495, 173);
+		contentPane.add(panel_7);
+		panel_7.setLayout(null);
+		panel_7.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		panel_7.setBackground(new Color(240, 248, 255));
+
+		JTextPane txtpnAddNewRecipe_1 = new JTextPane();
+		txtpnAddNewRecipe_1.setEditable(false);
+		txtpnAddNewRecipe_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myView.statview.initializeRecipe();
+				myView.statview.getAllIngredient();
+				myView.statview.getAllMeasuringTypes();
+				NewRecipe a=new NewRecipe();
+				a.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
+			}
+		});
+		txtpnAddNewRecipe_1.setText("Add New Recipe");
+		txtpnAddNewRecipe_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
+		txtpnAddNewRecipe_1.setBackground(new Color(240, 248, 255));
+		txtpnAddNewRecipe_1.setBounds(93, 66, 316, 45);
+		panel_7.add(txtpnAddNewRecipe_1);
 
 
 		JPanel panel = new JPanel();
@@ -128,7 +129,17 @@ public class MainPage extends JFrame {
 			data[row][2]=myView.recipeTop10Array.get(row).getRecipeRate();
 		}
 		JTable table = new JTable(data, columnNames);
-		table.setEnabled(false);
+		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
+
+		table.setModel(tableModel);
+		table.setUpdateSelectionOnSort(false);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -139,13 +150,14 @@ public class MainPage extends JFrame {
 				MainPage.this.setVisible(false);
 			}
 		});
+
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
 		table.getTableHeader().setFont(bigFont);
-//
+		//
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
 		scrollPane.setSize(432, 450);
@@ -266,7 +278,7 @@ public class MainPage extends JFrame {
 					MainPage.this.dispose();
 					MainPage.this.setVisible(false);
 				}
-	
+
 			}
 		});
 		textPane1.setBounds(882, 8, 102, 49);

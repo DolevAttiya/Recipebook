@@ -120,7 +120,14 @@ public class NewRecipe extends JFrame {
 		"Mesuring"}; 
 
 		Object[][] d= new Object[100][5];		
-	    DefaultTableModel tableModel =new DefaultTableModel(null, columnNames);
+	    DefaultTableModel tableModel =new DefaultTableModel(null, columnNames){
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
 	    JTable table = new JTable(tableModel);
 
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -324,7 +331,7 @@ public class NewRecipe extends JFrame {
 				{
 					Complexity = comboBox_4_1.getSelectedIndex();
 					timeToMake = Integer.parseInt(comboBox_5_1.getSelectedItem().toString());
-					myView.statview.addRecipe(textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
+				//	myView.statview.addRecipe(textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
 					RecipeView f=new RecipeView();
 					f.setVisible(true);
 					NewRecipe.this.dispose();

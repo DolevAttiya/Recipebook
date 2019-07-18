@@ -53,19 +53,7 @@ public class RecipeUpdate extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_9;
 
-	//allergies:
-	public int isFish=0;
-	public int isStrawberries=0;
-	public int isCoffie=0;
-	public int isGluten=0;
-	public int isLactose=0;
-	public int isMilk=0;
-	public int isEggs=0;
-	public int isSeeds=0;
-	public int isTreeNuts=0;
-	public int isPeanut=0;
-	public int isAcidity=0;
-	public int isChocolate=0;
+
 	public Double amount=0.0;
 	Object[] dataIngredients;
 	public int Complexity=0;
@@ -116,8 +104,15 @@ public class RecipeUpdate extends JFrame {
 
 		String[] columnNames = {"Ingredient Name",
 				"Amount",
-		"Mesuring"}; 
-	    DefaultTableModel tableModel =new DefaultTableModel(null, columnNames);
+		"Mesuring"};
+		DefaultTableModel tableModel = new DefaultTableModel(null, columnNames) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
 	    JTable table = new JTable(tableModel);
 	    dataIngredients = new Object[3];
 		for(int row=0;row<myView.ingredientArrayForRecipe.size();row++) {
@@ -145,7 +140,7 @@ public class RecipeUpdate extends JFrame {
 			}
 		});
 		comboBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		comboBox_5.setBounds(638, 445, 307, 31);
+		comboBox_5.setBounds(641, 169, 307, 31);
 		panel_1.add(comboBox_5);
 
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -186,183 +181,6 @@ public class RecipeUpdate extends JFrame {
 		textField_3.setBounds(318, 165, 81, 32);
 		panel_1.add(textField_3);
 
-
-		JCheckBox checkBox_7 = new JCheckBox("Gluten");
-		checkBox_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isGluten=myView.myRecipe.getRecipeAllergen()[3];
-				if (isGluten>0) {
-					checkBox_7.isSelected();
-				}
-			}
-		});
-		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_7.setBackground(new Color(240, 248, 255));
-		checkBox_7.setBounds(627, 222, 154, 41);
-		panel_1.add(checkBox_7);
-
-		JCheckBox checkBox_4 = new JCheckBox("Eggs");
-		checkBox_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isEggs=myView.myRecipe.getRecipeAllergen()[6];
-				if (isEggs>0) {
-					checkBox_4.isSelected();
-				}
-			}
-		});
-		checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_4.setBackground(new Color(240, 248, 255));
-		checkBox_4.setBounds(804, 102, 118, 41);
-		panel_1.add(checkBox_4);
-
-		JCheckBox checkBox_11 = new JCheckBox("Food Acidity");
-		checkBox_11.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isAcidity=myView.myRecipe.getRecipeAllergen()[10];
-				if (isAcidity>0) {
-					checkBox_11.isSelected();
-				}
-			}
-		});
-		checkBox_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_11.setBackground(new Color(240, 248, 255));
-		checkBox_11.setBounds(804, 262, 154, 41);
-		panel_1.add(checkBox_11);
-
-		JCheckBox checkBox_1 = new JCheckBox("Seeds");
-		checkBox_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isSeeds=myView.myRecipe.getRecipeAllergen()[7];
-				if (isSeeds>0) {
-					checkBox_1.isSelected();
-				}
-			}
-		});
-		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_1.setBackground(new Color(240, 248, 255));
-		checkBox_1.setBounds(804, 142, 118, 41);
-		panel_1.add(checkBox_1);
-
-		JCheckBox checkBox_9 = new JCheckBox("Lactose");
-		checkBox_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isLactose=myView.myRecipe.getRecipeAllergen()[4];
-				if (isLactose>0) {
-					checkBox_9.isSelected();
-				}
-			}
-		});
-		checkBox_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_9.setBackground(new Color(240, 248, 255));
-		checkBox_9.setBounds(627, 262, 154, 41);
-		panel_1.add(checkBox_9);
-
-		JCheckBox checkBox = new JCheckBox("Peanut");
-		checkBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isPeanut=myView.myRecipe.getRecipeAllergen()[9];
-				if (isPeanut>0) {
-					checkBox.isSelected();
-				}
-			}
-		});
-		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox.setBackground(new Color(240, 248, 255));
-		checkBox.setBounds(804, 222, 154, 41);
-		panel_1.add(checkBox);
-
-		JCheckBox checkBox_10 = new JCheckBox("Chocolate");
-		checkBox_10.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isChocolate=myView.myRecipe.getRecipeAllergen()[11];
-				if (isChocolate>0) {
-					checkBox_10.isSelected();
-				}
-			}
-		});
-		checkBox_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_10.setBackground(new Color(240, 248, 255));
-		checkBox_10.setBounds(804, 302, 154, 41);
-		panel_1.add(checkBox_10);
-
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setText("Allergies:");
-		textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
-		textPane.setBackground(new Color(240, 248, 255));
-		textPane.setBounds(681, 60, 198, 41);
-		panel_1.add(textPane);
-
-		JCheckBox checkBox_3 = new JCheckBox("Tree Nuts");
-		checkBox_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isTreeNuts=myView.myRecipe.getRecipeAllergen()[8];
-				if (isTreeNuts>0) {
-					checkBox_3.isSelected();
-				}
-			}
-		});
-		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_3.setBackground(new Color(240, 248, 255));
-		checkBox_3.setBounds(804, 182, 154, 41);
-		panel_1.add(checkBox_3);
-
-		JCheckBox checkBox_2 = new JCheckBox("Strawberries");
-		checkBox_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isStrawberries=myView.myRecipe.getRecipeAllergen()[1];
-				if (isStrawberries>0) {
-					checkBox_2.isSelected();
-				}
-			}
-		});
-		checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_2.setBackground(new Color(240, 248, 255));
-		checkBox_2.setBounds(627, 142, 171, 41);
-		panel_1.add(checkBox_2);
-
-		JCheckBox checkBox_6 = new JCheckBox("Coffie");
-		checkBox_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isCoffie=myView.myRecipe.getRecipeAllergen()[2];
-				if (isCoffie>0) {
-					checkBox_6.isSelected();
-				}
-			}
-		});
-		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_6.setBackground(new Color(240, 248, 255));
-		checkBox_6.setBounds(627, 182, 141, 41);
-		panel_1.add(checkBox_6);
-
-		JCheckBox checkBox_8 = new JCheckBox("Dairy");
-		checkBox_8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isMilk=myView.myRecipe.getRecipeAllergen()[5];
-				if (isMilk>0) {
-					checkBox_8.isSelected();
-				}
-			}
-		});
-		checkBox_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_8.setBackground(new Color(240, 248, 255));
-		checkBox_8.setBounds(627, 302, 154, 41);
-		panel_1.add(checkBox_8);
-
-		JCheckBox checkBox_5 = new JCheckBox("Fish");
-		checkBox_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isFish=myView.myRecipe.getRecipeAllergen()[0];
-				if (isFish>0) {
-					checkBox_5.isSelected();
-				}
-			}
-		});
-		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		checkBox_5.setBackground(new Color(240, 248, 255));
-		checkBox_5.setBounds(627, 102, 154, 41);
-		panel_1.add(checkBox_5);
-
 		String[] ingarr= new String[myView.ingredientArray.size()];
 		for (int i=0;i<myView.ingredientArray.size();i++ )
 			ingarr[i]=myView.ingredientArray.get(i).getIngredientName();
@@ -396,7 +214,7 @@ public class RecipeUpdate extends JFrame {
 
 				else {
 
-					myView.statview.addRecipe(textField_1.getText(), isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, textField_9.getText(), Complexity, timeToMake, textArea.getText());
+				//	myView.statview.recipeUpdate((textField_1.getText(), textField_9.getText(), Complexity, timeToMake, textArea.getText());
 					RecipeView f=new RecipeView();
 					f.setVisible(true);
 					RecipeUpdate.this.dispose();
@@ -476,7 +294,7 @@ public class RecipeUpdate extends JFrame {
 			}
 		});
 		btnAddNewIngredient.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnAddNewIngredient.setBounds(671, 491, 251, 23);
+		btnAddNewIngredient.setBounds(674, 215, 251, 23);
 		panel_1.add(btnAddNewIngredient);
 
 		JButton btnAdd_1 = new JButton("Add");
@@ -501,7 +319,7 @@ public class RecipeUpdate extends JFrame {
 		textPane_5.setText("Complexity:");
 		textPane_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textPane_5.setBackground(new Color(240, 248, 255));
-		textPane_5.setBounds(638, 350, 112, 31);
+		textPane_5.setBounds(641, 74, 112, 31);
 		panel_1.add(textPane_5);
 
 		String[] complexiting = {"Easy", "Medium", "Hard"};
@@ -514,7 +332,7 @@ public class RecipeUpdate extends JFrame {
 			}
 		});
 		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		comboBox_4.setBounds(638, 381, 307, 31);
+		comboBox_4.setBounds(641, 105, 307, 31);
 		panel_1.add(comboBox_4);
 
 		JTextPane textPane_6 = new JTextPane();
@@ -522,7 +340,7 @@ public class RecipeUpdate extends JFrame {
 		textPane_6.setText("Cooking Time Up To:");
 		textPane_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		textPane_6.setBackground(new Color(240, 248, 255));
-		textPane_6.setBounds(638, 412, 194, 31);
+		textPane_6.setBounds(641, 136, 194, 31);
 		panel_1.add(textPane_6);
 
 		//panel upper
