@@ -105,6 +105,7 @@ public class Dietican extends JFrame {
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				Dietican.this.dispose();
@@ -173,6 +174,12 @@ public class Dietican extends JFrame {
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
+				}
+				else
+				{
 				myView.statview.mainSearch(textField.getText());  
 				if (myView.check==false) {
 					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
@@ -182,6 +189,7 @@ public class Dietican extends JFrame {
 					d.setVisible(true);
 					Dietican.this.dispose();
 					Dietican.this.setVisible(false);
+				}
 				}
 			}
 		});
