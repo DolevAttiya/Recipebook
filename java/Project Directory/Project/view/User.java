@@ -1,47 +1,29 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
-
 import javax.swing.JComboBox;
-import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import javax.swing.JEditorPane;
-
-import javax.swing.JLabel;
-import java.awt.Component;
-import javax.swing.JScrollBar;
-import javax.swing.JProgressBar;
-import java.awt.Choice;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 public class User extends JFrame {
 
-	private JPanel contentPane;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane_1;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -69,30 +51,6 @@ public class User extends JFrame {
 	public int isKosher=0;
 	public int isAller=0;		
 
-
-
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					User frame = new User();
-					frame.setVisible(true);
-					frame.setTitle("Taimli!");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-	}
-	public void close() {
-		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-	 */
 	/**
 	 * Create the frame.
 	 */
@@ -100,7 +58,6 @@ public class User extends JFrame {
 		setSize(1000, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2,dim.height/2-this.getSize().height/2);
-		contentPane = new JPanel();
 		contentPane_1 = new JPanel();
 		contentPane_1.setBackground(new Color(65, 105, 225));
 		contentPane_1.setBorder(new EmptyBorder(5, 5, 5, 5));

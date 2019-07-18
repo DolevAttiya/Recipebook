@@ -1,8 +1,6 @@
 package view;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
-import controller.Event;
+import java.util.ArrayList;
 import model.Dietitian;
 import model.Ingredient;
 import model.IngredientType;
