@@ -77,7 +77,7 @@ public class AdvancedSearch extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-*/
+	 */
 	/**
 	 * Create the frame.
 	 */
@@ -107,6 +107,7 @@ public class AdvancedSearch extends JFrame {
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				AdvancedSearch.this.dispose();
@@ -127,7 +128,7 @@ public class AdvancedSearch extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (myView.myUser!=null) {
 					User f=new User();
-				f.setVisible(true);
+					f.setVisible(true);
 				}
 				else {
 					Dietican f=new Dietican();
@@ -136,8 +137,8 @@ public class AdvancedSearch extends JFrame {
 				AdvancedSearch.this.dispose();
 				AdvancedSearch.this.setVisible(false);
 			}
-			}
-		);
+		}
+				);
 		textPane.setBounds(882, 8, 102, 49);
 		panel.add(textPane);
 		textPane.setText("user details");
@@ -176,16 +177,23 @@ public class AdvancedSearch extends JFrame {
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
-				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					AdvancedSearch.this.dispose();
-					AdvancedSearch.this.setVisible(false);
-				}
+				else 
+				{
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						AdvancedSearch.this.dispose();
+						AdvancedSearch.this.setVisible(false);
+					}
+				} 
 			}
 		});
 		button.setBounds(682, 36, 47, 21);
@@ -547,26 +555,33 @@ public class AdvancedSearch extends JFrame {
 		txtpnAdvancedSearch.setText("Advanced Search");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 40));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
-		
-		
-		
-				JButton btnSearch = new JButton("Search!");
-				btnSearch.setBounds(412, 488, 175, 47);
-				panel_1.add(btnSearch);
-				btnSearch.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						myView.statview.advancedSearch(textField_1.getText(), kashruth, complexity, timeToMake, rateAbove, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate);
-						if (myView.check==false) {
-							JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
-						}
-						else {
-							SearchRes f=new SearchRes();
-							f.setVisible(true);
-							AdvancedSearch.this.dispose();
-							AdvancedSearch.this.setVisible(false);
-						}
-					}});
-				btnSearch.setFont(new Font("Tahoma", Font.BOLD, 25));
+
+
+
+		JButton btnSearch = new JButton("Search!");
+		btnSearch.setBounds(412, 488, 175, 47);
+		panel_1.add(btnSearch);
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (textField_1.getText()==null)
+				{
+					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
+				}
+				else
+				{
+					myView.statview.advancedSearch(textField_1.getText(), kashruth, complexity, timeToMake, rateAbove, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate);
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes f=new SearchRes();
+						f.setVisible(true);
+						AdvancedSearch.this.dispose();
+						AdvancedSearch.this.setVisible(false);
+					}
+				}
+			}});
+		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 25));
 
 	}
 }

@@ -78,7 +78,7 @@ public class Ingredient extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-*/
+	 */
 	/**
 	 * Create the frame.
 	 */
@@ -499,15 +499,22 @@ public class Ingredient extends JFrame {
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
-				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					Ingredient.this.dispose();
-					Ingredient.this.setVisible(false);
+				else
+				{
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						Ingredient.this.dispose();
+						Ingredient.this.setVisible(false);
+					}
 				}
 			}
 		});

@@ -25,7 +25,6 @@ public class myView extends Observable implements View
 	public static Dietitian myDietitian;
 	public static ArrayList<Ingredient> ingredientArray=new ArrayList<Ingredient>();
 	public static ArrayList<Recipe> recipeArray=new ArrayList<Recipe>();
-	public static ArrayList<Recipe> recipeTop10Array=new ArrayList<Recipe>();
 	public static ArrayList<IngredientType> myMeasuring;
 	public static Recipe myRecipe=null;
 	public static Ingredient myIngredient;
@@ -87,7 +86,6 @@ public class myView extends Observable implements View
 		ev.getArr().add(pass);
 		setChanged();
 		notifyObservers(ev);
-		getTop10();
 	}	
 	public void dloginResponse (ArrayList<Dietitian> usD) {
 		if(usD!=null) // if the user exists in the DB
@@ -167,7 +165,7 @@ public class myView extends Observable implements View
 		notifyObservers(ev);
 	}
 	public void getTop10Response (ArrayList<Recipe> r) {
-		recipeTop10Array=r;
+		recipeArray=r;
 	}
 	public void mainSearch(String s) {
 		ev=new Event();

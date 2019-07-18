@@ -92,7 +92,7 @@ public class User extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-*/
+	 */
 	/**
 	 * Create the frame.
 	 */
@@ -181,7 +181,7 @@ public class User extends JFrame {
 			}
 		});
 
-		
+
 		if (myView.myUser.getUserAllergen()[7]!=null) {
 			if(myView.myUser.getUserAllergen()[7]>0)
 			{
@@ -210,7 +210,7 @@ public class User extends JFrame {
 				}
 			}
 		});
-		
+
 		if (myView.myUser.getUserAllergen()[1]!=null) {
 			if(myView.myUser.getUserAllergen()[1]>0)
 			{
@@ -222,7 +222,7 @@ public class User extends JFrame {
 		}
 		else
 			isStrawberries=0;
-		
+
 		chckbxFish.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxFish.setBackground(new Color(240, 248, 255));
 		chckbxFish.setBounds(600, 152, 171, 41);
@@ -240,8 +240,8 @@ public class User extends JFrame {
 				}
 			}
 		});
-	
-		
+
+
 		if (myView.myUser.getUserAllergen()[9]!=null) {
 			if(myView.myUser.getUserAllergen()[9]>0)
 			{
@@ -253,7 +253,7 @@ public class User extends JFrame {
 		}
 		else
 			isPeanut=0;
-		
+
 		chckbxPeanut.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxPeanut.setBackground(new Color(240, 248, 255));
 		chckbxPeanut.setBounds(773, 232, 142, 41);
@@ -300,7 +300,7 @@ public class User extends JFrame {
 			}
 		});
 
-		
+
 		if (myView.myUser.getUserAllergen()[6]!=null) {
 			if(myView.myUser.getUserAllergen()[6]>0)
 			{
@@ -559,8 +559,8 @@ public class User extends JFrame {
 		}
 		else
 			isMilk=0;
-		
-		
+
+
 		chckbxDairy_1.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxDairy_1.setBackground(new Color(240, 248, 255));
 		chckbxDairy_1.setBounds(600, 312, 92, 41);
@@ -577,7 +577,7 @@ public class User extends JFrame {
 				}
 			}
 		});
-	
+
 		if (myView.myUser.getUserAllergen()[4]!=null) {
 			if(myView.myUser.getUserAllergen()[4]>0)
 			{
@@ -589,7 +589,7 @@ public class User extends JFrame {
 		}
 		else
 			isLactose=0;
-		
+
 
 		chckbxLactose.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxLactose.setBackground(new Color(240, 248, 255));
@@ -620,7 +620,7 @@ public class User extends JFrame {
 		}
 		else
 			isChocolate=0;
-		
+
 		chckbxChocolate.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxChocolate.setBackground(new Color(240, 248, 255));
 		chckbxChocolate.setBounds(773, 312, 155, 41);
@@ -650,7 +650,7 @@ public class User extends JFrame {
 		}
 		else
 			isAcidity=0;
-		
+
 		chckbxFoodAcidity.setFont(new Font("Dialog", Font.PLAIN, 20));
 		chckbxFoodAcidity.setBackground(new Color(240, 248, 255));
 		chckbxFoodAcidity.setBounds(773, 272, 176, 41);
@@ -726,6 +726,7 @@ public class User extends JFrame {
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				User.this.dispose();
@@ -794,15 +795,21 @@ public class User extends JFrame {
 		JButton button1 = new JButton("Go!");
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
 				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					User.this.dispose();
-					User.this.setVisible(false);
+					myView.statview.mainSearch(textField.getText()); 
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						User.this.dispose();
+						User.this.setVisible(false);
+					}
 				}
 			}
 		});

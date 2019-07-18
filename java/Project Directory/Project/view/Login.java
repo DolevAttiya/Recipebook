@@ -120,8 +120,7 @@ public class Login extends JFrame {
 				myView.statview.login(textField.getText(), String.copyValueOf(passwordField.getPassword()));
 				if (myView.check==true) // Connected as User or as Dietitian
 				{
-					myView.statview.myRecipes();
-
+					myView.statview.getTop10();
 					MainPage a=new MainPage();
 					a.setVisible(true);
 					Login.this.dispose();

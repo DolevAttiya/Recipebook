@@ -122,11 +122,11 @@ public class MainPage extends JFrame {
 		String[] columnNames = {"Recipe Name",
 				"Description",
 		"Rate"}; 
-		Object[][] data = new Object[myView.recipeTop10Array.size()][3];
-		for(int row=0;row<myView.recipeTop10Array.size();row++) {
-			data[row][0]=myView.recipeTop10Array.get(row).getRecipeName();
-			data[row][1]=myView.recipeTop10Array.get(row).getRecipeDescription();
-			data[row][2]=myView.recipeTop10Array.get(row).getRecipeRate();
+		Object[][] data = new Object[myView.recipeArray.size()][3];
+		for(int row=0;row<myView.recipeArray.size();row++) {
+			data[row][0]=myView.recipeArray.get(row).getRecipeName();
+			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
 		}
 		JTable table = new JTable(data, columnNames);
 		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
@@ -143,7 +143,7 @@ public class MainPage extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				myView.myRecipe=myView.recipeArray.get(table.getSelectedRow());
 				RecipeView f=new RecipeView();
 				f.setVisible(true);
 				MainPage.this.dispose();
@@ -248,6 +248,7 @@ public class MainPage extends JFrame {
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				MainPage.this.dispose();
@@ -320,6 +321,12 @@ public class MainPage extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				myView.statview.mainSearch(textField.getText());  
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
+				}
+				else
+				{
 				if (myView.check==false) {
 					JOptionPane.showMessageDialog(null,"There is no match to your search, Please try again");
 				}
@@ -328,6 +335,7 @@ public class MainPage extends JFrame {
 					d.setVisible(true);
 					MainPage.this.dispose();
 					MainPage.this.setVisible(false);
+				}
 				}
 			}
 		});
