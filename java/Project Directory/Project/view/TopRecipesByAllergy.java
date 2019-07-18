@@ -128,7 +128,6 @@ public class TopRecipesByAllergy extends JFrame {
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setCellSelectionEnabled(false);
-		table.setRowHeight(1, 60);
 		scrollPane.setSize(951, 511);
 		scrollPane.setLocation(10,64);
 		//TableColumn column = null;
