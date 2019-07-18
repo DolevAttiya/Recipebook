@@ -224,12 +224,6 @@ public class ViewMock implements View {
 	}
 
 	@Override
-	public void recipeUpdate(Recipe rec) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void ingredientUpdate(Ingredient ing) {
 		// TODO Auto-generated method stub
 		
@@ -275,15 +269,6 @@ public class ViewMock implements View {
 			Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk,
 			Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity,
 			Integer isChocolate, Integer wantAllerg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addRecipe(String recipeName, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten,
-			Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut,
-			Integer isAcidity, Integer isChocolate, String description, Integer complexity, Integer timeToMake,
-			String instructions) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -347,6 +332,20 @@ public class ViewMock implements View {
 
 	@Override
 	public void start() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addRecipe(String recipeName, String description, Integer complexity, Integer timeToMake,
+			String instructions) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void recipeUpdate(String recipeName, String description, Integer complexity, Integer timeToMake,
+			String instructions) {
 		// TODO Auto-generated method stub
 		
 	}
