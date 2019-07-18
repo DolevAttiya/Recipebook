@@ -1,8 +1,5 @@
 package view;
 import view.myView;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,43 +9,24 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
-import java.awt.im.InputContext;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
 import java.awt.event.WindowEvent;
 
 public class Login extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPanel contentPane;
 	private JPasswordField passwordField;
 
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login frame = new Login();
-					  frame.setVisible(true);
-					  frame.setTitle("Taimli!");
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
@@ -60,8 +38,7 @@ public class Login extends JFrame {
 	 */
 
 	public Login() {
-		
-		
+	
 		setSize(1000, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 

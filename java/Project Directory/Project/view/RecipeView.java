@@ -897,4 +897,3 @@ public class RecipeView extends JFrame {
 
 
 	}
-}
