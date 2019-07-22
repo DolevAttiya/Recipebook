@@ -1,32 +1,20 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
-import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
-import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -35,30 +23,13 @@ import javax.swing.ListSelectionModel;
 
 public class TopRecipesByAllergy extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTable table;
-	private Component txtRecipebook;
-	private JTextField textField_1;
 	public String[] recipeComplexity= {"Parve","Milk","Meat","Not Kosher"};
-
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TopRecipesByAllergy frame = new TopRecipesByAllergy();
-					frame.setVisible(true);
-					frame.setTitle("Taimli!");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -91,10 +62,10 @@ public class TopRecipesByAllergy extends JFrame {
 		panel_1.add(txtpnAdvancedSearch);
 
 		String[] columnNames = {"Recipe Name",
-                "Description",
-                "Rate",
-                "Calories",
-                "Kosher"}; 
+				"Description",
+				"Rate",
+				"Calories",
+		"Kosher"}; 
 		Object[][] data = new Object[myView.recipeArray.size()][5];
 		for(int row=0;row<myView.recipeArray.size();row++) {
 			data[row][0]=myView.recipeArray.get(row).getRecipeName();
@@ -103,13 +74,27 @@ public class TopRecipesByAllergy extends JFrame {
 			data[row][3]=myView.recipeArray.get(row).getRecipeTotalCalories();
 			data[row][4]=recipeComplexity[myView.recipeArray.get(row).getRecipeKashruth()];
 		}
-		
-		
+
+
 		JTable table = new JTable(data, columnNames);
+		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
+		table.setModel(tableModel);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				myView.statview.myRecipe=myView.statview.recipeArray.get(table.getSelectedRow());
+				myView.myRecipe=myView.recipeArray.get(table.getSelectedRow());
 				RecipeView f=new RecipeView();
 				f.setVisible(true);
 				TopRecipesByAllergy.this.dispose();
@@ -118,7 +103,7 @@ public class TopRecipesByAllergy extends JFrame {
 		});
 		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table.setRowHeight(50);
+		table.setRowHeight(32);
 		JTableHeader th = table.getTableHeader();
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
@@ -128,29 +113,29 @@ public class TopRecipesByAllergy extends JFrame {
 		table.setRowSelectionAllowed(true);
 		table.setColumnSelectionAllowed(false);
 		table.setCellSelectionEnabled(false);
-		table.setRowHeight(1, 60);
 		scrollPane.setSize(951, 511);
 		scrollPane.setLocation(10,64);
 		//TableColumn column = null;
 		panel_1.add(scrollPane);
-		
+
 		//panel upper
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 994, 59);
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		textField = new JTextField();
 		textField.setBounds(495, 36, 163, 21);
 		panel.add(textField);
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textField.setColumns(10);
-		
+
 		JTextPane textPane_5 = new JTextPane();
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				TopRecipesByAllergy.this.dispose();
@@ -164,14 +149,14 @@ public class TopRecipesByAllergy extends JFrame {
 		textPane_5.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 50));
 		textPane_5.setEditable(false);
 		textPane_5.setBackground(new Color(65, 105, 225));
-		
+
 		JTextPane textPane = new JTextPane();
 		textPane.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (myView.myUser!=null) {
 					User f=new User();
-				f.setVisible(true);
+					f.setVisible(true);
 				}
 				else {
 					Dietican f=new Dietican();
@@ -188,7 +173,7 @@ public class TopRecipesByAllergy extends JFrame {
 		textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
 		textPane.setEditable(false);
 		textPane.setBackground(new Color(65, 105, 225));
-		
+
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -206,7 +191,7 @@ public class TopRecipesByAllergy extends JFrame {
 		textPane_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
 		textPane_1.setEditable(false);
 		textPane_1.setBackground(new Color(65, 105, 225));
-		
+
 		JTextPane textPane_3 = new JTextPane();
 		textPane_3.setBounds(559, 11, 92, 29);
 		panel.add(textPane_3);
@@ -215,26 +200,32 @@ public class TopRecipesByAllergy extends JFrame {
 		textPane_3.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
 		textPane_3.setEditable(false);
 		textPane_3.setBackground(new Color(65, 105, 225));
-		
+
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
 				else {
-					SearchRes d=new SearchRes();
-				d.setVisible(true);
-				TopRecipesByAllergy.this.dispose();
-				TopRecipesByAllergy.this.setVisible(false);
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						TopRecipesByAllergy.this.dispose();
+						TopRecipesByAllergy.this.setVisible(false);
+					}
 				}
 			}
 		});
 		button.setBounds(659, 36, 47, 21);
 		panel.add(button);
 		button.setFont(new Font("Tahoma", Font.BOLD, 5));
-		
+
 		JTextPane textPane_2 = new JTextPane();
 		textPane_2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -253,7 +244,7 @@ public class TopRecipesByAllergy extends JFrame {
 		textPane_2.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
 		textPane_2.setEditable(false);
 		textPane_2.setBackground(new Color(65, 105, 225));
-		
+
 		JTextPane textPane_4 = new JTextPane();
 		textPane_4.addMouseListener(new MouseAdapter() {
 			@Override

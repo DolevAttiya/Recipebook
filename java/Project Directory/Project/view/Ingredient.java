@@ -1,40 +1,31 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
-import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class Ingredient extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField txtRecipebook;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
@@ -57,27 +48,6 @@ public class Ingredient extends JFrame {
 	public int isPeanut=0;
 	public int isAcidity=0;
 	public int isChocolate=0;
-
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Ingredient frame = new Ingredient();
-					frame.setVisible(true);
-					frame.setTitle("Taimli!");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	public void close() {
-		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
 
 	/**
 	 * Create the frame.
@@ -131,6 +101,10 @@ public class Ingredient extends JFrame {
 		JButton btnSearch = new JButton("Add!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Fat= Double.parseDouble(textField_4.getText());
+				Protein= Double.parseDouble(textField_6.getText());
+				Carbs= Double.parseDouble(textField_3.getText());
+				Calories= Double.parseDouble(textField_2.getText());
 				if((textField_7.getText().trim().isEmpty())||(textField_2.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textField_4.getText().trim().isEmpty())||(textField_6.getText().trim().isEmpty())) {
 					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
 				}
@@ -139,6 +113,9 @@ public class Ingredient extends JFrame {
 					if(myView.check==false)
 						JOptionPane.showMessageDialog(null,"Something went wrong, Please try again!");
 					else {				
+						myView.statview.getTop10();
+						MainPage a=new MainPage();
+						a.setVisible(true);
 						Ingredient.this.dispose();
 						Ingredient.this.setVisible(false);
 					}
@@ -154,7 +131,7 @@ public class Ingredient extends JFrame {
 		textPane.setText("per 100 grams");
 		textPane.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textPane.setBackground(new Color(240, 248, 255));
-		textPane.setBounds(660, 207, 85, 21);
+		textPane.setBounds(660, 210, 85, 21);
 		panel_1.add(textPane);
 
 		JTextPane textPane_1 = new JTextPane();
@@ -194,13 +171,13 @@ public class Ingredient extends JFrame {
 		textPane_5.setText("Nutrition Values:");
 		textPane_5.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
 		textPane_5.setBackground(new Color(240, 248, 255));
-		textPane_5.setBounds(536, 170, 340, 58);
+		textPane_5.setBounds(536, 170, 340, 38);
 		panel_1.add(textPane_5);
 
 		textField_2 = new JTextField();
 		textField_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Calories= Double.parseDouble(textField_7.getText());
+				Calories= Double.parseDouble(textField_2.getText());
 			}
 		});
 		textField_2.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -286,7 +263,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_1.setBackground(new Color(240, 248, 255));
-		checkBox_1.setBounds(187, 225, 121, 41);
+		checkBox_1.setBounds(210, 225, 121, 41);
 		panel_1.add(checkBox_1);
 
 		JCheckBox checkBox_2 = new JCheckBox("Food Acidity");
@@ -301,7 +278,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_2.setBackground(new Color(240, 248, 255));
-		checkBox_2.setBounds(187, 385, 133, 41);
+		checkBox_2.setBounds(210, 385, 209, 41);
 		panel_1.add(checkBox_2);
 
 		JCheckBox checkBox_3 = new JCheckBox("Seeds");
@@ -316,7 +293,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_3.setBackground(new Color(240, 248, 255));
-		checkBox_3.setBounds(187, 265, 92, 41);
+		checkBox_3.setBounds(210, 265, 167, 41);
 		panel_1.add(checkBox_3);
 
 		JCheckBox checkBox_4 = new JCheckBox("Lactose");
@@ -346,7 +323,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_5.setBackground(new Color(240, 248, 255));
-		checkBox_5.setBounds(187, 345, 105, 41);
+		checkBox_5.setBounds(210, 345, 153, 41);
 		panel_1.add(checkBox_5);
 
 		JCheckBox checkBox_6 = new JCheckBox("Chocolate");
@@ -361,7 +338,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_6.setBackground(new Color(240, 248, 255));
-		checkBox_6.setBounds(187, 425, 121, 41);
+		checkBox_6.setBounds(210, 425, 167, 41);
 		panel_1.add(checkBox_6);
 
 		JTextPane textPane_3 = new JTextPane();
@@ -369,7 +346,7 @@ public class Ingredient extends JFrame {
 		textPane_3.setText("Allergies:");
 		textPane_3.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
 		textPane_3.setBackground(new Color(240, 248, 255));
-		textPane_3.setBounds(67, 190, 192, 41);
+		textPane_3.setBounds(67, 180, 192, 41);
 		panel_1.add(textPane_3);
 
 		JCheckBox checkBox_7 = new JCheckBox("Tree Nuts");
@@ -384,7 +361,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_7.setBackground(new Color(240, 248, 255));
-		checkBox_7.setBounds(187, 305, 121, 41);
+		checkBox_7.setBounds(210, 305, 153, 41);
 		panel_1.add(checkBox_7);
 
 		JCheckBox checkBox_8 = new JCheckBox("Strawberries");
@@ -399,7 +376,7 @@ public class Ingredient extends JFrame {
 		});
 		checkBox_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_8.setBackground(new Color(240, 248, 255));
-		checkBox_8.setBounds(32, 265, 153, 41);
+		checkBox_8.setBounds(32, 265, 173, 41);
 		panel_1.add(checkBox_8);
 
 		JCheckBox checkBox_9 = new JCheckBox("Coffie");
@@ -448,89 +425,150 @@ public class Ingredient extends JFrame {
 		panel_1.add(checkBox_11);
 
 		//panel upper
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 994, 59);
-		panel.setBackground(new Color(65, 105, 225));
-		contentPane.add(panel);
-		panel.setLayout(null);
+				JPanel panel = new JPanel();
+				panel.setBounds(0, 0, 994, 59);
+				panel.setBackground(new Color(65, 105, 225));
+				contentPane.add(panel);
+				panel.setLayout(null);
 
-		textField = new JTextField();
-		textField.setBounds(518, 36, 163, 21);
-		panel.add(textField);
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textField.setColumns(10);
+				textField = new JTextField();
+				textField.setBounds(495, 36, 163, 21);
+				panel.add(textField);
+				textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				textField.setColumns(10);
 
-		JTextPane textPane_12 = new JTextPane();
-		textPane_12.setBounds(0, 0, 204, 57);
-		panel.add(textPane_12);
-		textPane_12.setText("Taimli");
-		textPane_12.setForeground(Color.WHITE);
-		textPane_12.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 50));
-		textPane_12.setEditable(false);
-		textPane_12.setBackground(new Color(65, 105, 225));
+				JTextPane textPane_51 = new JTextPane();
+				textPane_51.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						myView.statview.getTop10();
+						MainPage b=new MainPage();
+						b.setVisible(true);
+						Ingredient.this.dispose();
+						Ingredient.this.setVisible(false);
+					}
+				});
+				textPane_51.setBounds(10, 0, 204, 57);
+				panel.add(textPane_51);
+				textPane_51.setText("Taimli");
+				textPane_51.setForeground(Color.WHITE);
+				textPane_51.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 50));
+				textPane_51.setEditable(false);
+				textPane_51.setBackground(new Color(65, 105, 225));
 
-		JTextPane textPane_9 = new JTextPane();
-		textPane_9.setBounds(898, 8, 96, 49);
-		panel.add(textPane_9);
-		textPane_9.setText("user details");
-		textPane_9.setForeground(Color.WHITE);
-		textPane_9.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-		textPane_9.setEditable(false);
-		textPane_9.setBackground(new Color(65, 105, 225));
+				JTextPane textPane1 = new JTextPane();
+				textPane1.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if (myView.myUser!=null) {
+							User f=new User();
+							f.setVisible(true);
+						}
+						else {
+							Dietican f=new Dietican();
+							f.setVisible(true);
+						}
+						Ingredient.this.dispose();
+						Ingredient.this.setVisible(false);
+					}
+				});
+				textPane1.setBounds(882, 8, 102, 49);
+				panel.add(textPane1);
+				textPane1.setText("user details");
+				textPane1.setForeground(Color.WHITE);
+				textPane1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+				textPane1.setEditable(false);
+				textPane1.setBackground(new Color(65, 105, 225));
 
-		JTextPane textPane_10 = new JTextPane();
-		textPane_10.setBounds(746, 8, 126, 50);
-		panel.add(textPane_10);
-		textPane_10.setText("Advanced Search");
-		textPane_10.setForeground(Color.WHITE);
-		textPane_10.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-		textPane_10.setEditable(false);
-		textPane_10.setBackground(new Color(65, 105, 225));
+				JTextPane textPane_11 = new JTextPane();
+				textPane_11.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						AdvancedSearch d=new AdvancedSearch();
+						d.setVisible(true);
+						Ingredient.this.dispose();
+						Ingredient.this.setVisible(false);
+					}
+				});
+				textPane_11.setBounds(729, 7, 126, 50);
+				panel.add(textPane_11);
+				textPane_11.setText("Advanced Search");
+				textPane_11.setForeground(Color.WHITE);
+				textPane_11.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+				textPane_11.setEditable(false);
+				textPane_11.setBackground(new Color(65, 105, 225));
 
-		JTextPane textPane_11 = new JTextPane();
-		textPane_11.setBounds(582, 11, 92, 29);
-		panel.add(textPane_11);
-		textPane_11.setText("Search");
-		textPane_11.setForeground(Color.WHITE);
-		textPane_11.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-		textPane_11.setEditable(false);
-		textPane_11.setBackground(new Color(65, 105, 225));
+				JTextPane textPane_31 = new JTextPane();
+				textPane_31.setBounds(559, 11, 92, 29);
+				panel.add(textPane_31);
+				textPane_31.setText("Search");
+				textPane_31.setForeground(Color.WHITE);
+				textPane_31.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+				textPane_31.setEditable(false);
+				textPane_31.setBackground(new Color(65, 105, 225));
 
-		JButton button = new JButton("Go!");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
-				}
-				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					Ingredient.this.dispose();
-					Ingredient.this.setVisible(false);
-				}
-			}
-		});
-		button.setBounds(682, 36, 47, 21);
-		panel.add(button);
-		button.setFont(new Font("Tahoma", Font.BOLD, 5));
+				JButton button = new JButton("Go!");
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if (textField.getText().trim().isEmpty())
+						{
+							JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
+						}
+						else
+						{
+							myView.statview.mainSearch(textField.getText());  
+							if (myView.check==false) {
+								JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+							}
+							else {
+								SearchRes d=new SearchRes();
+								d.setVisible(true);
+								Ingredient.this.dispose();
+								Ingredient.this.setVisible(false);
+							}
+						}
+					}
+				});
+				button.setBounds(659, 36, 47, 21);
+				panel.add(button);
+				button.setFont(new Font("Tahoma", Font.BOLD, 5));
 
-		JTextPane textPane_7 = new JTextPane();
-		textPane_7.setBounds(385, 8, 132, 49);
-		panel.add(textPane_7);
-		textPane_7.setText("Favourite Recipes");
-		textPane_7.setForeground(Color.WHITE);
-		textPane_7.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-		textPane_7.setEditable(false);
-		textPane_7.setBackground(new Color(65, 105, 225));
+				JTextPane textPane_21 = new JTextPane();
+				textPane_21.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						myView.statview.myFavorite();
+						MyFavourites d=new MyFavourites();
+						d.setVisible(true);
+						Ingredient.this.dispose();
+						Ingredient.this.setVisible(false);
+					}
+				});
+				textPane_21.setBounds(341, 8, 132, 49);
+				panel.add(textPane_21);
+				textPane_21.setText("Favourite Recipes");
+				textPane_21.setForeground(Color.WHITE);
+				textPane_21.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+				textPane_21.setEditable(false);
+				textPane_21.setBackground(new Color(65, 105, 225));
 
-		JTextPane textPane_8 = new JTextPane();
-		textPane_8.setBounds(242, 8, 107, 49);
-		panel.add(textPane_8);
-		textPane_8.setText("My Recipes");
-		textPane_8.setForeground(Color.WHITE);
-		textPane_8.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
-		textPane_8.setEditable(false);
-		textPane_8.setBackground(new Color(65, 105, 225));
+				JTextPane textPane_41 = new JTextPane();
+				textPane_41.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						myView.statview.myRecipes();
+						MyRecipes c=new MyRecipes();
+						c.setVisible(true);
+						Ingredient.this.dispose();
+						Ingredient.this.setVisible(false);
+					}
+				});
+				textPane_41.setBounds(224, 8, 107, 49);
+				panel.add(textPane_41);
+				textPane_41.setText("My Recipes");
+				textPane_41.setForeground(Color.WHITE);
+				textPane_41.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
+				textPane_41.setEditable(false);
+				textPane_41.setBackground(new Color(65, 105, 225));
 	}
 }

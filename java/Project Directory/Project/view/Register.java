@@ -1,66 +1,50 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JComboBox;
-import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Component;
-import javax.swing.JScrollBar;
-import javax.swing.JProgressBar;
-import java.awt.Choice;
-import java.beans.VetoableChangeListener;
-import java.beans.PropertyChangeEvent;
 
 public class Register extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField txtRecipebook;
 	private JTextField textField_6;
 	private JTextField textField_3;
 	private JTextField textField_2;
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
-	public String dateOfBirth="0000-00-00";
+	public String dateOfBirth="0000-01-01";
 	public String yearOfBirth="0000";
-	public String monthOfBirth="00";
-	public String dayOfBirth="00";
+	public String monthOfBirth="01";
+	public String dayOfBirth="01";
 	public int isDietitian=0;
 	public String dietitianNum;
 	public int isKosher=0;
 	private JTextField textField_4;
-	public String dietitianStatDate="0000-00-00";
+	public String dietitianStatDate="0000-01-01";
 	public String yearOfStat="0000";
-	public String monthOfStat="00";
-	public String dayOfStat="00";
+	public String monthOfStat="01";
+	public String dayOfStat="01";
 	public int wantAllerg=0;
 
 	//allergies
@@ -85,7 +69,7 @@ public class Register extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -102,7 +86,7 @@ public class Register extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -173,13 +157,13 @@ public class Register extends JFrame {
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Dialog", Font.PLAIN, 20));
 		textField_7.setColumns(10);
-		textField_7.setBounds(256, 312, 282, 39);
+		textField_7.setBounds(284, 312, 254, 39);
 		panel_1.add(textField_7);
 
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Dialog", Font.PLAIN, 20));
 		textField_2.setColumns(10);
-		textField_2.setBounds(256, 262, 282, 39);
+		textField_2.setBounds(284, 262, 254, 39);
 		panel_1.add(textField_2);
 
 		textField_3 = new JTextField();
@@ -221,7 +205,7 @@ public class Register extends JFrame {
 		});
 		chckbxFish.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxFish.setBackground(new Color(240, 248, 255));
-		chckbxFish.setBounds(613, 152, 142, 41);
+		chckbxFish.setBounds(613, 152, 165, 41);
 		panel_1.add(chckbxFish);
 		setVisible(true);
 
@@ -245,7 +229,7 @@ public class Register extends JFrame {
 		});
 		chckbxPeanut.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxPeanut.setBackground(new Color(240, 248, 255));
-		chckbxPeanut.setBounds(773, 232, 98, 41);
+		chckbxPeanut.setBounds(773, 232, 165, 41);
 		panel_1.add(chckbxPeanut);
 
 		JCheckBox chckbxTreeNuts = new JCheckBox("Tree Nuts");
@@ -260,7 +244,7 @@ public class Register extends JFrame {
 		});
 		chckbxTreeNuts.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxTreeNuts.setBackground(new Color(240, 248, 255));
-		chckbxTreeNuts.setBounds(773, 192, 129, 41);
+		chckbxTreeNuts.setBounds(773, 192, 176, 41);
 		panel_1.add(chckbxTreeNuts);
 
 		JCheckBox chckbxEggs = new JCheckBox("Eggs");
@@ -314,7 +298,7 @@ public class Register extends JFrame {
 		});
 		chckbxNewCheckBox.setBackground(new Color(240, 248, 255));
 		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		chckbxNewCheckBox.setBounds(26, 450, 697, 39);
+		chckbxNewCheckBox.setBounds(26, 450, 319, 39);
 		panel_1.add(chckbxNewCheckBox);
 
 		JTextPane txtpnAdvancedSearch = new JTextPane();
@@ -339,7 +323,7 @@ public class Register extends JFrame {
 		chckbxDairy.setSelected(false);
 		chckbxDairy.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxDairy.setBackground(new Color(240, 248, 255));
-		chckbxDairy.setBounds(613, 112, 65, 41);
+		chckbxDairy.setBounds(613, 112, 152, 41);
 		panel_1.add(chckbxDairy);
 
 		JTextPane txtpnAllergies = new JTextPane();
@@ -364,7 +348,7 @@ public class Register extends JFrame {
 		});
 		chckbxG.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxG.setBackground(new Color(240, 248, 255));
-		chckbxG.setBounds(613, 192, 92, 41);
+		chckbxG.setBounds(613, 192, 152, 41);
 		panel_1.add(chckbxG);
 
 		JCheckBox chckbxNon = new JCheckBox("Gluten");
@@ -390,19 +374,22 @@ public class Register extends JFrame {
 				if((textField_1.getText().trim().isEmpty())||(textField_6.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textField_2.getText().trim().isEmpty())||(textField_7.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())) {
 					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
 				}
-				else if (myView.check==false)
-					JOptionPane.showMessageDialog(null,"Couldn't save, Something went wrong, Please try again!");
 				else
 				{
-					yearOfBirth=textField_9.getText();
-					yearOfStat=textField_4.getText();
-					dateOfBirth=yearOfBirth+"-"+monthOfBirth+"-"+dayOfBirth;
-					dietitianStatDate=yearOfStat+"-"+monthOfStat+"-"+dayOfStat;
-					myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
-					MainPage f=new MainPage();
-					f.setVisible(true);
-					Register.this.dispose();
-					Register.this.setVisible(false);
+					if (myView.check==false)
+						JOptionPane.showMessageDialog(null,"Couldn't save, Something went wrong, Please try again!");
+					else
+					{
+						yearOfBirth=textField_9.getText();
+						yearOfStat=textField_4.getText();
+						dateOfBirth=yearOfBirth+"-"+monthOfBirth+"-"+dayOfBirth;
+						dietitianStatDate=yearOfStat+"-"+monthOfStat+"-"+dayOfStat;
+						myView.statview.register(textField_1.getText(), textField_6.getText(), textField_3.getText(), textField_2.getText(), textField_7.getText(),dateOfBirth, isDietitian, textField_8.getText(), isKosher, dietitianStatDate, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate, wantAllerg);
+						MainPage f=new MainPage();
+						f.setVisible(true);
+						Register.this.dispose();
+						Register.this.setVisible(false);
+					}
 				}
 			}
 		});
@@ -430,7 +417,7 @@ public class Register extends JFrame {
 		txtpnEnterPassword.setText("Enter Password: (6 digits)");
 		txtpnEnterPassword.setFont(new Font("Dialog", Font.PLAIN, 20));
 		txtpnEnterPassword.setBackground(new Color(240, 248, 255));
-		txtpnEnterPassword.setBounds(26, 262, 226, 39);
+		txtpnEnterPassword.setBounds(26, 262, 243, 39);
 		panel_1.add(txtpnEnterPassword);
 
 		JTextPane txtpnEnterPasswordAgain = new JTextPane();
@@ -455,7 +442,7 @@ public class Register extends JFrame {
 		});
 		chckbxShowOnlyRecipes.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxShowOnlyRecipes.setBackground(new Color(240, 248, 255));
-		chckbxShowOnlyRecipes.setBounds(26, 492, 489, 41);
+		chckbxShowOnlyRecipes.setBounds(26, 492, 401, 41);
 		panel_1.add(chckbxShowOnlyRecipes);
 
 
@@ -504,7 +491,7 @@ public class Register extends JFrame {
 		});
 		chckbxChocolate.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxChocolate.setBackground(new Color(240, 248, 255));
-		chckbxChocolate.setBounds(773, 312, 117, 41);
+		chckbxChocolate.setBounds(773, 312, 165, 41);
 		panel_1.add(chckbxChocolate);
 
 		JCheckBox chckbxFoodAcidity = new JCheckBox("Food Acidity");
@@ -520,7 +507,7 @@ public class Register extends JFrame {
 		});
 		chckbxFoodAcidity.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxFoodAcidity.setBackground(new Color(240, 248, 255));
-		chckbxFoodAcidity.setBounds(773, 272, 142, 41);
+		chckbxFoodAcidity.setBounds(773, 272, 165, 41);
 		panel_1.add(chckbxFoodAcidity);
 
 		JCheckBox chckbxDietican = new JCheckBox("Dietican");
@@ -588,7 +575,7 @@ public class Register extends JFrame {
 		});
 		chckbxDietican.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		chckbxDietican.setBackground(new Color(240, 248, 255));
-		chckbxDietican.setBounds(26, 363, 237, 41);
+		chckbxDietican.setBounds(26, 363, 117, 41);
 		panel_1.add(chckbxDietican);
 
 
@@ -610,7 +597,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		comboBox.setBounds(178, 212, 87, 36);
+		comboBox.setBounds(274, 212, 87, 36);
 		panel_1.add(comboBox);
 
 
@@ -623,7 +610,7 @@ public class Register extends JFrame {
 			}
 		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		comboBox_1.setBounds(274, 212, 87, 36);
+		comboBox_1.setBounds(178, 212, 87, 36);
 		panel_1.add(comboBox_1);
 
 		JTextPane textPane = new JTextPane();
@@ -695,7 +682,7 @@ public class Register extends JFrame {
 		textPane_1.setBackground(new Color(65, 105, 225));
 
 		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setBounds(559, 11, 92, 29);
+		textPane_3.setBounds(559, 11, 92, 21);
 		panel.add(textPane_3);
 		textPane_3.setText("Search");
 		textPane_3.setForeground(Color.WHITE);

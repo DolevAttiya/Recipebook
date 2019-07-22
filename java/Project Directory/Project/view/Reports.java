@@ -1,47 +1,30 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JComboBox;
-import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
-import javax.swing.JCheckBox;
 import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Component;
-import javax.swing.JScrollBar;
-import javax.swing.JProgressBar;
-import java.awt.Choice;
-import java.beans.VetoableChangeListener;
-import java.beans.PropertyChangeEvent;
 
 public class Reports extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField txtRecipebook;
 	public String dateOfBirth="0000-00-00";
 	public String yearOfBirth="0000";
 	public String monthOfBirth="00";
@@ -78,7 +61,7 @@ public class Reports extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -95,7 +78,7 @@ public class Reports extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-
+	 */
 	/**
 	 * Create the frame.
 	 */
@@ -118,9 +101,6 @@ public class Reports extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
-		String[] monthsDietitian = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-
-		String[] daysDietitian = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		setVisible(true);
 
 		JTextPane txtpnAdvancedSearch = new JTextPane();
@@ -186,17 +166,18 @@ public class Reports extends JFrame {
 		panel.setBackground(new Color(65, 105, 225));
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		textField = new JTextField();
 		textField.setBounds(495, 36, 163, 21);
 		panel.add(textField);
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		textField.setColumns(10);
-		
+
 		JTextPane textPane_5 = new JTextPane();
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				Reports.this.dispose();
@@ -210,14 +191,14 @@ public class Reports extends JFrame {
 		textPane_5.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 50));
 		textPane_5.setEditable(false);
 		textPane_5.setBackground(new Color(65, 105, 225));
-		
+
 		JTextPane textPane = new JTextPane();
 		textPane.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (myView.myUser!=null) {
 					User f=new User();
-				f.setVisible(true);
+					f.setVisible(true);
 				}
 				else {
 					Dietican f=new Dietican();
@@ -234,7 +215,7 @@ public class Reports extends JFrame {
 		textPane.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
 		textPane.setEditable(false);
 		textPane.setBackground(new Color(65, 105, 225));
-		
+
 		JTextPane textPane_1 = new JTextPane();
 		textPane_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -252,7 +233,7 @@ public class Reports extends JFrame {
 		textPane_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
 		textPane_1.setEditable(false);
 		textPane_1.setBackground(new Color(65, 105, 225));
-		
+
 		JTextPane textPane_3 = new JTextPane();
 		textPane_3.setBounds(559, 11, 92, 29);
 		panel.add(textPane_3);
@@ -261,26 +242,32 @@ public class Reports extends JFrame {
 		textPane_3.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
 		textPane_3.setEditable(false);
 		textPane_3.setBackground(new Color(65, 105, 225));
-		
+
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
 				else {
-					SearchRes d=new SearchRes();
-				d.setVisible(true);
-				Reports.this.dispose();
-				Reports.this.setVisible(false);
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						Reports.this.dispose();
+						Reports.this.setVisible(false);
+					}
 				}
 			}
 		});
 		button.setBounds(659, 36, 47, 21);
 		panel.add(button);
 		button.setFont(new Font("Tahoma", Font.BOLD, 5));
-		
+
 		JTextPane textPane_2 = new JTextPane();
 		textPane_2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -299,7 +286,7 @@ public class Reports extends JFrame {
 		textPane_2.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 18));
 		textPane_2.setEditable(false);
 		textPane_2.setBackground(new Color(65, 105, 225));
-		
+
 		JTextPane textPane_4 = new JTextPane();
 		textPane_4.addMouseListener(new MouseAdapter() {
 			@Override
@@ -319,5 +306,5 @@ public class Reports extends JFrame {
 		textPane_4.setEditable(false);
 		textPane_4.setBackground(new Color(65, 105, 225));
 
-}
+	}
 }

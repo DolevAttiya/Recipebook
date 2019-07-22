@@ -1,16 +1,12 @@
 package view;
 
-
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Observable;
-
 import javax.swing.JFrame;
-
 import controller.Event;
 import model.Dietitian;
 import model.Ingredient;
@@ -18,16 +14,14 @@ import model.IngredientType;
 import model.Recipe;
 import model.User;
 
-public class myView extends Observable implements View {
-	
-	
+public class myView extends Observable implements View
+{
 	public static myView statview = new myView();
 	public static boolean check=true;
 	public static User myUser;
 	public static Dietitian myDietitian;
 	public static ArrayList<Ingredient> ingredientArray=new ArrayList<Ingredient>();
 	public static ArrayList<Recipe> recipeArray=new ArrayList<Recipe>();
-	public static ArrayList<Recipe> recipeTop10Array=new ArrayList<Recipe>();
 	public static ArrayList<IngredientType> myMeasuring;
 	public static Recipe myRecipe=null;
 	public static Ingredient myIngredient;
@@ -45,13 +39,11 @@ public class myView extends Observable implements View {
 		});
 	}
 	protected void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("ButtonExample");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //Create and set up the content pane.
-        Open = new Open(this);               
-
-		
+		//Create and set up the window.
+		JFrame frame = new JFrame("ButtonExample");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//Create and set up the content pane.
+		Open = new Open(this);               
 	}
 	private static String ConvertPassToHash(String input)  {
 		try { 
@@ -89,7 +81,6 @@ public class myView extends Observable implements View {
 		ev.getArr().add(pass);
 		setChanged();
 		notifyObservers(ev);
-		getTop10();
 	}	
 	public void dloginResponse (ArrayList<Dietitian> usD) {
 		if(usD!=null) // if the user exists in the DB
@@ -169,7 +160,7 @@ public class myView extends Observable implements View {
 		notifyObservers(ev);
 	}
 	public void getTop10Response (ArrayList<Recipe> r) {
-		recipeTop10Array=r;
+		recipeArray=r;
 	}
 	public void mainSearch(String s) {
 		ev=new Event();
@@ -219,7 +210,7 @@ public class myView extends Observable implements View {
 		ev.getArr().add(complexity);
 		ev.getArr().add(timeToMake); 
 		ev.getArr().add(rateAbove);
-			ev.getArr().add(allergies); // sends the user's allergies
+		ev.getArr().add(allergies); // sends the user's allergies
 		if (kashruth==4) // wants to see adapted results
 			ev.getArr().add(4); // 4 means that the user wants only Kosher recipes
 		else ev.getArr().add(null); // null means wants all results
@@ -250,7 +241,7 @@ public class myView extends Observable implements View {
 			ev.getArr().add(myDietitian.getPersonEmail());
 		setChanged();
 		notifyObservers(ev);
-		getTop10();
+
 	}
 	public void myFavoriteResponse(ArrayList<Recipe> r) {
 		recipeArray=r;
@@ -269,16 +260,15 @@ public class myView extends Observable implements View {
 	public void myRecipesResponse(ArrayList<Recipe> r) {
 		recipeArray=r;
 	} 
-	public void addRecipe(String recipeName,Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, String description, Integer complexity, Integer timeToMake, String instructions) {
-		Integer[] allergies= {isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate};
+	public void addRecipe(String recipeName, String description, Integer complexity, Integer timeToMake, String instructions) {
 		Recipe newRecipe;
 		if (myUser!=null) // Connected as User
 		{
-			newRecipe=new Recipe(1,recipeName, allergies, myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myUser.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
+			newRecipe=new Recipe(1,recipeName, myRecipe.getRecipeAllergen(), myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myUser.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
 		}
 		else // Connected as Dietitian
 		{
-			newRecipe=new Recipe(1,recipeName, allergies, myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myDietitian.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
+			newRecipe=new Recipe(1,recipeName, myRecipe.getRecipeAllergen(), myRecipe.getRecipeTotalCalories(), myRecipe.getRecipeTotalCarbohydrate(), myRecipe.getRecipeTotalProtein(), myRecipe.getRecipeTotalFat(), myRecipe.getRecipeKashruth(), timeToMake, complexity, myDietitian.getPersonEmail(), 0, description, instructions, myRecipe.getRecipeIngredientId(), myRecipe.getRecipeIngredientsType(), myRecipe.getRecipeIngredientsAmount());
 		}
 		Event ev=new Event();
 		ev.getArr().add("recipe_insert");
@@ -312,33 +302,39 @@ public class myView extends Observable implements View {
 
 		for( int i=0;i<myRecipe.getRecipeAllergen().length;i++)
 		{
-			if(newarray[i]==null)
-				newarray[i]=0;
 			if(newIngredient.getIngredientAllergen(i)>0)
 			{
 
 				newarray[i]+=1;
-				myRecipe.setRecipeAllergen(newarray);
 			}
-		}	 
+		}
+		myRecipe.setRecipeAllergen(newarray);
+	}
+	public void fillIngredientIdToNameForInsert() {
+		getAllIngredient();
+		getAllMeasuringTypes();
+		for(int j=0;j<ingredientArray.size();j++)
+			if(ingredientArray.get(j).getIngredientId()==myRecipe.getRecipeIngredientId().get(myRecipe.getRecipeIngredientId().size()-1))
+				ingredientArrayForRecipe.add(ingredientArray.get(j));
+		for(int j=0;j<myMeasuring.size();j++)
+			if(myMeasuring.get(j).getIngredientTypeId()==myRecipe.getRecipeIngredientsType().get(myRecipe.getRecipeIngredientsType().size()-1))
+				myMeasuringForRecipe.add(myMeasuring.get(j));
 	}
 	public void fillIngredientIdToName() {
 		getAllIngredient();
 		getAllMeasuringTypes();
-		for(int i=0;i<myRecipe.getRecipeIngredientId().size();i++)
-		{
+		ingredientArrayForRecipe=new ArrayList<Ingredient>();
+		myMeasuringForRecipe= new ArrayList<IngredientType>();
+		for (int i = 0; i < myRecipe.getRecipeIngredientId().size(); i++) {
 			for(int j=0;j<ingredientArray.size();j++)
 				if(ingredientArray.get(j).getIngredientId()==myRecipe.getRecipeIngredientId().get(i))
 					ingredientArrayForRecipe.add(ingredientArray.get(j));
-		}
-		for(int i=0;i<myRecipe.getRecipeIngredientsType().size();i++)
-		{
+
 			for(int j=0;j<myMeasuring.size();j++)
 				if(myMeasuring.get(j).getIngredientTypeId()==myRecipe.getRecipeIngredientsType().get(i))
 					myMeasuringForRecipe.add(myMeasuring.get(j));
 		}
 	}
-
 	public void addRecipeResponse(ArrayList<Recipe> r) {
 		if (r!=null)
 		{
@@ -351,7 +347,6 @@ public class myView extends Observable implements View {
 			myRecipe=null;
 		}
 	}
-
 	public void getAllIngredient() {
 		ev=new Event();
 		ev.getArr().add("ingredient_getall");
@@ -361,7 +356,6 @@ public class myView extends Observable implements View {
 	public void getAllIngredientResponse(ArrayList<Ingredient> ing) {
 		ingredientArray=ing;
 	}
-
 	public void getAllRecipes() {
 		ev=new Event();
 		ev.getArr().add("all_recipes");
@@ -513,10 +507,15 @@ public class myView extends Observable implements View {
 		}
 		else check=false; // error
 	}
-	public void recipeUpdate(Recipe rec) {
+	public void recipeUpdate(String recipeName, String description, Integer complexity,Integer timeToMake, String instructions) {
 		ev=new Event();
 		ev.getArr().add("recipe_update");
-		ev.getArr().add(rec);
+		myRecipe.setRecipeName(recipeName);
+		myRecipe.setRecipeDescription(description);
+		myRecipe.setRecipeComplex(complexity);
+		myRecipe.setRecipeTimeToMake(timeToMake);
+		myRecipe.setRecipeProcess(instructions);
+		ev.getArr().add(myRecipe);
 		setChanged();
 		notifyObservers(ev);
 	}
@@ -563,37 +562,34 @@ public class myView extends Observable implements View {
 	public void ingredientReportResponse(ArrayList<Ingredient> ing) {
 		ingredientArray=ing;
 	}
-	public void ifLiked(Integer recipeId) {
-		if (myUser!=null) // Connected as User
+	public void ifLiked(Integer recipeId)
+	{
+		myView.statview.myFavorite();
+		check=false;
+		for (int i=0;i<myView.recipeArray.size();i++)
 		{
-			for( int i=0;i<myUser.getPersonsFavoriteRecipe().size();i++)
-				if(myUser.getPersonsFavoriteRecipe().get(i)==recipeId)
-					check=true; // can't push the button
+			if (myView.myRecipe.getRecipeId()==myView.recipeArray.get(i).getRecipeId())
+			{
+				check=true; // can't press anymore
+			}
 		}
-		else // Connected as Dietitian
-		{
-			for( int i=0;i<myDietitian.getPersonsFavoriteRecipe().size();i++)
-				if(myDietitian.getPersonsFavoriteRecipe().get(i)==recipeId)
-					check=true; // can't push the button
-		}
-		check=false; // can push the button
 	}
 	public void likePressed() {
-		if(myUser!=null) // Connected as User
-		{
-			myRecipe.setRecipeRate(myRecipe.getRecipeRate()+1);
-			myUser.getPersonsFavoriteRecipe().add(myRecipe.getRecipeId());
-			userUpdateForFavorite(myUser);
-		}
-		else // Connected as Dietitian
-		{
-			myRecipe.setRecipeRate(myRecipe.getRecipeRate()+5);
-			myDietitian.getPersonsFavoriteRecipe().add(myRecipe.getRecipeId());
-			dietitianUpdateForFavorite(myDietitian);
-		}
-		recipeUpdate(myRecipe);
+			if(myUser!=null) // Connected as User
+			{
+				myRecipe.setRecipeRate(myRecipe.getRecipeRate()+1);
+				myUser.getPersonsFavoriteRecipe().add(myRecipe.getRecipeId());
+				userUpdateForFavorite(myUser);
+			}
+			else // Connected as Dietitian
+			{
+				myRecipe.setRecipeRate(myRecipe.getRecipeRate()+5);
+				myDietitian.getPersonsFavoriteRecipe().add(myRecipe.getRecipeId());
+				dietitianUpdateForFavorite(myDietitian);
+			}
+			recipeUpdate(myRecipe.getRecipeName(), myRecipe.getRecipeDescription(), myRecipe.getRecipeComplex(), myRecipe.getRecipeTimeToMake(), myRecipe.getRecipeProcess());
 	}
-	
+
 }
 /*
 //---------Login Page------------

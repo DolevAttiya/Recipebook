@@ -1,28 +1,18 @@
 package view; 
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JComboBox;
-import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -36,8 +26,6 @@ public class AdvancedSearch extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField txtRecipebook;
-	private JTextField textField_5;
 	private JTextField textField_1;
 	public int isFish=0;
 	public int isStrawberries=0;
@@ -61,7 +49,7 @@ public class AdvancedSearch extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -77,7 +65,7 @@ public class AdvancedSearch extends JFrame {
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
-
+	 */
 	/**
 	 * Create the frame.
 	 */
@@ -107,6 +95,7 @@ public class AdvancedSearch extends JFrame {
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				AdvancedSearch.this.dispose();
@@ -127,7 +116,7 @@ public class AdvancedSearch extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (myView.myUser!=null) {
 					User f=new User();
-				f.setVisible(true);
+					f.setVisible(true);
 				}
 				else {
 					Dietican f=new Dietican();
@@ -136,8 +125,8 @@ public class AdvancedSearch extends JFrame {
 				AdvancedSearch.this.dispose();
 				AdvancedSearch.this.setVisible(false);
 			}
-			}
-		);
+		}
+				);
 		textPane.setBounds(882, 8, 102, 49);
 		panel.add(textPane);
 		textPane.setText("user details");
@@ -176,16 +165,23 @@ public class AdvancedSearch extends JFrame {
 		JButton button = new JButton("Go!");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myView.statview.mainSearch(textField.getText());  
-				if (myView.check==false) {
-					JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
 				}
-				else {
-					SearchRes d=new SearchRes();
-					d.setVisible(true);
-					AdvancedSearch.this.dispose();
-					AdvancedSearch.this.setVisible(false);
-				}
+				else 
+				{
+					myView.statview.mainSearch(textField.getText());  
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes d=new SearchRes();
+						d.setVisible(true);
+						AdvancedSearch.this.dispose();
+						AdvancedSearch.this.setVisible(false);
+					}
+				} 
 			}
 		});
 		button.setBounds(682, 36, 47, 21);
@@ -251,7 +247,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_2.setBackground(new Color(240, 248, 255));
-		checkBox_2.setBounds(737, 316, 96, 41);
+		checkBox_2.setBounds(737, 316, 140, 41);
 		panel_1.add(checkBox_2);
 
 		String[] times = {"30", "60", "120", "180", "all"};
@@ -259,7 +255,7 @@ public class AdvancedSearch extends JFrame {
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_1 = (JComboBox)e.getSource();
-				String timeToMake = (String)comboBox_1.getSelectedItem();
+				timeToMake = (String)comboBox_1.getSelectedItem();
 				if (timeToMake=="all") {
 					timeToMake="99999";
 				}
@@ -274,7 +270,7 @@ public class AdvancedSearch extends JFrame {
 		comboBox_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_4 = (JComboBox)e.getSource();
-				int complexity = (int)comboBox_4.getSelectedIndex();
+				complexity = (int)comboBox_4.getSelectedIndex();
 			}
 		});
 		comboBox_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -292,7 +288,7 @@ public class AdvancedSearch extends JFrame {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JComboBox comboBox = (JComboBox)arg0.getSource();
-				int kashruth = (int)comboBox.getSelectedIndex();
+				kashruth = (int)comboBox.getSelectedIndex();
 
 				//send kashruth level to DB
 			}
@@ -362,7 +358,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox.setBackground(new Color(240, 248, 255));
-		checkBox.setBounds(737, 216, 87, 41);
+		checkBox.setBounds(737, 216, 120, 41);
 		panel_1.add(checkBox);
 
 		JCheckBox checkBox_1 = new JCheckBox("Strawberries");
@@ -378,7 +374,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_1.setBackground(new Color(240, 248, 255));
-		checkBox_1.setBounds(567, 216, 140, 41);
+		checkBox_1.setBounds(567, 216, 163, 41);
 		panel_1.add(checkBox_1);
 
 		JCheckBox checkBox_3 = new JCheckBox("Tree Nuts");
@@ -394,7 +390,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_3.setBackground(new Color(240, 248, 255));
-		checkBox_3.setBounds(737, 266, 120, 41);
+		checkBox_3.setBounds(737, 266, 163, 41);
 		panel_1.add(checkBox_3);
 
 		JCheckBox checkBox_4 = new JCheckBox("Eggs");
@@ -410,7 +406,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_4.setBackground(new Color(240, 248, 255));
-		checkBox_4.setBounds(737, 166, 74, 55);
+		checkBox_4.setBounds(737, 166, 120, 55);
 		panel_1.add(checkBox_4);
 
 		JCheckBox checkBox_5 = new JCheckBox("Fish");
@@ -426,7 +422,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_5.setBackground(new Color(240, 248, 255));
-		checkBox_5.setBounds(567, 166, 74, 41);
+		checkBox_5.setBounds(567, 166, 152, 41);
 		panel_1.add(checkBox_5);
 
 		JCheckBox checkBox_6 = new JCheckBox("Coffie");
@@ -442,7 +438,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_6.setBackground(new Color(240, 248, 255));
-		checkBox_6.setBounds(567, 266, 77, 41);
+		checkBox_6.setBounds(567, 266, 152, 41);
 		panel_1.add(checkBox_6);
 
 		JCheckBox checkBox_7 = new JCheckBox("Gluten");
@@ -458,7 +454,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_7.setBackground(new Color(240, 248, 255));
-		checkBox_7.setBounds(567, 316, 87, 41);
+		checkBox_7.setBounds(567, 316, 140, 41);
 		panel_1.add(checkBox_7);
 
 		JCheckBox checkBox_9 = new JCheckBox("Dairy");
@@ -474,7 +470,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_9.setBackground(new Color(240, 248, 255));
-		checkBox_9.setBounds(567, 416, 74, 41);
+		checkBox_9.setBounds(567, 416, 130, 41);
 		panel_1.add(checkBox_9);
 
 		JCheckBox checkBox_10 = new JCheckBox("Lactose");
@@ -490,7 +486,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_10.setBackground(new Color(240, 248, 255));
-		checkBox_10.setBounds(567, 366, 96, 41);
+		checkBox_10.setBounds(567, 366, 140, 41);
 		panel_1.add(checkBox_10);
 
 		JCheckBox checkBox_11 = new JCheckBox("Chocolate");
@@ -506,7 +502,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_11.setBackground(new Color(240, 248, 255));
-		checkBox_11.setBounds(737, 416, 120, 41);
+		checkBox_11.setBounds(737, 416, 163, 41);
 		panel_1.add(checkBox_11);
 
 		JCheckBox checkBox_12 = new JCheckBox("Food Acidity");
@@ -522,7 +518,7 @@ public class AdvancedSearch extends JFrame {
 		});
 		checkBox_12.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		checkBox_12.setBackground(new Color(240, 248, 255));
-		checkBox_12.setBounds(737, 366, 140, 41);
+		checkBox_12.setBounds(737, 366, 163, 41);
 		panel_1.add(checkBox_12);
 
 		String[] rate = {"0","50", "100", "150","200", "more than 200"};
@@ -530,7 +526,7 @@ public class AdvancedSearch extends JFrame {
 		comboBox_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_2 = (JComboBox)e.getSource();
-				String rateAbove = (String)comboBox.getSelectedItem();
+				rateAbove = (String)comboBox.getSelectedItem();
 				if (rateAbove=="more than 200") {
 					rateAbove="99999";
 				}
@@ -547,26 +543,33 @@ public class AdvancedSearch extends JFrame {
 		txtpnAdvancedSearch.setText("Advanced Search");
 		txtpnAdvancedSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 40));
 		txtpnAdvancedSearch.setBackground(new Color(240, 248, 255));
-		
-		
-		
-				JButton btnSearch = new JButton("Search!");
-				btnSearch.setBounds(412, 488, 175, 47);
-				panel_1.add(btnSearch);
-				btnSearch.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						myView.statview.advancedSearch(textField_1.getText(), kashruth, complexity, timeToMake, rateAbove, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate);
-						if (myView.check==false) {
-							JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
-						}
-						else {
-							SearchRes f=new SearchRes();
-							f.setVisible(true);
-							AdvancedSearch.this.dispose();
-							AdvancedSearch.this.setVisible(false);
-						}
-					}});
-				btnSearch.setFont(new Font("Tahoma", Font.BOLD, 25));
+
+
+
+		JButton btnSearch = new JButton("Search!");
+		btnSearch.setBounds(412, 488, 175, 47);
+		panel_1.add(btnSearch);
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (textField_1.getText()==null)
+				{
+					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
+				}
+				else
+				{
+					myView.statview.advancedSearch(textField_1.getText(), kashruth, complexity, timeToMake, rateAbove, isFish, isStrawberries, isCoffie, isGluten, isLactose, isMilk, isEggs, isSeeds, isTreeNuts, isPeanut, isAcidity, isChocolate);
+					if (myView.check==false) {
+						JOptionPane.showMessageDialog(null,"There is no match to your search, try again");
+					}
+					else {
+						SearchRes f=new SearchRes();
+						f.setVisible(true);
+						AdvancedSearch.this.dispose();
+						AdvancedSearch.this.setVisible(false);
+					}
+				}
+			}});
+		btnSearch.setFont(new Font("Tahoma", Font.BOLD, 25));
 
 	}
 }

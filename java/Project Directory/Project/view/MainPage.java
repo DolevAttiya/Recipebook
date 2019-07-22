@@ -1,36 +1,21 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
-import java.awt.Component;
 import java.awt.Dimension;
-
-import javax.swing.Box;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
-import javax.swing.UIManager;
-import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
@@ -38,30 +23,12 @@ import javax.swing.JTable;
 
 public class MainPage extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainPage frame = new MainPage();
-					frame.setVisible(true);
-					frame.setTitle("Taimli!");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-	}
-	public void close() {
-		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);}
 
 	/**
 	 * Create the frame.
@@ -76,10 +43,141 @@ public class MainPage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 60, 971, 586);
+		panel.setBackground(new Color(240, 248, 255));
+		contentPane.add(panel);
+		panel.setLayout(null);
+
+		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(null);
+		panel_3.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		panel_3.setBackground(new Color(240, 248, 255));
+		panel_3.setBounds(10, 61, 452, 514);
+		panel.add(panel_3);
+
+		String[] columnNames = {"Recipe Name",
+				"Description",
+		"Rate"}; 
+		Object[][] data = new Object[myView.recipeArray.size()][3];
+		for(int row=0;row<myView.recipeArray.size();row++) {
+			data[row][0]=myView.recipeArray.get(row).getRecipeName();
+			data[row][1]=myView.recipeArray.get(row).getRecipeDescription();
+			data[row][2]=myView.recipeArray.get(row).getRecipeRate();
+		}
+		JTable table = new JTable(data, columnNames);
+		DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//all cells false
+				return false;
+			}
+		};
+
+		table.setModel(tableModel);
+		table.setUpdateSelectionOnSort(false);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				myView.myRecipe=myView.recipeArray.get(table.getSelectedRow());
+				RecipeView f=new RecipeView();
+				f.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
+			}
+		});
+
+		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		table.setRowHeight(32);
+		JTableHeader th = table.getTableHeader();
+		th.setPreferredSize(new Dimension(100, 30));
+		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
+		table.getTableHeader().setFont(bigFont);
+		//
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		scrollPane.setSize(432, 450);
+		scrollPane.setLocation(10, 53);
+		//TableColumn column = null;
+		panel_3.add(scrollPane);
+
+		JTextPane txtpnTopTen = new JTextPane();
+		txtpnTopTen.setEditable(false);
+		txtpnTopTen.setText("Top Ten!!");
+		txtpnTopTen.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
+		txtpnTopTen.setBackground(new Color(240, 248, 255));
+		txtpnTopTen.setBounds(140, 11, 180, 44);
+		panel_3.add(txtpnTopTen);
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		panel_2.setBounds(466, 61, 495, 126);
+		panel.add(panel_2);
+		panel_2.setBackground(new Color(240, 248, 255));
+		panel_2.setLayout(null);
+
+		JTextPane txtpnSearch = new JTextPane();
+		txtpnSearch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Reports d=new Reports();
+				d.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
+			}
+		});
+		txtpnSearch.setEditable(false);
+		txtpnSearch.setBounds(158, 38, 160, 44);
+		panel_2.add(txtpnSearch);
+		txtpnSearch.setBackground(new Color(240, 248, 255));
+		txtpnSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
+		txtpnSearch.setText("Reports");
+
+		JPanel panel_6 = new JPanel();
+		panel_6.setLayout(null);
+		panel_6.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		panel_6.setBackground(new Color(240, 248, 255));
+		panel_6.setBounds(466, 190, 495, 127);
+		panel.add(panel_6);
+
+		JTextPane txtpnAllRecipies = new JTextPane();
+		txtpnAllRecipies.setEditable(false);
+		txtpnAllRecipies.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myView.statview.getAllRecipes();
+				SearchRes d=new SearchRes();
+				d.setVisible(true);
+				MainPage.this.dispose();
+				MainPage.this.setVisible(false);
+			}
+		});
+		txtpnAllRecipies.setText("All Recipies");
+		txtpnAllRecipies.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
+		txtpnAllRecipies.setBackground(new Color(240, 248, 255));
+		txtpnAllRecipies.setBounds(129, 40, 234, 52);
+		panel_6.add(txtpnAllRecipies);
+
+		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
+		textPane.setText("Welcome To Taimli !");
+		textPane.setForeground(new Color(0, 0, 0));
+		textPane.setFont(new Font("Tempus Sans ITC", Font.BOLD, 50));
+		textPane.setBackground(new Color(240, 248, 255));
+		textPane.setBounds(226, 0, 745, 60);
+		panel.add(textPane);
 		
 				JPanel panel_7 = new JPanel();
-				panel_7.setBounds(475, 461, 495, 173);
-				contentPane.add(panel_7);
+				panel_7.setBounds(466, 449, 495, 126);
+				panel.add(panel_7);
 				panel_7.setLayout(null);
 				panel_7.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
 				panel_7.setBackground(new Color(240, 248, 255));
@@ -101,112 +199,32 @@ public class MainPage extends JFrame {
 						txtpnAddNewRecipe_1.setText("Add New Recipe");
 						txtpnAddNewRecipe_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
 						txtpnAddNewRecipe_1.setBackground(new Color(240, 248, 255));
-						txtpnAddNewRecipe_1.setBounds(93, 66, 316, 45);
+						txtpnAddNewRecipe_1.setBounds(95, 30, 316, 45);
 						panel_7.add(txtpnAddNewRecipe_1);
-
-
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 60, 971, 586);
-		panel.setBackground(new Color(240, 248, 255));
-		contentPane.add(panel);
-		panel.setLayout(null);
-
-		JPanel panel_3 = new JPanel();
-		panel_3.setLayout(null);
-		panel_3.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-		panel_3.setBackground(new Color(240, 248, 255));
-		panel_3.setBounds(10, 61, 452, 514);
-		panel.add(panel_3);
-
-		String[] columnNames = {"Recipe Name",
-				"Description",
-		"Rate"}; 
-		Object[][] data = new Object[myView.recipeTop10Array.size()][3];
-		for(int row=0;row<myView.recipeTop10Array.size();row++) {
-			data[row][0]=myView.recipeTop10Array.get(row).getRecipeName();
-			data[row][1]=myView.recipeTop10Array.get(row).getRecipeDescription();
-			data[row][2]=myView.recipeTop10Array.get(row).getRecipeRate();
-		}
-		JTable table = new JTable(data, columnNames);
-		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table.setRowHeight(80);
-		JTableHeader th = table.getTableHeader();
-		th.setPreferredSize(new Dimension(100, 30));
-		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
-		table.getTableHeader().setFont(bigFont);
-
-		JScrollPane scrollPane = new JScrollPane(table);
-		table.setFillsViewportHeight(true);
-		scrollPane.setSize(432, 450);
-		scrollPane.setLocation(10, 53);
-		//TableColumn column = null;
-		panel_3.add(scrollPane);
-
-		JTextPane txtpnTopTen = new JTextPane();
-		txtpnTopTen.setEditable(false);
-		txtpnTopTen.setText("Top Ten!!");
-		txtpnTopTen.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
-		txtpnTopTen.setBackground(new Color(240, 248, 255));
-		txtpnTopTen.setBounds(140, 11, 180, 44);
-		panel_3.add(txtpnTopTen);
-
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-		panel_2.setBounds(466, 61, 495, 158);
-		panel.add(panel_2);
-		panel_2.setBackground(new Color(240, 248, 255));
-		panel_2.setLayout(null);
-
-		JTextPane txtpnSearch = new JTextPane();
-		txtpnSearch.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Reports d=new Reports();
-				d.setVisible(true);
-				MainPage.this.dispose();
-				MainPage.this.setVisible(false);
-			}
-		});
-		txtpnSearch.setEditable(false);
-		txtpnSearch.setBounds(158, 54, 160, 44);
-		panel_2.add(txtpnSearch);
-		txtpnSearch.setBackground(new Color(240, 248, 255));
-		txtpnSearch.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
-		txtpnSearch.setText("Reports");
-
-		JPanel panel_6 = new JPanel();
-		panel_6.setLayout(null);
-		panel_6.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-		panel_6.setBackground(new Color(240, 248, 255));
-		panel_6.setBounds(466, 224, 495, 173);
-		panel.add(panel_6);
-
-		JTextPane txtpnAllRecipies = new JTextPane();
-		txtpnAllRecipies.setEditable(false);
-		txtpnAllRecipies.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				myView.statview.getAllRecipes();
-				SearchRes d=new SearchRes();
-				d.setVisible(true);
-				MainPage.this.dispose();
-				MainPage.this.setVisible(false);
-			}
-		});
-		txtpnAllRecipies.setText("All Recipies");
-		txtpnAllRecipies.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
-		txtpnAllRecipies.setBackground(new Color(240, 248, 255));
-		txtpnAllRecipies.setBounds(127, 57, 234, 52);
-		panel_6.add(txtpnAllRecipies);
-
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setText("Welcome To Taimli !");
-		textPane.setForeground(new Color(0, 0, 0));
-		textPane.setFont(new Font("Tempus Sans ITC", Font.BOLD, 50));
-		textPane.setBackground(new Color(240, 248, 255));
-		textPane.setBounds(226, 0, 745, 66);
-		panel.add(textPane);
+						
+						JPanel panel_4 = new JPanel();
+						panel_4.setLayout(null);
+						panel_4.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+						panel_4.setBackground(new Color(240, 248, 255));
+						panel_4.setBounds(466, 320, 495, 126);
+						panel.add(panel_4);
+						
+						JTextPane txtpnAddNewIngredient = new JTextPane();
+						txtpnAddNewIngredient.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent arg0) {
+								Ingredient a=new Ingredient();
+								a.setVisible(true);
+								MainPage.this.dispose();
+								MainPage.this.setVisible(false);
+							}
+						});
+						txtpnAddNewIngredient.setText("Add New Ingredient");
+						txtpnAddNewIngredient.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 30));
+						txtpnAddNewIngredient.setEditable(false);
+						txtpnAddNewIngredient.setBackground(new Color(240, 248, 255));
+						txtpnAddNewIngredient.setBounds(68, 37, 390, 45);
+						panel_4.add(txtpnAddNewIngredient);
 
 		//panel upper
 		JPanel panel_1 = new JPanel();
@@ -225,6 +243,7 @@ public class MainPage extends JFrame {
 		textPane_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myView.statview.getTop10();
 				MainPage b=new MainPage();
 				b.setVisible(true);
 				MainPage.this.dispose();
@@ -255,7 +274,7 @@ public class MainPage extends JFrame {
 					MainPage.this.dispose();
 					MainPage.this.setVisible(false);
 				}
-	
+
 			}
 		});
 		textPane1.setBounds(882, 8, 102, 49);
@@ -297,6 +316,12 @@ public class MainPage extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				myView.statview.mainSearch(textField.getText());  
+				if (textField.getText().trim().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null,"Cannot search an empty string!");
+				}
+				else
+				{
 				if (myView.check==false) {
 					JOptionPane.showMessageDialog(null,"There is no match to your search, Please try again");
 				}
@@ -305,6 +330,7 @@ public class MainPage extends JFrame {
 					d.setVisible(true);
 					MainPage.this.dispose();
 					MainPage.this.setVisible(false);
+				}
 				}
 			}
 		});

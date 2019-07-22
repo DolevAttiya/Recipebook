@@ -1,8 +1,5 @@
 package view;
 import view.myView;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,43 +9,24 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
-import java.awt.im.InputContext;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
 import java.awt.event.WindowEvent;
 
 public class Login extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JPanel contentPane;
 	private JPasswordField passwordField;
 
-
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login frame = new Login();
-					  frame.setVisible(true);
-					  frame.setTitle("Taimli!");
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	public void close() {
 		WindowEvent winClosingEvent= new WindowEvent (this,WindowEvent.WINDOW_CLOSING);
@@ -60,8 +38,7 @@ public class Login extends JFrame {
 	 */
 
 	public Login() {
-		
-		
+	
 		setSize(1000, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -118,16 +95,15 @@ public class Login extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent f) {
 				myView.statview.login(textField.getText(), String.copyValueOf(passwordField.getPassword()));
-				if (myView.check==true) // Connected as User
+				if (myView.check==true) // Connected as User or as Dietitian
 				{
-					myView.statview.myRecipes();
-
+					myView.statview.getTop10();
 					MainPage a=new MainPage();
 					a.setVisible(true);
 					Login.this.dispose();
 					Login.this.setVisible(false);
 				}
-				else // Connected as Dietitian
+				else // not exist
 					JOptionPane.showMessageDialog(null,"One of the parameters is wrong, Please try again");
 			}
 		});

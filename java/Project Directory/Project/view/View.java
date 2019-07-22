@@ -1,8 +1,6 @@
 package view;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
-import controller.Event;
+import java.util.ArrayList;
 import model.Dietitian;
 import model.Ingredient;
 import model.IngredientType;
@@ -45,7 +43,7 @@ public interface View {
 	public void addIngredient (String ingredientName, Integer kashruth,  Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, Double calories, Double carbohydrate, Double fat, Double protein);
 	public void myFavorite ();
 	public void myRecipes ();
-	public void addRecipe(String recipeName,Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate, String description, Integer complexity, Integer timeToMake, String instructions);
+	public void addRecipe(String recipeName, String description, Integer complexity, Integer timeToMake, String instructions);
 	public void getAllRecipes();
 	public void userUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, Integer isKosher, Integer isFish, Integer isStrawberries, Integer isCoffie, Integer isGluten, Integer isLactose, Integer isMilk, Integer isEggs, Integer isSeeds, Integer isTreeNuts, Integer isPeanut, Integer isAcidity, Integer isChocolate , Integer wantAllerg);
 	public void dietitianUpdate(String firstName, String lastName, String email, String pass, String pass2, String dateOfBirth, String dietitianNum, String dietitianStatDate);
@@ -53,7 +51,7 @@ public interface View {
 	public void deleteDietitian();
 	public void deleteIngredient(Ingredient ing);
 	public void deleteRecipe();
-	public void recipeUpdate(Recipe rec);
+	public void recipeUpdate(String recipeName, String description, Integer complexity,Integer timeToMake, String instructions);
 	public void ingredientUpdate(Ingredient ing);
 	public void getAllMeasuringTypes();
 	public void addIngredientToRecipe(Ingredient newIngredient,IngredientType newingredientType, Double IngredientAmount); // small add button, adds to Recipe automatically
