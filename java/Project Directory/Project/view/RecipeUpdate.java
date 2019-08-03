@@ -96,14 +96,16 @@ public class RecipeUpdate extends JFrame {
 		th.setPreferredSize(new Dimension(100, 30));
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
 		table.getTableHeader().setFont(bigFont);
-
-		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
+		
+		
+		String[] times = {"30", "60", "90","120","150", "180"}; //if string=all -->>99999
 		JComboBox comboBox_5 = new JComboBox(times);
-		comboBox_5.setSelectedItem(myView.myRecipe.getRecipeTimeToMake());
+		Integer x= (myView.myRecipe.getRecipeTimeToMake()/30)-1;
+		comboBox_5.setSelectedIndex(x);
 		comboBox_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox_5 = (JComboBox)e.getSource();
-				timeToMake = (int)comboBox_5.getSelectedIndex();
+				timeToMake = Integer.parseInt( comboBox_5.getSelectedItem().toString());
 			}
 		});
 		comboBox_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -174,7 +176,7 @@ public class RecipeUpdate extends JFrame {
 		JButton btnSearch = new JButton("Update!");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((textField_1.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textArea.getText().trim().isEmpty())) {
+				if((textField_1.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())||(textArea.getText().trim().isEmpty())) {
 					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
 				}
 
@@ -248,22 +250,11 @@ public class RecipeUpdate extends JFrame {
 		textPane_3.setBounds(10, 109, 113, 31);
 		panel_1.add(textPane_3);
 
-		textField_9 = new JTextField(myView.myRecipe.getRecipeProcess());
+		textField_9 = new JTextField(myView.myRecipe.getRecipeDescription());
 		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textField_9.setColumns(10);
 		textField_9.setBounds(126, 109, 492, 31);
 		panel_1.add(textField_9);
-
-		JButton btnAddNewIngredient = new JButton("Add New Ingredient");
-		btnAddNewIngredient.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				view.Ingredient f=new view.Ingredient();
-				f.setVisible(true);
-			}
-		});
-		btnAddNewIngredient.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnAddNewIngredient.setBounds(674, 215, 251, 23);
-		panel_1.add(btnAddNewIngredient);
 
 		JButton btnAdd_1 = new JButton("Add");
 		btnAdd_1.addActionListener(new ActionListener() {

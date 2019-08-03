@@ -93,7 +93,7 @@ public class NewRecipe extends JFrame {
 		Font bigFont = new Font("Tahoma", Font.PLAIN, 12);
 		table.getTableHeader().setFont(bigFont);
 
-		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
+		String[] times = {"30", "60", "90","120","150", "180"}; //if string=all -->>99999
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
@@ -265,7 +265,7 @@ public class NewRecipe extends JFrame {
 		panel_1.add(btnSearch);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((textField_1.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())||(textField_3.getText().trim().isEmpty())||(textArea.getText().trim().isEmpty())) {
+				if((textField_1.getText().trim().isEmpty())||(textField_9.getText().trim().isEmpty())||(textArea.getText().trim().isEmpty())) {
 					JOptionPane.showMessageDialog(null,"One of the parameters is empty, Please fill all");
 				}
 				else if(myView.check==false)

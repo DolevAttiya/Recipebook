@@ -133,10 +133,9 @@ public class RecipeView extends JFrame {
 		txtpnCookingTime.setBounds(777, 386, 75, 41);
 		panel_1.add(txtpnCookingTime);
 
-		String[] times = {"30", "60", "120", "180", "all"}; //if string=all -->>99999
+		String[] times = {myView.myRecipe.getRecipeTimeToMake().toString()}; //if string=all -->>99999
 		JComboBox comboBox_3 = new JComboBox(times);
 		comboBox_3.setEnabled(false);
-		comboBox_3.setSelectedItem(myView.myRecipe.getRecipeTimeToMake());
 		comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox_3.setBounds(857, 396, 104, 31);
 		panel_1.add(comboBox_3);

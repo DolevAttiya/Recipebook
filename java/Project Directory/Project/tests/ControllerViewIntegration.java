@@ -178,23 +178,7 @@ class ControllerViewIntegration {
 		v.addRecipe("Ommlete", "best ommlete ever", 3, 30, "1. Break 3 eggs into a boal");
 		assertFalse(myView.check);		
 	}
-	@Test
-	void testAddIngredientToRecipe() {
-		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
-		v.initializeRecipe();
-		Recipe r;
-		int x;
-		v.getAllIngredient();
-		v.getAllMeasuringTypes();
-		v.addRecipe("Lazania", "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
-		x=myView.myRecipe.getRecipeIngredientId().size();
-		v.addIngredientToRecipe(myView.ingredientArray.get(1),myView.myMeasuring.get(1) , 3.1);
-		assertEquals(x+1,myView.myRecipe.getRecipeIngredientId().size());
-		myView.myRecipe.Delete();
-		myView.myRecipe=null;
-		myView.myMeasuring=null;
-		myView.ingredientArray=null;
-	}
+	
 	@Test
 	void testFillIngredientIdToName() {
 		myView.myRecipe=Models.GetRecipeFromDB(1);
@@ -306,7 +290,7 @@ class ControllerViewIntegration {
 		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.initializeRecipe();
 		Recipe r=null;
-		v.addRecipe("Lazania", "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
+		v.addRecipe("Lazanaia", "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
 		ResultSet rs =Models.SelectSpecificFrom("Max( recipeId ) as max", "Recipe", null, null);
 		try {
 			r = Models.GetRecipeFromDB(rs.getInt("max"));
@@ -337,9 +321,7 @@ class ControllerViewIntegration {
 	void testRecipeUpdate() {
 		myView.myUser=Models.GetUserFromDB("drakarisValyrian.com");
 		v.initializeRecipe();
-		Recipe r=null;
 		v.addRecipe("Lazania", "best Lazania ever", 3, 30, "1. Go to a resturant and give up on the Lazania");
-		myView.myRecipe.setRecipeKashruth(3);
 		v.recipeUpdate(myView.myRecipe.getRecipeName(), myView.myRecipe.getRecipeDescription(), myView.myRecipe.getRecipeComplex(), myView.myRecipe.getRecipeTimeToMake(), myView.myRecipe.getRecipeProcess());
 		assertTrue(myView.check);
 		myView.myRecipe.Delete();
